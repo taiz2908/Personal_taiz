@@ -1,5 +1,9 @@
 Project Mgmt & Comprehensive tool written in Java 
-Main file is pom.xml contains info about the project & various configuration details.
+Old - ANT
+New - Gradel
+Dependencies- Its refers to the Java liberares that are needed for the project.
+
+Main file is "pom.xml" contains info about the project & various configuration details.
 Also it contains goals, plugins etc.
 pom.xml - Project Object Model , Extensible Markup Language
 
