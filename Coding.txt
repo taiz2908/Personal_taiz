@@ -1,0 +1,39 @@
+Time Framework to Learn : 3 - 6 months
+ next Language : 1 - 3 weeks Only
+
+3 Life Saving Websites for Coders!
+ stackoverflow.com
+ medium.com
+ github.com
+
+Backend:
+ Python - django 
+ Javascript - node Js
+ 
+Data Science:
+ Python - Best One
+
+Data Structure & Algorithms (DSA)- Product Based Companies 
+Creation of Logic / Logic Build 
+
+Learn Basics: For every Language 
+ Variables 
+ if-else
+ Loops
+ Arrays
+
+Coding Practice:
+ HackerRank
+ Hackerearth
+ GreeksforGeeks  
+
+Placement / Interview Preparation:
+ Leetcode - SAT / SUN
+ InterviewBit
+
+Competitive Programming:
+ Codeforces
+ Codechef
+
+Make a Project:
+ 
