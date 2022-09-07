@@ -4,7 +4,7 @@ New - Gradel
 Dependencies- Its refers to the Java liberares that are needed for the project.
 
 Main file is "pom.xml" contains info about the project & various configuration details.
-Also it contains goals, plugins etc.
+Also it contains metadata, goals, plugins,Dependencies etc.
 pom.xml - Project Object Model , Extensible Markup Language
 
 It contains 
