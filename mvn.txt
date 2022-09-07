@@ -1,0 +1,19 @@
+Project Mgmt & Comprehensive tool written in Java 
+Main file is pom.xml contains info about the project & various configuration details.
+Also it contains goals, plugins etc.
+pom.xml - Project Object Model , Extensible Markup Language
+
+It contains 
+    <groupId>sathya</groupId>
+    <artifactId>TestProject</artifactId>
+    <version>1.5</version>
+    <packaging>war</packaging>
+    <name>myproj</name>
+
+Maven Goal -
+ mvn clean: to clean the repo
+ mvn compile: to compile the code
+ mvn Test: to apply test cases
+ mvn package: to generate the package i.e war/jar
+ mvn install: install the package in the local repo ".m2"
+ mvn deploy: to deplot in nexus repo
