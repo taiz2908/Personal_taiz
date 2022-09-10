@@ -1,0 +1,26 @@
+Ref : https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
+
+#yum -y update
+#sudo yum install java-11-openjdk
+#sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+#sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+#sudo yum upgrade
+
+#sudo yum install jenkins
+#sudo systemctl daemon-reload
+
+#sudo systemctl enable jenkins
+#sudo systemctl start jenkins
+#sudo systemctl status jenkins
+#sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+#find /usr/lib/jvm/java-11.0* | head -n 3
+#vi .bash_profile 
+ JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
+ PATH=$JAVA_HOME/bin:$PATH
+#echo $JAVA_HOME
+ /usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
+#source ~/.bash_profile
+ 
+ 
