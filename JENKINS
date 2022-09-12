@@ -11,35 +11,11 @@ hudson.plugins.git.GitTool.xml                      nodes                       
 identity.key.enc                                    org.jenkinsci.plugins.workflow.flow.FlowExecutionList.xml  userContent
 jenkins.install.InstallUtil.lastExecVersion         plugins                                                    users
 ------------------------------------------------------------
-
 Jenkinsfile - Pipeline as a code
  Scripted & Declarative - Both uses grrovy , Here 1st uses syntax
  Declarative: Starts with pipeline 
 
-Required Arrtibutes:
-1) pipeline
-2) agent any - where to execute
-3) stages - need to define different different stage
-4) stage - Whole work happens 'checking out the code/clone/build/test/deploy'
-5) steps - where scripts written
-
-6) post - Executes some logic after all stages completed
-   conditions: always/success/failure 
-  post {
-    always {
-        // will be excuted not matter build failed / succeeded - Notification  
-    }
-    success {
-        // will excute the script only the build succeeded
-    }
-    failure {
-        // will execute the build of the build failed
-    }
-  }
-
-
-
-Ex:
+ Ex:
   pipeline {
     agent any 
     stages {
@@ -63,3 +39,59 @@ pipeline {
     }
 }
 ----------------------------------------------
+Required Arrtibutes:
+1) pipeline
+2) agent any - where to execute
+3) stages - need to define different different stage
+4) stage - Whole work happens 'checking out the code/clone/build/test/deploy'
+5) steps - where scripts written
+
+6) post - Executes some logic after all stages completed
+   conditions: always/success/failure 
+  post {
+    always {
+        // will be excuted not matter build failed / succeeded - Notification  
+    }
+    success {
+        // will excute the script only the build succeeded
+    }
+    failure {
+        // will execute the build of the build failed
+    }
+  }
+
+7) Define Conditionals for each stage: Only want to run the test in Dev Branch build not in other branch 
+   So when we can define 'when' expression. Step i.e hello only can execute if the branch is 'DEV'
+   Note: Using env variable for the branch i.e env.BRANCH_NAME / BRANCH.NAME , CODE_CHANGES
+   
+Ex: '==' - EQUALS to, '||' - OR 
+stage ('test') {
+    when {
+        expression {
+            BRANCH_NAME == 'DEV' || BRANCH_NAME == 'MASTER' 
+        }
+    }
+    steps {
+        echo 'Hello'
+    }
+  }
+Ex: "&&" - AND 
+define before pipeline i.e CODE_CHANGES = getGITchanges()
+  stage ('Build') {
+    when {
+        expression {
+            BRANCH_NAME == 'DEV' && CODE_CHANGES == true 
+        }
+    }
+    steps {
+        echo 'Hello'
+    }
+  }
+------------------------------------------------------------
+Environmental Variables:
+
+
+
+
+
+
