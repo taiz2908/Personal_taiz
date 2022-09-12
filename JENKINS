@@ -1,3 +1,8 @@
+Ref: Jenkinsfile 
+https://www.youtube.com/watch?v=aFRjn_4nb-Q&list=PLKaiHc24qCTSnXaus2t4b71ihq9k649XS
+https://www.youtube.com/watch?v=7KCS70sCoK0&t=236s - TechwithNana
+
+
 By default, Jenkins stores all of its data in this directory on the file system
 /var/lib/jenkins
 
@@ -88,8 +93,54 @@ define before pipeline i.e CODE_CHANGES = getGITchanges()
     }
   }
 ------------------------------------------------------------
-Environmental Variables:
+Environmental Variables: http://localhost:8080/env-var.html/
+Ex:
+pipeline {
+    agent any 
+    environment {
+        NEW_VERSION = '1.2.0'
+    }
+    stages {
+        stage ('Build') {
+            steps {
+                echo 'Builing'
+                echo "Building version ${NEW_VERSION} "
 
+            }
+        }
+    }   
+}
+------------------------------------------------------------
+Parameters: Apply to all the branches 
+External configuration that you want to your build 
+we want to be select which version to be deployed so we define by using paramters.
+Ex:
+pipeline {
+    agent any
+    parameters {
+        choice(name: 'VERSION', choices: ['1.1.0', '1.2.1', description: ''])
+        booleanParam(name: 'executeTests', defaultValue: true, description: '')
+    stages {
+        stage ('Test') {
+            when{
+                expression{
+                    params.executeTests
+                }
+            }
+            steps {
+                echo 'Testing the Application'
+            }
+        stage ('Deploy') {
+            steps {
+                echo 'deployinh the application'
+                echo "deploying version ${PARAMS.version}"
+            }
+        }
+        }
+    }   
+    }
+}
+    
 
 
 
