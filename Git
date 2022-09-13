@@ -33,7 +33,7 @@ Branching Strategy:
 # git branch 'Prod_1.0' / 'branch_name' - Create a new branch
 # git checkout 'branch_name' - switch to new branch with branch name
 # git push origin 'branch_name' - Push from within the branch
-# git merge 'dev' - merge 'dev' branch to master/main
+# git merge 'dev' - merge 'dev' branch to master/main , After merge use push cmd to send to central repo.
 # git branch -d 'branch_name' - Local Repo
 # git branch -D 'branch_name' - Local repo forcefully
 # git push origin --delete 'branch_name' - Delete from central repo

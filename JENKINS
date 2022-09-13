@@ -118,26 +118,26 @@ Ex:
 pipeline {
     agent any
     parameters {
-        choice(name: 'VERSION', choices: ['1.1.0', '1.2.1', description: ''])
+        choice(name: 'VERSION', choices: ['1.1.0', '1.2.1'], description: '')
         booleanParam(name: 'executeTests', defaultValue: true, description: '')
+    }
     stages {
-        stage ('Test') {
-            when{
-                expression{
+        stage('test') {
+            when {
+                expression {
                     params.executeTests
                 }
             }
             steps {
                 echo 'Testing the Application'
             }
+        }
         stage ('Deploy') {
             steps {
                 echo 'deployinh the application'
-                echo "deploying version ${PARAMS.version}"
+                echo "deploying version ${params.version}"
             }
         }
-        }
-    }   
     }
 }
     
