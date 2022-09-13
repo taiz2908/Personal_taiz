@@ -1,0 +1,50 @@
+Git is a free and open source distributed version control system.
+Github is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+
+Git stages:
+ Working area
+ stating area
+ Local repo 
+ Central repo
+
+Git Commands:
+create a dir & within dir initiate git init
+# git init - Initialize an existing dir as a git repo
+Git Config:
+# git config --global user.name "" - set a Username
+# git config --global user.email "" - set an Email
+# git clone repo_url - Clone (download) a repo that already exist on github, including all files, branches & commits.
+# git remote add origin 'url' - After using git init cmd link the local repo to an empty guthub repo.
+# git add .
+# git commit -m "msg" / git commit -am "msg"
+# git status
+# git push 
+
+Git Stash:
+Git Ignore:
+
+
+Rename / Delete a file:
+# git rm hello.txt - deleting a file
+# git mv hello.txt demo.txt - renaming a file
+
+Branching Strategy:
+# git branch - to see the branch details
+# git branch 'Prod_1.0' / 'branch_name' - Create a new branch
+# git checkout 'branch_name' - switch to new branch with branch name
+# git push origin 'branch_name' - Push from within the branch
+# git merge 'dev' - merge 'dev' branch to master/main
+# git branch -d 'branch_name' - Local Repo
+# git branch -D 'branch_name' - Local repo forcefully
+# git push origin --delete 'branch_name' - Delete from central repo
+
+Log / Commit Id's: 40 alpha numeric char
+# git log - to show all commit ID i.e author ,commmit, date
+# git log --oneline
+# git log -P - shows code changes
+# git reflog - show all commit id even deleted
+# git diff - show the difference/ compaire of working dir with staging area
+#
+
+# git 
+
