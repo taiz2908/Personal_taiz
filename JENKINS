@@ -116,6 +116,8 @@ Parameters:
  External configuration that you want to your build 
  we want to be select which version to be deployed so we define by using paramters.
 Various Types of Parameters: string , text, booleanParam, choice, password etc..
+If you want to genereate the parameters script then choose ,pipeline syntax->properties->this project is parameterised
+
 Ex: 1
 pipeline {
     agent any
