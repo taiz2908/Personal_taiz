@@ -51,8 +51,8 @@ Required Arrtibutes:
 4) stage - Whole work happens 'checking out the code/clone/build/test/deploy'
 5) steps - where scripts written
 
-6) post - Executes some logic after all stages completed
-   conditions: always/success/failure 
+6) post - Executes some logic after all 'stages' completed
+   conditions/types: always / success / failure /
   post {
     always {
         // will be excuted not matter build failed / succeeded - Notification  
@@ -111,10 +111,12 @@ pipeline {
     }   
 }
 ------------------------------------------------------------
-Parameters: Apply to all the branches 
-External configuration that you want to your build 
-we want to be select which version to be deployed so we define by using paramters.
-Ex:
+Parameters: 
+ Apply to all the branches 
+ External configuration that you want to your build 
+ we want to be select which version to be deployed so we define by using paramters.
+Various Types of Parameters: string , text, booleanParam, choice, password etc..
+Ex: 1
 pipeline {
     agent any
     parameters {
@@ -134,12 +136,73 @@ pipeline {
         }
         stage ('Deploy') {
             steps {
-                echo 'deployinh the application'
-                echo "deploying version ${params.version}"
+                echo 'deploying the application'
+                echo "deploying version ${params.VERSION}"
             }
         }
     }
 }
+--------------------------------------------------------------------
+Ex: 2, If we should tik it should be print Project A, else Print B
+pipeline {
+    agent any
+    parameters {
+        choice(name: 'VERSION', choices: ['1.1.0', '1.2.1'], description: '')
+        booleanParam(name: 'executeTests', defaultValue: '', description: '')
+    }
+    stages {
+        stage('test') {
+            steps {
+                script {
+                    if ( params.executeTests == true ) {
+                        echo "Test Project A" 
+                    } else {
+                        echo "Test Project B"
+                    }
+                }
+            }
+        }
+        stage ('Deploy') {
+            steps {
+                echo "deploying the ${params.VERSION}"
+            }
+        }
+    }
+}
+--------------------------------------------------------------------
+EX:3, 
+pipeline {
+    agent any
+    parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+
+        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+
+        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+
+        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+    }   
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello ${params.PERSON}"
+
+                echo "Biography: ${params.BIOGRAPHY}"
+
+                echo "Toggle: ${params.TOGGLE}"
+
+                echo "Choice: ${params.CHOICE}"
+
+                echo "Password: ${params.PASSWORD}"
+            }
+        }
+    }
+}
+------------------------
+https://www.youtube.com/watch?v=qDVqezp3mOw
+
     
 
 

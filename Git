@@ -21,7 +21,16 @@ Git Config:
 # git push 
 
 Git Stash:
-Git Ignore:
+
+
+Git Ignore: 
+If we have multiple files and we want to ignore some of files during staging area in that situsation we can use git ignore 
+# vi .gitignore
+ * file.css
+ * file.java
+# git add .gitignore
+# git commit -am "commit msg"
+
 
 
 Rename / Delete a file:
