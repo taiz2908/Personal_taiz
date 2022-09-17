@@ -155,6 +155,8 @@ pipeline {
 }
 --------------------------------------------------------------------
 Ex: 2, If we should tik it should be print Project A, else Print B
+Parameters + Git clone + Extra Step
+
 pipeline {
     agent any
     parameters {
@@ -162,6 +164,11 @@ pipeline {
         booleanParam(name: 'executeTests', defaultValue: '', description: '')
     }
     stages {
+        stage ('Clone git repo') {
+            steps {
+                git branch: 'main', crendentialsId '****', url: '****'
+            }
+        }
         stage('test') {
             steps {
                 script {
@@ -185,20 +192,20 @@ EX:3,
 pipeline {
     agent any
     parameters {
-        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        string(name: 'ARTIFACT', defaultValue: '.war', description: 'Who should I say hello to?')
 
         text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
 
         booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
 
-        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+        choice(name: 'CHOICE', choices: ['DEV', 'SIT', 'PROD'], description: 'Pick something')
 
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }   
     stages {
         stage('Example') {
             steps {
-                echo "Hello ${params.PERSON}"
+                echo "Hello ${params.ARTIFACT}"
 
                 echo "Biography: ${params.BIOGRAPHY}"
 
@@ -211,7 +218,122 @@ pipeline {
         }
     }
 }
-------------------------
+------------------------------------------------------------------------------------
+Parallel Build: 
+In build if we have many steps in a single pipeline it will take more time to complete the build.
+for this we run the build in parallel inside the declarative pipeline.
+Blue Ocean Plugin: We can see the build visually .
+
+pipeline {
+    agent any
+    parameters {
+        booleanParam(name: 'executeTests', defaultValue: '', description: '')
+    }
+    stages {
+        stage ('Clone git repo') {
+            steps {
+                git branch: 'main', url: 'https://github.com/taiz2908/Personal_taiz.git'
+            }
+        }
+        stage('parallel stage') { 
+            parallel {
+                stage('Running') {
+                    steps {
+                        echo "Running..."
+                    }
+                }
+                stage('Building') {
+                    steps {
+                        echo "Building..."
+                    }
+                }
+                stage('Deploying') {
+                    steps {
+                        echo "Deploying..."
+                    }
+                }
+            }
+        }
+        stage('Parallel Test') {
+            parallel {
+                stage('Testing Application') {
+                    steps {
+                        script {
+                            if ( params.executeTests == true ) {
+                                echo "Test Project A"
+                            } else {
+                                echo "Test Project B"
+                            }
+                        }
+                    }   
+                }
+                stage ('Deploy') {  
+                    steps {
+                        echo "deploying the Application.."
+                    }
+                }
+            }
+        }
+    }
+}
+-----------------------------------------------
+pipeline {
+    agent any
+    parameters {
+        booleanParam(name: 'executeTests', defaultValue: '', description: '')
+    }
+    stages {
+        stage ('Clone git repo') {
+            steps {
+                git branch: 'main', url: 'https://github.com/taiz2908/Personal_taiz.git'
+            }
+        }
+        stage('Paramaters') {
+                steps {
+                    script {
+                        if ( params.executeTests == true ) {
+                            echo "Test Project A" 
+                        } else {
+                            echo "Test Project B"
+                    }
+                }
+            }
+        }
+        stage('parallel stage') { 
+            parallel {
+                stage('Running') {
+                    steps {
+                        echo "Running..."
+                    }
+                }
+                stage('Building') {
+                    steps {
+                        echo "Building..."
+                    }
+                }
+                stage('Deploying') {
+                    steps {
+                        echo "Deploying..."
+                    }
+                }
+            }
+        }
+        stage('Parallel Test') {
+            parallel {
+                stage('Testing Application') {
+                    steps {
+                        echo "Testing the App.."
+                    }   
+                }
+                stage ('Deploy') {  
+                    steps {
+                        echo "deploying the App.."
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 
