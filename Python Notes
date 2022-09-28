@@ -1,0 +1,34 @@
+print / input - function in python
+() - Parenthesis
+"" - Double quotes - represents 'String'
+Ex: print("Hello World!")
+-----------------------------------------------------------
+Variables:
+ Define memory location where data is being store
+ Basic Types in Python -  
+ 1) Numbers(integers '22/1/43', floating'1.1/3.4,11.3'), 
+ 2) boolean('True/False'), 
+ 3) strings
+
+Ex:
+  name = "Taizun"
+  age = 33 / age = "22"
+  print(name, age)
+
+Ex: Here defining two variable with first_name & last_name .
+  first_name = "Tony"
+  last_name = "shark"
+  age = "52"
+  Tony_Genius = True
+  print(first_name + " " + last_name, age, Tony_Genius)
+
+  + - concatenation
+
+  Ex: Taking the i/p from users
+   name = input("Enter your name?")
+   print("Hello" + name)
+-------------------------------------------------------------------
+Type Conversion:
+  
+   
+
