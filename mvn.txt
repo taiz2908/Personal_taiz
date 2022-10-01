@@ -15,9 +15,12 @@ It contains
     <name>myproj</name>
 
 Maven Goal -
- mvn clean: to clean the repo
- mvn compile: to compile the code
- mvn Test: to apply test cases
- mvn package: to generate the package i.e war/jar
- mvn install: install the package in the local repo ".m2"
+ mvn clean: to clean the repo / Previous project to be clean
+ mvn site - Aslo it will generate reports.
+ mvn compile: to compile the source code of the project , Executable files.
+ mvn Test: to apply test cases. 
+ mvn package: to generate the package,executable files, i.e .war / .jar
+ mvn install: install the package in the local repo in mvn i.e. ".m2"
  mvn deploy: to deplot in nexus repo
+ 
+Whatever artifact generated it'll store under "target" folder.
