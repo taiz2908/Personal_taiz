@@ -1,11 +1,14 @@
 -> Project Mgmt & Comprehensive tool written in Java 
 -> pom.xml - Project Object Model , Extensible Markup Language
+-> In project we have one "parent pom" , and every module have separate pom.
+
 Old - ANT
 New - Gradel
 Dependencies- Its refers to the Java liberares that are needed for the project.
 
 Main file is "pom.xml" contains info about the project & various configuration details.
 Also it contains 
+- project Info
 - metadata
 - goals 
 - plugins
@@ -28,3 +31,9 @@ Maven Goal -
  mvn deploy: to deplot in nexus repo
  
 Whatever artifact generated it'll store under "target" folder.
+In Pom.xml: 
+<distributionManagement> 
+section we need to define where we should push our artifact.
+<id> should match with setting.xml within .m2 folder.
+<snapshotRepository> related to DEV env. 
+
