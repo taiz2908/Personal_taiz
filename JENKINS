@@ -1,14 +1,21 @@
 Ref: Jenkinsfile 
-https://www.youtube.com/watch?v=aFRjn_4nb-Q&list=PLKaiHc24qCTSnXaus2t4b71ihq9k649XS
+1. https://www.youtube.com/watch?v=aFRjn_4nb-Q&list=PLKaiHc24qCTSnXaus2t4b71ihq9k649XS
 
-https://www.youtube.com/watch?v=7KCS70sCoK0&t=236s - TechwithNana
+2. https://www.youtube.com/watch?v=7KCS70sCoK0&t=236s - TechwithNana
 
-How to pass parameters to downstream jobs: https://www.youtube.com/watch?v=qDVqezp3mOw
+3. How to pass parameters to downstream jobs: https://www.youtube.com/watch?v=qDVqezp3mOw
 
-Parameter Jobs: https://devopscube.com/declarative-pipeline-parameters/
+4. Parameter Jobs: https://devopscube.com/declarative-pipeline-parameters/, 
+   https://www.youtube.com/watch?v=u2GZERqMb0I&t=26s
 
-Jenkins Tutorial,How to Deploy a Test Server with Docker + Linux :
-https://www.youtube.com/watch?v=f4idgaq2VqA&t=22s
+5. Jenkins Tutorial,How to Deploy a Test Server with Docker + Linux :
+   https://www.youtube.com/watch?v=f4idgaq2VqA&t=22s
+
+6. Jenkisfile: deploy war file into tomcat. https://www.youtube.com/watch?v=MBn3fx9OfRk
+
+7. Jenkinsfile Tutorial : https://www.youtube.com/channel/UCYo5aJ_PChQ_UzkaNsj5ZFg/videos
+
+
 ---------------------------------------------------------------------------------------
 
 
