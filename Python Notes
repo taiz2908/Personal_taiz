@@ -1,4 +1,9 @@
+from argparse import REMAINDER
+from ast import operator
+from time import thread_time
 from xmlrpc.client import boolean
+
+from wsgiref import types
 
 
 print / input - function in python
@@ -71,4 +76,32 @@ Ex:
  a = "ibraur"
  print("i" in a)
 ---------------------------------------------------
-Arithmetic Operators: 30 mins
+Arithmetic Operators: 
++ , -, *, / , % (REMAINDER/MODULER), //, **
+Ex:
+ a = 10
+ a += 2
+ a -= 2
+ a *= 2
+ print(a)
+operator Precedence: 
+Ex:
+ result = 2 + 3 * 5
+ print(result) 
+or,
+ result = (2 + 4) * 5
+ print(result)
+--------------------------------------------------------
+Comments:
+# this is my first code
+---------------------------------------------------------
+Comparision Operators:
+< , >, <= ,>= , ==, != ,
+Logical Operators: Three types
+Or : if we have two conditions , we can use or operator.
+and : if two conditions are true then print true only or else false. 
+not: makes true to false & false to true. 
+-------------------------------------------------------
+If else :
+
+
