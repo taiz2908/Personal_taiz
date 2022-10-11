@@ -1,4 +1,8 @@
-Ref: Jenkinsfile 
+Ref: Jenkinsfile : Jenkins.io
+https://www.jenkins.io/doc/book/pipeline/syntax/#parameters
+https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/
+
+VIDEO:
 1. https://www.youtube.com/watch?v=aFRjn_4nb-Q&list=PLKaiHc24qCTSnXaus2t4b71ihq9k649XS
 
 2. https://www.youtube.com/watch?v=7KCS70sCoK0&t=236s - TechwithNana
@@ -8,7 +12,7 @@ Ref: Jenkinsfile
 4. Parameter Jobs: https://devopscube.com/declarative-pipeline-parameters/, 
    https://www.youtube.com/watch?v=u2GZERqMb0I&t=26s
 
-5. Jenkins Tutorial,How to Deploy a Test Server with Docker + Linux :
+5. Jenkins Tutorial,How to Deploy a Test Server with Docker + Linux : Freecodecamp
    https://www.youtube.com/watch?v=f4idgaq2VqA&t=22s
 
 6. Jenkisfile: deploy war file into tomcat. https://www.youtube.com/watch?v=MBn3fx9OfRk

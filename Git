@@ -1,7 +1,7 @@
-Git is a free and open source distributed version control system.
+Git is a free and open source "distributed version control system" .
 Github is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
 
-Git stages:
+Git Stages:
  Working area
  stating area
  Local repo 
@@ -9,17 +9,25 @@ Git stages:
 
 Git Commands:
 create a dir & within dir initiate git init
-# git init - Initialize an existing dir as a git repo
+# git init - Initialize an empty dir as a git repo
 Git Config:
 # git config --global user.name "" - set a Username
 # git config --global user.email "" - set an Email
-# git clone repo_url - Clone (download) a repo that already exist on github, including all files, branches & commits.
-# git remote add origin 'url' - After using git init cmd link the local repo to an empty guthub repo.
-# git add .
-# git commit -m "msg" / git commit -am "msg"
-# git status
-# git push 
+# git clone <repo_url> - Clone (download) a repo that already exist on github, including all files, branches & commits.
+# git remote -v - to whether remote repo configured or not.
 
+# git remote add origin <url> - After using git init cmd link the local repo to an empty guthub repo.
+# git add . - Git add all untracked files.
+# git commit -m "msg" / git commit -am "msg" - commit changes.
+# git status - show all untracked files
+# git push -u origin master - pushing the code to remote repo.
+# git pull <repo_url> - Pull the latest changes from remote/central repo
+# git 
+
+# git clone --bare <repo_url>
+# cd 
+# git push --mirror <repo_url>
+-------------------------------------------------------------
 Git Stash:
 
 
