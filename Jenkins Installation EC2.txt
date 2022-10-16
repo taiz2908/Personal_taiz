@@ -22,5 +22,13 @@ Ref : https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
 #echo $JAVA_HOME
  /usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
 #source ~/.bash_profile
- 
- 
+
+----------------------------------------------------------------
+Build Trigger's:
+1. Build Periodically : cron job / 5 astrics 
+2. Poll scm
+3. Build after other projects are Build
+4. Trigger build remotely
+5. Manual 
+6. github hook trigger for git scm polling. 
+--------------------------------------------------------------
