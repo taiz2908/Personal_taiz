@@ -26,9 +26,49 @@ Ref : https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
 ----------------------------------------------------------------
 Build Trigger's:
 1. Build Periodically : cron job / 5 astrics 
-2. Poll scm
+2. Poll scm :
 3. Build after other projects are Build
 4. Trigger build remotely
 5. Manual 
 6. github hook trigger for git scm polling. 
 --------------------------------------------------------------
+Jenkinsfile - Pipeline as a code
+ Scripted & Declarative - Both uses grrovy , Here 1st uses syntax
+ Declarative: Starts with pipeline 
+
+Required Arrtibutes:
+1) pipeline
+2) agent any - where to execute
+3) stages - need to define different different stage
+4) stage - Whole work happens 'checking out the code/clone/build/test/deploy'
+5) steps - where scripts written
+
+6) "post" -
+ - Executes some logic after all 'stages' completed
+ - conditions/types: "always / success / failure" etc.
+
+7) Define Conditionals for each stage: 
+ - Only want to run the "build / test" in Dev Branch but not in other branch. 
+ - So when we can define ("when" with "expression"), Step i.e hello which can execute if the branch is 'DEV'
+ - Note: Using env variable for the branch i.e env.BRANCH_NAME / BRANCH.NAME , CODE_CHANGES
+
+8)Parameters: 
+ - Apply to all the branches 
+ - External configuration that you want to your build 
+ - we want to be select which version to be deployed so we define by using paramters.
+ - Various Types of Parameters: (string , text, booleanParam, choice, password) etc..
+ - If you want to genereate the parameters script then choose ,
+ - pipeline syntax->properties->this project is parameterised
+
+9)Parallel Build: 
+ - In build if we have many steps in a single pipeline it will take more time to complete the build.
+ - for this we run the build in parallel inside the declarative pipeline.
+ - Blue Ocean Plugin: We can see the build visually .
+
+-----------------------------------------------------------------------------
+How to add / provide "Admin / any other access" to user's:
+- We need to go to: Manage jenkins--> security-->configure global security-->
+  - Matrix-based security
+  - project-based matrix authorization strategy 
+  - Role-based strategy
+------------------------------------------------------------------------------

@@ -1,0 +1,87 @@
+--------------------What is Docker? -------------------------------------
+ - Docker is a tool for running application in an isolated environment. 
+ - It's similar to virtual machine.
+ - Standard for software deployment. 
+
+--------------------Container vs Virtual Machine-----------------------------------
+Containers:
+ - Containers are an abstraction at the app layer that packages code & dependecies together. 
+ - Multiple containers can run on the same machine & share the OS Kernel with other container. 
+
+Ex:
+----[Aap A] [Aap B]  [Aap C]
+------Docker-----------
+------Host OS----------
+------Infra------------
+
+Virtual Machine:
+ - Virtual machines are an abstraction of physical hardware turning one server into many servers.
+ - Each VM includes full copy of an OS system / Dedicated OS, necessary binaries & libraries- taking up ten's of GB's
+ - Slow to boot. 
+
+Ex:
+ [-----VM1----] [VM2] [VM3]
+ -----AAP1---
+ [GUEST OS]     [GUEST os]
+ -----Hypervisor--------------------------
+ -----Infra-------------------------------
+
+Benefits of Container:
+- Run container in sec instead of minutes. 
+- Less resource result less disk spaces. 
+- Less Memory i.e. light weight 
+- Doest need full OS. 
+- High Performance 
+- Deployment 
+- Testing (Locally)
+
+---------------------------- Docker Images & Contaioners -----------------------------------
+Images:
+ - Image is a template for creating an environment of our choice. 
+ - It's a snapshot
+ - Has everything to run an application. 
+ - OS , software , app code etc 
+
+Containers:
+ - Running instance of an image. 
+ - 
+
+------------------------COMMAND'S-------------------------------------
+Images:
+ - docker images
+ - docker run 
+ - docker tag
+ - docker pull
+ - docker push
+ - docker rmi <image_name>
+
+Container's:
+ - docker ps ,to show running container 
+ - docker ps -a , to show running as well as stop container 
+ - docker top 
+ - docker start 
+ - docker stop
+ - docker rm
+ - docker commit
+ - docker attach
+ - docker stats
+ - docker inspect
+ - docker logs
+
+Ex: Pulling an image from hub.docker.com
+# docker pull ubuntu
+# docker pull tomcat:7.0
+# docker pull tomcat:8.0
+# docker images
+# docker run -it ubuntu /bin/bash -> create the container as well as entered into the container. 
+
+
+# docker run -itd ubuntu /bin/bash
+# docker attach <containerID>
+
+Delete Container:
+docker stop <containerID>
+docker stop $(docker ps -q) , stop multiple container
+docker rm $(docker ps -aq) , delete all container
+docker rmi $(docker images -q) , remove multiple images
+docker rm <containerID> --force , forcefully delete a container. 
