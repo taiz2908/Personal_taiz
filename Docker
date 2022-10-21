@@ -45,10 +45,11 @@ Images:
 Containers:
  - Running instance of an image. 
  - 
+Note: We can't modify docker images, Can convert into container's and within container we can do the required changes, 
 
 ------------------------COMMAND'S-------------------------------------
 Images:
- - docker images
+ - docker images / docker image ls
  - docker run 
  - docker tag
  - docker pull
@@ -56,8 +57,10 @@ Images:
  - docker rmi <image_name>
 
 Container's:
+ - docker container ls 
  - docker ps ,to show running container 
- - docker ps -a , to show running as well as stop container 
+ - docker ps --help
+ - docker ps -a / docker ps -aq, to show running as well as stop container 
  - docker top 
  - docker start 
  - docker stop
@@ -85,3 +88,63 @@ docker stop $(docker ps -q) , stop multiple container
 docker rm $(docker ps -aq) , delete all container
 docker rmi $(docker images -q) , remove multiple images
 docker rm <containerID> --force , forcefully delete a container. 
+
+------------------------------ DOCKER PORT MAPPING ------------------------------------------------
+Ex: Exposing Ports
+ docker pull nginx
+ docker run -d nginx:latest
+ docker run -d -p 8080:80 nginx:latest
+
+Ex: Exposing multiple ports.
+ #docker run -d -p 8080:80 -p 9090:80 nginx:latest
+
+---------------------------------NAMING A CONTAINER---------------------------------------------
+ #docker run --name webserver -d -p 8080:80 nginx:latest
+
+ #docker ps --format="ID\t{{.ID}}\nNAME\t{{.Names}}\nIMAGE\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"
+
+ #export FORMAT="ID\t{{.ID}}\nNAME\t{{.Names}}\nIMAGE\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"
+
+ #docker ps --format=$FORMAT
+
+-------------------------------- DOCKER VOLUMES ------------------------
+Allowing share of data, files & folders between hosts & containers, and between conatiners. 
+
+1. Copy the data from local to nginx container: 
+ #docker run --name website -v <desktop path>:/usr/share/nginx/html -d -p 8080:80 nginx:latest
+ #docker exec -it website/containerID bash
+ #ctrl+d : come outside of the container 
+
+2. Volumes between containers:
+  docker run --help: show all commands
+  docker run --name website-copy --volumes-from website -d -p 8081:80 nginx
+
+-------------------------------- DOCKERFILE ----------------------------
+By using dockerfile we can create our own image 
+
+ FROM: The base image to use in the build
+ RUN: executes a command
+ CMD:
+ EXPOSE: opens a port 
+ COPY: only perform copy i.e, copy a file from host 
+ ADD: copy the files from the remote source i.e, from website
+ ENV: gets an env variable 
+ ENTRYPOINT: 
+ WORKDIR:
+ USER:
+
+Ex: 1, Building docker file & create a image. 
+ FROM nginx:latest
+ ADD . /usr/share/nginx/html
+
+ docker build -t website:latest .
+ docker image ls 
+ docker run --name website -p 8080:80 -d website:latest
+
+
+
+
+
+
+
+
