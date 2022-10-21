@@ -1,14 +1,53 @@
-from operator import index
-from platform import java_ver
-from unittest import FunctionTestCase
-from winreg import ConnectRegistry
+from sys import modules
+from xml.sax.xmlreader import InputSource
 
+
+1. WEB DEVELOPMENT
+2. DATA SCIENCE
+3. MACHINE LEARNING
+4. AI 
+5. AUTOMATION
+
+Advantages:
+ easy to learn & setup
+ simple Syntax
+ many libraries
+ large community 
+
+ Web Development: 
+  Popular librarires : django , more light weight flask 
+  
 
 print / input - function in python
 () - Parenthesis
 [] - square bracket
 "" - Double quotes - represents 'String'
 Ex: print("Hello World!")
+
+1. Work with strings, boolean, number
+2. list, sets, DICTIONARY
+3. variables & Functions
+4. accepting user Input
+5. input validation with conditional (if/else)
+6. error handling try/except
+7. looping for /while loop
+
+Modules:
+1. Write own modules
+2. use build in python modules
+
+Project-1 : Countdown app 
+ - work with date time module 
+ - package , pyPI & pip 
+
+Project- 2 : Automation with Python 
+
+OOP :
+ Classes and Objects 
+
+Project- 3:  API Request to GitLab 
+ - HTTP REQUEST & HTTP RESPONSE 
+
 -----------------------------------------------------------
 Variables:
  Define memory location where data is being store
@@ -321,3 +360,6 @@ Ex:
 def sum(first, second):
     print(first + second)
 sum(2, 9)
+
+---------------------------------Techwith NANA -----------------------------------------------------
+
