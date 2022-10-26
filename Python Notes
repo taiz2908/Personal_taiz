@@ -1,3 +1,6 @@
+from ast import keyword
+from dis import Instruction
+from errno import ENOTCONN
 from sys import modules
 from xml.sax.xmlreader import InputSource
 
@@ -16,7 +19,7 @@ Advantages:
 
  Web Development: 
   Popular librarires : django , more light weight flask 
-  
+
 
 print / input - function in python
 () - Parenthesis
@@ -24,6 +27,7 @@ print / input - function in python
 "" - Double quotes - represents 'String'
 Ex: print("Hello World!")
 
+---------------- :PYTHON COURSE TOPICS: ------------------------
 1. Work with strings, boolean, number
 2. list, sets, DICTIONARY
 3. variables & Functions
@@ -48,9 +52,11 @@ OOP :
 Project- 3:  API Request to GitLab 
  - HTTP REQUEST & HTTP RESPONSE 
 
------------------------------------------------------------
+---------------------- VARIABLES ----------------------------------------------
 Variables:
  Define memory location where data is being store
+ Variables are the containers for storing the value. 
+
  Basic Types in Python -  
  1) Numbers(integers '22/1/43', floating'1.1/3.4,11.3'), 
  2) boolean('True/False'), 
@@ -73,9 +79,91 @@ Ex: Here defining two variable with first_name & last_name .
   Ex: Taking the i/p from users
    name = input("Enter your name?")
    print("Hello" + name)
+or,
+  Ex:
+  print(f"I'm {33} years old") , f stands for formatting
+  print(f" 20 days are{20 * 80 * 66} days")
+or,
+ mins_sec = 20 * 30 * 60
+ seconds_mins = "seconds"
+ print(f"I'm {33} {mins_sec}")
+ print(f" 20 days are {seconds_mins}")
+
+ ---------------------------- FUNCTIONS -----------------------------------------
+FUNCTIONS: To avoid repeating the same logic. 
+1. In-Build function
+2. User-Defined function
+3. Module Function
+
+1.In-Build Functions:
+ - Ex: int(), str(), bool(), etc
+ - parameters are also called arguments. 
+ - Informations can be passed into functions as parameters.  
+
+2.User-Defined function:
+ - def : definition , A function is defined using the def keyword. 
+ - Block of code which only runs when it is called. 
+ - Caliing a function = to execute the function.
+
+ def function_name (parameters);
+
+Ex: 
+def sum(first, second):
+    print(first + second)
+sum(2, 9)
+
+Ex:2
+calculations_to_units = 20
+name_of_units = "hours"
+
+def days_to_units():
+    print(f"20 days are {calculations_to_units} {name_of_units}")
+    print("All Good!")
+    
+days_to_units()
+
+Ex: 3, Parameters: Passing the input parameter
+- defining the parameters within the bracket
+
+calculations_to_units = 20
+name_of_units = "hours"
+
+def days_to_units(num_of_days):
+    print(f"{num_of_days} days are { num_of_days * calculations_to_units} {name_of_units}")
+    print("All Good!")
+
+days_to_units(20)
+days_to_units(30)
+days_to_units(40)
+
+Ex: 4 , Passing two input parameters. 
+calculations_to_units = 20
+name_of_units = "hours"
+
+def days_to_units(num_of_days, custome_message):
+    print(f"{num_of_days} days are { num_of_days * calculations_to_units} {name_of_units}")
+    print(custome_message)
+
+days_to_units(20, "Hello Good day!")
+days_to_units(30, "Awesome!")
+
+3.Module Function:
+ Ex: math module.
+
+ import math
+ print(dir(math))
+
+Ex:
+ from math import sqrt
+ print(sqrt(16))
+ o/p: 4.0
+or, 
+ from math import *
+ print(sqrt(16))
+
 -------------------------------------------------------------------
 Type Conversion: 4 types (int, float, str, bool)
-Ex:
+Ex: 
  age = input("Pls provide your age")
  new_age = int(age) + 2
  print(new_age)
@@ -329,37 +417,10 @@ print(marks["math"]) ----> print only math marks.
 marks["bio"] = 88;  ------> Insert bio & marks
 print(marks)
 
--------------------------------------------------------------------
-FUNCTIONS:
-1. In-Build function
-2. User-Defined function
-3. Module Function
-
-1.In-Build Functions:
-Ex: int(), str(), bool(), etc
-
-2.Module Function:
-Ex: math module.
-
-import math
-print(dir(math))
-
-Ex:
-from math import sqrt
-print(sqrt(16))
-o/p: 4.0
-or, 
-from math import *
-print(sqrt(16))
-
-2.User-Defined function:
-def : definition 
-def function_name (parameters);
-
-Ex:
-def sum(first, second):
-    print(first + second)
-sum(2, 9)
 
 ---------------------------------Techwith NANA -----------------------------------------------------
-
+Reverssed Key words in Python?
+- Nothing but keywords with predefined meaning & syntax in the languag.
+- Used to develop programming Instruction. 
+Ex: 
+and , as , break, class, continue, def, del,if, elif, else,in , is, with, while except, finally, false, for. 
