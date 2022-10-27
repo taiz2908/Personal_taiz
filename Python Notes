@@ -220,28 +220,40 @@ or,
 --------------------------------------------------------
 Comments:
 # this is my first code
----------------------------------------------------------
-Comparision Operators:
-< , >, <= ,>= , ==, != ,
+---------------------------------------------------------------------------------------------------
+Comparision Operators: or, Conditionals (< , >, <= ,>= , ==, != )
+ - Equals: a = b
+ - Not equal: a != b
+ - Less than: a < b
+ - Greater than: a > b
+ - Less than eual to: a<= b
+ - Greater than equal to: a >= b
+
 Logical Operators: Three types
-Or : if we have two conditions , we can use or operator.
-and : if two conditions are true then print true only or else false. 
-not: makes true to false & false to true. 
--------------------------------------------------------
-If : Simple If statement
+ 1. Or : if we have two conditions , we can use or operator.
+ 2. and : if two conditions are true then print true only or else false. 
+ 3. not: makes true to false & false to true. 
+--------------If statement--------
 Ex:
  a = 11
  if a <= 12:
      print("value is true")
----------------------
-If else: if else _Statement
+I--------------if-else------------
 Ex: a = 13
  if a <= 12:
      print("value is true")
  else:
      print("Value is False")
-----------------------
-nested ifelse:
+
+Ex:
+first_num = int(input("Enter first_num: "))
+second_num = int(input("Enter second Num: "))
+
+if first_num >= second_num:
+    print(first_num)
+else:
+    print(second_num)
+----------------nested if-else-----
 Ex: 
 age = 40
 if age >= 60:
@@ -267,7 +279,7 @@ elif operator == '*':
     print(first * second)
 else:
     print("Invalid ")
------------------------------------
+--------------------------------------------------------------------------------------------------
 Range: range(5) # 0, 1, 2, 3, 4
 in python -1 indexing means starting the counting from the right side.
 Ex:
