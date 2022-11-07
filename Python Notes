@@ -96,7 +96,7 @@ FUNCTIONS: To avoid repeating the same logic.
 3. Module Function
 
 1.In-Build Functions:
- - Ex: int(), str(), bool(), etc
+ - Ex: int(), str(), bool(), type(), input(), print(), .isdigit() etc
  - parameters are also called arguments. 
  - Informations can be passed into functions as parameters.  
 
@@ -279,7 +279,10 @@ elif operator == '*':
     print(first * second)
 else:
     print("Invalid ")
---------------------------------------------------------------------------------------------------
+--------------------------- LOOPING ( While / for) ---------------------------------------------------------
+- To execute the logic multiple times.
+- Has 2 loop commands
+
 Range: range(5) # 0, 1, 2, 3, 4
 in python -1 indexing means starting the counting from the right side.
 Ex:
@@ -314,9 +317,8 @@ Ex:
 marks = [11, 23, 44]
 for score in marks:
     print(score)
-------------------------
-List: Collection of data types. 
-Define by []
+------------------------List: Collection of data types.---------------------------------
+- Define by []
 
 Ex: 0/p: [67]
 value = [45, 67, 22, "hello"]
