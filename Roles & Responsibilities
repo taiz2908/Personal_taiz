@@ -1,5 +1,5 @@
 ----------Git & GHE --------------------
-1. creating the Repo for different services/components. 
+1. Creating the Repo for different services/components. 
 2. Creating / deletion the branchs.
 3. Solving git conflicts during merging 
 4. 
@@ -8,12 +8,26 @@
 1. Writing / modifying the Jenkinsfile according to the project req. 
  - Creating parallel jobs
  - Creating parameterized jobs
-2. Assiging the roles to the users/teams . (roles based strategy)
+ - 
+2. Assiging the roles to the users / teams . (roles based strategy)
 3. 
 
 ----------- Maven --------------------
-1.
-2.
-3.
+1. Updating pom.xml file
+ - Adding plugins as per the project requirement 
+  -
+  -
+  -
+ - Updating <distributionManagement> section for pushing the artifact to nexus repo.
+  - Release section
+  - Snapshot section
+ - 
+------------ Ansible ------------------
+
+------------- Docker ------------------
+
+------------- K8S ---------------------
+
+
 
 
