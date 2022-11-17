@@ -5,6 +5,8 @@ https://www.youtube.com/watch?v=Sxb-eqrKWkA&t=3712s
 
 
 
+
+
 -> Project Mgmt & Comprehensive tool written in Java 
 -> pom.xml - Project Object Model , Extensible Markup Language
 -> In project we have one "parent pom" , and every module have separate pom.
