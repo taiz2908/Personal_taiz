@@ -7,24 +7,31 @@
 ----------- Jenkins -------------------
 1. Writing / modifying the Jenkinsfile according to the project req. 
  - Creating parallel jobs
- - Creating parameterized jobs ((string , text, booleanParam, choice, password etc.)
+ - Creating parent child jobs, upstream / downstream 
+ - Creating parameterized jobs (string , text, booleanParam, choice, password etc.)
  - Adding req attributes after stages i.e., post (cleanup, always, success, failures etc. ) 
 2. Assiging the roles to the users / teams . (roles based strategy)
 3. Installing diff plugins in Jenkins to achieve Continous Integration.
-4. 
+4. CI Stages in Jenkinsfile
+ - code checkout (gerrit / git)
+ - Code build (mvnInstall)
+ - Code deploy (mvnDeploy)
+ - SonarQube (code quality analysis)
+ - NexusIq (Vulnerability)
+ - 
 
 ----------- Maven --------------------
 1. Using as Build tools for the building of deployable artifacts from source code & deploying to those
    artifacts to nexus / Jfrog repo. 
 Ex:
 Updating pom.xml file
- - Adding plugins as per the project requirement 
+ - Adding required plugins as per the project requirement 
   -
   -
   -
- - Updating <distributionManagement> section for pushing the artifact to nexus repo.
-  - Release section
-  - Snapshot section
+ - Updating <distributionManagement> section & setting.xml file for pushing the artifact to nexus repo.
+  - Release section, 
+  - Snapshot section, 
  - 
 ------------ Ansible ------------------
 

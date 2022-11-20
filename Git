@@ -13,15 +13,15 @@ create a dir & within dir initiate git init
 Git Config:
 # git config --global user.name "" - set a Username
 # git config --global user.email "" - set an Email
-# git clone <repo_url> - Clone (download) a repo that already exist on github, including all files, branches & commits.
-# git remote -v - to whether remote repo configured or not.
+# git clone <repo_url> : Clone (download) a repo that already exist on github, including all files, branches & commits.
+# git remote add origin <url> : After using git init cmd link the local repo to an empty guthub repo.
+# git remote -v : to whether remote repo configured or not.
 
-# git remote add origin <url> - After using git init cmd link the local repo to an empty guthub repo.
 # git add . - Git add all untracked files.
 # git commit -m "msg" / git commit -am "msg" - commit changes.
 # git status - show all untracked files
-# git push -u origin master - pushing the code to remote repo.
-# git pull <repo_url> - Pull the latest changes from remote/central repo
+# git push -u origin master : pushing the code to remote repo.
+# git pull <repo_url> : Pull the latest changes from remote/central repo
 # git 
 
 # git clone --bare <repo_url>
@@ -65,6 +65,21 @@ Log / Commit Id's: 40 alpha numeric char
 
 # git 
 
+-------------------------- Pull Request's ---------------------------
+1) If developer's wants to do any changes in the code he can't directly do it in the master branch, 
+   has to create a new branch, push the code to newly created branch , 
+   So need to raise the pull request, need to review by us/ sr members and merge it to master 
+2) Developers needs to follow some perticular templates when raising the pull requests.
+Ex:
+That is Application Id/ Task ID etc
+
+-------------------------- Git Branching Strategy -------------------
+Currently in our project basically  we have 
+1) Master Branch: It containes production code which is stable
+2) Development Branch: Has Pre-Production code . ()
+3) Feature Branch: 
+4) Release Branch: 
+5) 
 
 
 

@@ -37,7 +37,7 @@ identity.key.enc                                    org.jenkinsci.plugins.workfl
 jenkins.install.InstallUtil.lastExecVersion         plugins                                                    users
 ------------------------------------------------------------
 Jenkinsfile - Pipeline as a code
- Scripted & Declarative - Both uses grrovy , Here 1st uses syntax
+ Scripted & Declarative - Both uses groovy , Here 1st uses syntax
  Declarative: Starts with pipeline 
 
  Ex:
@@ -355,4 +355,18 @@ pipeline {
 
 
 
+pipeline {
+    agent any
+    stage {
+        stages('build'){
+            steps{
+                echo "hello world!"
+            }
+        }
+    }
+}
 
+
+pipeline {
+    
+}
