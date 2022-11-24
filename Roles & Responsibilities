@@ -1,8 +1,10 @@
 ----------Git & GHE --------------------
-1. Creating & managing the Repo by using various git cmds for different services/components. 
+1. Creating & managing the GHE Repo by using various git cmds for different services/components. 
 2. Creating / deletion the branchs.
-3. Solving git conflicts during merging 
+3. Solving git conflicts during merging.
 4. Guiding Developers reg generateting the ssh keys and connect with git to respective repo's like GHE, Gerrit etc.
+5. Creating Branching strategy as per the project Req. 
+6. Guiding & merging the pull request into the master branch.
 
 ----------- Jenkins -------------------
 1. Writing / modifying the Jenkinsfile according to the project req. 
@@ -12,22 +14,29 @@
  - Adding req attributes after stages i.e., post (cleanup, always, success, failures etc. ) 
 2. Assiging the roles to the users / teams . (roles based strategy)
 3. Installing diff plugins in Jenkins to achieve Continous Integration.
-4. CI Stages in Jenkinsfile
+ -
+ -
+ -
+4. Adding diff diff CI Stages in Jenkinsfile as per the project req. 
  - code checkout (gerrit / git)
  - Code build (mvnInstall)
  - Code deploy (mvnDeploy)
  - SonarQube (code quality analysis)
  - NexusIq (Vulnerability)
  - 
-
+5. Creating various JOBS as per the project req. 
+- free style
+- maven 
+- pipeline
+- multibranch pipeline 
 ----------- Maven --------------------
 1. Using as Build tools for the building of deployable artifacts from source code & deploying to those
    artifacts to nexus / Jfrog repo. 
 Ex:
 Updating pom.xml file
- - Adding required plugins as per the project requirement 
-  -
-  -
+ - Adding required plugins as per the project requirement , under <build> section. 
+  - <maven-deploy-plugin>
+  - <jacoco-maven-plugin>
   -
  - Updating <distributionManagement> section & setting.xml file for pushing the artifact to nexus repo.
   - Release section, 

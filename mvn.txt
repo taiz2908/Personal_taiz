@@ -21,27 +21,33 @@ Also it contains
 - plugins
 - Dependencies etc.
 
-Ex:
+Ex: GAV's in POM: 
     <groupId>sathya</groupId>
     <artifactId>TestProject</artifactId>
     <version>1.5</version>
     <packaging>war</packaging>
     <name>myproj</name>
 
-Maven Goal -
+default value for <packaging> : jar
+
+Maven Goal / Build Life cycle: 
  mvn clean: to clean the repo / Previous project to be clean
- mvn site - Aslo it will generate reports.
+ mvn site - Aslo it will generate reports.(project license, project summery, dependencies, CI reports etc and create a html docs)
  mvn compile: to compile the source code of the project , Executable files.
  mvn Test: to apply test cases. 
  mvn package: to generate the package,executable files, i.e .war / .jar
  mvn install: install the package in the local repo in mvn i.e. ".m2"
- mvn deploy: to deplot in nexus repo
+ mvn deploy: to deploy in nexus repo
  
+mvn deploy :
 Whatever artifact generated it'll store under "target" folder.
 In Pom.xml: 
-<distributionManagement> 
-section we need to define where we should push our artifact.
-<id> should match with setting.xml within .m2 folder.
+Under <distributionManagement> section we need to define where we should push our artifact.
+and <id> should match with setting.xml within .m2 folder and also we need to define the nexus credentils.
+<url> nexus url <url>
 <snapshotRepository> related to DEV env. 
+
+
+
 
 
