@@ -1,0 +1,310 @@
+IMP TOPICS:
+ 1) Architechture
+ 2) Replication Type
+ 3) Networking
+ 4) Services
+ 5) 
+
+
+
+----------------------: INTRO :---------------------------------
+Developed by Google labs (2003) later donated to CNCF.
+
+Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerised applications. The open source project is hosted by the Cloud Native Computing Foundation (CNCF).
+- Smallest unit in K8s is POD.
+
+---------------------: ARCHITECTURE OF K8S : ------------------
+Master Node - Scheduler , API Server, ETCD, Control manager 
+Worker Node - Kubelet , Container runtime (Docker), Pods
+
+1. An API Server: kubectl cmds
+Its acts like a front-end for Kubernetes. The users, management devices, CLI interfaces all talk to the API Server to interact with the k8s cluster. 
+
+2. An ETCD Service: ‘D’ distributed system
+Its a distributed reliable key-value store used by k8s to store all data used to manage the cluster. 
+When we have multiple nodes and multiple masters in our cluster, etcd stores all that information on all the nodes in the cluster in a distributed manner. 
+
+3. Scheduler:
+Responsible for distributing works / containers across multiple nodes. 
+It looks for newly created containers & assigns them to nodes. 
+
+4. Controller: 
+Controllers are the brain behind orchestration. 
+They are responsible for noticing & responding when nodes, containers or endpoints goes down.
+The controllers make decision to bring up new containers in such cases.
+
+5. Container Runtime : Docker
+Container runtime is the underlying software that is used to run containers .
+
+6. Kubelet:
+Kubelet is the agent that runs on each node in the cluster.
+The agent is responsible for making sure that the containers are running on the nodes as expected.
+
+7. Kubeproxy:
+
+---------------------: Kubernetes definition file :-----------------------------------
+
+Kubernetes definition file always contains four top level fields:
+1. "apiVersion": version of the k8s to creating the object ( v1 ,apps/v1 )
+2. "kind": type of object : (Pod , Service, ReplicaSet, Deployment )
+3. "metatdata": data about the object ( names , lables )
+       name: could be a string value ( myapp-pod)
+       lables:
+         name:
+ 	     app: able to filter out the pods by giving the unique name ( myapp ) 
+4. "spec": specification section , 
+       containers: name of the pod within the container
+       	 - name: nginx-container - name of the container i.e nginx container 
+       	   image: nginx - docker hub image name to create 
+       	   ports:
+       	       - containerPort: 80
+       	   env:
+       	       - name: POSTGRES_USER
+       	         value: "******"
+       	       - name: POSTGRES_PASSWORD
+       	         value: "*****"
+       	  
+Example 1: pod.yml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: nginx
+ lables: 
+   app: nginx
+   tier: frontend
+spec:
+ containers:
+   - name: nginx
+     image: nginx 
+   - name: busybox
+     image: busybox
+ #kubectl create / apply -f pod.yml
+ #kubectl get pods
+ #kubectl describe pod nginx 
+ #kubectl delete pod nginx
+
+------------------------------: K8S IMP CMDS: -------------------------------------------------
+#kubectl get pods - running containers in pod / total containers in the pod
+#kubectl describe pod ngnix - details/informations of the pod
+#kubectl get pods -o wide - can see the details of  node / IP/ age / status etc..
+#kubectl delete pod webapps - to delete the pod named webapps, 
+#kubectl exec -it podname -- sh  - to enter within a specific pod
+#kubectl logs podname -f - -f to watch the logs - to see the pod logs
+
+#kubectl get nodes - to get the details of node
+#kubectl cluster-info - 
+#kubectl expose deployments - 
+#kubectl run nginx --image=nginx - single command to create nginx pod 
+#kubectl create -f pod-definition.yml - '-f' file name - create nginx pod with definition.yml file
+#kubectl apply -f pod-definition.yml - create nginx pod with definition.yml file
+#kubectl api-resources | grep replicaset - to get the details for replicaset / deployments
+#kubectl api-resources | grep services - to get the details of services 
+#kubectl get replicationcontroller
+#kubectl get replicasets / rs
+#kubectl get deployment
+#kubectl get all
+#kubectl describe deployment myapp-deployment
+#kubectl get pods,svc - Can see both pods running status aswell as services 
+#kubectl scale --replicas=6 -f replicas-definition.yml , 1st we edit the definition file and apply the scale in 0r out 
+
+Status of rollout:
+ # kubectl rollout status deployment/myapp-deployment  - 
+ #kubectl rollout history deployment/myapp-deployment - to see the revision & history of deployments
+ #kubectl rollout undo deployment/myapp-deployment - i.e rollback to the previous version of deployment, notice somthing change / not working after that we can use this command
+
+-------------------: Kubernetes Replication Tyes :--------------------------
+
+ Why :
+     - Self Healing - if any pods goes down , bringing back is called self healing 
+     - Roll out & Rollback 
+     - High Availability 
+Types:
+   1. Replication Controller ( Old )
+   2. Replica Set (new, recommended way) , requires a "selector" definition helps to identify what pod falls under it . 
+   3. Deployment 
+ Differences:
+     Major difference between replicaset & Deployment :
+       ReplicaSet - always makes sure desired number of replica's are always available .
+       Deployment- except kind which is deployment . rollout & rolling updates , Whenever we create the deployment , deployment recreate the replicaset & replicaset create the pods .
+
+------------------------Kubernetes Services: -----------------------------------------------
+
+ Why:
+      Enables the communication between various components within & outside of the application . 
+ Types:
+     1. Node port ( 30,000 - 32,767)
+     2. ClusterIP (Port - 443 / TCP) Default one , Expose's the pod Internal to the cluster , when we don't want to expose the application to the outside world i.e database's 
+     3. Load balancer
+     4. Multi-Port , For some Services, you need to expose more than one port. Kubernetes lets you configure multiple port definitions on a Service object.
+  Advantages:
+      - Load Balancing 
+      - Zero downtime 
+      - service discovery 
+      
+ ----------------------------------------------------------------------------------
+1. Replication Controller : one fails we still have another one , providing high availability , can help automatically bringing up the new pods even its just one or hundrade  .
+
+Example - rc- definition.yml 
+ apiVersion: v1
+ kind: ReplicationController
+ metadata: 
+  name:  myapp-rc
+  lables:
+  	app: myapp
+  	type: front-end
+ spec:
+ 	- template:
+ 		metadata: 
+ 			name: myapp-pod
+ 			lables:
+ 				app: myapp
+ 				type: front-end
+ 		spec: 
+ 		 containers:
+ 		 	- name: nginx-container
+ 		 	  image: nginx
+ 	- replicas: 3
+ kubectl create -f rc-definition.yml
+ kubectl get replicationcontroller - to view the list of created replicationcontroller.
+ kubectl get pods
+ 
+ ----------------------
+ 2. Replicaset: replicaset-definition.yml
+ "Labels & Selectors:" 
+ 	monitors the exisiting pods as its already created , if anyone fails then its deploy a new one .
+ 	"lables" uses as filter section.
+ 	
+ Example:
+ 1. apiVersion: apps/v1
+ 2. kind: ReplicaSet , "Note: R & S should be in capital"
+ 3. metadata:
+ 	name: myapp-replicaset
+ 	lables:
+ 		- name: myapp
+ 		  type: front-end
+ 4.  spec:
+  	 	1. - template:
+ 		    1. metadata: 
+ 			  name: myapp-pod
+ 			  lables:
+ 				app: myapp
+ 				type: front-end
+ 		   2. spec: 
+ 		      containers:
+ 		 	   - name: nginx-container
+ 		 	   image: nginx
+    2.	- replicas: 3
+ 	3. selector: ----> ( copy the lables from the pod definition file and paste it under the selector section )
+ 	  	matchLables: 
+ 	  		type: front-end
+ Two ways to scale the replicaset :
+ 	1st: edit to 6 and use cmd #kubectl replace -f replicase-definition.yml
+ 	2nd: #kubectl scale --replicas=6 -f replicas-definition.yml 
+ 	
+------------------------------------------------------------------
+3. Deployments: 
+
+ Updates & Rollbacks in a Deployments:
+     Rollout & Versioning in a deployment:
+        when we 1st create a deployment , it triggers a rollout , a new rollout creates a new deployment revision-1, 
+        In further when application upgraded / updated a new revision-2 created.
+        This helps us keep track changes and enables us to rollback in future if necessary .
+        Whenever we create the deployment , deployment recreate the replicaset & replicaset create the pods .
+        
+Status of rollout:
+ # kubectl rollout status deployment/myapp-deployment  - 
+ #kubectl rollout history deployment/myapp-deployment - to see the revision & history of deployments
+ #kubectl rollout undo deployment/myapp-deployment - notice somthing change / not working after that we can use this command i.e rollback to the previous version of deployment
+
+Deployment strategies:
+ Two types
+ 1. recreate strategy , 1st destroy previous version & create /deploy new application versions - downtime
+ 2. Rolling update , default strategy, one by one upgrade i.e one down & update like this
+----------------------------------------------------------------------
+Networking in K8S:
+ cisco , cilium, flannel , vmware NSX, calico 
+----------------------------------------------------------------------
+ Kubernetes Services: 
+  Enables the communication between various components within & outside of the application . 
+ 1. Node port ( 30,000 - 32,767) / TCP
+ 2. Cluster IP , default one , Port - 443 / TCP
+ 3. Load balancer
+ 
+ 1. Node Port:
+     Exposes the Service on each Node's IP at a static port (the NodePort). 
+     A ClusterIP Service, to which the NodePort Service routes, is automatically created. 
+     You'll be able to contact the NodePort Service, from outside the cluster, by requesting <NodeIP>:<NodePort>.
+  Example :
+      apiVersion: v1 
+      Kind: Service
+      Metadata:
+          name: myapp-service
+      spec: 
+       type: NodePort
+       ports:
+           - targetPort: 80 ---1 (withinpod)
+             port: 80 ---2 (service port)
+             nodeport: 30008 ---3 (node)
+       selector:  ----> "Could be hundrade of pods , so we will use lables & selector to link together " pull the lables from the pod and place under selector section . 
+            app: myapp
+            type: front-end
+#kubectl create -f service-definition.yml
+#kubectl get services - list the service , where we can able to see cluster IP & NodePort
+#curl https://192.186.1.2:30008 
+
+2. ClusterIP: 
+  Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default ServiceType.
+  As Pod ip can not be static as it may goes down and again recreate with new one so, we can't relie on this ip for internal communication between the applications .
+
+3. LoadBalancer:
+ Exposes the Service externally using a cloud provider's load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
+ 
+ Microservices Application on K8S:
+     1. First we need to create the container by using the images "docker run cmd" to start an instance / container . (all images of the applications are already build and avaialble in dockerhub repo)
+     2. deploy pods
+     3. enable connectivity between the services . what application required .
+     4. Create the services ( ClusterIP & NodePort )
+-----------------------------------------------------------------------------------------------------------------  
+Kubernetes Ingress:
+ We can access the application from outside of the cluster. 
+ Benefits over NodePort / LoadBalancer:
+     We can include our own authentication . 
+     
+     
+ 
+Kubernetes Namespaces:
+ 1. What is Namespace?
+    - Way to organise the cluster into the virtual sub- clusters so we are creating the resources (pod,svs,rs,deployment,secrets,ingress,configs) in these namespaces instead of creating all in one namespaces. 
+      Each namespace logically separate with each other but can cumminicate with each other. 
+      
+    - When we create k8s cluster 4 default namespaces created ( Default, kube-node-lease, kube-public, kube-system )
+       Default - By default resource created  within default namespace , Resource when we don't specify namespace explicitly
+       Kube-node-lease - Contains lease resources  to send the hearbeats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
+       kube-public - Used for public resource . Open to all users with read only access. 
+       kube-system- For Objects created by k8s .
+  
+ 2. Need of Namespace?
+   - Avoid conflicts like same name ,
+   - Restricting Access like Dev & Prod 
+   - Resource limits by using resource quota , i.e allocated to the individual application according to their requirement .
+  
+ 3. Namespaces in action?
+   Can be created in two way
+   1st one - 
+     #kubectl create namespace nginx , here nginx is the name of the namespace.
+     #kubectl get namespaces ->  2nd one - Byusing Config file ( better recommendation )
+   
+   spec - is optional in namespace 
+   #kubectl get all --name-namspaces or kubectl get all -A
+  
+
+ 
+
+  
+ 
+ 	
+ 
+ 
+
+
+
