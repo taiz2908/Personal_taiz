@@ -1,3 +1,5 @@
+Ref: https://www.youtube.com/watch?v=bhBSlnQcq2k&t=154s
+
 --------------------What is Docker? -------------------------------------
  - Docker is a tool for running application in an isolated environment. 
  - It's similar to virtual machine.
@@ -87,7 +89,7 @@ docker stop <containerID>
 docker stop $(docker ps -q) , stop multiple container
 docker rm $(docker ps -aq) , delete all container
 docker rmi $(docker images -q) , remove multiple images
-docker rm <containerID> --force , forcefully delete a container. 
+docker rm <containerID> --force / docker rm -f <container_name>, forcefully delete a container
 
 ------------------------------ DOCKER PORT MAPPING ------------------------------------------------
 Ex: Exposing Ports
@@ -120,26 +122,67 @@ Allowing share of data, files & folders between hosts & containers, and between 
   docker run --name website-copy --volumes-from website -d -p 8081:80 nginx
 
 -------------------------------- DOCKERFILE ----------------------------
-By using dockerfile we can create our own image 
+By using dockerfile we can create our own image & always create a dockerfile within the folder
+Below's are the set of instructions using in dockerfile:
 
  FROM: The base image to use in the build
  RUN: executes a command
- CMD:
  EXPOSE: opens a port 
  COPY: only perform copy i.e, copy a file from host 
  ADD: copy the files from the remote source i.e, from website
  ENV: gets an env variable 
+ WORKDIR: Going to create a workdir inside of the container 
+ USER: instruction sets the user name
  ENTRYPOINT: 
- WORKDIR:
- USER:
+ CMD:
+------------------------ ENTERYPOINT vs CMD ----------------------
+ENTRYPOINT has two forms:
+ - The exec form, which is the preferred form: ENTRYPOINT ["executable", "param1", "param2"]
+ - The shell form: ENTRYPOINT command param1 param2
 
-Ex: 1, Building docker file & create a image. 
+The CMD instruction has three forms:
+- CMD ["executable","param1","param2"] (exec form, this is the preferred form)
+- CMD ["param1","param2"] (as default parameters to ENTRYPOINT)
+- CMD command param1 param2 (shell form)
+-----------------------------------------------------------------
+Ex: 1, Building docker file & create a nginx image. 
+ mkdir folder_name
+ docker build --help
+ vi Dockerfile
  FROM nginx:latest
  ADD . /usr/share/nginx/html
 
  docker build -t website:latest .
  docker image ls 
  docker run --name website -p 8080:80 -d website:latest
+ docker ps --format=$FORMAT
+
+Ex: 2, Nodejs & Express js
+Files Present in Source code:
+index.js
+package-lock.json
+package.json
+Dockerfile
+.dockerignore
+
+ FROM node:latest
+ WORKDIR /app
+ ADD . .
+ RUN npm install
+ CMD node index.js
+
+-------------------- .dockerignore -----------------------------
+ We should ignore files /folders . 
+ How to add ? we need to create .dockerignore 
+ file.txt
+ Dockerfile
+ .git
+ *.java
+
+--------------------- CACHING & LAYERS ------------------------
+When ever source code modify with new code caching & layers added as its not a good practice. 
+How to improve this in Dockerfile ?
+
 
 
 
