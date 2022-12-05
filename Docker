@@ -1,4 +1,6 @@
-Ref: https://www.youtube.com/watch?v=bhBSlnQcq2k&t=154s
+Ref: 
+https://www.youtube.com/watch?v=bhBSlnQcq2k&t=154s
+https://www.youtube.com/watch?v=1eVy_iWrc20&t=4403s
 
 --------------------What is Docker? -------------------------------------
  - Docker is a tool for running application in an isolated environment. 
@@ -89,6 +91,7 @@ docker stop <containerID>
 docker stop $(docker ps -q) , stop multiple container
 docker rm $(docker ps -aq) , delete all container
 docker rmi $(docker images -q) , remove multiple images
+docker image rm <imageID>
 docker rm <containerID> --force / docker rm -f <container_name>, forcefully delete a container
 
 ------------------------------ DOCKER PORT MAPPING ------------------------------------------------
@@ -101,20 +104,20 @@ Ex: Exposing multiple ports.
  #docker run -d -p 8080:80 -p 9090:80 nginx:latest
 
 ---------------------------------NAMING A CONTAINER---------------------------------------------
- #docker run --name webserver -d -p 8080:80 nginx:latest
+ # docker run --name <name_of_the_container> -d -p 8080:80 nginx:latest
 
- #docker ps --format="ID\t{{.ID}}\nNAME\t{{.Names}}\nIMAGE\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"
+ # docker ps --format="ID\t{{.ID}}\nNAME\t{{.Names}}\nIMAGE\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"
 
- #export FORMAT="ID\t{{.ID}}\nNAME\t{{.Names}}\nIMAGE\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"
+ # export FORMAT="ID\t{{.ID}}\nNAME\t{{.Names}}\nIMAGE\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"
 
- #docker ps --format=$FORMAT
+ # docker ps --format=$FORMAT
 
 -------------------------------- DOCKER VOLUMES ------------------------
 Allowing share of data, files & folders between hosts & containers, and between conatiners. 
 
 1. Copy the data from local to nginx container: 
- #docker run --name website -v <desktop path>:/usr/share/nginx/html -d -p 8080:80 nginx:latest
- #docker exec -it website/containerID bash
+ #docker run --name website -v <desktop_path>:</usr/share/nginx/html> -d -p 8080:80 nginx:latest
+ #docker exec -it <containername/containerID> bash
  #ctrl+d : come outside of the container 
 
 2. Volumes between containers:
@@ -152,10 +155,10 @@ Ex: 1, Building docker file & create a nginx image.
  FROM nginx:latest
  ADD . /usr/share/nginx/html
 
- docker build -t website:latest .
- docker image ls 
- docker run --name website -p 8080:80 -d website:latest
- docker ps --format=$FORMAT
+ # docker build -t website:latest .
+ # docker image ls 
+ # docker run --name website -p 8080:80 -d website:latest
+ # docker ps --format=$FORMAT
 
 Ex: 2, Nodejs & Express js
 Files Present in Source code:
@@ -181,13 +184,102 @@ Dockerfile
 
 --------------------- CACHING & LAYERS ------------------------
 When ever source code modify with new code caching & layers added as its not a good practice. 
-How to improve this in Dockerfile ?
+How to improve this in Dockerfile ? 
+Just thinking what will change & what'll not change.
 
+FROM node:latest
+WORKDIR /app
+ADD package*.json ./
+RUN npm install
+ADD . .
+CMD node index.js
 
+---------------------: How to Improve our Image sizes with Docker :--------
+One way by using Alpine linux distribution Method. 
+https://www.alpinelinux.org/
 
+docker pull node:lts-alpine
+docker pull nginx:alpine
 
+Ex: Using in a Dockerfile: 
+ FROM node:alpine
+ WORKDIR /app
+ ADD package*.json ./
+ RUN npm install
+ ADD . .
+ CMD node index.js
 
+----------------: Tags, Versioning & Tagging :----------------------------
+1. Allows you to control image versions
+2. Avoids breaking changes
+3. Safe 
 
+Ex: Suppose two images there but not sure with version. 
+# docker pull node:alpine ---> version using 8.0
+# docker pull node:alpine ---> version using 12.0
 
+Ex: Using in a Dockerfile: 
+ FROM node:1.71.2-alpine
+ WORKDIR /app
+ ADD package*.json ./
+ RUN npm install
+ ADD . .
+ CMD node index.js
 
+--------: Tagging our Own Images :-------------------------------
+# docker build -t api-website:latest .
+# docker tag api-website:latest api-website:1 , changing a latest tag to 1 / renaming a tag
+
+--------: Running Containers with different Tags: ----------------
+# docker run --name api-website -p 8080:80 -d api-website:latest
+# docker run --name api-website-1 -p 8081:80 -d api-website:1
+# docker images
+ api-website:latest
+ api-website:1
+
+----------: Docker Registries: ---------------------------
+Docker Hub
+Amazon ECR
+QUAY.IO
+1. Private 
+2. Public
+- Highly scalable server side application that stores and lets you distribute docker images. 
+- Used in CI/CD Pipelines.
+- Running the applications. 
+
+# docker push amigoscode/website:tagname
+ amigoscode: account name
+ website: repo name within docker registries
+
+1) Taging the Image according to the docker hub account_&_repo_name.
+# docker tag api-website:latest amigoscode/website:latest
+# docker tag api-website:1 amigoscode/website:1
+2) Pushing the Image to docker hub
+# docker push amigoscode/website:latest
+# docker push amigoscode/website:1
+3) Pulling our own Images
+# docker pull amigoscode/website:latest
+# docker pull amigoscode/website:1
+4) Converting image to container 
+# docker run --name website-new -p 9000:80 -d amigoscode/website:latest
+# docker run --name website-new-1 -p 9001:80 -d amigoscode/website:1
+
+--------------: Docker Inspect :----------------------------------------
+Use for debugging the container . 
+Following info we can see
+ Portbinding, Restart Policy, Volumne driver, Cpu period, Memory swap, Networks, IP address etc...
+
+# docker inspect <containerID_or_conatinerNAME> , gives a JSON format
+
+--------------: Docker Logs :------------------------------------
+Want to view the logs of the container. 
+# docker logs --help
+# docker logs <containerID_or_conatinerNAME>
+
+docker exec:
+# docker exec --help
+# docker exec -it <containerID_or_conatinerNAME> /bin/bash --> failed to create the container.
+# docker inspect <containerID_or_conatinerNAME> , search in cmd and able to see command. 
+# docker exec -it <containerID_or_conatinerNAME> /bin/sh , enter inside the container. 
+  ls -al 
 

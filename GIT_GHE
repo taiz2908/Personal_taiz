@@ -1,11 +1,11 @@
 Git is a free and open source "distributed version control system" .
 Github is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
 
-Git Stages:
- Working area
- stating area
- Local repo 
- Central repo
+-------- Git Stages: ----------
+ 1) Working area
+ 2) stating area
+ 3) Local repo 
+ 4) Central repo
 
 Git Commands:
 create a dir & within dir initiate git init
@@ -65,7 +65,7 @@ Log / Commit Id's: 40 alpha numeric char
 
 # git 
 
--------------------------- Pull Request's ---------------------------
+--------------------------How to Create Pull Request's ---------------------------
 1) If developer's wants to do any changes in the code he can't directly do it in the master branch, 
    has to create a new branch, push the code to newly created branch , 
    So need to raise the pull request, need to review by us/ sr members and merge it to master 
