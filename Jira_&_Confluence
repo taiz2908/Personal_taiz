@@ -1,0 +1,22 @@
+-------- About Jira ---------
+
+
+---------: Raising / Updatinng a Jira: ---------
+ - Headline
+ - Description 
+   - Objectives 
+ - Daily updates paste under comment section
+ 
+--------: Jira Tickets Work Flow: ----------
+1) We have Epic and under epic we have Story.
+
+2) We have story 
+ - Objects
+ - Description
+ - Reference
+ - Pre-requisites
+ - Steps
+ - Acceptance Criteria etc..
+
+3) Under story we have sub-tasks which is assigned to respective members. 
+ - 
