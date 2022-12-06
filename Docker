@@ -24,9 +24,9 @@ Virtual Machine:
  - Slow to boot. 
 
 Ex:
- [-----VM1----] [VM2] [VM3]
- -----AAP1---
- [GUEST OS]     [GUEST os]
+ [-----VM1----] [VM2]   [VM3]
+ -----AAP1---  --AAP2--  
+ [GUEST OS]    [GUEST OS]
  -----Hypervisor--------------------------
  -----Infra-------------------------------
 
@@ -42,14 +42,18 @@ Benefits of Container:
 ---------------------------- Docker Images & Contaioners -----------------------------------
 Images:
  - Image is a template for creating an environment of our choice. 
- - It's a snapshot
+ - It's a snapshot.
  - Has everything to run an application. 
- - OS , software , app code etc 
+ - OS , software , app code etc .
 
 Containers:
  - Running instance of an image. 
  - 
-Note: We can't modify docker images, Can convert into container's and within container we can do the required changes, 
+Note: We can't modify docker images, Can convert into container's and within container we can do the required changes. 
+
+Docker Daemon :
+- It listen docker api request and manages docker objects such as images, container, volumes etc.
+- Also it can communicate with other docker deamon to manage services.
 
 ------------------------COMMAND'S-------------------------------------
 Images:
@@ -65,28 +69,27 @@ Container's:
  - docker ps ,to show running container 
  - docker ps --help
  - docker ps -a / docker ps -aq, to show running as well as stop container 
- - docker top 
  - docker start 
- - docker stop
- - docker rm
- - docker commit
+ - docker stop - stopping the running container,send the signal SIGTERM.
+ - docker kill - Kill one or more container, send the signal SIGKILL.
+ - docker rm 
  - docker attach
- - docker stats
  - docker inspect
  - docker logs
 
-Ex: Pulling an image from hub.docker.com
-# docker pull ubuntu
-# docker pull tomcat:7.0
-# docker pull tomcat:8.0
+ - docker stats --all / <containerID> : to check the container CPU Usage's
+ - docker commit
+ - docker top 
+
+Ex: Pulling an image from hub.docker.com , Tomcat Image
+# docker pull tomcat
 # docker images
-# docker run -it ubuntu /bin/bash -> create the container as well as entered into the container. 
+# docker run -d --name appserver -p 8090:8080 tomcat 
+# docker exec -it appserver /bin/bash or, bash
+# cd webapps.dist/
+# cp -R * ../webapps/
 
-
-# docker run -itd ubuntu /bin/bash
-# docker attach <containerID>
-
-Delete Container:
+--- Delete Container: -------
 docker stop <containerID>
 docker stop $(docker ps -q) , stop multiple container
 docker rm $(docker ps -aq) , delete all container
@@ -95,7 +98,7 @@ docker image rm <imageID>
 docker rm <containerID> --force / docker rm -f <container_name>, forcefully delete a container
 
 ------------------------------ DOCKER PORT MAPPING ------------------------------------------------
-Ex: Exposing Ports
+Ex: Exposing Ports 
  docker pull nginx
  docker run -d nginx:latest
  docker run -d -p 8080:80 nginx:latest
@@ -118,7 +121,9 @@ Allowing share of data, files & folders between hosts & containers, and between 
 1. Copy the data from local to nginx container: 
  #docker run --name website -v <desktop_path>:</usr/share/nginx/html> -d -p 8080:80 nginx:latest
  #docker exec -it <containername/containerID> bash
- #ctrl+d : come outside of the container 
+ # ctrl+d : come outside of the container.
+ # ctrl+p+q: come outside of the container without stopping. 
+ # ctrl+c: kill the process
 
 2. Volumes between containers:
   docker run --help: show all commands
@@ -264,17 +269,19 @@ QUAY.IO
 # docker run --name website-new -p 9000:80 -d amigoscode/website:latest
 # docker run --name website-new-1 -p 9001:80 -d amigoscode/website:1
 
---------------: Docker Inspect :----------------------------------------
+DEBUGGING THE CONTAINERS :
+1) --------------: Docker Inspect :----------------------------------------
 Use for debugging the container . 
 Following info we can see
  Portbinding, Restart Policy, Volumne driver, Cpu period, Memory swap, Networks, IP address etc...
 
 # docker inspect <containerID_or_conatinerNAME> , gives a JSON format
 
---------------: Docker Logs :------------------------------------
+2) -------------: Docker Logs :------------------------------------
 Want to view the logs of the container. 
 # docker logs --help
 # docker logs <containerID_or_conatinerNAME>
+# docker logs <containerID> | tail , to see the last logs
 
 docker exec:
 # docker exec --help
@@ -282,4 +289,8 @@ docker exec:
 # docker inspect <containerID_or_conatinerNAME> , search in cmd and able to see command. 
 # docker exec -it <containerID_or_conatinerNAME> /bin/sh , enter inside the container. 
   ls -al 
-
+-------------: Docker Container IP :---------------
+By using # docker inspect <containerID>
+172.17.0.1
+172.17.0.2
+---------------: Docker Compose :--------------------------------

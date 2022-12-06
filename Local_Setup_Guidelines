@@ -2,5 +2,24 @@
 Galaxy Developer tool: 
 Java Path:
 Maven Path:
-Docker:
+Docker: 
 Minikube:
+
+How to set Java (jdk.exe file) & Maven in win10 machine:
+ This PC --> RIGHT CLICK then properties --> Advance system setting --> Env Variables
+  1. User Variables: click on New
+     - Variable Name: JAVA_HOME 
+     - Variable Value: C:\Program Files\Java\jdk1.8.0_321
+     - Variable Name: M2_HOME
+     - Variable Value: C:\Apps\Galaxy\maven
+  2. Click on path and edit
+     - click on New and paste the path
+     - C:\Program Files\Java\jdk1.8.0_321\bin
+     - C:\Apps\Galaxy\maven\bin
+
+How to check :
+ - open Windows Power Shell --> run as admin
+ - java -version
+ - mvn -version
+ - In CMD opens as asmin
+ - echo %JAVA_HOME%
