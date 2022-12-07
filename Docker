@@ -89,7 +89,7 @@ Ex: Pulling an image from hub.docker.com , Tomcat Image
 # cd webapps.dist/
 # cp -R * ../webapps/
 
---- Delete Container: -------
+------: To Delete Container: ----------
 docker stop <containerID>
 docker stop $(docker ps -q) , stop multiple container
 docker rm $(docker ps -aq) , delete all container
@@ -100,7 +100,6 @@ docker rm <containerID> --force / docker rm -f <container_name>, forcefully dele
 ------------------------------ DOCKER PORT MAPPING ------------------------------------------------
 Ex: Exposing Ports 
  docker pull nginx
- docker run -d nginx:latest
  docker run -d -p 8080:80 nginx:latest
 
 Ex: Exposing multiple ports.
@@ -115,8 +114,8 @@ Ex: Exposing multiple ports.
 
  # docker ps --format=$FORMAT
 
--------------------------------- DOCKER VOLUMES ------------------------
-Allowing share of data, files & folders between hosts & containers, and between conatiners. 
+--------------------------------: DOCKER VOLUMES :------------------------
+Allowing share of data, files & folders between hosts & containers, and between containers. 
 
 1. Copy the data from local to nginx container: 
  #docker run --name website -v <desktop_path>:</usr/share/nginx/html> -d -p 8080:80 nginx:latest
@@ -129,7 +128,7 @@ Allowing share of data, files & folders between hosts & containers, and between 
   docker run --help: show all commands
   docker run --name website-copy --volumes-from website -d -p 8081:80 nginx
 
--------------------------------- DOCKERFILE ----------------------------
+--------------------------------: DOCKERFILE :----------------------------
 By using dockerfile we can create our own image & always create a dockerfile within the folder
 Below's are the set of instructions using in dockerfile:
 
@@ -150,8 +149,31 @@ ENTRYPOINT has two forms:
 
 The CMD instruction has three forms:
 - CMD ["executable","param1","param2"] (exec form, this is the preferred form)
-- CMD ["param1","param2"] (as default parameters to ENTRYPOINT)
 - CMD command param1 param2 (shell form)
+- CMD ["param1","param2"] (as default parameters to ENTRYPOINT)
+
+Major difference is:
+1. In ENTRYPOINT it executes as it is & if we provide any new arguments its appended at the end of the instruction. 
+
+Ex: CMD
+ FROM centos:centos7
+ CMD ["yum", "-y", "install", "git"]
+ docker build -t demo .
+ docker run -d --name demo httpd : it's failed as its try to replaced the arg/instruction to httpd.
+
+Ex: ENTRYPOINT
+ FROM centos:centos7
+ ENTRYPOINT ["yum", "-y", "install", "git"]
+ docker build -t demo .
+ docker run -d --name demo httpd tree telnet : it's work and its appned at the end of the arg.
+
+Note: We can use both CMD & ENTRYPOINT in a dockerfile.
+Ex:
+FROM centos:centos7
+ENTRYPOINT ["yum", "-y", "install"]
+CMD ["git"]
+docker build -t demo .
+docker run -d --name demo tree httpd telnet
 -----------------------------------------------------------------
 Ex: 1, Building docker file & create a nginx image. 
  mkdir folder_name
@@ -257,23 +279,23 @@ QUAY.IO
  website: repo name within docker registries
 
 1) Taging the Image according to the docker hub account_&_repo_name.
-# docker tag api-website:latest amigoscode/website:latest
-# docker tag api-website:1 amigoscode/website:1
+ # docker tag api-website:latest amigoscode/website:latest
+ # docker tag api-website:1 amigoscode/website:1
 2) Pushing the Image to docker hub
-# docker push amigoscode/website:latest
-# docker push amigoscode/website:1
+ # docker push amigoscode/website:latest
+ # docker push amigoscode/website:1
 3) Pulling our own Images
-# docker pull amigoscode/website:latest
-# docker pull amigoscode/website:1
+ # docker pull amigoscode/website:latest
+ # docker pull amigoscode/website:1
 4) Converting image to container 
-# docker run --name website-new -p 9000:80 -d amigoscode/website:latest
-# docker run --name website-new-1 -p 9001:80 -d amigoscode/website:1
+ # docker run --name website-new -p 9000:80 -d amigoscode/website:latest
+ # docker run --name website-new-1 -p 9001:80 -d amigoscode/website:1
 
 DEBUGGING THE CONTAINERS :
-1) --------------: Docker Inspect :----------------------------------------
-Use for debugging the container . 
-Following info we can see
- Portbinding, Restart Policy, Volumne driver, Cpu period, Memory swap, Networks, IP address etc...
+ 1) --------------: Docker Inspect :----------------------------------------
+ Use for debugging the container . 
+ Following info we can see
+  - Portbinding, Restart Policy, Volumne driver, Cpu period, Memory swap, Networks, IP address etc...
 
 # docker inspect <containerID_or_conatinerNAME> , gives a JSON format
 
