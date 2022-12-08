@@ -169,11 +169,12 @@ Ex: ENTRYPOINT
 
 Note: We can use both CMD & ENTRYPOINT in a dockerfile.
 Ex:
-FROM centos:centos7
-ENTRYPOINT ["yum", "-y", "install"]
-CMD ["git"]
-docker build -t demo .
-docker run -d --name demo tree httpd telnet
+ FROM centos:centos7
+ ENTRYPOINT ["yum", "-y", "install"]
+ CMD ["git"]
+ docker build -t demo .
+ docker run -d --name demo tree httpd telnet
+ 
 -----------------------------------------------------------------
 Ex: 1, Building docker file & create a nginx image. 
  mkdir folder_name

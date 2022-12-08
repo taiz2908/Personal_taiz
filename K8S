@@ -1,9 +1,17 @@
+Ref:
+https://www.youtube.com/watch?v=r0uRLhrzbtU&list=PL2We04F3Y_43dAehLMT5GxJhtk3mJtkl5&index=1
+https://www.youtube.com/watch?v=bhBSlnQcq2k&t=10652s : By TechwithNana
+https://www.youtube.com/watch?v=YHuZ78Ig_oc&list=PLrMP04WSdCjrkNYSFvFeiHrfpsSVDFMDR : Pavan Elthepu
+
 IMP TOPICS:
  1) Architechture
  2) Replication Type
  3) Networking
  4) Services
- 5) 
+ 5) Ingress
+ 6) Namespace
+ 7) Helm Charts
+ 8) 
 
  ---------------------: INTERVIEW QUS :------------------------
  1) Namespace 
@@ -20,6 +28,9 @@ IMP TOPICS:
  12) Tar command parameters
  13) How to take volume backup
  14) How to deploy k8s
+
+----------------------: Installation: -----------------------
+
 
 ----------------------: INTRO :---------------------------------
 Developed by Google labs (2003) later donated to CNCF.
@@ -56,7 +67,7 @@ The agent is responsible for making sure that the containers are running on the 
 
 7. Kubeproxy:
 
----------------------: Kubernetes definition file :-----------------------------------
+---------------------: Kubernetes Definition File :-----------------------------------
 
 Kubernetes definition file always contains four top level fields:
 1. "apiVersion": version of the k8s to creating the object ( v1 ,apps/v1 )
@@ -141,7 +152,7 @@ Types:
        ReplicaSet - always makes sure desired number of replica's are always available .
        Deployment- except kind which is deployment . rollout & rolling updates , Whenever we create the deployment , deployment recreate the replicaset & replicaset create the pods .
 
-------------------------Kubernetes Services: -----------------------------------------------
+-----------------------: Kubernetes Services: -----------------------------------------------
 
  Why:
       Enables the communication between various components within & outside of the application . 
@@ -155,8 +166,9 @@ Types:
       - Zero downtime 
       - service discovery 
       
- ----------------------------------------------------------------------------------
-1. Replication Controller : one fails we still have another one , providing high availability , can help automatically bringing up the new pods even its just one or hundrade  .
+-----------------------: Kubernetes Replication Tyes : -----------------------
+
+1. Replication Controller : One fails we still have another one , providing high availability , can help automatically bringing up the new pods even its just one or hundrade  .
 
 Example - rc- definition.yml 
  apiVersion: v1
@@ -182,11 +194,9 @@ Example - rc- definition.yml
  kubectl get replicationcontroller - to view the list of created replicationcontroller.
  kubectl get pods
  
- ----------------------
  2. Replicaset: replicaset-definition.yml
- "Labels & Selectors:" 
- 	monitors the exisiting pods as its already created , if anyone fails then its deploy a new one .
- 	"lables" uses as filter section.
+ - "Labels & Selectors:" Monitors the exisiting pods as its already created , if anyone fails then its deploy a new one .
+ - "lables" uses as filter section.
  	
  Example:
  1. apiVersion: apps/v1
@@ -215,10 +225,8 @@ Example - rc- definition.yml
  	1st: edit to 6 and use cmd #kubectl replace -f replicase-definition.yml
  	2nd: #kubectl scale --replicas=6 -f replicas-definition.yml 
  	
-------------------------------------------------------------------
 3. Deployments: 
-
- Updates & Rollbacks in a Deployments:
+ - Updates & Rollbacks in a Deployments:
      Rollout & Versioning in a deployment:
         when we 1st create a deployment , it triggers a rollout , a new rollout creates a new deployment revision-1, 
         In further when application upgraded / updated a new revision-2 created.
@@ -234,11 +242,12 @@ Deployment strategies:
  Two types
  1. recreate strategy , 1st destroy previous version & create /deploy new application versions - downtime
  2. Rolling update , default strategy, one by one upgrade i.e one down & update like this
+
 ----------------------------------------------------------------------
 Networking in K8S:
  cisco , cilium, flannel , vmware NSX, calico 
-----------------------------------------------------------------------
- Kubernetes Services: 
+
+--------------------------: Kubernetes Services: -------------------------------------------
   Enables the communication between various components within & outside of the application . 
  1. Node port ( 30,000 - 32,767) / TCP
  2. Cluster IP , default one , Port - 443 / TCP
@@ -278,15 +287,14 @@ Networking in K8S:
      2. deploy pods
      3. enable connectivity between the services . what application required .
      4. Create the services ( ClusterIP & NodePort )
------------------------------------------------------------------------------------------------------------------  
-Kubernetes Ingress:
+
+----------------------------Kubernetes Ingress: ---------------------------------------------
+
  We can access the application from outside of the cluster. 
  Benefits over NodePort / LoadBalancer:
-     We can include our own authentication . 
-     
-     
+     We can include our own authentication .  
  
-Kubernetes Namespaces:
+------------------------: Kubernetes Namespaces: ------------------------------
  1. What is Namespace?
     - Way to organise the cluster into the virtual sub- clusters so we are creating the resources (pod,svs,rs,deployment,secrets,ingress,configs) in these namespaces instead of creating all in one namespaces. 
       Each namespace logically separate with each other but can cumminicate with each other. 
