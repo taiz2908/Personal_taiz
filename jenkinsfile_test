@@ -1,0 +1,124 @@
+def newimg = 'web-server'
+def newtag = params.IMAGE_TAG
+def repo_url = ''
+
+pipeline {
+    agent {
+        kubernetes {
+            workspaceVolume hostPathWorkspaceVolumne("/buildstore/jenkins")
+            defaultContainer 'maven'
+            yaml '''
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      labels:
+        lable: myproject_slave
+    spec:
+      securityContest: 
+         privileged: true
+         runAsuser: 0
+      nodeSelector:
+        node-role.kubernetes.io/worker: true
+      container:
+      - name: maven
+         image: /maven:3.5.0
+         command:
+         - cat
+         tty: true
+      - name: sonar-scanner
+         image: latest
+         command:
+         - cat
+         tty: true
+
+'''
+
+        }
+    }
+
+    stages {
+        stage ('PACKAGE') {
+            steps {
+                mvnInstall()
+            }
+        }
+        stage ('DEPLOYING TO NEXUS') {
+            steps {
+                mvnDeploy()
+            }
+        }
+        stage ('SONAR CODE ANALYSIS') {
+            steps {
+                Sonarcodeanalysis()
+            }
+        }
+        stage ('NEXUSIQ') {
+            steps {
+                script {
+                    nexusIQ ('testproject', "/target/*.war .jar")
+                }
+            }
+        }
+        stage ('UNIT TEST') {
+            steps{
+                mvnTest()
+            }
+        }
+        stage ('DOCKER LOGIN') {
+            steps{
+                script {
+                    container('docker'){
+                        withCredentials([
+                            usernamePassword(credentialsID:'my_cred', usernameVariable:'my_update', passwordVariables:'my_passwd')
+                        ]) {
+
+                            sh """#!/bin/sh
+                             docker login -u \$my_update -p \my_passwd $repo_url
+                             docker build -t $newimg:$newtag --build-arg SRC=$repo_url --build-arg IMG=$newimg --build-arg TAG=newtag .
+                           """  
+                        }
+                    }
+                }
+            }
+        }
+        stage ('BUILDING & PUSHING IMG') {
+            steps {
+                script {
+                    container('docker'){
+                        withDockerRegistry(credentialsID: 'my_demo_test' , url: 'hub.docker.com') {
+
+                            sh """#!/bin/sh
+                            docker tag $newimg:$newtag $repo_url/$newimg:$newtag
+                            docker push $repo_url/$newimg:$newtag
+                            """
+                        }
+                    }
+                }
+            }
+        }
+        stage ('RUNNING CONTAINER') {
+            steps {
+                scripts{
+                    container('docker'){
+                        withDockerRegistry(credentialsID: 'my_demo_test' , url: 'hub.docker.com') {
+
+                            sh """#!/bin/sh
+                            docker rm -f web-server-container
+                            sleep 60
+                            docker run -dit -p 8080:8080 --name web-server-1 web-server:"$params.IMAGE_TAG"
+                            docker ps
+                            sleep 60
+                            docker exec web-server-1 curl localhost:8080/
+                        """
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post{
+        cleanup {
+            cleanWs()
+        }
+    }
+}
