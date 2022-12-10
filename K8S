@@ -1,7 +1,40 @@
 Ref:
-https://www.youtube.com/watch?v=r0uRLhrzbtU&list=PL2We04F3Y_43dAehLMT5GxJhtk3mJtkl5&index=1
+https://www.youtube.com/watch?v=r0uRLhrzbtU&list=PL2We04F3Y_43dAehLMT5GxJhtk3mJtkl5&index=1: Mumshad
 https://www.youtube.com/watch?v=bhBSlnQcq2k&t=10652s : By TechwithNana
 https://www.youtube.com/watch?v=YHuZ78Ig_oc&list=PLrMP04WSdCjrkNYSFvFeiHrfpsSVDFMDR : Pavan Elthepu
+https://www.youtube.com/watch?v=DsHcfoRyDsM&list=PLTyWtrsGknYfanKF33E12LdJvl5q5PZGp&index=1: Tech Primers
+
+
+------------------------: Exam Overview CKA : ---------------------
+CKA : 50% , Cluster Installation , upgrade, Maintenance & Troubleshoot. 
+CKAD : 50% , SYLLABUS IS SAME , Software / Application :Pod
+
+Installer : Kubeadm --> (9 marks) - 100%
+etcd backup & restore --> (6 marks) - 100%
+
+----------------------: INTRO / OVERVIEW OF K8S :---------------------------------
+- Developed by Google labs (2003) later donated to CNCF (Cloud native Computing Foundation) in collab with Linux foundation. 
+- Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerised applications. The open source project is hosted by the Cloud Native Computing Foundation (CNCF).
+- Smallest unit in K8s is POD.
+
+- Enterprise k8s distribution , build on the top of the k8s with additional funtionality. 
+- Any functionality is missing with k8s , they have added.
+ - VMWare Tanzu
+ - Redhat Openshift --> provides all free trainings. (self placed)
+ - SUSE Rancher --> procides all free tranings. (self placed)
+
+- K8s doesn't natively support monitoring, logging & tracing .(vanilla k8s)
+- K8s doesnot natively support CICD Pipeline. 
+
+ EKS : Amazon Elastic k8s service
+ AKS : Azure K8s service
+ GKE : Google k8s Engine
+ Digitalocean K8s
+ IBM Cloud K8s Services
+ Oracle Container Engine for k8s
+ VMWare Tanzu K8s Grid
+
+ -->  self Managed: Openshift by Redhat and Docker enterprise. 
 
 IMP TOPICS:
  1) Architechture
@@ -29,43 +62,62 @@ IMP TOPICS:
  13) How to take volume backup
  14) How to deploy k8s
 
-----------------------: Installation: -----------------------
+---------------------: COMPONENTS / ARCHITECTURE OF K8S : ------------------
 
+https://kubernetes.io/docs/concepts/overview/components/
 
-----------------------: INTRO :---------------------------------
-Developed by Google labs (2003) later donated to CNCF.
+Master Node / Control Plane (3 Node) - Scheduler , API Server, ETCD, Control manager, Cloud manager , Container runtime , Kubelet, Kubeproxy . 
+Worker Node  - Kubelet , Kube-proxy, Container runtime (Docker engine / CRI-O / Containerd), Pods
 
-Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerised applications. The open source project is hosted by the Cloud Native Computing Foundation (CNCF).
-- Smallest unit in K8s is POD.
-
----------------------: ARCHITECTURE OF K8S : ------------------
-Master Node - Scheduler , API Server, ETCD, Control manager 
-Worker Node - Kubelet , Container runtime (Docker), Pods
-
-1. An API Server: kubectl cmds
-Its acts like a front-end for Kubernetes. The users, management devices, CLI interfaces all talk to the API Server to interact with the k8s cluster. 
+1. An API Server: kubectl cmds , Heart of K8s
+ - Its acts like a front-end /main access point to the control panel.
+ - The users, management devices, CLI interfaces all talk to the API Server to interact with the k8s cluster. 
 
 2. An ETCD Service: ‘D’ distributed system
-Its a distributed reliable key-value store used by k8s to store all data used to manage the cluster. 
-When we have multiple nodes and multiple masters in our cluster, etcd stores all that information on all the nodes in the cluster in a distributed manner. 
+ - Its a distributed reliable key-value store used by k8s to store all data used to manage the cluster. 
+ - When we have multiple nodes and multiple masters in our cluster, etcd stores all that information on all the nodes in the cluster in a distributed manner. 
+ - Also its responsible for implementating locks within the cluster to ensure there is no conflicts between the Masters.
+ - Data is never overwritten , it always append. 
+ - ETCD CLI managment tool - etcdcli, provides snapshot save & restore. 
+ - It's written in Go Language.
+ - Also used to store subnets, Configmaps, secrets etc.
 
 3. Scheduler:
-Responsible for distributing works / containers across multiple nodes. 
-It looks for newly created containers & assigns them to nodes. 
+ - Responsible for distributing works / containers across multiple nodes. 
+ - It looks for newly created containers & assigns them to nodes. 
 
 4. Controller: 
-Controllers are the brain behind orchestration. 
-They are responsible for noticing & responding when nodes, containers or endpoints goes down.
-The controllers make decision to bring up new containers in such cases.
+ - Controllers are the brain behind orchestration. 
+ - They are responsible for noticing & responding when nodes, containers or endpoints goes down.
+ - The controllers make decision to bring up new containers in such cases.
 
 5. Container Runtime : Docker
-Container runtime is the underlying software that is used to run containers .
+ - Container runtime is the underlying software that is used to run containers .
 
-6. Kubelet:
-Kubelet is the agent that runs on each node in the cluster.
-The agent is responsible for making sure that the containers are running on the nodes as expected.
+6. Kubelet: Agent
+ - Kubelet is the agent that runs on each node in the cluster.
+ - The agent is responsible for making sure that the containers are running on the nodes as expected.
+ - Also it is responsible to interacting with the masters to provide health info of the worker node. 
+ - Kubelet uses a "shim" application. 
+ - Swap disabled. You MUST disable swap in order for the kubelet to work properly.
 
-7. Kubeproxy:
+7. Kube-proxy:
+ - Responsible for ensuring the network traffic is routed properly to internal & external services as required. 
+ - kube-proxy maintains network rules on nodes. These network rules allow network communication to your Pods from network sessions inside or outside of your cluster.
+
+
+ ----- KUBEADM HA Topology - Stacked etcd ---------------------
+- Out of 3 etcd, one would be active.
+ Ex:
+  Worker Node_1 --  Worker_Node_2 --  Worker_Node_3
+  -------------  Load Balancer --------------------
+  Control_panel_1 -- control_panel_2 --control_panel_3
+
+----- KUBEADM HA Topology - External etcd ---------------------
+- etcd running outside the control plane .
+- Have to take care of the replication.
+
+----------------------: Installation: -----------------------
 
 ---------------------: Kubernetes Definition File :-----------------------------------
 
@@ -109,12 +161,12 @@ spec:
  #kubectl delete pod nginx
 
 ------------------------------: K8S IMP CMDS: -------------------------------------------------
-#kubectl get pods - running containers in pod / total containers in the pod
-#kubectl describe pod ngnix - details/informations of the pod
-#kubectl get pods -o wide - can see the details of  node / IP/ age / status etc..
-#kubectl delete pod webapps - to delete the pod named webapps, 
-#kubectl exec -it podname -- sh  - to enter within a specific pod
-#kubectl logs podname -f - -f to watch the logs - to see the pod logs
+#kubectl get pods , running containers in pod / total containers in the pod
+#kubectl describe pod ngnix , details/informations of the pod
+#kubectl get pods -o wide , can see the details of  node / IP/ age / status etc..
+#kubectl delete pod webapps, to delete the pod named webapps, 
+#kubectl exec -it podname -- sh , to enter within a specific pod
+#kubectl logs podname -f , '-f' to watch the logs, to see the pod logs
 
 #kubectl get nodes - to get the details of node
 #kubectl cluster-info - 
