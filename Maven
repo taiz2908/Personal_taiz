@@ -3,8 +3,6 @@ https://www.youtube.com/watch?v=Q4m3koo2PQ8&t=1s: Deekshith SN
 https://www.youtube.com/watch?v=RcWSch8r3Zw&t=73s
 https://www.youtube.com/watch?v=Sxb-eqrKWkA&t=3712s
 
-
-
 -> Project Mgmt & Comprehensive tool written in Java 
 -> pom.xml - Project Object Model , Extensible Markup Language
 -> In project we have one "parent pom" , and every module have separate pom.
@@ -40,12 +38,12 @@ Maven Goal / Build Life cycle:
  mvn deploy: to deploy in nexus repo
  
 mvn deploy :
-Whatever artifact generated it'll store under "target" folder.
+ Whatever artifact generated it'll store under "target" folder.
 In Pom.xml: 
-Under <distributionManagement> section we need to define where we should push our artifact.
-and <id> should match with setting.xml within .m2 folder and also we need to define the nexus credentils.
-<url> nexus url <url>
-<snapshotRepository> related to DEV env. 
+ Under <distributionManagement> section we need to define where we should push our artifact.
+ and <id> should match with setting.xml within .m2 folder and also we need to define the nexus credentils.
+ <url> nexus url <url>
+ <snapshotRepository> related to DEV env. 
 
 
 

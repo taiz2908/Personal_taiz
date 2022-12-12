@@ -67,7 +67,11 @@ IMP TOPICS:
 https://kubernetes.io/docs/concepts/overview/components/
 
 Master Node / Control Plane (3 Node) - Scheduler , API Server, ETCD, Control manager, Cloud manager , Container runtime , Kubelet, Kubeproxy . 
-Worker Node  - Kubelet , Kube-proxy, Container runtime (Docker engine / CRI-O / Containerd), Pods
+Worker Node  - Kubelet , Kube-proxy, Container runtime (Docker engine / CRI-O / Containerd), Pod(IP Address, Volume, Docker). 
+
+Ex:
+Pod1: App1
+Pod2: App2
 
 1. An API Server: kubectl cmds , Heart of K8s
  - Its acts like a front-end / Main access point to the control panel.
@@ -191,7 +195,7 @@ Status of rollout:
 
 -------------------: Kubernetes Replication Tyes :--------------------------
  Why :
-     - Self Healing - if any pods goes down , bringing back is called self healing 
+     - Self Healing - if any pods goes down , bringing back is called self healing.
      - Roll-out & Roll-back 
      - High Availability 
 Types:
@@ -253,11 +257,11 @@ Example: rc-definition.yml
  1. apiVersion: apps/v1
  2. kind: ReplicaSet , "Note: R & S should be in capital"
  3. metadata:
- 	name: myapp-replicaset
- 	lables:
+ 	 name: myapp-replicaset
+ 	 lables:
  		- name: myapp
  		  type: front-end
- 4.  spec:
+ 4. spec:
   	 	1. - template:
  		    1. metadata: 
  			  name: myapp-pod
@@ -267,11 +271,11 @@ Example: rc-definition.yml
  		   2. spec: 
  		      containers:
  		 	   - name: nginx-container
- 		 	   image: nginx
-    2.	- replicas: 3
- 	3. selector: ----> ( copy the lables from the pod definition file and paste it under the selector section )
- 	  	matchLables: 
- 	  		type: front-end
+ 		 	     image: nginx
+        2.	- replicas: 3
+ 	    3. selector: ----> ( copy the lables from the pod definition file and paste it under the selector section )
+ 	  	    matchLables: 
+ 	  		   type: front-end
 
  Two ways to scale the replicaset :
  	1st: edit to 6 and use cmd #kubectl replace -f replicase-definition.yml
@@ -306,9 +310,9 @@ Networking in K8S:
  3. Load balancer
  
  1. Node Port:
-     Exposes the Service on each Node's IP at a static port (the NodePort). 
-     A ClusterIP Service, to which the NodePort Service routes, is automatically created. 
-     You'll be able to contact the NodePort Service, from outside the cluster, by requesting <NodeIP>:<NodePort>.
+    - Exposes the Service on each Node's IP at a static port (the NodePort). 
+    - A ClusterIP Service, to which the NodePort Service routes, is automatically created. 
+    - You'll be able to contact the NodePort Service, from outside the cluster, by requesting <NodeIP>:<NodePort>
   Example :
       apiVersion: v1 
       Kind: Service
@@ -344,7 +348,7 @@ Networking in K8S:
 
  We can access the application from outside of the cluster. 
  Benefits over NodePort / LoadBalancer:
-     We can include our own authentication .  
+ - We can include our own authentication .  
  
 ------------------------: Kubernetes Namespaces: ------------------------------
  1. What is Namespace?
