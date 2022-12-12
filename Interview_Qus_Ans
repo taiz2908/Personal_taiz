@@ -15,7 +15,9 @@
  - Deploy is called as downstream.
 
 3. Multibranch Pipeline with a Webhook on Jenkins.
- - Sometimes it may be necessary to create a pipeline on Jenkins for each Git branch. In this case it could be difficult to create independent pipeline for each branch. Besides that what if we create or delete a branch in future? So someone has to take care of the pipelines on Jenkins whenever there is change in branches. That’s where Multibranch pipeline comes into picture.
+ - Sometimes it may be necessary to create a pipeline on Jenkins for each Git branch. In this case it could be difficult to create independent pipeline for each branch. 
+ - Besides that what if we create or delete a branch in future? So someone has to take care of the pipelines on Jenkins whenever there is change in branches. 
+ - That’s where Multibranch pipeline comes into picture.
  - Through Multibranch pipeline we can create a pipeline for each branch in a repository and it also create or remove when there is a change in the branches.
 Create a Multibranch Pipeline
  - Login to Jenkins GUI
@@ -23,11 +25,13 @@ Create a Multibranch Pipeline
  - Give Display Name and Description
  - Under Branch Sources → Add source → Chose Git → and provide GitHub URL and Credentials (Credentials are optional if it is public repo)
  - Under Build Configuration → chose Jenkinsfile path. Most of the case it will be under Repo root directory.
+
 Apply and Save the job.
 Now Jenkins automatically scans the repository and create a job for each branch wherever it finds a Jenkinsfile and initiate first build.
 
 Using Webhook:
- - If you wish to automate the build process in the multibranch pipeline we can use Webhook. This feature is not enabled until we install “Multibranch Scan Webhook Trigger”. This enables an option “scan by webhook” under “Scan Multibranch Pipeline Triggers”. Here we should give a token.
+ - If you wish to automate the build process in the multibranch pipeline we can use Webhook. This feature is not enabled until we install “Multibranch Scan Webhook Trigger”.
+ -  This enables an option “scan by webhook” under “Scan Multibranch Pipeline Triggers”. Here we should give a token.
  - Now to enable auto build process we should provide Jenkins URL with token in the GitHub. 
  - For this log into GitHub → settings → Webhooks → Add webhook.
  - Provide Payload URL and Content type as “application/json” and click on Add webhook
@@ -129,9 +133,11 @@ Click On Backup Now & Restore Now.
 
 ----------------------: ANSIBLE :---------------------------------------
 1. Ansible Roles: 
- - If we add more and more functionalities to a single playbook it will make it difficult to maintain in a single file. To resolve this issue, the playbooks are arranged in a directory structure called roles. 
+ - If we add more and more functionalities to a single playbook it will make it difficult to maintain in a single file.
+ - To resolve this issue, the playbooks are arranged in a directory structure called roles. 
  - Under roles directory we created sub directory such as files, handlers, meta, task, vars) and inside sub directory We create main.yml file.
- - When we call main playbook, main playbook will call all sections files respectively in the order whatever  we mention in playbook. So, by using this Role, we can maintain small playbook without any complexity.
+ - When we call main playbook, main playbook will call all sections files respectively in the order whatever  we mention in playbook.
+ - So, by using this Role, we can maintain small playbook without any complexity.
  - Roles 
     - FILES (index.html / sample.html / war )
     - HANDLERS (main.yml) apche2 ,tomcat 8 , mysql_server start
@@ -232,7 +238,8 @@ Ansible-Installation :
  - #ansible-playbook pb1.yml –check –diff (what needs to be change)
 
 15. Ansible Idempotency:
- - For Ansible it means After 1 run of a playbook to set things to a desired state, further runs of the same playbook should result in 0 changes.  
+ - For Ansible it means After 1 run of a playbook to set things to a desired state, 
+ - Further runs of the same playbook should result in 0 changes.  
  - In simplest terms, idempotency means you can be sure of a consistent state in your environment.
 
 -------: DOCKER :-------------
