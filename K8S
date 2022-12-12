@@ -57,7 +57,7 @@ IMP TOPICS:
  8) How to assign permisson to particular group
  9) How to search image in Docker
  10) How to kill process of particular users
- 11) How to copy data bet directory
+ 11) How to copy data between directory.
  12) Tar command parameters
  13) How to take volume backup
  14) How to deploy k8s
@@ -70,7 +70,7 @@ Master Node / Control Plane (3 Node) - Scheduler , API Server, ETCD, Control man
 Worker Node  - Kubelet , Kube-proxy, Container runtime (Docker engine / CRI-O / Containerd), Pods
 
 1. An API Server: kubectl cmds , Heart of K8s
- - Its acts like a front-end /main access point to the control panel.
+ - Its acts like a front-end / Main access point to the control panel.
  - The users, management devices, CLI interfaces all talk to the API Server to interact with the k8s cluster. 
 
 2. An ETCD Service: ‘D’ distributed system
@@ -162,11 +162,11 @@ spec:
 
 ------------------------------: K8S IMP CMDS: -------------------------------------------------
 #kubectl get pods , running containers in pod / total containers in the pod
-#kubectl describe pod ngnix , details/informations of the pod
+#kubectl describe pod <ngnix> , details/informations of the pod
 #kubectl get pods -o wide , can see the details of  node / IP/ age / status etc..
-#kubectl delete pod webapps, to delete the pod named webapps, 
-#kubectl exec -it podname -- sh , to enter within a specific pod
-#kubectl logs podname -f , '-f' to watch the logs, to see the pod logs
+#kubectl delete pod <podname>, to delete the pod named webapps, 
+#kubectl exec -it <podname> -- sh , to enter within a specific pod
+#kubectl logs <podname> -f , '-f' to watch the logs, to see the pod logs
 
 #kubectl get nodes - to get the details of node
 #kubectl cluster-info - 
@@ -190,30 +190,28 @@ Status of rollout:
  #kubectl rollout undo deployment/myapp-deployment - i.e rollback to the previous version of deployment, notice somthing change / not working after that we can use this command
 
 -------------------: Kubernetes Replication Tyes :--------------------------
-
  Why :
      - Self Healing - if any pods goes down , bringing back is called self healing 
-     - Roll out & Rollback 
+     - Roll-out & Roll-back 
      - High Availability 
 Types:
    1. Replication Controller ( Old )
    2. Replica Set (new, recommended way) , requires a "selector" definition helps to identify what pod falls under it . 
    3. Deployment 
- Differences:
+Differences:
      Major difference between replicaset & Deployment :
        ReplicaSet - always makes sure desired number of replica's are always available .
        Deployment- except kind which is deployment . rollout & rolling updates , Whenever we create the deployment , deployment recreate the replicaset & replicaset create the pods .
 
 -----------------------: Kubernetes Services: -----------------------------------------------
-
- Why:
-      Enables the communication between various components within & outside of the application . 
- Types:
+Why:
+    Enables the communication between various components within & outside of the application . 
+Types:
      1. Node port ( 30,000 - 32,767)
      2. ClusterIP (Port - 443 / TCP) Default one , Expose's the pod Internal to the cluster , when we don't want to expose the application to the outside world i.e database's 
      3. Load balancer
      4. Multi-Port , For some Services, you need to expose more than one port. Kubernetes lets you configure multiple port definitions on a Service object.
-  Advantages:
+Advantages:
       - Load Balancing 
       - Zero downtime 
       - service discovery 
@@ -222,33 +220,34 @@ Types:
 
 1. Replication Controller : One fails we still have another one , providing high availability , can help automatically bringing up the new pods even its just one or hundrade  .
 
-Example - rc- definition.yml 
- apiVersion: v1
- kind: ReplicationController
- metadata: 
-  name:  myapp-rc
-  lables:
-  	app: myapp
-  	type: front-end
- spec:
- 	- template:
- 		metadata: 
+Example: rc-definition.yml 
+ 1. apiVersion: v1
+ 2. kind: ReplicationController
+ 3. metadata: 
+      name:  myapp-rc
+    lables:
+  	  app: myapp
+  	  type: front-end
+ 4. spec:
+ 	1. - template:
+ 		 metadata: 
  			name: myapp-pod
  			lables:
  				app: myapp
  				type: front-end
- 		spec: 
- 		 containers:
- 		 	- name: nginx-container
- 		 	  image: nginx
- 	- replicas: 3
+ 		 spec: 
+ 		  containers:
+ 		 	 - name: nginx-container
+ 		 	   image: nginx
+ 	2. - replicas: 3
+
  kubectl create -f rc-definition.yml
  kubectl get replicationcontroller - to view the list of created replicationcontroller.
  kubectl get pods
  
- 2. Replicaset: replicaset-definition.yml
- - "Labels & Selectors:" Monitors the exisiting pods as its already created , if anyone fails then its deploy a new one .
- - "lables" uses as filter section.
+2. Replicaset: replicaset-definition.yml
+  - "Labels & Selectors:" Monitors the exisiting pods as its already created , if anyone fails then its deploy a new one .
+  - "lables" uses as filter section.
  	
  Example:
  1. apiVersion: apps/v1
@@ -273,6 +272,7 @@ Example - rc- definition.yml
  	3. selector: ----> ( copy the lables from the pod definition file and paste it under the selector section )
  	  	matchLables: 
  	  		type: front-end
+
  Two ways to scale the replicaset :
  	1st: edit to 6 and use cmd #kubectl replace -f replicase-definition.yml
  	2nd: #kubectl scale --replicas=6 -f replicas-definition.yml 
