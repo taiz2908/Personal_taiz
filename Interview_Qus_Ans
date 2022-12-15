@@ -31,7 +31,7 @@ Now Jenkins automatically scans the repository and create a job for each branch 
 
 Using Webhook:
  - If you wish to automate the build process in the multibranch pipeline we can use Webhook. This feature is not enabled until we install “Multibranch Scan Webhook Trigger”.
- -  This enables an option “scan by webhook” under “Scan Multibranch Pipeline Triggers”. Here we should give a token.
+ - This enables an option “scan by webhook” under “Scan Multibranch Pipeline Triggers”. Here we should give a token.
  - Now to enable auto build process we should provide Jenkins URL with token in the GitHub. 
  - For this log into GitHub → settings → Webhooks → Add webhook.
  - Provide Payload URL and Content type as “application/json” and click on Add webhook
@@ -128,6 +128,14 @@ backup directory path: /tmp/backup1
  - Max Number of backups – 2/3
 Click On Backup Now & Restore Now.
 
+11. Jenkins Env Variables.
+ - BRANCH_NAME
+ - CHANGE_ID
+ - CHANGE_URL
+ - BUILD_ID
+ - JOB_NAME
+ - BUILD_TAG
+
 -------: MAVEN :--------------
  Refere to Maven File.
 
@@ -165,8 +173,12 @@ Click On Backup Now & Restore Now.
 4.  Ad-Hoc commands:
  - Ad Hoc commands are ready to use commands using to perform quick task, without using playbooks we can use these Ad-Hoc commands for temporary purpose.
  - These are simple one liner Linux commands we use to meet temporary requirements without actually saving for later. 
- - Here we don’t use Ansible modules. So there, Idem-potency will not work with Ad-Hoc commands. 
+ - Here we don’t use Ansible modules. So Idem-potency will not work with Ad-Hoc commands. 
  - If at all we don’t get required YAML module to write to create infrastructure, then we go for it. 
+Ex:
+ - ansible-all -i hosts -l ubnt -m apt -a "name=apache2 state=present"
+ - ansible-all -i hosts -l <ip> -m setup -a "filter=ansible_distribution"
+ - ansible-all -m package -a "name=net-tools state=latest"
 
 5. When we run playbook what are the things happening?
  - Gathering Facts
@@ -200,8 +212,8 @@ Click On Backup Now & Restore Now.
  - Restart the SSH (service SSH restart, systemctl restart sshd)
  - Connect with master through private IP .
 MASTER:
- - to generate key pair – SSH-KEYGEN
- - to send public key to nodes – SSH-COPY-ID <NODE IP>
+ - to generate key pair: SSH-KEYGEN
+ - to send public key to nodes: SSH-COPY-ID <NODE IP>
  - able to connect through SSH 
 Ansible-Installation :
      apt-get update -y
@@ -209,7 +221,7 @@ Ansible-Installation :
      apt-add-repository ppa:ansible/ansible
      apt-get update
      apt-get install ansible -y
-     ansible –version – 2.9.22 , python – 2.7
+     ansible version: 2.9.22 , python: 2.7
 
 10. Ansible Modules?
  - Yum, Apt, Get_url,  File, Ping , Package, Raw ,Group, User, Git, 
@@ -217,13 +229,13 @@ Ansible-Installation :
 
 11. Ping Module?
  - Check whether Master is reachable to respective nodes or not and response getting as “Pong”.
+ - ansible all -m ping
 
 12. Plugins using-
  - publish over SSH : Ansible 
  - Maven integration: Maven
  - Build Pipeline 
  - Role based Authorized strategy
-
 
 13. Ansible playbook structure?
  - HOST : ubnt/centos
@@ -232,17 +244,21 @@ Ansible-Installation :
  - TASKS: each play contains task and these task from top to bottom,under task we use modules. 
  - HANDLERS: to start the services
 
-14. Ansible Dryrun? –Check --diff
+14. Ansible Dryrun? -Check --diff
  - Dry run called “Check mode” to check the playbook before run. 
  - Ansible Dry Run feature we can execute the playbook without having to actually make changes on the server.
  - #ansible-playbook pb1.yml –check –diff (what needs to be change)
+ - #ansible-playbook pb1.yaml --syntax-check
 
 15. Ansible Idempotency:
  - For Ansible it means After 1 run of a playbook to set things to a desired state, 
  - Further runs of the same playbook should result in 0 changes.  
  - In simplest terms, idempotency means you can be sure of a consistent state in your environment.
 
--------: DOCKER :-------------
+16. Ansible Config file?
+ 
+
+-----------------------------------: DOCKER :-----------------------------------
 1.  VM's                      Container
  - More time to create      - Less time to create
  - Dedicated OS             - Common OS
@@ -257,7 +273,7 @@ Ansible-Installation :
  - # docker stats  --all
  - # docker stats <containerID>
 
-3. Docker –itd vs –it?
+3. Docker -itd vs -it?
  -itd: interactive terminal in detached mode, running in backend with /bin/bash. 
  -it: interactive terminal, container will create and we are entered into that container.
 
@@ -278,12 +294,13 @@ Ansible-Installation :
  - Docker commit:  convert a container into an image, docker commit  <container id> myimage
  - Docker build: build a script from docker file.
 
-8. Docker Port Mapping: 
-    - docker pull nginx
-    - docker run -d --name <name> -p 8080:80 nginx:latest
-   Docker Volume: Copy the data from local to nginx container: 
-    - docker run --name website -v <desktop_path>:</usr/share/nginx/html> -d -p 8080:80 nginx:latest
-    - docker exec -it <containername/containerID> bash
+8. 
+ Docker Port Mapping: 
+  - docker pull nginx
+  - docker run -d --name <name> -p 8080:80 nginx:latest
+ Docker Volume: Copy the data from local to nginx container: 
+  - docker run --name website -v <desktop_path>:</usr/share/nginx/html> -d -p 8080:80 nginx:latest
+  - docker exec -it <containername/containerID> bash
 
 9. Docker File??
  - Create an image automatically using a build script.
@@ -297,6 +314,18 @@ Ex:
  - #docker build –t myimage:1.0 .
  - #docker run -d --name <name> myimage:1.0
 
+10. DOCKER ContainerIP?
+ - 172.17.0.1: host
+ - docker ispect <containerID>
+ 
+11. DOCKER FILE: Single vs Multiple "RUN" commands ?
+ - After building the image all layers stored under "Docker Cache", Suppose we later modify apt-get install by adding extra pkg
+ - Docker sees the initial & modified instructions as identical & reuses the cache from previous steps.
+ - As a result the apt-get is not executed bcz the build uses the cached version. 
+ - So build can potentially get an outdated version of the curl / nginx pkg. 
+Using RUN apt-get update && apt-get install -y nginx , ensures the Dockerfile installs latest pks. 
+ - This technique is known as "cache busting"
+
 --------: K8S :---------------
 
 --------: LINUX :-------------
@@ -309,12 +338,13 @@ Ex:
  - "free -h" primary memory RAM Usages
  - "df -h" secondary memory HDD Usages
  - "du" directory memory check. 
+ - uptime: Load Average
 
 3. SOFT LINK VS HARD LINK & INODE IN LINUX:
  - An inode is a data structure that stores various information about a file in Linux,
    Containing information (the metadata) about a regular file and directory.
    Inode: Uniqe number for every file in Linux
- - Soft lInk: ln –s demo.txt Slink , only store the path, no data can store here , different inode value
+ - Soft lInk: ln -s demo.txt Slink , only store the path, no data can store here , different inode value
  - Hard Link: ln demo.txt Hlink , contains data , replica of actual file, similar Inode value, if file is deleted can access the data from Hlink.
 
 4. LINUX BOOTSTRAP PROCESS:
@@ -324,3 +354,12 @@ Ex:
   KERNEL: executes /sbin/init
   INIT: executes run level program
   RUNLEVEL:
+
+5. Linux Run-lables.
+ 0 shutdown
+ 1 single user
+ 2 multiuser
+ 3 multiuser with n/wing
+ 4 notused
+ 5 GUI
+ 6 Reboot

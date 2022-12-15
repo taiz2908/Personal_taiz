@@ -7,6 +7,8 @@ https://www.youtube.com/watch?v=1eVy_iWrc20&t=4403s
  - It's similar to virtual machine.
  - Standard for software deployment. 
 
+Now Docker is paid , we can use dockerD.
+
 --------------------Container vs Virtual Machine-----------------------------------
 Containers:
  - Containers are an abstraction at the app layer that packages code & dependecies together. 
@@ -68,14 +70,14 @@ Container's:
  - docker container ls 
  - docker ps ,to show running container 
  - docker ps --help
- - docker ps -a / docker ps -aq, to show running as well as stop container 
+ - docker ps -a / docker ps -aq: to show running as well as stop container 
  - docker start 
- - docker stop - stopping the running container,send the signal SIGTERM.
- - docker kill - Kill one or more container, send the signal SIGKILL.
+ - docker stop: stopping the running container,send the signal SIGTERM.
+ - docker kill: Kill one or more container, send the signal SIGKILL.
  - docker rm 
  - docker attach
  - docker inspect
- - docker logs
+ - docker logs: Want to view the logs of the container. 
 
  - docker stats --all / <containerID> : to check the container CPU Usage's
  - docker commit
@@ -202,6 +204,9 @@ Dockerfile
  RUN npm install
  CMD node index.js
 
+Ex: 3, Deploying springboot app in tomcat server.
+
+
 -------------------- .dockerignore -----------------------------
  We should ignore files /folders . 
  How to add ? we need to create .dockerignore 
@@ -317,3 +322,10 @@ By using # docker inspect <containerID>
 172.17.0.1
 172.17.0.2
 ---------------: Docker Compose :--------------------------------
+
+---------------: Docker Networking :-----------------------------
+1. Bridge
+2. Host
+3. None
+4. Overlay
+5. Macvlan

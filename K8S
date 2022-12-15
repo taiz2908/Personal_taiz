@@ -133,7 +133,7 @@ Kubernetes definition file always contains four top level fields:
        lables:
          name:
  	     app: able to filter out the pods by giving the unique name ( myapp ) 
-4. "spec": specification section , 
+4. "spec": specification section , Defiines whats inside th object we're creating. 
        containers: name of the pod within the container
        	 - name: nginx-container - name of the container i.e nginx container 
        	   image: nginx - docker hub image name to create 
@@ -226,28 +226,29 @@ Advantages:
 
 Example: rc-definition.yml 
  1. apiVersion: v1
- 2. kind: ReplicationController
- 3. metadata: 
-      name:  myapp-rc
+ 2. kind: ReplicationController  
+ 3. metadata: --> for replicationcontroller
+      name: myapp-rc
     lables:
   	  app: myapp
   	  type: front-end
- 4. spec:
- 	1. - template:
- 		 metadata: 
+ 4. spec: --> for replicationcontroller
+ 	1. - template: to provide the pod template. --> For Pod
+ 		  metadata: 
  			name: myapp-pod
  			lables:
- 				app: myapp
- 				type: front-end
- 		 spec: 
- 		  containers:
+ 			 app: myapp
+ 			 type: front-end
+ 		  spec: --> For Pod
+ 		    containers:
  		 	 - name: nginx-container
  		 	   image: nginx
  	2. - replicas: 3
 
- kubectl create -f rc-definition.yml
- kubectl get replicationcontroller - to view the list of created replicationcontroller.
- kubectl get pods
+  # kubectl create -f rc-definition.yml
+  # kubectl get replicationcontroller - to view the list of created replicationcontroller.
+  # kubectl get pods
+ Note: All are starting with replicationcontroller name i.e., "myapp-rc"
  
 2. Replicaset: replicaset-definition.yml
   - "Labels & Selectors:" Monitors the exisiting pods as its already created , if anyone fails then its deploy a new one .
@@ -264,14 +265,14 @@ Example: rc-definition.yml
  4. spec:
   	 	1. - template:
  		    1. metadata: 
- 			  name: myapp-pod
- 			  lables:
- 				app: myapp
- 				type: front-end
+ 			    name: myapp-pod
+ 			    lables:
+ 				 app: myapp
+ 				 type: front-end
  		   2. spec: 
- 		      containers:
- 		 	   - name: nginx-container
- 		 	     image: nginx
+ 		        containers:
+ 		 	     - name: nginx-container
+ 		 	       image: nginx
         2.	- replicas: 3
  	    3. selector: ----> ( copy the lables from the pod definition file and paste it under the selector section )
  	  	    matchLables: 
