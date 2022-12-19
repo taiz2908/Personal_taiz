@@ -49,8 +49,8 @@ IMP TOPICS:
  ---------------------: INTERVIEW QUS :------------------------
  1) Namespace 
  2) Why we used Namespace
- 3) Architechture of K8S
- 4) How to check pod logs in k8s
+ 3) Architechture of K8S  
+ 4) How to check pod logs in k8s 
  5) how to delete job in k8s
  6) How to check nodes cpu utilisation
  7) How to check node quota
@@ -61,6 +61,11 @@ IMP TOPICS:
  12) Tar command parameters
  13) How to take volume backup
  14) How to deploy k8s
+ 15) Why not docker swarm instead of K8s??
+   - Cluster is not robust.
+   - K8s Autoscaling , if pod dies automatically its create a new one
+   - rolling update
+   - integrate tools for logging & monitoring like promethus & grafana etc. 
 
 ---------------------: COMPONENTS / ARCHITECTURE OF K8S : ------------------
 
@@ -128,9 +133,9 @@ Pod2: App2
 Kubernetes definition file always contains four top level fields:
 1. "apiVersion": version of the k8s to creating the object ( v1 ,apps/v1 )
 2. "kind": type of object : (Pod , Service, ReplicaSet, Deployment )
-3. "metatdata": data about the object ( names , lables )
+3. "metatdata": data / information about the object ( names , lables )
        name: could be a string value ( myapp-pod)
-       lables:
+       lables: (We can filter the pod )
          name:
  	     app: able to filter out the pods by giving the unique name ( myapp ) 
 4. "spec": specification section , Defiines whats inside th object we're creating. 
@@ -166,11 +171,14 @@ spec:
 
 ------------------------------: K8S IMP CMDS: -------------------------------------------------
 #kubectl get pods , running containers in pod / total containers in the pod
-#kubectl describe pod <ngnix> , details/informations of the pod
-#kubectl get pods -o wide , can see the details of  node / IP/ age / status etc..
+#kubectl describe pod <ngnix> , details/informations of the single pod.
+#kubectl get pods -o wide , -o:output format, can see the details of  node / IP/ age / status etc..
 #kubectl delete pod <podname>, to delete the pod named webapps, 
-#kubectl exec -it <podname> -- sh , to enter within a specific pod
+#kubectl exec -it <podname> -- sh/bash , to enter within a specific pod
+#kubectl exec -it <podname> -c <containername> -- sh/bash , When we have multiple container in a pod. 
 #kubectl logs <podname> -f , '-f' to watch the logs, to see the pod logs
+#kubectl get pods -l name=myapp, we can see the pods falls under the lables. "filter the pods"
+#kubectl port-forward <podname> 8080:80, localport to the container port. localhost:8080
 
 #kubectl get nodes - to get the details of node
 #kubectl cluster-info - 
@@ -292,12 +300,12 @@ Example: rc-definition.yml
         
 Status of rollout:
  # kubectl rollout status deployment/myapp-deployment  - 
- #kubectl rollout history deployment/myapp-deployment - to see the revision & history of deployments
- #kubectl rollout undo deployment/myapp-deployment - notice somthing change / not working after that we can use this command i.e rollback to the previous version of deployment
+ # kubectl rollout history deployment/myapp-deployment - to see the revision & history of deployments
+ # kubectl rollout undo deployment/myapp-deployment - notice somthing change / not working after that we can use this command i.e rollback to the previous version of deployment
 
 Deployment strategies:
  Two types
- 1. recreate strategy , 1st destroy previous version & create /deploy new application versions - downtime
+ 1. recreate strategy , 1st destroy previous version & create / deploy new application versions - downtime
  2. Rolling update , default strategy, one by one upgrade i.e one down & update like this
 
 ----------------------------------------------------------------------
@@ -328,13 +336,13 @@ Networking in K8S:
        selector:  ----> "Could be hundrade of pods , so we will use lables & selector to link together " pull the lables from the pod and place under selector section . 
             app: myapp
             type: front-end
-#kubectl create -f service-definition.yml
-#kubectl get services - list the service , where we can able to see cluster IP & NodePort
-#curl https://192.186.1.2:30008 
+# kubectl create -f service-definition.yml
+# kubectl get services - list the service , where we can able to see cluster IP & NodePort
+# curl https://192.186.1.2:30008 
 
 2. ClusterIP: 
-  Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default ServiceType.
-  As Pod ip can not be static as it may goes down and again recreate with new one so, we can't relie on this ip for internal communication between the applications .
+  - Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default ServiceType.
+  - As Pod ip can not be static as it may goes down and again recreate with new one so, we can't relie on this ip for internal communication between the applications .
 
 3. LoadBalancer:
  Exposes the Service externally using a cloud provider's load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
