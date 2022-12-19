@@ -284,7 +284,7 @@ QUAY.IO
  amigoscode: account name
  website: repo name within docker registries
 
-1) Taging the Image according to the docker hub account_&_repo_name.
+1) Taging the Image according to the docker_hub_account_&_repo_name.
  # docker tag api-website:latest amigoscode/website:latest
  # docker tag api-website:1 amigoscode/website:1
 2) Pushing the Image to docker hub
@@ -297,25 +297,25 @@ QUAY.IO
  # docker run --name website-new -p 9000:80 -d amigoscode/website:latest
  # docker run --name website-new-1 -p 9001:80 -d amigoscode/website:1
 
-DEBUGGING THE CONTAINERS :
+-------------: DEBUGGING THE CONTAINERS :-----------
  1) --------------: Docker Inspect :----------------------------------------
- Use for debugging the container . 
- Following info we can see
-  - Portbinding, Restart Policy, Volumne driver, Cpu period, Memory swap, Networks, IP address etc...
+ - Use for debugging the container . 
+ - Following info we can see
+ - Portbinding, Restart Policy, Volumne driver, Cpu period, Memory swap, Networks, IP address etc...
 
 # docker inspect <containerID_or_conatinerNAME> , gives a JSON format
 
-2) -------------: Docker Logs :------------------------------------
-Want to view the logs of the container. 
-# docker logs --help
-# docker logs <containerID_or_conatinerNAME>
-# docker logs <containerID> | tail , to see the last logs
+ 2) -------------: Docker Logs :------------------------------------
+ - Want to view the logs of the container. 
+ # docker logs --help
+ # docker logs <containerID_or_conatinerNAME>
+ # docker logs <containerID> | tail , to see the last logs
 
-docker exec:
-# docker exec --help
-# docker exec -it <containerID_or_conatinerNAME> /bin/bash --> failed to create the container.
-# docker inspect <containerID_or_conatinerNAME> , search in cmd and able to see command. 
-# docker exec -it <containerID_or_conatinerNAME> /bin/sh , enter inside the container. 
+ Ex: docker exec:
+ # docker exec --help
+ # docker exec -it <containerID_or_conatinerNAME> /bin/bash --> failed to create the container.
+ # docker inspect <containerID_or_conatinerNAME> , search in cmd and able to see command. 
+ # docker exec -it <containerID_or_conatinerNAME> /bin/sh , enter inside the container. 
   ls -al 
 -------------: Docker Container IP :---------------
 By using # docker inspect <containerID>
