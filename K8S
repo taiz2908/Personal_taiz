@@ -176,7 +176,7 @@ spec:
 #kubectl delete pod <podname>, to delete the pod named webapps, 
 #kubectl exec -it <podname> -- sh/bash , to enter within a specific pod
 #kubectl exec -it <podname> -c <containername> -- sh/bash , When we have multiple container in a pod. 
-#kubectl logs <podname> -f , '-f' to watch the logs, to see the pod logs
+#kubectl logs <podname> -f , '-f' to watch / monitoring the logs, to see the pod logs
 #kubectl get pods -l name=myapp, we can see the pods falls under the lables. "filter the pods"
 #kubectl port-forward <podname> 8080:80, localport to the container port. localhost:8080
 
@@ -203,21 +203,22 @@ Status of rollout:
 
 -------------------: Kubernetes Replication Tyes :--------------------------
  Why :
-     - Self Healing - if any pods goes down , bringing back is called self healing.
-     - Roll-out & Roll-back 
-     - High Availability 
+     - Self Healing, if any pods goes down , bringing back is called self healing.
+     - Roll-out & Roll-back, 1.21 --> 1.22 & 1.22 --> 1.21
+     - High Availability
 Types:
    1. Replication Controller ( Old )
    2. Replica Set (new, recommended way) , requires a "selector" definition helps to identify what pod falls under it . 
    3. Deployment 
 Differences:
      Major difference between replicaset & Deployment :
-       ReplicaSet - always makes sure desired number of replica's are always available .
-       Deployment- except kind which is deployment . rollout & rolling updates , Whenever we create the deployment , deployment recreate the replicaset & replicaset create the pods .
+       1. ReplicaSet - always makes sure desired number of replica's are always available .
+       2. Deployment- except kind which is deployment . rollout & rolling updates , Whenever we create the deployment , deployment recreate the replicaset & replicaset create the pods .
 
 -----------------------: Kubernetes Services: -----------------------------------------------
+# kubectl get svc --> "kubernetes" is the default service.
 Why:
-    Enables the communication between various components within & outside of the application . 
+    - Enables the communication between various components within & outside of the application . 
 Types:
      1. Node port ( 30,000 - 32,767)
      2. ClusterIP (Port - 443 / TCP) Default one , Expose's the pod Internal to the cluster , when we don't want to expose the application to the outside world i.e database's 
@@ -256,6 +257,7 @@ Example: rc-definition.yml
   # kubectl create -f rc-definition.yml
   # kubectl get replicationcontroller - to view the list of created replicationcontroller.
   # kubectl get pods
+  # kubectl get all
  Note: All are starting with replicationcontroller name i.e., "myapp-rc"
  
 2. Replicaset: replicaset-definition.yml
@@ -271,7 +273,7 @@ Example: rc-definition.yml
  		- name: myapp
  		  type: front-end
  4. spec:
-  	 	1. - template:
+  	 	1. template:
  		    1. metadata: 
  			    name: myapp-pod
  			    lables:
@@ -281,13 +283,13 @@ Example: rc-definition.yml
  		        containers:
  		 	     - name: nginx-container
  		 	       image: nginx
-        2.	- replicas: 3
- 	    3. selector: ----> ( copy the lables from the pod definition file and paste it under the selector section )
- 	  	    matchLables: 
+        2.	replicas: 3
+ 	    3.  selector: ----> ( copy the lables from the pod definition file and paste it under the selector section )
+ 	  	     matchLables: 
  	  		   type: front-end
 
  Two ways to scale the replicaset :
- 	1st: edit to 6 and use cmd #kubectl replace -f replicase-definition.yml
+ 	1st: edit to 6 and use cmd #kubectl apply -f replicase-definition.yml --> Recommended Way.
  	2nd: #kubectl scale --replicas=6 -f replicas-definition.yml 
  	
 3. Deployments: 
@@ -301,7 +303,8 @@ Example: rc-definition.yml
 Status of rollout:
  # kubectl rollout status deployment/myapp-deployment  - 
  # kubectl rollout history deployment/myapp-deployment - to see the revision & history of deployments
- # kubectl rollout undo deployment/myapp-deployment - notice somthing change / not working after that we can use this command i.e rollback to the previous version of deployment
+ # kubectl rollout undo deployment/myapp-deployment - notice somthing change / not working after that we can use.
+ - this command i.e rollback to the previous version of deployment
 
 Deployment strategies:
  Two types
@@ -314,7 +317,7 @@ Networking in K8S:
 
 --------------------------: Kubernetes Services: -------------------------------------------
   Enables the communication between various components within & outside of the application . 
- 1. Node port ( 30,000 - 32,767) / TCP
+ 1. Node port ( 30,000 - 32,767) / TCP --> Stable IP Address. 
  2. Cluster IP , default one , Port - 443 / TCP
  3. Load balancer
  
@@ -326,16 +329,16 @@ Networking in K8S:
       apiVersion: v1 
       Kind: Service
       Metadata:
-          name: myapp-service
+        name: myapp-service
       spec: 
-       type: NodePort
-       ports:
-           - targetPort: 80 ---1 (withinpod)
-             port: 80 ---2 (service port)
-             nodeport: 30008 ---3 (node)
+        type: NodePort
+        ports:
+         - targetPort: 80 ---1 (withinpod)
+            port: 80 ---2 (service port)
+            nodeport: 30008 ---3 (node)
        selector:  ----> "Could be hundrade of pods , so we will use lables & selector to link together " pull the lables from the pod and place under selector section . 
-            app: myapp
-            type: front-end
+         app: myapp
+         type: front-end
 # kubectl create -f service-definition.yml
 # kubectl get services - list the service , where we can able to see cluster IP & NodePort
 # curl https://192.186.1.2:30008 
@@ -343,9 +346,12 @@ Networking in K8S:
 2. ClusterIP: 
   - Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default ServiceType.
   - As Pod ip can not be static as it may goes down and again recreate with new one so, we can't relie on this ip for internal communication between the applications .
+  # kubectl port-forward service/nginx-service 8083:8082
 
 3. LoadBalancer:
- Exposes the Service externally using a cloud provider's load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
+ - Exposes the Service externally using a cloud provider's load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
+ - New load balancer created and we need to pay , When we have multiple services it will increases the cost and difficult to manage. 
+ - If we're using bare metal then we've to set entrypoint like proxy-server. 
  
  Microservices Application on K8S:
      1. First we need to create the container by using the images "docker run cmd" to start an instance / container . (all images of the applications are already build and avaialble in dockerhub repo)
@@ -353,11 +359,12 @@ Networking in K8S:
      3. enable connectivity between the services . what application required .
      4. Create the services ( ClusterIP & NodePort )
 
-----------------------------Kubernetes Ingress: ---------------------------------------------
+----------------------------: Kubernetes Ingress: ---------------------------------------------
+What is Ingress?
+    - We can access the application from outside of the cluster. 
 
- We can access the application from outside of the cluster. 
- Benefits over NodePort / LoadBalancer:
- - We can include our own authentication .  
+Benefits over NodePort / LoadBalancer:
+    - We can include our own authentication .  
  
 ------------------------: Kubernetes Namespaces: ------------------------------
  1. What is Namespace?
