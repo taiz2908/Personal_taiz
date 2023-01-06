@@ -4,11 +4,13 @@
  Tomcat post: 8080
  path: /var/lib/tomcat/webapps
 
- .war : web application archieve ,WAR files are used only for web applications. 
+ - .war : web application archieve ,WAR files are used only for web applications. 
+ - .jar : java archieve , JAR files allow us to package multiple files in order to use it as a library, plugin, or any kind of application.
+ - .ear : enterprise archieve. 
 
- .jar : java archieve , JAR files allow us to package multiple files in order to use it as a library, plugin, or any kind of application.
-
- .ear : enterprise archieve, 
+How to start tomcat server?
+ - catalina.sh - does everything
+ - startup.sh - calls catalina.sh start
 
 ----- Web Server -------------
  To deploy static web pages ( .html files)
@@ -17,3 +19,7 @@
  Port: 80
  path: /usr/share/nginx/html
  path : /var/www/html  
+
+How to start tomcat server?
+- service apache2 start: ubuntu
+- systemctl start apache2: CentOS
