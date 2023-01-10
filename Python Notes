@@ -1,9 +1,3 @@
-from ast import keyword
-from dis import Instruction
-from errno import ENOTCONN
-from sys import modules
-from xml.sax.xmlreader import InputSource
-
 
 1. WEB DEVELOPMENT
 2. DATA SCIENCE
@@ -17,8 +11,8 @@ Advantages:
  many libraries
  large community 
 
- Web Development: 
-  Popular librarires : django , more light weight flask 
+Web Development: 
+ Popular librarires : django , more light weight flask 
 
 
 print / input - function in python

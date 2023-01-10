@@ -1,4 +1,4 @@
------- Application Server: --------------
+----------: Application Server: ------------------------
  To deploy static dynamic web pages ( .war / .jar /.ear )
  Ex: Apache Tomcat / Web-logic / Jboss 
  Tomcat post: 8080
@@ -12,7 +12,7 @@ How to start tomcat server?
  - catalina.sh - does everything
  - startup.sh - calls catalina.sh start
 
------ Web Server -------------
+-----------: Web Server :----------------------------
  To deploy static web pages ( .html files)
  Ex: Apache2, httpd, nginx
 

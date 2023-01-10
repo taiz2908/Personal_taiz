@@ -2,9 +2,9 @@ Git is a free and open source "distributed version control system" .
 Github is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
 
 -------- Git Stages: ----------
- 1) Working area
- 2) stating area
- 3) Local repo 
+ 1) Working area: where we can create files physically and modify. Being a Git user, we work in this work space.
+ 2) staging area: Git takes a snapshot for every version. It is a buffer zone between workspace and local repository. We can’t see this region because it is virtual.
+ 3) Local repo: where Git stores all commit locally. It is a hidden directory so that no one can delete it accidentally. Every commit will have unique commit ID.
  4) Central repo
 
 Git Commands:
@@ -29,17 +29,25 @@ Git Config:
 # git push --mirror <repo_url>
 -------------------------------------------------------------
 Git Stash:
-
+ - Stash is a temporary repository where we can store our content and bring it back whenever we want to continue with our work with that stored content. It removes content inside file from working directory and puts in stashing store and gives clean working directory so that we can start new work freshly. Later on you can bring back that stashed items to working directory and can resume your work on that file. 
+ Ex:
+  vi demo.txt
+  git stash save "msg"
+  git stasg list
+  git stash apply stash@{0}
+  git stash clear
+  git stasg pop stash@{0}
+  git add .
+  git commit -m "msg"
+  git pusg
 
 Git Ignore: 
-If we have multiple files and we want to ignore some of files during staging area in that situsation we can use git ignore 
+- If we have multiple files and we want to ignore some of files during staging area in that situsation we can use git ignore 
 # vi .gitignore
  * file.css
  * file.java
 # git add .gitignore
 # git commit -am "commit msg"
-
-
 
 Rename / Delete a file:
 # git rm hello.txt - deleting a file
