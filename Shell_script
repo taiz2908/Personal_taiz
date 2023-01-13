@@ -1,0 +1,17 @@
+Imp Links:
+https://www.geeksforgeeks.org/shell-script-to-perform-operations-on-a-file/
+
+Scripts Examples:
+
+Ex:1, To check file is present in a specific location or not,
+Note:  If directory then use -d in place of -f
+
+#! /bin/bash
+
+file=/opt/demo.txt
+if [ -f "$file" ];
+then
+echo "file is present"
+else
+echo "file is not present"
+fi
