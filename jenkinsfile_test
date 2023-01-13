@@ -2,6 +2,7 @@ def newimg = 'web-server'
 def newtag = params.IMAGE_TAG
 def repo_url = ''
 
+//running in k8s cluster, so mentioned k8s under the agent 
 pipeline {
     agent {
         kubernetes {
@@ -29,11 +30,29 @@ pipeline {
          image: latest
          command:
          - cat
-         tty: true
+         tty: 
+      - name: docker
+        image: /docker:18.09.4
+        command:
+         - cat
+        tty: true
+        volumeMounts:
+         - mountPath: /var/run/docker.sock
+           name: volume-0
+           readOnly: false
+        volumes:
+         - name: volume-0
+           hostPath:
+            path: /var/run/docker.sock
+            type: Socket
 
 '''
 
         }
+    }
+
+    triggers {
+        pollSCM('') //Enabling build on push
     }
 
     stages {
@@ -64,7 +83,12 @@ pipeline {
                 mvnTest()
             }
         }
+
         stage ('DOCKER LOGIN') {
+            when {
+                branch 'main'
+            }
+
             steps{
                 script {
                     container('docker'){
@@ -82,6 +106,10 @@ pipeline {
             }
         }
         stage ('BUILDING & PUSHING IMG') {
+            when {
+                branch 'main'
+            }
+            
             steps {
                 script {
                     container('docker'){
@@ -96,7 +124,7 @@ pipeline {
                 }
             }
         }
-        stage ('RUNNING CONTAINER') {
+        /* stage ('RUNNING CONTAINER') {
             steps {
                 scripts{
                     container('docker'){
@@ -113,8 +141,8 @@ pipeline {
                         }
                     }
                 }
-            }
-        }
+            } 
+        } */
     }
     post{
         cleanup {
