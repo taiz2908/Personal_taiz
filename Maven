@@ -19,7 +19,7 @@ Also it contains
 - plugins
 - Dependencies etc.
 
-Ex: GAV's in POM: 
+Ex: GAV's in POM: groupID, artifactID, version
     <groupId>sathya</groupId>
     <artifactId>TestProject</artifactId>
     <version>1.5</version>

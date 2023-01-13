@@ -178,9 +178,10 @@ or,
  print("The sum is " + str(sum))
 ----------------------------------------------------
 Strings:
-Ex: convert lower case to upper case.
+Ex: convert lower case to upper case & upper to lower.
  name = "ibraur ahemad"
  print(name.upper())
+ print(name.lower())
 
 Ex: Find a specific letter/count/index position.
  a = "ibraur ahemad"
@@ -193,7 +194,7 @@ Ex: replace my name to hello.
 Keywords: to find character or sub string within the main string , 
 using "in" function: True / False, boolean
 Ex:
- a = "ibraur"
+ a = "ibraur"   
  print("i" in a)
 ---------------------------------------------------
 Arithmetic Operators: 

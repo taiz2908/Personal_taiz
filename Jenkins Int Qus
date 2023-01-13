@@ -57,7 +57,7 @@ Required Arrtibutes:
 
 6) "post" -
  - Executes some logic after all 'stages' completed
- - conditions/types: "always / success / failure" etc.
+ - conditions/types: "cleanup / always / success / failure" etc.
 
 7) Define Conditionals for each stage: 
  - Only want to run the "build / test" in Dev Branch but not in other branch. 

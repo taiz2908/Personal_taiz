@@ -362,9 +362,18 @@ Networking in K8S:
 ----------------------------: Kubernetes Ingress: ---------------------------------------------
 What is Ingress?
     - We can access the application from outside of the cluster. 
+    - 
 
 Benefits over NodePort / LoadBalancer:
     - We can include our own authentication .  
+
+Ingress Controller:
+ - 
+Types:
+  - Nginx Ingress Controller only maintained by K8s itself.
+  - HA Proxy
+  - traefik
+  - Istio etc
  
 ------------------------: Kubernetes Namespaces: ------------------------------
  1. What is Namespace?
