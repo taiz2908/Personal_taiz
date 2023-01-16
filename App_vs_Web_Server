@@ -3,6 +3,7 @@
  Ex: Apache Tomcat / Web-logic / Jboss 
  Tomcat post: 8080
  path: /var/lib/tomcat/webapps
+ Docker file path: /usr/local/tomcat/webapps
 
  - .war : web application archieve ,WAR files are used only for web applications. 
  - .jar : java archieve , JAR files allow us to package multiple files in order to use it as a library, plugin, or any kind of application.
@@ -17,9 +18,9 @@ How to start tomcat server?
  Ex: Apache2, httpd, nginx
 
  Port: 80
- path: /usr/share/nginx/html
- path : /var/www/html  
-
+ path : /var/www/html 
+ Docker file path: /usr/share/nginx/html
+  
 How to start tomcat server?
 - service apache2 start: ubuntu
 - systemctl start apache2: CentOS

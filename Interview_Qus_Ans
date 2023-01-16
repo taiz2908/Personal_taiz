@@ -25,6 +25,7 @@ Create a Multibranch Pipeline
  - Give Display Name and Description
  - Under Branch Sources → Add source → Chose Git → and provide GitHub URL and Credentials (Credentials are optional if it is public repo)
  - Under Build Configuration → chose Jenkinsfile path. Most of the case it will be under Repo root directory.
+ - Under "Behaviour" select branch name or we can add in Jenkinsfile with when expression
 
 Apply and Save the job.
 Now Jenkins automatically scans the repository and create a job for each branch wherever it finds a Jenkinsfile and initiate first build.
@@ -112,6 +113,8 @@ Become: true install jdk & tomcat8, through copy module src file and destination
  - Disk full
  - Mvn goals – clean compile install: spelling error 
  - Compile Errors- Developers 
+ - pom.xml - distribution management , pulls any dependecies etc
+ - 
 
 PRE-BUILD CHECKS:
  - Mock builds
@@ -226,6 +229,7 @@ Ansible-Installation :
 10. Ansible Modules?
  - Yum, Apt, Get_url,  File, Ping , Package, Raw ,Group, User, Git, 
  - Unarchive, Copy, Template, Shell, Setup, Debug, cron.
+ - shell module:
 
 11. Ping Module?
  - Check whether Master is reachable to respective nodes or not and response getting as “Pong”.
@@ -251,8 +255,8 @@ Ansible-Installation :
  - #ansible-playbook pb1.yaml --syntax-check
 
 15. Ansible Idempotency:
- - For Ansible it means After 1 run of a playbook to set things to a desired state, 
- - Further runs of the same playbook should result in 0 changes.  
+ - For Ansible it means After first run of a playbook to set things to a desired state. 
+ - Further runs of the same playbook should result in 0 changes.
  - In simplest terms, idempotency means you can be sure of a consistent state in your environment.
 
 16. Ansible Config file?
@@ -266,7 +270,7 @@ Ansible-Installation :
  - Memory wastage           - No memory wastage
  - Low Performance          - High performance
  - Height weight m/c        - Light weight m/c
- - Comples configuration    - Less configuration
+ - Complex configuration    - Less configuration
  - Memory can't share       - memory can share
 
 2. How to check multiple running containers CPU Usages:
@@ -294,8 +298,7 @@ Ansible-Installation :
  - Docker commit:  convert a container into an image, docker commit  <container id> myimage
  - Docker build: build a script from docker file.
 
-8. 
- Docker Port Mapping: 
+8. Docker Port Mapping: 
   - docker pull nginx
   - docker run -d --name <name> -p 8080:80 nginx:latest
  Docker Volume: Copy the data from local to nginx container: 
