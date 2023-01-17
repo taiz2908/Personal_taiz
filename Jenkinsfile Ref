@@ -22,6 +22,12 @@ VIDEO:
 
 ---------------------------------------------------------------------------------------
 
+Tasks:
+1. Multi-branch pipeline: https://www.youtube.com/watch?v=B_2FXWI6CWg
+2. Upstream & downstream jobs
+3. Parameterised Jobs
+4. 
+
 
 By default, Jenkins stores all of its data in this directory on the file system
 /var/lib/jenkins
@@ -346,27 +352,3 @@ pipeline {
     }
 }
 
-
-
-
-
-    
-
-
-
-
-pipeline {
-    agent any
-    stage {
-        stages('build'){
-            steps{
-                echo "hello world!"
-            }
-        }
-    }
-}
-
-
-pipeline {
-
-}

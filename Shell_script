@@ -7,7 +7,6 @@ Ex:1, To check file is present in a specific location or not,
 Note:  If directory then use -d in place of -f
 
 #! /bin/bash
-
 file=/opt/demo.txt
 if [ -f "$file" ];
 then
@@ -15,3 +14,13 @@ echo "file is present"
 else
 echo "file is not present"
 fi
+
+Ex:2, Printing 1-10.
+a=1
+while [ $a -le 10 ]
+do
+echo $a
+a=`expr $a + 1`
+done
+
+Ex:3,

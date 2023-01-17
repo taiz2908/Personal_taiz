@@ -134,14 +134,17 @@ Allowing share of data, files & folders between hosts & containers, and between 
 By using dockerfile we can create our own image & always create a dockerfile within the folder
 Below's are the set of instructions using in dockerfile:
 
- FROM: The base image to use in the build
- RUN: executes a command
+ MAINTAINER: Author name / emailid
+ FROM: The base image to use in the build Ubuntu, Redis, MySQL, etc.
+ RUN: executes a command,It is used to tell the container what to do after creating the container from the image. 
+ Such as, apk add —update-redis.
  EXPOSE: opens a port 
  COPY: only perform copy i.e, copy a file from host 
- ADD: copy the files from the remote source i.e, from website
+ ADD: copy the files from the remote source i.e, from website,
+ It downloads tar, zip, or web file and extracts and copies inside of our image.
  ENV: gets an env variable 
  WORKDIR: Going to create a workdir inside of the container 
- USER: instruction sets the user name
+ USER: instruction sets the user name 
  ENTRYPOINT: 
  CMD:
 ------------------------ ENTERYPOINT vs CMD ----------------------
@@ -205,6 +208,13 @@ Dockerfile
  CMD node index.js
 
 Ex: 3, Deploying springboot app in tomcat server.
+ Ref: https://iamvickyav.medium.com/deploying-spring-boot-war-in-tomcat-based-docker-2b689b206496
+
+ FROM tomcat:lates8.5-jdk11-openjdk-slim
+ RUN rm -rf /usr/local/tomcat/webapps/*
+ ADD target/sample.war /usr/local/tomcat/webapps
+ EXPOSE 8080
+ CMD ["catalina.sh", "run"]
 
 
 -------------------- .dockerignore -----------------------------

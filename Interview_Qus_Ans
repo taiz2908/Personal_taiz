@@ -1,4 +1,88 @@
+Docker file's:
+1. Building docker file & create a nginx image. 
+ mkdir folder_name
+ docker build --help
+ vi Dockerfile
+ FROM nginx:latest
+ ADD . /usr/share/nginx/html
+
+ # docker build -t api-website:latest .
+ # docker tag api-website:latest api-website:1 , changing a latest tag to 1 / renaming a tag
+ # docker image ls 
+ # docker run --name website -p 8080:80 -d website:latest
+ # docker ps 
+ # docker exec -it <containerID_or_conatinerNAME> /bin/sh , enter inside the container. 
+
+2. Springboot application + Tomcat Image:
+  FROM tomcat:lates8.5-jdk11-openjdk-slim
+  RUN rm -rf /usr/local/tomcat/webapps/*
+  ADD target/sample.war /usr/local/tomcat/webapps
+  EXPOSE 8080
+  CMD ["catalina.sh", "run"]
+
+3. Building NodeJs & ExpressJs
+ FROM node:alpine
+ WORKDIR /app
+ ADD package*.json ./
+ RUN npm install
+ ADD . .
+ CMD node index.js
+
+
+
 -------: GIT :----------------
+1. What is Git stash?
+ - We create multiple branches to work simultaneously on multiple features. But to work on multiple tasks simultaneously in one branch (i.e. on one feature), we use git stash. Stash is a temporary repository where we can store our content and bring it back whenever we want to continue with our work with that stored content.
+ - It removes content inside file from working directory and puts in stashing store and gives clean working directory so that we can start new work freshly.
+ - Later on you can bring back that stashed items to working directory and can resume your work on that file. Git stash applicable to modified files. Not new files. Once we finish our work, we can remove all stashed items form stash repository.
+
+2. What is Git Reset?
+ - Git Reset command is used to remove changes form staging area. This is bringing back file form staging area to work directory. We use this command before commit. Often we go with git add accidentally. In this case if we commit, that file will be committed. Once you commit, commit ID will be generated and it will be in the knowledge of everyone. So to avoid this one, we use Git reset.
+ - If you add “–hard” flag to git reset command, in one go, file will be removed from staging area as well as working directory. We generally go with this one if we fell that something wrong in the file itself.
+
+3. What is Git Revert?
+ - Git Revert command is used to remove changes from all 3 stages (work directory, staging area and local repository). We use this command after commit. Sometimes, we commit accidentally and later on we realize that we shouldn’t have done that. For this we use Git revert. This operation will generate new commit ID with some meaningful message to ignore previous commit where mistake is there. But, here we can’t completely eliminate the commit where mistake is there. Because Git tracks each and every change.
+
+4. Difference between Git pull and Git clone?
+ - We use these two commands to get changes from central repository. For the first time if you want whole central repository in your local server, we use git clone. 
+ - It brings entire repository to your local server. Next time onwards you might want only changes instead of whole repository. In this case, we use Git pull.
+ - Git clone is to get whole copy of central repository
+ - Git pull is to get only new changes from central repository (Incremental data)
+
+5. What is the difference between Git pull and Fetch?
+ - We use Git pull command to get changes from central repository. In this operation, internally two commands will get executed. One is Git fetch and another one is Git merge.
+ - Git fetch means, only bringing changes from central repo to local repo. But these changes will not be integrated to local repo which is there in your server.
+ - Git merge means, merging changes to your local repository which is there in your server. Then only you can see these changes.
+ - So Git pull is the combination of Git pull and Git merge.
+
+6. What is the difference between Git merge and rebase?
+ - We often use these commands to merge code in multiple branches. Both are almost same but few differences. When you run Git merge, one new merge commit will be generated which is having the history of both development branches. 
+ - It preserves the history of both branches. By seeing this merge commit, everyone will come to know that we merged two branches. 
+ - If you do Git rebase, commits in new branch will be applied on top of base branch tip. 
+ - There won’t be any merge commit here. It appears that you started working in one single branch form the beginning. 
+ - This operation will not preserves the history of new branch.
+
+7. What is Git Bisect?
+ - Git Bisect we use to pick bad commit out of all good commits. 
+ - Often developers do some mistakes. For them it is very difficult to pick that commit where mistake is there.
+ - They go with building all commits one by one to pick bad commit. But Git bisect made their lives easy. Git bisect divides all commits equally in to two parts (bisecting equally). Now instead of building each commit, they go with building both parts. Where ever bad commit is there, that part build will be failed. We do operation many times till we get bad commit. So Git bisect allows you to find a bad commit out of good commits. You don’t have to trace down the bad commit by hand; git-bisect will do that for you.
+
+8. What is Git squash?
+ - To move multiple commits into its parent so that you end up with one commit. If you repeat this process multiple times, you can reduce “n” number of commits to a single one. Finally we will end up with only one parent commit. We use this operation just to reduce number of commits.
+
+9. What is Git hooks?
+ - We often call this as web hooks as well. By default we get some configuration files when you install git. These files we use to set some permissions and notification purpose. 
+ - We have different types of hooks (pre commit hooks & post commit hooks)
+ - Pre-commit hooks:- Sometimes you would want every member in your team to follow certain pattern while giving commit message. Then only it should allow them to commit.
+ - These type of restrictions we call pre-commit hooks.
+ - Post-commit hooks:- Sometimes, being a manager you would want an email notification regarding every commit occurs in a central repository. This kind of things we call post-commit hooks.
+ - In simple terms, hooks are nothing but scripts to put some restrictions.
+
+10. What is Git cherry-pick?
+ - When you go with git merge, all commits which are there in new development branch will be merged into current branch where you are. 
+ - But sometimes, requirement will be in such that you would want to get only one commit form development branch instead of merging all commits. 
+ - In this case we go with git cherry-pick. Git cherry-pick will pick only one commit whatever you select and merges with commits which are there in your current branch. 
+ - So picking particular commit and merging into your current branch we call git cherry-pick.
 
 ---------------------------: JENKINS-2.332.3 :-----------------------------------
 1. Jenkins Trigger:
@@ -284,6 +368,7 @@ Ansible-Installation :
 4. Docker Kill vs Stop?
  - STOP: Stop the running container and send the signal SIGTERM.	
  - Kill:  Kill one or more containers and send the signal SIGKILL.
+  - Docker provides the kill command for sending signals to a container.
 
 5. Docker Daemon?
  - A docker Deamon (Dokered ) listens for Docker API requests and manages Docker objects such as images, containers, volumes etc. 
@@ -295,7 +380,7 @@ Ansible-Installation :
 
 7. How to get an Docker Image?
  - Docker pull <imagename>: pull an image from docker hub
- - Docker commit:  convert a container into an image, docker commit  <container id> myimage
+ - Docker commit: convert a container into an image, docker commit  <container id> myimage
  - Docker build: build a script from docker file.
 
 8. Docker Port Mapping: 
@@ -308,7 +393,7 @@ Ansible-Installation :
 9. Docker File??
  - Create an image automatically using a build script.
 Ex:
- - Vi Dockerfile
+ -  Vi Dockerfile
  - FROM ubuntu
  - MAINTAINER xyz
  - RUN apt-get update
