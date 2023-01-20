@@ -1,0 +1,61 @@
+Imp Links:
+https://www.geeksforgeeks.org/shell-script-to-perform-operations-on-a-file/
+
+Scripts Examples:
+
+Ex:1, To check file is present in a specific location or not,
+ - Note:  If directory then use -d in place of -f
+
+ #! /bin/bash
+ file=/opt/demo.txt
+ if [ -f "$file" ];then
+ echo "file is present"
+ else
+ echo "file is not present"
+ fi
+
+Ex:2, Printing 1-10.
+ a=1
+ while [ $a -le 10 ]
+ do
+ echo $a
+ a=`expr $a + 1`
+ done
+
+Ex:3, Taking i/p and doing arithmatic operations.
+ read a b
+ echo "Addition: `expr $a + $b `"
+ echo "Substraction: `expr $a - $b `"
+ echo "Multiplication: `expr $a \* $b `"
+ echo "Division: `expr $a / $b `"
+ echo "Reminder: `expr $a % $b `"
+
+Ex:4, Taking i/p and Comparing among three Big number.
+ read a b c
+ if [ $a -gt $b -a $b -gt $c ];then
+ echo "a is big"
+ elif [ $b -gt $c ];then
+ echo "b is big"
+ else
+ echo "c is big"
+ fi
+
+Ex:5, Printing 1-10.
+ num=1
+ while [ $num -le 20 ];do
+ echo "$num"
+ ((num++)) #increment by 1
+ done
+
+Ex:6, Printing 10 to 1.
+ num=10
+ while [ $num -ge 1 ];do
+ echo "$num"
+ ((num--)) #decrement by 1
+ done
+
+Ex:7 Printing 10 to 1 in a single line by using for loop
+ for (( counter=10; counter>0; counter-- ))
+ do
+ echo -n "$counter "
+ done
