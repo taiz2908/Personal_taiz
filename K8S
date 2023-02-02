@@ -21,7 +21,7 @@ etcd backup & restore --> (6 marks) - 100%
 - Any functionality is missing with k8s , they have added.
  - VMWare Tanzu
  - Redhat Openshift --> provides all free trainings. (self placed)
- - SUSE Rancher --> procides all free tranings. (self placed)
+ - SUSE Rancher --> provides all free tranings. (self placed)
 
 - K8s doesn't natively support monitoring, logging & tracing .(vanilla k8s)
 - K8s doesnot natively support CICD Pipeline. 
@@ -138,7 +138,7 @@ Kubernetes definition file always contains four top level fields:
        lables: (We can filter the pod )
          name:
  	     app: able to filter out the pods by giving the unique name ( myapp ) 
-4. "spec": specification section , Defiines whats inside th object we're creating. 
+4. "spec": specification section , Defines whats inside th object we're creating. 
        containers: name of the pod within the container
        	 - name: nginx-container - name of the container i.e nginx container 
        	   image: nginx - docker hub image name to create 
@@ -194,7 +194,7 @@ spec:
 #kubectl get all
 #kubectl describe deployment myapp-deployment
 #kubectl get pods,svc - Can see both pods running status aswell as services 
-#kubectl scale --replicas=6 -f replicas-definition.yml , 1st we edit the definition file and apply the scale in 0r out 
+#kubectl scale --replicas=6 -f replicas-definition.yml , 1st we edit the definition file and apply the scale-in or scale-out 
 
 Status of rollout:
  # kubectl rollout status deployment/myapp-deployment  - 
@@ -268,7 +268,7 @@ Example: rc-definition.yml
  1. apiVersion: apps/v1
  2. kind: ReplicaSet , "Note: R & S should be in capital"
  3. metadata:
- 	 name: myapp-replicaset
+ 	   name: myapp-replicaset
  	 lables:
  		- name: myapp
  		  type: front-end
@@ -283,7 +283,7 @@ Example: rc-definition.yml
  		        containers:
  		 	     - name: nginx-container
  		 	       image: nginx
-        2.	replicas: 3
+      2.	replicas: 3
  	    3.  selector: ----> ( copy the lables from the pod definition file and paste it under the selector section )
  	  	     matchLables: 
  	  		   type: front-end
@@ -295,10 +295,10 @@ Example: rc-definition.yml
 3. Deployments: 
  - Updates & Rollbacks in a Deployments:
      Rollout & Versioning in a deployment:
-        when we 1st create a deployment , it triggers a rollout , a new rollout creates a new deployment revision-1, 
-        In further when application upgraded / updated a new revision-2 created.
-        This helps us keep track changes and enables us to rollback in future if necessary .
-        Whenever we create the deployment , deployment recreate the replicaset & replicaset create the pods .
+      - when we 1st create a deployment , it triggers a rollout , a new rollout creates a new deployment revision-1, 
+      - In further when application upgraded / updated a new revision-2 created.
+      - This helps us keep track changes and enables us to rollback in future if necessary .
+      - Whenever we create the deployment , deployment recreate the replicaset & replicaset create the pods .
         
 Status of rollout:
  # kubectl rollout status deployment/myapp-deployment  - 
@@ -361,19 +361,32 @@ Networking in K8S:
 
 ----------------------------: Kubernetes Ingress: ---------------------------------------------
 What is Ingress?
-    - We can access the application from outside of the cluster. 
-    - 
+  - We can access the application from outside of the cluster. 
+  - We declare which request should go to which service.So we should write the ingress rule for this. 
+  - For ingress rule we should have deploy ingress controller into our cluster to process the ingress rule.
+
+How it Works ?
+ 1. User hit the http request i.e http:/www.xyz.com
+ 2. Forwards the service to load balancer.
+ 3. Load balancer forward the service to ingress controller pod and reads the ingress rules and decide which service to call.
+ 4. Once decides which service to call it forwards the request to service. 
+ 5. And reaches to desired pod.
+
+Imp Note:
+- Now we don't need any Nodeport or load balancer services as ingress controller is a pod and can access ClusterIP services. 
 
 Benefits over NodePort / LoadBalancer:
-    - We can include our own authentication .  
+  - We can include our own authentication .
 
-Ingress Controller:
- - 
+Ingress Controller: Mostly third parites.
 Types:
-  - Nginx Ingress Controller only maintained by K8s itself.
+  - "Nginx Ingress Controller" only maintained by K8s itself.
   - HA Proxy
   - traefik
   - Istio etc
+# kubectl get po -n ingress-nginx - to verify nginx ingress controller and get expose through service.
+# kubectl get svc -n ingress-nginx - Nodeport service is created for nginx ingress controller., if cloud it should create Load balancer service. 
+# kubectl describe ing nginx-ingress
  
 ------------------------: Kubernetes Namespaces: ------------------------------
  1. What is Namespace?
