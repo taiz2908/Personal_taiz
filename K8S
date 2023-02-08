@@ -175,7 +175,7 @@ spec:
  #kubectl delete pod nginx
 
 ------------------------------: K8S IMP CMDS: -------------------------------------------------
-#kubectl get nodes | pods | deployment | services | replicaset , to get the status
+#kubectl get nodes | pods | deployment | services | replicaset | namespace , to get the status
 
 #kubectl get pods -o wide , -o:output format, can see the details of  node / IP/ age / status etc..
 #kubectl delete pod <podname>, to delete the pod named webapps, 
@@ -269,7 +269,8 @@ Example: rc-definition.yml
  
 2. Replicaset: replicaset-definition.yml
   - "Labels & Selectors:" Monitors the exisiting pods as its already created , if anyone fails then its deploy a new one .
-  - "lables" uses as filter section.
+  - "label  " uses as filter section.
+  - "selector" to connect to pod through labels.
  	
  Example:
  1. apiVersion: apps/v1
@@ -370,7 +371,7 @@ Networking in K8S:
 What is Ingress?
   - We can access the application from outside of the cluster. 
   - We declare which request should go to which service.So we should write the ingress rule for this. 
-  - For ingress rule we should have deploy ingress controller into our cluster to process the ingress rule.
+  - For ingress rule we should have deploy "Ingress Controller" into our cluster to process the ingress rule.
 
 How it Works ?
  1. User hit the http request i.e http:/www.xyz.com
@@ -381,6 +382,8 @@ How it Works ?
 
 Imp Note:
 - Now we don't need any Nodeport or load balancer services as ingress controller is a pod and can access ClusterIP services. 
+
+External service vs Ingress:
 
 Benefits over NodePort / LoadBalancer:
   - We can include our own authentication .
@@ -403,21 +406,30 @@ Types:
        1. Default - By default resource created  within default namespace , Resource when we don't specify namespace explicitly
        2. Kube-node-lease - Contains lease resources  to send the hearbeats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
        3. kube-public - Used for public resource . Open to all users with read only access. 
-       4. kube-system- For Objects created by k8s .
+       4. kube-system - For Objects created by k8s .
   
  2. Need of Namespace?
-   - Avoid conflicts like same name ,
-   - Restricting Access like Dev & Prod 
-   - Resource limits by using resource quota , i.e allocated to the individual application according to their requirement .
+   - Avoid conflicts like same name between teams.
+   - Restricting Access like Dev & Prod .
+   - Resource limits by using resource quota , i.e allocated to the individual application according to their requirement .(CPU,RAM,Storage per NS etc)
   
  3. Namespaces in action?
    Can be created in two way
-   1st one - 
-     #kubectl create namespace nginx , here nginx is the name of the namespace.
-     #kubectl get namespaces ->  2nd one - Byusing Config file ( better recommendation )
+     #kubectl create namespace <nginx> , here nginx is the name of the namespace -> (1st one) 
+     #kubectl get namespaces ->  2nd one - Byusing ConfigMap file ( Better recommendation )
+  
+  Ex: By using Configuration file.
+   apiVersion: v1
+   Kind: ConfigMap
+   metatdata:
+    name: mysql-configmap
+    namespace: my-namespace
+   spec:
+    db_url: <>
    
    spec - is optional in namespace 
    #kubectl get all --name-namspaces or kubectl get all -A
+  
 
 
    =================== Two Application setup =============================
@@ -425,7 +437,9 @@ Types:
    2. MongoDB
 
    Pre-requisites:
-   
+   1. MongoDB Pod
+   2. Internal service - No external req are allow 
+   3. Mongo deployment
   
 
  

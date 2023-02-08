@@ -1,3 +1,13 @@
+1. How to Pass DevOps Interview | DevOps Interview Tips | How to Ace DevOps Interview | SRE Interview:
+https://www.youtube.com/watch?v=JLU_CHe3azY
+
+2. 
+
+
+
+
+
+------------------------ DOCKERFILE'S EXAMPLE ----------------------------------------
 Docker file's:
 1. Building docker file & create a nginx image. 
  mkdir folder_name
@@ -28,9 +38,34 @@ Docker file's:
  ADD . .
  CMD node index.js
 
+4. Building tomcat image and using copy,add,expose,cmd instruction. 
+   FROM tomcat:8.0
+   MAINTAINER satish
+   RUN apt-get update && apt-get install -y curl
+   RUN apt-get install -y git-core
+   COPY index.html /usr/local/tomcat/webapps/ROOT/index.html
+   ADD https://tomcat.apache.org/tomcat-7.0-
+doc/appdev/sample/sample.war /usr/local/tomcat/webapps/sample.war
+   USER root
+   WORKDIR /usr/local/tomcat/webapps
+   EXPOSE 8080
+   CMD ["catalina.sh","run"]
+
+5. Taking linux OS & building nginx image.
+  FROM ubuntu
+  MAINTAINER satish
+  RUN apt-get update && apt-get install -y nginx
+  COPY index.html /usr/share/nginx/html/index.html
+  USER root
+  WORKDIR /usr/share/nginx/html
+  ENV JAVA_PATH='/usr/bin/java'
+  VOLUME /myvol
+  EXPOSE 80
+  CMD ["service","nginx","start"]
 
 
--------: GIT :----------------
+
+=============================: GIT :=============================================
 1. What is Git stash?
  - We create multiple branches to work simultaneously on multiple features. But to work on multiple tasks simultaneously in one branch (i.e. on one feature), we use git stash. Stash is a temporary repository where we can store our content and bring it back whenever we want to continue with our work with that stored content.
  - It removes content inside file from working directory and puts in stashing store and gives clean working directory so that we can start new work freshly.
@@ -411,9 +446,14 @@ Ex:
  - Docker sees the initial & modified instructions as identical & reuses the cache from previous steps.
  - As a result the apt-get is not executed bcz the build uses the cached version. 
  - So build can potentially get an outdated version of the curl / nginx pkg. 
-Using RUN apt-get update && apt-get install -y nginx , ensures the Dockerfile installs latest pks. 
+ - Using RUN apt-get update && apt-get install -y nginx , ensures the Dockerfile installs latest pks. 
  - This technique is known as "cache busting"
 
+12. How many Docker components are there?
+ There are three docker components, they are: Docker Client, Docker Host and Docker Registry.
+ - Docker Client: This component performs “build” and “run” operations for the purpose of opening communication with the docker host.
+ - Docker Host: This component has the main docker daemon and hosts containers and their associated images. The daemon establishes a connection with the docker registry.
+ - Docker Registry: This component stores the docker images. There can be a public registry or a private one. The most famous public registries are Docker Hub and Docker Cloud.
 --------: K8S :---------------
 
 --------: LINUX :-------------

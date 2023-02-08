@@ -1,6 +1,11 @@
 Ref: 
-https://www.youtube.com/watch?v=bhBSlnQcq2k&t=154s
-https://www.youtube.com/watch?v=1eVy_iWrc20&t=4403s
+- https://www.youtube.com/watch?v=bhBSlnQcq2k&t=154s
+- https://www.youtube.com/watch?v=1eVy_iWrc20&t=4403s
+- https://www.youtube.com/watch?v=41UBe7J4oQo&list=PLKDtzUTXWwwF6e0UFWxpylEJgrKm0dEoI: docker containers namespaces
+
+
+Docker Interview Qus:
+- https://www.interviewbit.com/docker-interview-questions/
 
 --------------------What is Docker? -------------------------------------
  - Docker is a tool for running application in an isolated environment. 
@@ -78,7 +83,6 @@ Container's:
  - docker attach
  - docker inspect
  - docker logs: Want to view the logs of the container. 
-
  - docker stats --all / <containerID> : to check the container CPU Usage's
  - docker commit
  - docker top 
@@ -332,6 +336,10 @@ By using # docker inspect <containerID>
 172.17.0.1
 172.17.0.2
 ---------------: Docker Compose :--------------------------------
+- It is a YAML file consisting of all the details regarding various services, networks, and volumes that are needed for setting up the Docker-based application. 
+- So, docker-compose is used for creating multiple containers, host them and establish communication between them.
+- For the purpose of communication amongst the containers, ports are exposed by each and every container.
+
 
 ---------------: Docker Networking :-----------------------------
 1. Bridge
