@@ -1,8 +1,11 @@
 Ref:
-https://www.youtube.com/watch?v=r0uRLhrzbtU&list=PL2We04F3Y_43dAehLMT5GxJhtk3mJtkl5&index=1: Mumshad
-https://www.youtube.com/watch?v=bhBSlnQcq2k&t=10652s : By TechwithNana
-https://www.youtube.com/watch?v=YHuZ78Ig_oc&list=PLrMP04WSdCjrkNYSFvFeiHrfpsSVDFMDR : Pavan Elthepu
-https://www.youtube.com/watch?v=DsHcfoRyDsM&list=PLTyWtrsGknYfanKF33E12LdJvl5q5PZGp&index=1: Tech Primers
+- https://www.youtube.com/watch?v=r0uRLhrzbtU&list=PL2We04F3Y_43dAehLMT5GxJhtk3mJtkl5&index=1: Mumshad
+- https://www.youtube.com/watch?v=bhBSlnQcq2k&t=10652s : By TechwithNana
+- https://www.youtube.com/watch?v=X48VuDVv0do&t=138s By TechwithNana
+- https://www.youtube.com/watch?v=YHuZ78Ig_oc&list=PLrMP04WSdCjrkNYSFvFeiHrfpsSVDFMDR : Pavan Elthepu
+- https://www.youtube.com/watch?v=DsHcfoRyDsM&list=PLTyWtrsGknYfanKF33E12LdJvl5q5PZGp&index=1: Tech Primers
+- https://www.youtube.com/watch?v=J9CqfcKmkEw&list=PLKDtzUTXWwwEVpu7OzRkEf4zlmVBTzgxr&index=1: 
+- https://www.youtube.com/watch?v=tsAH_Vv8GOI&list=PLy0Gle4XyvbFkHCDcJEYG2f6q1dVNJ64- :Peter Jausovec
 
 
 ------------------------: Exam Overview CKA : ---------------------
@@ -99,6 +102,7 @@ Pod2: App2
  - Controllers are the brain behind orchestration. 
  - They are responsible for noticing & responding when nodes, containers or endpoints goes down.
  - The controllers make decision to bring up new containers in such cases.
+ - Knows the state of the cluster.
 
 5. Container Runtime : Docker
  - Container runtime is the underlying software that is used to run containers .
@@ -111,6 +115,7 @@ Pod2: App2
  - Swap disabled. You MUST disable swap in order for the kubelet to work properly.
 
 7. Kube-proxy:
+ - It's forward's the request.
  - Responsible for ensuring the network traffic is routed properly to internal & external services as required. 
  - kube-proxy maintains network rules on nodes. These network rules allow network communication to your Pods from network sessions inside or outside of your cluster.
 
@@ -170,17 +175,17 @@ spec:
  #kubectl delete pod nginx
 
 ------------------------------: K8S IMP CMDS: -------------------------------------------------
-#kubectl get pods , running containers in pod / total containers in the pod
-#kubectl describe pod <ngnix> , details/informations of the single pod.
+#kubectl get nodes | pods | deployment | services | replicaset , to get the status
+
 #kubectl get pods -o wide , -o:output format, can see the details of  node / IP/ age / status etc..
 #kubectl delete pod <podname>, to delete the pod named webapps, 
 #kubectl exec -it <podname> -- sh/bash , to enter within a specific pod
 #kubectl exec -it <podname> -c <containername> -- sh/bash , When we have multiple container in a pod. 
+#kubectl describe pod <ngnix> , details/informations of the single pod.
 #kubectl logs <podname> -f , '-f' to watch / monitoring the logs, to see the pod logs
 #kubectl get pods -l name=myapp, we can see the pods falls under the lables. "filter the pods"
 #kubectl port-forward <podname> 8080:80, localport to the container port. localhost:8080
 
-#kubectl get nodes - to get the details of node
 #kubectl cluster-info - 
 #kubectl expose deployments - 
 #kubectl run nginx --image=nginx - single command to create nginx pod 
@@ -190,11 +195,11 @@ spec:
 #kubectl api-resources | grep services - to get the details of services 
 #kubectl get replicationcontroller
 #kubectl get replicasets / rs
-#kubectl get deployment
 #kubectl get all
 #kubectl describe deployment myapp-deployment
 #kubectl get pods,svc - Can see both pods running status aswell as services 
-#kubectl scale --replicas=6 -f replicas-definition.yml , 1st we edit the definition file and apply the scale-in or scale-out 
+#kubectl scale --replicas=6 -f replicas-definition.yml , 1st we edit the definition file and apply the scale-in /scale-out 
+#kubectl get deployment <nginx-deployment> -o yaml > results.yaml
 
 Status of rollout:
  # kubectl rollout status deployment/myapp-deployment  - 
@@ -237,22 +242,24 @@ Example: rc-definition.yml
  1. apiVersion: v1
  2. kind: ReplicationController  
  3. metadata: --> for replicationcontroller
-      name: myapp-rc
+    name: myapp-rc
     lables:
   	  app: myapp
   	  type: front-end
  4. spec: --> for replicationcontroller
- 	1. - template: to provide the pod template. --> For Pod
+ 	1. template: to provide the pod template. --> For Pod
  		  metadata: 
- 			name: myapp-pod
- 			lables:
- 			 app: myapp
- 			 type: front-end
- 		  spec: --> For Pod
+ 			  name: myapp-pod
+ 			  lables:
+ 			   app: myapp
+ 			   type: front-end
+ 		  spec: --> For Pod (image,pod name, port)
  		    containers:
- 		 	 - name: nginx-container
- 		 	   image: nginx
- 	2. - replicas: 3
+ 		 	   - name: nginx-container
+ 		 	     image: nginx
+           ports:
+            - containerPort: 8080
+ 	2. replicas: 3
 
   # kubectl create -f rc-definition.yml
   # kubectl get replicationcontroller - to view the list of created replicationcontroller.
@@ -290,7 +297,7 @@ Example: rc-definition.yml
 
  Two ways to scale the replicaset :
  	1st: edit to 6 and use cmd #kubectl apply -f replicase-definition.yml --> Recommended Way.
- 	2nd: #kubectl scale --replicas=6 -f replicas-definition.yml 
+ 	2nd: # kubectl scale --replicas=6 -f replicas-definition.yml 
  	
 3. Deployments: 
  - Updates & Rollbacks in a Deployments:
@@ -390,14 +397,13 @@ Types:
  
 ------------------------: Kubernetes Namespaces: ------------------------------
  1. What is Namespace?
-    - Way to organise the cluster into the virtual sub- clusters so we are creating the resources (pod,svs,rs,deployment,secrets,ingress,configs) in these namespaces instead of creating all in one namespaces. 
-      Each namespace logically separate with each other but can cumminicate with each other. 
-      
-    - When we create k8s cluster 4 default namespaces created ( Default, kube-node-lease, kube-public, kube-system )
-       Default - By default resource created  within default namespace , Resource when we don't specify namespace explicitly
-       Kube-node-lease - Contains lease resources  to send the hearbeats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
-       kube-public - Used for public resource . Open to all users with read only access. 
-       kube-system- For Objects created by k8s .
+  - Way to organise the cluster into the virtual sub-clusters, so we are creating the resources (pod,svs,rs,deployment,secrets,ingress,configs) in these namespaces instead of creating all in one namespaces. 
+  - Each namespace logically separated with each other but can cumminicate with each other. 
+  - When we create k8s cluster 4 default namespaces created ( Default, kube-node-lease, kube-public, kube-system )
+       1. Default - By default resource created  within default namespace , Resource when we don't specify namespace explicitly
+       2. Kube-node-lease - Contains lease resources  to send the hearbeats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
+       3. kube-public - Used for public resource . Open to all users with read only access. 
+       4. kube-system- For Objects created by k8s .
   
  2. Need of Namespace?
    - Avoid conflicts like same name ,
@@ -412,6 +418,14 @@ Types:
    
    spec - is optional in namespace 
    #kubectl get all --name-namspaces or kubectl get all -A
+
+
+   =================== Two Application setup =============================
+   1. Mongo express
+   2. MongoDB
+
+   Pre-requisites:
+   
   
 
  
