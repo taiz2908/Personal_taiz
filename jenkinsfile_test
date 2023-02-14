@@ -58,7 +58,7 @@ pipeline {
     stages {
         stage ('PACKAGE') {
             steps {
-                mvnInstall()
+                mvnInstall() 
             }
         }
         stage ('DEPLOYING TO NEXUS') {

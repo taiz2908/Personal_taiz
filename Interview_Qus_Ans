@@ -6,6 +6,18 @@ https://www.youtube.com/watch?v=JLU_CHe3azY
 
 
 
+----------: Ports & Versions: ----------------------
+Tomcat:
+Nginx:
+Git:
+Jenkins:
+Sonarqube:
+K8s:
+Docker:
+Helm:
+Maven:
+Ansible:
+
 
 ------------------------ DOCKERFILE'S EXAMPLE ----------------------------------------
 Docker file's:

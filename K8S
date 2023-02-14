@@ -16,6 +16,8 @@ Installer : Kubeadm --> (9 marks) - 100%
 etcd backup & restore --> (6 marks) - 100%
 
 ----------------------: INTRO / OVERVIEW OF K8S :---------------------------------
+Version:
+
 - Developed by Google labs (2003) later donated to CNCF (Cloud native Computing Foundation) in collab with Linux foundation. 
 - Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerised applications. The open source project is hosted by the Cloud Native Computing Foundation (CNCF).
 - Smallest unit in K8s is POD.
@@ -175,7 +177,7 @@ spec:
  #kubectl delete pod nginx
 
 ------------------------------: K8S IMP CMDS: -------------------------------------------------
-#kubectl get nodes | pods | deployment | services | replicaset | namespace , to get the status
+#kubectl get nodes | pods | deployment | services | replicaset | namespace | pv | pvc, to get the status
 
 #kubectl get pods -o wide , -o:output format, can see the details of  node / IP/ age / status etc..
 #kubectl delete pod <podname>, to delete the pod named webapps, 
@@ -371,9 +373,11 @@ Networking in K8S:
 What is Ingress?
   - We can access the application from outside of the cluster. 
   - We declare which request should go to which service.So we should write the ingress rule for this. 
-  - For ingress rule we should have deploy "Ingress Controller" into our cluster to process the ingress rule.
+  - For ingress rule we should have deploy "Ingress Controller" pod into our cluster to process the ingress rule.
+  - Ingress Controller could be entrypoint to the cluster.
 
-How it Works ?
+How it Works ? 
+http-->load balancer-->ingress controller-->reads ingress rules-->forwards to service-->pod
  1. User hit the http request i.e http:/www.xyz.com
  2. Forwards the service to load balancer.
  3. Load balancer forward the service to ingress controller pod and reads the ingress rules and decide which service to call.
@@ -382,8 +386,6 @@ How it Works ?
 
 Imp Note:
 - Now we don't need any Nodeport or load balancer services as ingress controller is a pod and can access ClusterIP services. 
-
-External service vs Ingress:
 
 Benefits over NodePort / LoadBalancer:
   - We can include our own authentication .
@@ -430,17 +432,228 @@ Types:
    spec - is optional in namespace 
    #kubectl get all --name-namspaces or kubectl get all -A
   
+===================: Helm-3 :=============================
+Version: 2 vs 3
+ - Version2 comes in two parts (client,server model)
+  - helm client 
+  - server (tiller)
+  - Don't have role based control access. 
 
+ - Version3 (Client)
+  - Single client architecture.
+  - Releases in Nov2019.
+ When we execute the cmd helm install <chartname> it ->send the request to tiller
+  - Helm client & libraries written in Go language. 
+---------------------------------
+Like yum & apt -->package manager (automated installation, versioning, dependecies mgmt, remove etc)
 
-   =================== Two Application setup =============================
-   1. Mongo express
-   2. MongoDB
+What is Helm?
+ - Introduce in 2015
+ - Package manager for k8s.
+ - To package YAML files and distributes in public & private repo.(helmhub)
+ - Helm automatically maintains a database of all versions of our releases. 
 
-   Pre-requisites:
-   1. MongoDB Pod
-   2. Internal service - No external req are allow 
-   3. Mongo deployment
-  
+What are Helm charts?
+ - Bundle of YAML files.
+ - We can create our own helm charts with helm
+ - download and can use.
+ - With the help of helm charts we can define, install, upgrade the application. 
+ Ex:
+ Database apps, Mongo DB, Elasticsearch, mySQL, Prometheus etc..
+
+Why we need helm ?
+ - Writing & maintaing k8s manifest file can be time consuming & tidious work. 
+ - Min three yaml files need. 
+ Ex: deployment, secretes, configmaps, services etc
+ 
+Helm chart Structure:
+- Directory structure: ls
+<Chart.yaml charts templates values.yaml>
+  #tree mycharts
+  mycharts/ -->folder
+  - Charts.yaml -->meta info about chart, name, version, dependecies etc.
+  - values.yaml --> place where all the values can be configure/ default value can be configured .
+  - charts/ --> folder contain chart dependecies. 
+  - templates/ -->folder contains actual templates files stored.
+    - .txt
+    - _helpers.tpl
+    - deployment.yaml
+    - ingress.yaml
+    - service.yaml
+    - serviceaccount.yaml
+   ..
+ #helm install <chartname>
+  NAME:
+  LAST DEPLOYED:
+  NAMESPACE:
+  STATUS:
+  REVISION:
+ #kubectl get all
+
+Heml Feature:
+1. Templating Engine:
+ - define a common blueprint
+ - Dynamic values replaced by placeholders.
+
+2. Same application across different clusters:
+ Ex: dev, QA, staging, prod etc.
+
+3. Release Management:
+ - Helm automatically maintains a database of all versions of our releases. 
+
+:Examples:
+---> Normal yaml file <---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: Release-springboot
+spec:
+ replicas: 2
+ selector:
+  matchlabels: 
+
+---> Helm file <---
+- we need to defines values.yaml file there we need to go replicaCount, and place it here. 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: Release-springboot
+spec:
+ replicas: {{.values.replicaCount}}
+ selector:
+  matchlabels: 
+
+------Heml Cmds----------
+helm list
+helm repo list
+helm repo add <repo_name> <repo_url>
+helm repo remove <repo_name>
+helm search repo jenkins
+helm show --> info about chart
+helm show <values|chart|readme|all> <chart_name>
+helm install <release_name> <chart_name>
+helm install <release_name> <chart_name> --version 0.1.0
+helm create 
+helm install --dry-run <release_name> <chart_name>
+helm status <release_name>
+helm history <release_name>
+helm upgrade <release_name> <chart_name> 
+helm rollback <release_name>
+helm pull <chart_name> - in the form of tar file
+helm pull -untar <chart_name>
+
+========================= "Readnessprob" & "Livenessprob / Healthcheck" ====================
+- In Order to verify whether application is running or not within the container we can use livenessprob. 
+- If the cmds succeds, it returns 0 and the kubelet consider the container is alive & healthy. 
+- if it's get nonzero then kills the pod/container & recreate it. 
+Ex:
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: mylivenessprobe
+spec:
+  containers:
+  - name: liveness
+    image: ubuntu
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 1000
+    livenessProbe:                                          
+      exec:
+        command:                                         
+        - cat                
+        - /tmp/healthy
+      initialDelaySeconds: 5          
+      periodSeconds: 5                                 
+      timeoutSeconds: 30 
+
+  echo $? --> show health condition either 0 or 1
+
+========================= "K8S VOLUME" =====================================
+Link: https://www.youtube.com/watch?v=9zjGOCb-6As&list=PLBGx66SQNZ8aPsFDwb79JrS2KQBTIZo10&index=53
+
+How to persists data in k8s using volumes?
+1. Persistent Volume (Always Available)
+2. Persistent Volume Claim
+3. Storage Class
+
+- When Pod gets restarted all the data gets deleted. so need to configure database each app explicitly. 
+- Storage must be available in all nodes. 
+- Storage needs to survive even if cluster crashes. 
+
+1. Persistent Volume
+  - Are not namespaces. 
+  - Cluster resource just like RAM CPU Use to store data
+  - Created by YAML file
+  - kind: PersistentVolume
+  - spec: how much storage?
+  - needs actual physical storage like local disk, cloud storage, nfs etc
+
+2. Persistent Volume Claim
+Pod request the volume through the PV claim, claim tries to find a volume in cluster, Volume has the actual storage backend. 
+  - Claims must be in the same namespace.
+  - Created by YAML file
+  - kind: PersistentVolumeClaim
+  - spec: 
+
+3. Storage Class
+ 
+=================================
+PERSISTENT VOLUME EXAMPLE
+================================
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: myebsvol
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  awsElasticBlockStore:
+    volumeID:           # YAHAN APNI EBS VOLUME ID DAALO
+    fsType: ext4
+============
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myebsvolclaim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pvdeploy
+spec:
+  replicas: 1
+  selector:      # tells the controller which pods to watch/belong to
+    matchLabels:
+     app: mypv
+  template:
+    metadata:
+      labels:
+        app: mypv
+    spec:
+      containers:
+      - name: shell
+        image: centos
+        command: ["bin/bash", "-c", "sleep 10000"]
+        volumeMounts:
+        - name: mypd
+          mountPath: "/tmp/persistent"
+      volumes:
+        - name: mypd
+          persistentVolumeClaim:
+            claimName: myebsvolclaim
 
  
 
