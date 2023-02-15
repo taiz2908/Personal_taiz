@@ -9,7 +9,7 @@ https://www.youtube.com/watch?v=JLU_CHe3azY
 ----------: Ports & Versions: ----------------------
 Tomcat:
 Nginx:
-Git:
+Git: v2.38.1
 Jenkins:
 Sonarqube:
 K8s:
@@ -17,6 +17,7 @@ Docker:
 Helm:
 Maven:
 Ansible:
+Terraform: v1.3.4
 
 
 ------------------------ DOCKERFILE'S EXAMPLE ----------------------------------------
