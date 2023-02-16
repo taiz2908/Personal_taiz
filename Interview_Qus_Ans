@@ -311,9 +311,9 @@ Click On Backup Now & Restore Now.
  - Here we don’t use Ansible modules. So Idem-potency will not work with Ad-Hoc commands. 
  - If at all we don’t get required YAML module to write to create infrastructure, then we go for it. 
 Ex:
- - ansible-all -i hosts -l ubnt -m apt -a "name=apache2 state=present"
+ - ansible-all -i hosts -l <ubnt> -m apt -a "name=apache2 state=present"
  - ansible-all -i hosts -l <ip> -m setup -a "filter=ansible_distribution"
- - ansible-all -m package -a "name=net-tools state=latest"
+ - ansible-all -i hosts -l <centos> -m package -a "name=net-tools state=latest"
 
 5. When we run playbook what are the things happening?
  - Gathering Facts
@@ -332,7 +332,7 @@ Ex:
  - highly flexible and Ready to use modules
  - free and open source
 
-8. Structure of Ansible
+8. Structure / Architechture of Ansible.
  - Modules: Pre defined
  - Module utilities
  - Plugins: email,logging, others
@@ -380,11 +380,55 @@ Ansible-Installation :
  - TASKS: each play contains task and these task from top to bottom,under task we use modules. 
  - HANDLERS: to start the services
 
+Ex: 1,
+- hosts: ubnt
+  become: true
+  gather_facts: yes
+  tasks:
+  - name: to update repo
+    raw: apt-get -y update
+
+  - name: to install apache
+    apt: name=apache2 state=present
+
+  - name: to deploy a file
+    copy:
+      src: /root/files/index.html
+      dest: /var/www/html/index.html
+
+  - name: to start service
+    service: name=apache2 state=started
+
+Ex:2, 
+- hosts: all
+  become: true
+  gather_facts: yes
+  vars:
+  - pack1: mysql-server
+  - pack2: mariadb-server
+  tasks:
+  - name: to update and install {{pack1}}
+    package: name={{pack1}} update_cache=yes state=latest
+    when: ansible_distribution=="Ubuntu"
+    notify:
+      - start mysql
+
+  - name: to update and install {{pack2}}
+    package: name={{pack2}} update_cache=yes state=latest
+    when: ansible_distribution=="CentOS"
+    notify:
+      - start mariadb
+  handlers:
+  - name: start mysql
+    service: name=mysql state=started
+  - name: start mariadb
+    systemd: name=mariadb state=started
+
 14. Ansible Dryrun? -Check --diff
  - Dry run called “Check mode” to check the playbook before run. 
  - Ansible Dry Run feature we can execute the playbook without having to actually make changes on the server.
- - #ansible-playbook pb1.yml –check –diff (what needs to be change)
- - #ansible-playbook pb1.yaml --syntax-check
+ - # ansible-playbook pb1.yml -check –-diff (what needs to be change)
+ - # ansible-playbook pb1.yaml --syntax-check
 
 15. Ansible Idempotency:
  - For Ansible it means After first run of a playbook to set things to a desired state. 

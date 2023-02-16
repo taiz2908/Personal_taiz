@@ -215,7 +215,7 @@ Status of rollout:
      - High Availability
 Types:
    1. Replication Controller ( Old )
-   2. Replica Set (new, recommended way) , requires a "selector" definition helps to identify what pod falls under it . 
+   2. ReplicaSet (new, recommended way) , requires a "selector" definition helps to identify what pod falls under it . 
    3. Deployment 
 Differences:
      Major difference between replicaset & Deployment :
@@ -374,7 +374,7 @@ What is Ingress?
   - We can access the application from outside of the cluster. 
   - We declare which request should go to which service.So we should write the ingress rule for this. 
   - For ingress rule we should have deploy "Ingress Controller" pod into our cluster to process the ingress rule.
-  - Ingress Controller could be entrypoint to the cluster.
+  - Ingress Controller could be an entrypoint to the cluster.
 
 How it Works ? 
 http-->load balancer-->ingress controller-->reads ingress rules-->forwards to service-->pod
@@ -403,10 +403,10 @@ Types:
 ------------------------: Kubernetes Namespaces: ------------------------------
  1. What is Namespace?
   - Way to organise the cluster into the virtual sub-clusters, so we are creating the resources (pod,svs,rs,deployment,secrets,ingress,configs) in these namespaces instead of creating all in one namespaces. 
-  - Each namespace logically separated with each other but can cumminicate with each other. 
+  - Each namespace logically separated with each other but can communicate with each other. 
   - When we create k8s cluster 4 default namespaces created ( Default, kube-node-lease, kube-public, kube-system )
        1. Default - By default resource created  within default namespace , Resource when we don't specify namespace explicitly
-       2. Kube-node-lease - Contains lease resources  to send the hearbeats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
+       2. Kube-node-lease - Contains lease resources to send the heart_beats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
        3. kube-public - Used for public resource . Open to all users with read only access. 
        4. kube-system - For Objects created by k8s .
   

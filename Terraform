@@ -49,21 +49,23 @@ Terraform cmds:
  # terraform validate
  # terraform plan
  # terraform apply
+ # terraform destroy
 
-Terraform Init:
- - initializing the backend.../ initializing providers plugins...
+1. Terraform Init:
+The terraform init command creates a working directory in which Terraform configuration files can be found. 
+ - Initializing the backend.../ initializing providers plugins...
  - Reusing previous version
  - Finding latest version of hasicorp
  - installing hasicorp local
  - Terraform has been successfully initialized
 
-Terraform validate
+2. Terraform validate
  - Shows the message: Success! The configuration is valid. 
 
-Terraform Plan:
+3. Terraform Plan:
  - it will perform the following actions
 
-Terrafrom apply:
+4. Terrafrom apply:
  - it will ask for these actions Yes or No
 -----------------------------
 What is .tfstate ?
