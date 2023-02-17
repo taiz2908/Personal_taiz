@@ -78,7 +78,7 @@ Required Arrtibutes:
  - Blue Ocean Plugin: We can see the build visually .
 
 About Project: 
-Continous Integration stages worked:
+Continous Integration stages I've worked:
 1. Code checkout
 2. Code Build(mvnInstall)
  - mvnInstall refer to "pipeline-libraries under vars folder i.e. mvnInstall.groovy"

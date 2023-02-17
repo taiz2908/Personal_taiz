@@ -41,8 +41,10 @@ Ex:
  }
  ---------------------------
 Providers:
+ - Responsible for understanding the API interaction
  - <provider>_<resource_type>: Resource type-->2nd
  - automatically created the file and before we need to run terrafrom init.
+ - downloaded the plugins for providers.
 
 Terraform cmds:
  # terraform init

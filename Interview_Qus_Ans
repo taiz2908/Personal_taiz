@@ -10,11 +10,11 @@ https://www.youtube.com/watch?v=JLU_CHe3azY
 Tomcat:
 Nginx:
 Git: v2.38.1
-Jenkins:
+Jenkins: v2.332.3
 Sonarqube:
 K8s:
 Docker:
-Helm:
+Helm: v3
 Maven:
 Ansible:
 Terraform: v1.3.4

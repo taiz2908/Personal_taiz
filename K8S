@@ -66,6 +66,7 @@ IMP TOPICS:
  12) Tar command parameters
  13) How to take volume backup
  14) How to deploy k8s
+
  15) Why not docker swarm instead of K8s??
    - Cluster is not robust.
    - K8s Autoscaling , if pod dies automatically its create a new one
@@ -122,7 +123,7 @@ Pod2: App2
  - kube-proxy maintains network rules on nodes. These network rules allow network communication to your Pods from network sessions inside or outside of your cluster.
 
 
- ----- KUBEADM HA Topology - Stacked etcd ---------------------
+----- KUBEADM HA Topology - Stacked etcd ---------------------
 - Out of 3 etcd, one would be active.
  Ex:
   Worker Node_1 --  Worker_Node_2 --  Worker_Node_3
@@ -293,8 +294,8 @@ Example: rc-definition.yml
  		        containers:
  		 	     - name: nginx-container
  		 	       image: nginx
-      2.	replicas: 3
- 	    3.  selector: ----> ( copy the lables from the pod definition file and paste it under the selector section )
+      2. replicas: 3
+ 	    3. selector: ----> ( copy the lables from the pod definition file and paste it under the selector section )
  	  	     matchLables: 
  	  		   type: front-end
 

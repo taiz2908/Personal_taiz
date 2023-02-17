@@ -33,13 +33,13 @@ Git Stash:
  Ex:
   vi demo.txt
   git stash save "msg"
-  git stasg list
+  git stash list
   git stash apply stash@{0}
   git stash clear
   git stasg pop stash@{0}
   git add .
   git commit -m "msg"
-  git pusg
+  git push
 
 Git Ignore: 
 - If we have multiple files and we want to ignore some of files during staging area in that situsation we can use git ignore 
@@ -63,9 +63,9 @@ Branching Strategy:
 # git branch -D 'branch_name' - Local repo forcefully
 
 Delete & renaming the existing branch:
-git branch -m <old_name> <new_name> - Renaming the branch in local
-git push origin -u <new_name> - Pushing the new branch to remote.
-git push origin --delete 'branch_name' - Delete from remote repo.
+# git branch -m <old_name> <new_name> - Renaming the branch in local
+# git push origin -u <new_name> - Pushing the new branch to remote.
+# git push origin --delete 'branch_name' - Delete from remote repo.
 
 Log / Commit Id's: 40 alpha numeric char
 # git log - to show all commit ID i.e author ,commmit, date
