@@ -7,14 +7,6 @@ Ref:
 - https://www.youtube.com/watch?v=J9CqfcKmkEw&list=PLKDtzUTXWwwEVpu7OzRkEf4zlmVBTzgxr&index=1: 
 - https://www.youtube.com/watch?v=tsAH_Vv8GOI&list=PLy0Gle4XyvbFkHCDcJEYG2f6q1dVNJ64- :Peter Jausovec
 
-
-------------------------: Exam Overview CKA : ---------------------
-CKA : 50% , Cluster Installation , upgrade, Maintenance & Troubleshoot. 
-CKAD : 50% , SYLLABUS IS SAME , Software / Application :Pod
-
-Installer : Kubeadm --> (9 marks) - 100%
-etcd backup & restore --> (6 marks) - 100%
-
 ----------------------: INTRO / OVERVIEW OF K8S :---------------------------------
 Version:
 
@@ -105,12 +97,12 @@ Pod2: App2
  - Controllers are the brain behind orchestration. 
  - They are responsible for noticing & responding when nodes, containers or endpoints goes down.
  - The controllers make decision to bring up new containers in such cases.
- - Knows the state of the cluster.
+ - Knows the state of the cluster / node / pods. 
 
 5. Container Runtime : Docker
  - Container runtime is the underlying software that is used to run containers .
 
-6. Kubelet: Agent
+6. Kubelet: "Agent"
  - Kubelet is the agent that runs on each node in the cluster.
  - The agent is responsible for making sure that the containers are running on the nodes as expected.
  - Also it is responsible to interacting with the masters to provide health info of the worker node. 
@@ -178,6 +170,9 @@ spec:
  #kubectl delete pod nginx
 
 ------------------------------: K8S IMP CMDS: -------------------------------------------------
+#kubectl api-resources | more -->how many resources we can manage/create
+ - false: can't be run in ns.
+ - true: can be deployed within the namespace.
 #kubectl get nodes | pods | deployment | services | replicaset | namespace | pv | pvc, to get the status
 
 #kubectl get pods -o wide , -o:output format, can see the details of  node / IP/ age / status etc..
@@ -208,6 +203,15 @@ Status of rollout:
  # kubectl rollout status deployment/myapp-deployment  - 
  #kubectl rollout history deployment/myapp-deployment - to see the revision & history of deployments
  #kubectl rollout undo deployment/myapp-deployment - i.e rollback to the previous version of deployment, notice somthing change / not working after that we can use this command
+
+------------------------------------------------------------------------
+
+------------------ Namespace ---------------
+------------------ Service ------------------
+------------------ Deployment ----------------
+ ----------------- ReplicaSet ----------------
+  ---C1--------C2------   ---c1-----c2------
+  ---------- Pod-1-----   -----Pod2----------
 
 -------------------: Kubernetes Replication Tyes :--------------------------
  Why :
@@ -324,7 +328,7 @@ Deployment strategies:
 
 ----------------------------------------------------------------------
 Networking in K8S:
- cisco , cilium, flannel , vmware NSX, calico 
+ cisco , cilium, flannel , vmware NSX, calico (project calico)
 
 --------------------------: Kubernetes Services: -------------------------------------------
   Enables the communication between various components within & outside of the application . 
@@ -409,7 +413,7 @@ Types:
        1. Default - By default resource created  within default namespace , Resource when we don't specify namespace explicitly
        2. Kube-node-lease - Contains lease resources to send the heart_beats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
        3. kube-public - Used for public resource . Open to all users with read only access. 
-       4. kube-system - For Objects created by k8s .
+       4. kube-system - For Objects created by k8s (etcd,apiserver,kubeproxy,scheduler,control manager)
   
  2. Need of Namespace?
    - Avoid conflicts like same name between teams.

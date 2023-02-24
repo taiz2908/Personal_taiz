@@ -1,0 +1,93 @@
+------------------------: Exam Overview CKA : ---------------------
+CKA : 50% , Cluster Installation , upgrade, Maintenance & Troubleshoot. 
+CKAD : 50% , SYLLABUS IS SAME , Software / Application :Pod
+
+Installer : Kubeadm --> (9 marks) - 100%
+etcd backup & restore --> (6 marks) - 100%
+
+====================================================================
+By default k8s doesn't support 
+ - monitoring
+ - logging
+ - tracing
+we need to add plugin's --> 3rd party
+
+------------------:K8s Cluster:-------------------------------------------------------------
+ - Control Plane -> 1 / 2
+ - Worker Nodes -> 1 / 2
+ - CRI (Container runtime)
+ - CNI (container network interface), Overlay n/w
+ - CSI (container storage interface)
+
+=========================:Installer : Kubeadm:===============================================
+Paste under userdata:
+
+#!/bin/bash
+swapoff -a
+sudo apt-get update
+sudo apt-get install -y docker.io/containerd jq wget curl  
+sudo apt-get install -y apt-transport-https ca-certificates curl
+sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+sudo usermod -aG docker ubuntu
+
+------------------------its not mandatory but easily communicate---------
+Rename hostname :--> It's for Ubuntu M/c
+ cat /etc/hosts
+to change the hostname:
+ - hostnamectl set-hostname master
+ - hostname master
+ - vi /etc/hosts/
+ - to get private ip
+   22.43.5.1 Master
+   3.4.22.34 Node1
+----------------------------Creating a cluster with kubeadm---------------
+In Master 
+sudo kubeadm init --apiserver-advertise-address=<ip-address_privateip> | tee kubeadm-output.txt
+
+
+How to get join command once again:
+# kubeadm token create --print-join-command
+
+In the exam :
+Cmd to install CNI given to you. 
+
+
+====================================:CNI:===========================================================================
+- https://docs.tigera.io/calico/3.25/getting-started/kubernetes/self-managed-onprem/onpremises
+- curl https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico-typha.yaml -o calico.yaml
+kubectl apply -f calico.yaml
+
+==============================:Exam --> Better to write Imperative way: ========================================
+
+# kubectl api-resources | more -->how many resources we can manage/create.
+ - false: can't be run in ns.
+ - true: can be deployed within the namespace.
+# kubectl api-versions
+# kubectl explain pod
+# kubectl explain pod.metadata | more
+# kubectl explain pod.spec | grep -i require
+# kubectl get nodes -o wide --> runtime, internalip, os image, kernel version
+
+------------------------------------------------------
+# kubectl run <pod_name> --image nginx --port 80
+# kubectl get pod -o wide --> ip & node in which it is running.
+# kubectl describe pod <pod_namae> -o wide | more -->lables, status,ip, container info, host port numnber etc and "events"
+ - from the events we can use for troubleshooting 
+
+------------------ :dry-run=client -o yaml > 1.yaml: ---------------------------------------
+IMP Command: ---> complete yml file. (--dry-run=client -o yaml > 1.yaml)
+# kubectl run <pod_name> nginx --port 80 --dry-run=client -o yaml > 1.yaml
+# kubectl apply -f 1.yaml 
+# curl http://<POD_ip>
+
+# kubectl create deployment abc --name nginx --dry-run=client -o yaml > 2.yaml
+---------------------Basic Troubleshooting commands:-------------------------------
+ kubectl logs <pod_name>
+ kubectl logs  <pod_name> -f 
+
+
+
