@@ -135,6 +135,7 @@ Kubernetes definition file always contains four top level fields:
 2. "kind": type of object : (Pod , Service, ReplicaSet, Deployment )
 3. "metatdata": data / information about the object ( names , lables )
        name: could be a string value ( myapp-pod)
+       namespace:
        lables: (We can filter the pod )
          name:
  	     app: able to filter out the pods by giving the unique name ( myapp ) 
@@ -170,14 +171,18 @@ spec:
  #kubectl delete pod nginx
 
 ------------------------------: K8S IMP CMDS: -------------------------------------------------
-#kubectl api-resources | more -->how many resources we can manage/create
+# kubectl api-resources | more -->how many resources we can manage/create.
  - false: can't be run in ns.
  - true: can be deployed within the namespace.
+#kubectl explain pod
+#kubectl explain pod.metadata | more
+#kubectl explain pod.spec | grep -i require
+
 #kubectl get nodes | pods | deployment | services | replicaset | namespace | pv | pvc, to get the status
 
 #kubectl get pods -o wide , -o:output format, can see the details of  node / IP/ age / status etc..
 #kubectl delete pod <podname>, to delete the pod named webapps, 
-#kubectl exec -it <podname> -- sh/bash , to enter within a specific pod
+#kubectl exec -it <podname> -- bash , to enter within a specific pod
 #kubectl exec -it <podname> -c <containername> -- sh/bash , When we have multiple container in a pod. 
 #kubectl describe pod <ngnix> , details/informations of the single pod.
 #kubectl logs <podname> -f , '-f' to watch / monitoring the logs, to see the pod logs
@@ -207,11 +212,11 @@ Status of rollout:
 ------------------------------------------------------------------------
 
 ------------------ Namespace ---------------
------------------- Service ------------------
------------------- Deployment ----------------
- ----------------- ReplicaSet ----------------
+------------------ Service -----------------
+------------------ Deployment --------------
+ ----------------- ReplicaSet --------------
   ---C1--------C2------   ---c1-----c2------
-  ---------- Pod-1-----   -----Pod2----------
+  ---------- Pod-1-----   -----Pod2---------
 
 -------------------: Kubernetes Replication Tyes :--------------------------
  Why :
@@ -437,7 +442,7 @@ Types:
    spec - is optional in namespace 
    #kubectl get all --name-namspaces or kubectl get all -A
   
-===================: Helm-3 :=============================
+==============================: Helm-3 :==========================================================
 Version: 2 vs 3
  - Version2 comes in two parts (client,server model)
   - helm client 

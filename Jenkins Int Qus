@@ -1,3 +1,6 @@
+https://www.jenkins.io/doc/developer/plugin-development/dependency-management/
+
+
 Ref : https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
 
 #yum -y update

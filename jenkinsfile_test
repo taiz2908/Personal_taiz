@@ -1,3 +1,4 @@
+def file = 'values-sit.yaml'
 def newimg = 'web-server'
 def newtag = params.IMAGE_TAG
 def repo_url = ''
@@ -51,14 +52,18 @@ pipeline {
         }
     }
 
-    triggers {
-        pollSCM('') //Enabling build on push
+    environment {
+        U***N_CRED = 'taiz'
     }
+
+    /* triggers {
+        pollSCM('') //Enabling build on push
+    } */
 
     stages {
         stage ('PACKAGE') {
             steps {
-                mvnInstall() 
+                mvnInstall()
             }
         }
         stage ('DEPLOYING TO NEXUS') {
@@ -85,9 +90,9 @@ pipeline {
         }
 
         stage ('DOCKER LOGIN') {
-            when {
+           /* when {
                 branch 'main'
-            }
+            } */
 
             steps{
                 script {
@@ -95,7 +100,6 @@ pipeline {
                         withCredentials([
                             usernamePassword(credentialsID:'my_cred', usernameVariable:'my_update', passwordVariables:'my_passwd')
                         ]) {
-
                             sh """#!/bin/sh
                              docker login -u \$my_update -p \my_passwd $repo_url
                              docker build -t $newimg:$newtag --build-arg SRC=$repo_url --build-arg IMG=$newimg --build-arg TAG=newtag .
@@ -106,15 +110,14 @@ pipeline {
             }
         }
         stage ('BUILDING & PUSHING IMG') {
-            when {
+            /* when {
                 branch 'main'
-            }
+            } */
             
             steps {
                 script {
                     container('docker'){
                         withDockerRegistry(credentialsID: 'my_demo_test' , url: 'hub.docker.com') {
-
                             sh """#!/bin/sh
                             docker tag $newimg:$newtag $repo_url/$newimg:$newtag
                             docker push $repo_url/$newimg:$newtag
@@ -124,7 +127,7 @@ pipeline {
                 }
             }
         }
-        /* stage ('RUNNING CONTAINER') {
+        /* "not necessary" stage ('RUNNING CONTAINER') {
             steps {
                 scripts{
                     container('docker'){
@@ -143,6 +146,19 @@ pipeline {
                 }
             } 
         } */
+
+        stage ('Helm Upload') {
+            steps{
+                container('name') {
+                    withCredentials([sting(credentialsID: , variable: '')]) {
+                        sh """
+
+                        """
+                    }
+                }
+            }
+        }
+
     }
     post{
         cleanup {

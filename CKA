@@ -44,7 +44,7 @@ to change the hostname:
  - to get private ip
    22.43.5.1 Master
    3.4.22.34 Node1
-----------------------------Creating a cluster with kubeadm---------------
+---------------------------- :Creating a cluster with kubeadm: ---------------
 In Master 
 sudo kubeadm init --apiserver-advertise-address=<ip-address_privateip> | tee kubeadm-output.txt
 
@@ -66,6 +66,7 @@ kubectl apply -f calico.yaml
 # kubectl api-resources | more -->how many resources we can manage/create.
  - false: can't be run in ns.
  - true: can be deployed within the namespace.
+# kubectl api-resources | grep -i rs
 # kubectl api-versions
 # kubectl explain pod
 # kubectl explain pod.metadata | more
@@ -85,9 +86,86 @@ IMP Command: ---> complete yml file. (--dry-run=client -o yaml > 1.yaml)
 # curl http://<POD_ip>
 
 # kubectl create deployment abc --name nginx --dry-run=client -o yaml > 2.yaml
+
 ---------------------Basic Troubleshooting commands:-------------------------------
  kubectl logs <pod_name>
  kubectl logs  <pod_name> -f 
+ kubectl logs <pod_name> -c <container_name>
+
+
+=============================: Namespace :=========================================================================
+1. default
+2. kube-system 
+3. kube-public
+4. kube-node-lease
+
+============================: Controllers: ========================================================================
+1. ReplicaSet() --> desired count/replicas & actual count matches, any mismatch going to do self healing.
+2. Deployment -->
+3. DeamonSet --> One pod per node.
+4. statefulSet --> Maintain a sticky identity for each of their pods.
+
+1. ReplicaSet:
+ - self healing
+ - scale out / scale In
+ # kubectl get rs -o wide
+ # kubectl get pods
+ # kubectl get pod,rs -o wide
+ # kubectl describe rs <name_rs>
+
+2. StatefulSet: Stateful Applications.
+ - Is we have stateful application like data bases, mysql,mongodb etc ... 
+ - Maintain a sticky identity for each of their pods
+ - with same identity. 
+ when:
+- stable, unique n/w identifier. 
+- stable, persistent storage.
+- orered, automated rolling updates
+- ordered, graceful deployment and scaling.
+ # kubectl get statefulset -o wide
+
+3. DeamonSet:
+ - One pod per node, monitoring, loggings etc, 
+ - if we add new node, automatically added into that pod. 
+ # kubectl get ds -n kube-system
+
+4. Deployment: Stateless Application
+ - deployment deploy rs
+ - rs creates pod
+ - Gives us rollout & rollback -->imp feature. 
+
+Ex: with the help of labels & selector pod is bind with deployment.
+ apiVersion: apps/v1
+
+ kind: Deployment
+
+ metadata:
+  labels:
+   owner: nginx
+
+ spec:
+  replicas: 3
+
+  selector:
+   matchLabels:
+    app: nginx
+
+  template:           ------> Pod template spec
+   metadata:
+    labels:
+     app: nginx
+   spec:
+    containers:
+    - name: nginx
+      image: nginx:1.1
+      ports:
+       - containerPort: 80
+--------------------------------------------------------------------------------------------------------------------
+ 
+
+
+
+
 
 
 

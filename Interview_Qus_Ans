@@ -76,7 +76,12 @@ doc/appdev/sample/sample.war /usr/local/tomcat/webapps/sample.war
   EXPOSE 80
   CMD ["service","nginx","start"]
 
-
+6. Create a dockerfile for nginx and copy html file to target path and open the port.
+  FROM nginx:latest
+  COPY ./index-html/*  /usr/share/nginx/html/
+  EXPOSE 80
+  # docker build -t web:latest .
+  # docker run -d --name nginxwebb -p 8089:80 -v myvol:/usr/share/nginx/html nginxweb
 
 =============================: GIT :=============================================
 1. What is Git stash?
@@ -548,3 +553,6 @@ Ex:
  4 notused
  5 GUI
  6 Reboot
+
+ =======================================================================================================
+ what are the primary role you're doing in k8s?
