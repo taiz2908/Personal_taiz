@@ -178,7 +178,7 @@ spec:
 #kubectl explain pod.metadata | more
 #kubectl explain pod.spec | grep -i require
 
-#kubectl get nodes | pods | deployment | services | replicaset | namespace | pv | pvc, to get the status
+#kubectl get nodes | po | deployment | sv | rs | ns | pv | pvc, to get the status
 
 #kubectl get pods -o wide , -o:output format, can see the details of  node / IP/ age / status etc..
 #kubectl delete pod <podname>, to delete the pod named webapps, 
@@ -224,14 +224,19 @@ Status of rollout:
      - Roll-out & Roll-back, 1.21 --> 1.22 & 1.22 --> 1.21
      - High Availability
 Types:
-   1. Replication Controller ( Old )
-   2. ReplicaSet (new, recommended way) , requires a "selector" definition helps to identify what pod falls under it . 
-   3. Deployment 
+1. ReplicaSet() --> desired count/replicas & actual count matches, any mismatch going to do self healing.
+2. Deployment --> Gives us rollout & rollback
+3. DeamonSet --> One pod per node.
+4. statefulSet --> Maintain a sticky identity for each of their pods.
+-------------------------------
+   1. ReplicaSet (new, recommended way) , requires a "selector" definition helps to identify what pod falls under it . 
+   2. Deployment 
 Differences:
      Major difference between replicaset & Deployment :
        1. ReplicaSet - always makes sure desired number of replica's are always available .
        2. Deployment- except kind which is deployment . rollout & rolling updates , Whenever we create the deployment , deployment recreate the replicaset & replicaset create the pods .
-
+    3. DeamonSet --> One pod per node.
+    4. statefulSet --> Maintain a sticky identity for each of their pods.
 -----------------------: Kubernetes Services: -----------------------------------------------
 # kubectl get svc --> "kubernetes" is the default service.
 Why:
@@ -360,7 +365,7 @@ Networking in K8S:
          app: myapp
          type: front-end
 # kubectl create -f service-definition.yml
-# kubectl get services - list the service , where we can able to see cluster IP & NodePort
+# kubectl get sv - list the service , where we can able to see cluster IP & NodePort
 # curl https://192.186.1.2:30008 
 
 2. ClusterIP: 
@@ -553,6 +558,7 @@ helm pull <chart_name> - in the form of tar file
 helm pull -untar <chart_name>
 
 ========================= "Readnessprob" & "Livenessprob / Healthcheck" ====================
+- Application Healthcheck.
 - In Order to verify whether application is running or not within the container we can use livenessprob. 
 - If the cmds succeds, it returns 0 and the kubelet consider the container is alive & healthy. 
 - if it's get nonzero then kills the pod/container & recreate it. 

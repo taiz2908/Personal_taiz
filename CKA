@@ -3,7 +3,11 @@ CKA : 50% , Cluster Installation , upgrade, Maintenance & Troubleshoot.
 CKAD : 50% , SYLLABUS IS SAME , Software / Application :Pod
 
 Installer : Kubeadm --> (9 marks) - 100%
-etcd backup & restore --> (6 marks) - 100%
+etcd backup & restore --> (6 marks) - 100% --> two cmds
+ - etcdctl
+ - 2nd link
+ - --key & --cacert value would be given
+deployment, release & rollout deployment --> (5/6 marks) - 100%
 
 ====================================================================
 By default k8s doesn't support 
@@ -101,7 +105,7 @@ IMP Command: ---> complete yml file. (--dry-run=client -o yaml > 1.yaml)
 
 ============================: Controllers: ========================================================================
 1. ReplicaSet() --> desired count/replicas & actual count matches, any mismatch going to do self healing.
-2. Deployment -->
+2. Deployment --> Gives us rollout & rollback
 3. DeamonSet --> One pod per node.
 4. statefulSet --> Maintain a sticky identity for each of their pods.
 
@@ -118,10 +122,10 @@ IMP Command: ---> complete yml file. (--dry-run=client -o yaml > 1.yaml)
  - Maintain a sticky identity for each of their pods
  - with same identity. 
  when:
-- stable, unique n/w identifier. 
-- stable, persistent storage.
-- orered, automated rolling updates
-- ordered, graceful deployment and scaling.
+ - stable, unique n/w identifier. 
+ - stable, persistent storage.
+ - orered, automated rolling updates
+ - ordered, graceful deployment and scaling.
  # kubectl get statefulset -o wide
 
 3. DeamonSet:
@@ -133,24 +137,29 @@ IMP Command: ---> complete yml file. (--dry-run=client -o yaml > 1.yaml)
  - deployment deploy rs
  - rs creates pod
  - Gives us rollout & rollback -->imp feature. 
+ # kubectl create deployment <deployment_name> --image <image_name> --replicas 3 --dry-run=client -o yaml > 1.yaml
+ # kubectl get deploy
+ # kubectl get deploy,rs,pod -o wide
+ # kubectl scale deployment d1 --replicas=5
+ # kubectl set image deploy/d1 <image_name>=nginx:1.41.1
+ # kubectl rollout undo deployment/d1
+ or,
+ # kubectl rollout undo deployment/d1 --to-revision=2
 
-Ex: with the help of labels & selector pod is bind with deployment.
+Ex: with the help of "labels & selector" pod is bind with deployment.
  apiVersion: apps/v1
-
  kind: Deployment
-
  metadata:
   labels:
    owner: nginx
-
  spec:
   replicas: 3
-
-  selector:
-   matchLabels:
+  selector:  
+           -------> to filter out.
+   matchLabels:      
     app: nginx
 
-  template:           ------> Pod template spec
+  template:           ------> Pod template spec.
    metadata:
     labels:
      app: nginx
@@ -160,10 +169,35 @@ Ex: with the help of labels & selector pod is bind with deployment.
       image: nginx:1.1
       ports:
        - containerPort: 80
---------------------------------------------------------------------------------------------------------------------
+
+Rollout deployment:
+
+=============================: K8S Services: =====================================================================
+- Enabling network. 
+1. ClusterIP ( Port - 443 / TCP ) --> default
+2. NodePort ( 30,000 - 32,767) / TCP --> Stable IP Address.
+3. LoadBalancer
  
+1. ClusterIP:
+ - Within the cluster
+ - Inside the cluster can access the application. 
+ - By using labels & selector we can bind the pods using clusterIP
+Ex:
+apiVesrion: v1         apiVersion: v1
+kind: Service          kind: pod
+metatdata:             metadata:
+ name: ingress          name:
+spec:                   "labels: nginx-backend"
+ type: clusterIP       spec:
+ ports:                 containers: 
+  - name: http          - image:
+    port: 80              name:
+    targetPort: 80        ports:
+    protocol: TCP          - containerPort: 80 -->targetport
+ selector:
+  "app: nginx- backend"
 
-
+2. NodePort:
 
 
 
