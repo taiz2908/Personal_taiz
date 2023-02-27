@@ -2,12 +2,15 @@
 CKA : 50% , Cluster Installation , upgrade, Maintenance & Troubleshoot. 
 CKAD : 50% , SYLLABUS IS SAME , Software / Application :Pod
 
-Installer : Kubeadm --> (9 marks) - 100%
-etcd backup & restore --> (6 marks) - 100% --> two cmds
+1. Installer : Kubeadm --> (9 marks) - 100%
+2. etcd backup & restore --> (6 marks) - 100% --> two cmds
  - etcdctl
  - 2nd link
  - --key & --cacert value would be given
-deployment, release & rollout deployment --> (5/6 marks) - 100%
+3. deployment, release & rollout deployment --> (5/6 marks) - 100%
+
+4. Volume, ConfigMaps, Secrets -->20 Marks
+ - PC & PVC --> (8/9 marks) --> 100%
 
 ====================================================================
 By default k8s doesn't support 
@@ -176,8 +179,16 @@ Rollout deployment:
 - Enabling network. 
 1. ClusterIP ( Port - 443 / TCP ) --> default
 2. NodePort ( 30,000 - 32,767) / TCP --> Stable IP Address.
-3. LoadBalancer
- 
+3. LoadBalancer --> more of network load balancer. ( Layer 4)
+    - Requires public IP / External IP
+    - will work when deploy to EKS, AKS, GKE etc. 
+
+4. Ingress:  --> Application Load balancer (layer 7)
+ - http/https
+ - path based routing()
+ - host based routing
+ - content 
+---------------------------------------------
 1. ClusterIP:
  - Within the cluster
  - Inside the cluster can access the application. 
@@ -198,8 +209,83 @@ spec:                   "labels: nginx-backend"
   "app: nginx- backend"
 
 2. NodePort:
+ - Outside the cluster. 
+ - opens a specific port on all the nodes in the cluster. 
+ - A ClusterIP Service, to which the NodePort Service routes, is automatically created. 
+ - You'll be able to contact the NodePort Service, from outside the cluster, by requesting <NodeIP>:<NodePort>
 
+Ex:
+apiVesrion: v1         
+kind: Service          
+metatdata:             
+ name: ingress          
+spec:                   
+ type: NodePort       
+ ports:                 
+  - name: http          
+    port: 80              
+    targetPort: 80  --> app port
+    nodePort: 30080 --> node port       
+    protocol: TCP          
+ selector:
+  "app: nginx- backend"
 
+# kubectl get svc
+# kubectl get svc -0 wide
+# kubectl describe svc <name_of_svc> --> we can see endpoints.
+# kubectl get nodes -o wide
+# <node_IP>:<node_port>
+# kubectl run abc --image nginx -l <selector>
+# kubectl expose --help  ---> we can use in exam
+# kubectl expose deploy/pod d1 --port=80 --targetport=80 --type NodePort --name <service_name> --dry-run=client -o yaml
 
+Limitations:
+ - Never use in production or practical world
+ - 
 
+========================= "K8S VOLUME" ======================================================================
+Types:
+ - cephs
+ - configMap
+ - emptydir
+ - persistentvolume
+ - persistentVolumeClaim
+ - local
+ - nfs
+ - hostpath
+ - secret
+ - fc (fibre channel)
+
+Node local memory (emptydir & hostPath) --> exam point not in real world like prod. 
+Cloud volumes
+File sharing volumes (nfs, network file system)
+Distributed file systems (cephFS & glusterFS)
+Special volume types (persistentVolumeClaim, secret, configMap)
+
+1. emptyDir:
+ - emptyDir volume is first created when a pod is assigned to a node. 
+ - when a pod dies / removed from a node for any reason, the data in the emptyDIr is deleted forever.
+ - mainly used to store cache / temporary data to be processed. 
+Note:
+ - volumeMounts "name" & volumes "name" should match.
+
+2. hostPath:
+ - if pod dies, data will be there.
+ - volume mounts a file/dir from the host node filesystem into our pod.
+ - when node becomes unstable, the pods might fail to access the hostPath dir & eventually gets terminated.
+
+Mountvolume.setup failed --> we need to create a dir
+ - mkdir /data
+
+3. PV & PVC: --> Real world, --> infra team will provide the storage. 
+ - Cluster-wide resource used to store the data beyond the lifetime of a pod.
+ - in order to use pv , we need to first claim it using pvc.
+ - size, speed, read write properties etc
+--------------
+ Storage Admin
+  - PV1 3gb
+  - PV2 2gb --> bound
+  - PV3 500mb 
+
+developer --> pod --> 2gb asked --> PV2 as volume
 
