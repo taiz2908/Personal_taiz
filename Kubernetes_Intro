@@ -111,6 +111,8 @@ Pod2: App2
  - Also it is responsible to interacting with the masters to provide health info of the worker node. 
  - Kubelet uses a "shim" application. 
  - Swap disabled. You MUST disable swap in order for the kubelet to work properly.
+Note:
+The kubelet uses "liveness probes" to know when to restart a container.
 
 7. Kube-proxy:
  - It's forward's the request.
@@ -523,6 +525,7 @@ helm pull -untar <chart_name>
 
 ========================= "Readnessprob" & "Livenessprob / Healthcheck" ====================
 - Application Healthcheck.
+- Livenessprobes determine whether or not an application running in a container is in a healthy state / 
 - In Order to verify whether application is running or not within the container we can use livenessprob. 
 - If the cmds succeds, it returns 0 and the kubelet consider the container is alive & healthy. 
 - if it's get nonzero then kills the pod/container & recreate it. 
@@ -551,6 +554,9 @@ spec:
       timeoutSeconds: 30 
 
   echo $? --> show health condition either 0 or 1
+
+ReadnessProb:
+- readiness probes to know when a container is ready to start accepting traffic.
 
 ========================= "K8S VOLUME" ======================================================================
 

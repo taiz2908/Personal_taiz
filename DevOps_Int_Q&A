@@ -555,13 +555,17 @@ Ex:
  6 Reboot
 
  =======================================================================================================
- what are the primary role you're doing in k8s?
- what are the error's facing in k8s?
+ 1. what are the primary role you're doing in k8s +  have you written helm charts?
+  - writing & modifing helm charts as per the project req
+  - checking pod logs
+  - 
+
+ 2. what are the error's facing in k8s?
   - Mountvolume.setup failed --> we need to create a dir
     - mkdir /data
-  
- have you created deployment file?
- have you written helm charts?
- how you mount the volume & volume name?
- network using ?
+
+ 3. have you created deployment file?
+
+ 4. how you mount the volume & volume name?
+ 5. network using ?
 

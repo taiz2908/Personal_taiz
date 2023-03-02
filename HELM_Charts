@@ -7,3 +7,33 @@ Ref :
 
 
 =====================================================================================================================
+Helm chart Structure:
+- Directory structure: ls
+<Chart.yaml charts templates values.yaml>
+
+  #tree mycharts
+  mycharts/ -->folder
+  - Charts.yaml --> meta info about chart, name, version,description, dependecies etc.
+  - values.yaml --> imp one, place where all the values can be configure/ default value can be configured .
+  - charts/ --> folder contain chart dependecies. 
+  - templates/ -->folder contains actual templates files stored.
+    - .txt
+    - _helpers.tpl
+    - deployment.yaml
+    - ingress.yaml
+    - service.yaml
+    - serviceaccount.yaml
+
+if yaml related to same app , having same lables
+- write a function under helpers.tpl and later we can call in deployment.yaml under lables. 
+----------------------Real-time---------------
+charts/
+ - templates /
+   - _helpers.tpl
+   - deployment.yaml
+   - service.yaml
+   - route.yaml
+ - chart.yaml
+values.yaml
+-----------------------------------------------
+
