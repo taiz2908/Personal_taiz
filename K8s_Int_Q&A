@@ -1,0 +1,182 @@
+  https://www.youtube.com/watch?v=Bf1Eq6ocskE: kubernetes interview questions | docker, kubernetes and helm interview questions
+  
+  ========================================================
+  K8s Version: 1.17
+
+  v1.26 -->latest
+  v1.25 
+  v1.24
+  v1.23
+
+  kubeadm --> setup
+ 
+ 1. what are the primary role / currently working in k8s +  have you written helm charts?
+  - use to write deployment files
+  - service files
+  - writing & modifing helm charts as per the project req , package and deploy to k8s cluster
+  - checking pod logs
+  - Admin side 
+
+2. Architechture of k8s:
+  - Master Node / Control Plane (3 Node): Scheduler , API Server, ETCD, Control manager, Cloud manager , Container runtime , Kubelet, Kubeproxy .
+  - Worker Node: Kubelet , Kube-proxy, Container runtime (Docker engine / CRI-O / Containerd), Pod(IP Address, Volume, Docker). 
+
+3. Controllers: 
+  Why :
+     - Self Healing, if any pods goes down , bringing back is called self healing.
+     - Roll-out & Roll-back, 1.21 --> 1.22 & 1.22 --> 1.21
+     - High Availability
+  Types: & Why with example ?
+    1. ReplicaSet --> desired count/replicas & actual count matches, any mismatch going to do self healing.
+    2. Deployment --> Gives us rollout & rollback
+    3. DeamonSet --> One pod per node. Each and evey node (Prometheus & grafana to monitor k8s cluster)
+    4. statefulSet --> Maintain a sticky identity for each of their pods. (Data base servers)
+
+4. What are all objects you used in K8s?
+ - deployment
+ - service
+ - replicaSet
+ - configMaps
+ - ingress controller 
+
+5. Once you deployed application using deployment into cluster, how do you access application outside world?
+ - once deployment is done
+ - we need to write nodePort service 
+ - Also we can use ingress controller 
+
+6. k8s services:
+ - Enabling network. 
+  1. ClusterIP ( Port - 443 / TCP ) --> default
+  2. NodePort ( 30,000 - 32,767) / TCP --> Stable IP Address.
+  3. LoadBalancer --> more of network load balancer. ( Layer 4)
+     - Requires public IP / External IP
+     - will work when deploy to EKS, AKS, GKE etc. 
+  4. Ingress:  --> Application Load balancer (layer 7)
+     - http/https
+     - path based routing()
+     - host based routing
+     - content 
+
+7. K8s Volume Types:
+ - cephs
+ - configMap
+ - emptydir
+ - persistentvolume
+ - persistentVolumeClaim
+ - local
+ - nfs
+ - hostpath
+ - secret
+ - fc (fibre channel)
+ConfigMaps:
+ - store the data in key-value pairs in "plain text".
+ - storing the application configuration files.
+ - allows to decouple environment-specific configuration from the container image.
+Note:
+ - There are four different ways that you can use a ConfigMap to configure a container inside a Pod:
+ 1. Inside a container command and args
+ 2. Environment variables for a container
+ 3. Add a file in read-only volume, for the application to read
+ 4. Write code to run inside the Pod that uses the Kubernetes API to read a ConfigMap
+Secrets:
+ - store the data in "encrypted format".
+
+8. Explain static pods in K8s?
+ - Static Pods are managed directly by the "kubelet daemon" on a specific node
+ - Use Cases of Using Static Pods :
+   - Static pods are usually used by different software for bootstrapping Kubernetes itself. 
+   - For example, kubeadm uses static pods to bring up Kubernetes control plane components like api-server, controller-manager as static pods on the Master Node.
+ - /etc/kubernetes/manifests -> keep our yaml files and creates the pods.
+
+9. Do you know high availability in pod level?  "Readnessprob" & "Livenessprob / Healthcheck"
+Livenessprob:
+ - Application Healthcheck.
+ - In Order to verify whether application is running or not within the container we can use livenessprob. 
+      initialDelaySeconds: 5          
+      periodSeconds: 5                                 
+      timeoutSeconds: 30 
+ReadnessProb:
+  - readiness probes to know when a container is ready to start accepting traffic.
+Ex;
+ - Sometimes, applications are temporarily unable to serve traffic. 
+ - For example, an application might need to load large data or configuration files during startup, or depend on external services after startup. 
+ - In such cases, you don't want to kill the application, but you don't want to send it requests either. Kubernetes provides readiness probes to detect and mitigate these situations.
+
+10. Is it possible to deply pod in master?
+ - Yeah , Its Possible
+ - some "taints" will be there in master, but if we apply some tolerance we can deploy to master. 
+
+11. Is it possible to decide to deploy pod in particular node?
+ - Yes, we can do that
+ - "nodeSelector" we can do that, also we can use nodeAffinity. 
+
+12. To upgrade K8s version, what steps you will follow?
+ - we need to take off the pods from the nodes. 
+ - Move to node1 to node2.i.e., cordorton. 
+ - we can do upgradation 
+ - 
+
+13. Init Containers:
+ - A Pod can have multiple containers running apps within it, but it can also have one or more init containers, which are run before the app containers are started.
+ - Init containers can contain utilities or setup scripts not present in an app image.
+
+14. By default how many namespaces are available in kubernetes?
+  1. Default - By default resource created  within default namespace , Resource when we don't specify namespace explicitly
+  2. Kube-node-lease - Contains lease resources to send the heart_beats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
+  3. kube-public - Used for public resource . Open to all users with read only access. 
+  4. kube-system - For Objects created by k8s (etcd,apiserver,kubeproxy,scheduler,control manager)
+ - "Resource Quota"
+
+15. Why we use networking solutions like flannel or calico?
+ - Use : We have some nodes & keep creating the pods, and having ip add of the pod , if creating again created with same IP, thats why we need networking solutions. 
+
+16. RBAC Authorization?
+ - An RBAC Role or ClusterRole contains rules that represent a set of permissions. Permissions are purely additive (there are no "deny" rules).
+ - A Role always sets permissions within a particular namespace; when you create a Role, you have to specify the namespace it belongs in.
+
+17. What is use of PV and PVC?
+Pod request the volume through the PV claim, claim tries to find a volume in cluster, Volume has the actual storage backend. 
+ - PV & PVC: --> Real world, --> infra team will provide the storage. 
+ - Cluster-wide resource used to store the data beyond the lifetime of a pod.
+ - in order to use pv , we need to first claim it using pvc.
+ - size, speed, read write properties etc
+--------------
+ Storage Admin
+  - PV1 3gb
+  - PV2 2gb --> bound
+  - PV3 500mb 
+
+18. What is Ingress?
+  - We can access the application from outside of the cluster. 
+  - We declare which request should go to which service.So we should write the ingress rule for this. 
+  - For ingress rule we should have deploy "Ingress Controller" pod into our cluster to process the ingress rule.
+  - Ingress Controller could be an entrypoint to the cluster.
+How it Works ? 
+ - http-->load balancer-->ingress controller-->reads ingress rules-->forwards to service-->pod
+
+19. Did you face any challenge in application while setting K8s cluster or while deploying application?
+ - resource quota full in namespace
+ - during claim pvc its mismatch with: volumeMounts "name" & volumes "name", i.e., should match.
+ - selector issue, pod labels & matchLabels should be match 
+
+
+
+
+
+
+
+ 2. what are the error's facing in k8s?
+  - Mountvolume.setup failed --> we need to create a dir
+    - mkdir /data
+
+ 3. have you created deployment file?
+  Yes, 
+  Ex:
+
+
+
+
+------
+
+
+

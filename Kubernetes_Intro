@@ -7,9 +7,14 @@ Ref:
 - https://www.youtube.com/watch?v=J9CqfcKmkEw&list=PLKDtzUTXWwwEVpu7OzRkEf4zlmVBTzgxr&index=1: 
 - https://www.youtube.com/watch?v=tsAH_Vv8GOI&list=PLy0Gle4XyvbFkHCDcJEYG2f6q1dVNJ64- :Peter Jausovec
 
+---------------------------------------------------------------------------------
+Projects:
+ - Deploy a Reddit Clone with Kubernetes Ingress: https://www.youtube.com/watch?v=9tl0A_rwgu4
+
 ----------------------: INTRO / OVERVIEW OF K8S :---------------------------------
 Version: 
- v1.25 -->latest
+ v1.26 -->latest
+ v1.25 
  v1.24
  v1.23
 
@@ -184,7 +189,7 @@ spec:
   ---C1--------C2------   ---c1-----c2------
   ---------- Pod-1-----   -----Pod2---------
 
--------------------: Kubernetes Replication Tyes :--------------------------
+-------------------: Kubernetes Controllers/ Replication Tyes :--------------------------
  Why :
      - Self Healing, if any pods goes down , bringing back is called self healing.
      - Roll-out & Roll-back, 1.21 --> 1.22 & 1.22 --> 1.21
@@ -201,8 +206,16 @@ Differences:
      Major difference between replicaset & Deployment :
        1. ReplicaSet - always makes sure desired number of replica's are always available .
        2. Deployment- except kind which is deployment . rollout & rolling updates , Whenever we create the deployment , deployment recreate the replicaset & replicaset create the pods .
-    3. DeamonSet --> One pod per node.
-    4. statefulSet --> Maintain a sticky identity for each of their pods.
+   3. DeamonSet --> One pod per node.
+   4. statefulSet --> Maintain a sticky identity for each of their pods.
+        - Is we have stateful application like data bases, mysql,mongodb etc ... 
+        - Maintain a sticky identity for each of their pods
+        - with same identity. 
+       when:
+        - stable, unique n/w identifier. 
+        - stable, persistent storage.
+        - ordered, automated rolling updates
+        - ordered, graceful deployment and scaling.
 -----------------------: Kubernetes Services: -----------------------------------------------
 # kubectl get svc --> "kubernetes" is the default service.
 Why:

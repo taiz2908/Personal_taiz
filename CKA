@@ -5,13 +5,20 @@ CKA--> 2HRS
 66% PASSING MARKS
 MUMSHAD / SRINATH CHALLA
 ---------------
-t3.small / t3.medium -- ubuntu 20.04 OS
-sg -- all ports open
+Option-1:
+ - t3.small / t3.medium -- ubuntu 20.04 OS
+ - sg -- all ports open
+ - Min: 2vCPU, 2GB RAM, 10GB HDD
+ - Recommended: 2vCPU, 2GB RAM, 10GB HDD
 
+Option-2:
+ - Azure AKS/ Google GKE / AWS EKS -->Managed cloud services.
+-----------------
 CKA : 50% , Cluster Installation , upgrade, Maintenance & Troubleshoot. 
 CKAD : 50% , SYLLABUS IS SAME , Software / Application :Pod
 
-1. Installer : Kubeadm --> (9 marks) - 100%
+================: Sure short Qus :===============================
+1. Installer : Kubeadm --> (9 marks) - 100% --> CKA
 2. etcd backup & restore --> (6 marks) - 100% --> two cmds
  - etcdctl
  - 2nd link
@@ -45,7 +52,7 @@ Paste under userdata:
 #!/bin/bash
 swapoff -a
 sudo apt-get update
-sudo apt-get install -y docker.io/containerd jq wget curl  
+sudo apt-get install -y docker.io / containerd jq wget curl  
 sudo apt-get install -y apt-transport-https ca-certificates curl
 sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
@@ -74,7 +81,6 @@ How to get join command once again:
 
 In the exam :
 Cmd to install CNI given to you. 
-
 
 ====================================:CNI:===========================================================================
 - https://docs.tigera.io/calico/3.25/getting-started/kubernetes/self-managed-onprem/onpremises
