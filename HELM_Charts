@@ -9,7 +9,7 @@ Ref :
 =====================================================================================================================
 Helm chart Structure:
 - Directory structure: ls
-<Chart.yaml charts templates values.yaml>
+<Chart.yaml charts/ templates/ values.yaml>
 
   #tree mycharts
   mycharts/ -->folder
@@ -17,23 +17,28 @@ Helm chart Structure:
   - values.yaml --> imp one, place where all the values can be configure/ default value can be configured .
   - charts/ --> folder contain chart dependecies. 
   - templates/ -->folder contains actual templates files stored.
-    - .txt
-    - _helpers.tpl
+    - .txt  --> information about chart, when its installed, upgrade, rollback etc depending upon the action. 
+    - _helpers.tpl  --> 
     - deployment.yaml
     - ingress.yaml
     - service.yaml
     - serviceaccount.yaml
+Note:
+- 1st values. yaml 
+- values.yaml validating json schema. 
+Validating charts value in JSON schema. 
 
 if yaml related to same app , having same lables
-- write a function under helpers.tpl and later we can call in deployment.yaml under lables. 
+- write a function / define it under helpers.tpl and later we can call in deployment.yaml under lables. 
 ----------------------Real-time---------------
+<charts/ values.yaml deploy.json >
+values.yaml
 charts/
+ - chart.yaml
  - templates /
    - _helpers.tpl
    - deployment.yaml
    - service.yaml
-   - route.yaml
- - chart.yaml
-values.yaml
+   - route.yaml 
 -----------------------------------------------
 

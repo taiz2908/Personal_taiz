@@ -455,18 +455,22 @@ What are Helm charts?
  Ex:
  Database apps, Mongo DB, Elasticsearch, mySQL, Prometheus etc..
 
-Why we need helm ?
+Why we need helm ? / Advantages. 
  - Writing & maintaing k8s manifest file can be time consuming & tidious work. 
+ - Makes application deployment easy
+ - Improves developer productivity
+ - reduces deployment complexity. 
  - Min three yaml files need. 
  Ex: deployment, secretes, configmaps, services etc
- 
+-------------------------
 Helm chart Structure:
 - Directory structure: ls
-<Chart.yaml charts templates values.yaml>
+<Chart.yaml charts/ templates/ values.yaml>
+
   #tree mycharts
   mycharts/ -->folder
   - Charts.yaml -->meta info about chart, name, version, dependecies etc.
-  - values.yaml --> place where all the values can be configure/ default value can be configured .
+  - values.yaml --> Imp , place where all the values can be configure/ default value can be configured .
   - charts/ --> folder contain chart dependecies. 
   - templates/ -->folder contains actual templates files stored.
     - .txt
@@ -475,7 +479,12 @@ Helm chart Structure:
     - ingress.yaml
     - service.yaml
     - serviceaccount.yaml
-   ..
+----------------------
+Note:
+- 1st values. yaml 
+- values.yaml validating json schema. 
+Validating charts value in JSON schema. 
+------------------------
  #helm install <chartname>
   NAME:
   LAST DEPLOYED:
@@ -483,18 +492,16 @@ Helm chart Structure:
   STATUS:
   REVISION:
  #kubectl get all
-
+-----------------------------
 Heml Feature:
 1. Templating Engine:
- - define a common blueprint
- - Dynamic values replaced by placeholders.
-
+  - define a common blueprint
+  - Dynamic values replaced by placeholders.
 2. Same application across different clusters:
- Ex: dev, QA, staging, prod etc.
-
-3. Release Management:
- - Helm automatically maintains a database of all versions of our releases. 
-
+  - Ex: dev, QA, staging, prod etc.
+3. Release Management: Versioning 
+  - Helm automatically maintains a database of all versions of our releases. 
+-------------------------------
 :Examples:
 ---> Normal yaml file <---
 apiVersion: apps/v1

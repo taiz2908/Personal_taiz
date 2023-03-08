@@ -173,10 +173,29 @@ How it Works ?
   Yes, 
   Ex:
 
+==============================: Helm :=============================================================================
+1. What and why we need helm charts? What helm charts version that you have worked with? and difference between helm 3 and helm 2? 
+ - Refer K8S Intro
 
+2. What are the files and folders in helm charts and explain briefly about files & folders?
+ - Directory structure: ls
+<Chart.yaml charts/ templates/ values.yaml>
 
+  # tree mycharts
+  mycharts/ -->folder
+  - Charts.yaml --> meta info about chart, name, version,description, dependecies etc.
+  - values.yaml --> Imp one, place where all the values can be configure/ default value can be configured .
+  - charts/ --> folder contain chart dependecies. 
+  - templates/ -->folder contains actual templates files stored.
+    - .txt
+    - _helpers.tpl
+    - deployment.yaml
+    - ingress.yaml
+    - service.yaml
+    - serviceaccount.yaml
+Note:
+- 1st values. yaml 
+- values.yaml validating json schema. 
+Validating charts value in JSON schema. 
 
-------
-
-
-
+3. 
