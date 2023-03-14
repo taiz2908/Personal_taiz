@@ -157,6 +157,7 @@ Below's are the set of instructions using in dockerfile:
  USER: instruction sets the user name 
  ENTRYPOINT: it executes as it is & if we provide any new arguments its appended at the end of the instruction. 
  CMD: it's failed as its try to replaced the arg/instruction to httpd.
+
 ------------------------ ENTERYPOINT vs CMD ----------------------
 ENTRYPOINT has two forms:
  - The exec form, which is the preferred form: ENTRYPOINT ["executable", "param1", "param2"]
