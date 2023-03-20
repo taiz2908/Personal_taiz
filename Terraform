@@ -1,4 +1,10 @@
-INTRODUCTION
+Ref: 
+ 1. - https://www.youtube.com/watch?v=7xngnjfIlK4&t=1716s
+    - https://github.com/sidpalas/devops-directive-terraform-course
+ 2. 
+
+
+============================: INTRODUCTION :=================================================================
  - IAC - Infrasstructure as a code.
  - Cloudformation(2011): Automated infrastructure in AWS.
     Mitchell Hashimoto - 2014
@@ -39,9 +45,9 @@ Ex:
  output "rand-str" {
     value = random_string.rand_str[*].result
  }
- ---------------------------
+-----------------------------------------------------
 Providers:
- - Responsible for understanding the API interaction
+ - Responsible for understanding the API interaction.
  - <provider>_<resource_type>: Resource type-->2nd
  - automatically created the file and before we need to run terrafrom init.
  - downloaded the plugins for providers.
@@ -65,13 +71,19 @@ The terraform init command creates a working directory in which Terraform config
  - Shows the message: Success! The configuration is valid. 
 
 3. Terraform Plan:
- - it will perform the following actions
+ - compaired desired state with actual state.
+ - it will perform the following actions.
+ - it'll display show after apply 
 
 4. Terrafrom apply:
  - it will ask for these actions Yes or No
 -----------------------------
 What is .tfstate ?
  - Whatever it'll create it's lock those things.
+ - JSON file: contains informations about every resource and data object. 
+ - Contains sensitive info- database password etc
+ - can be stored locally or remotely(S3, Google cloud storage etc)
+
 
 ==================:Terraform with Docker: ==========================================================
  - Terraform Block: Install required providers, versions etc
@@ -151,9 +163,98 @@ resource "aws_s3_bucket" "bucket" {
   }
 }
 
-===================: Terraform Meta Arguments: ===========================================
+===================: Terraform Variables & Outputs: ===========================================
+Variable Types:
+1. Input variables:
+   - var.<name>
+  Ex:
+  variable "instance_type" {
+  description = "ec2 instance type"
+  type        = string
+  default     = "t2.micro"
+}
 
+2. Local Variables: Temporary variables.can reuse,  Take a value repeatadely 
+   - local.<name>
 
+3. Output Variables:
+   - Allows you to output some value
 
+Setting Input variables:
+ - manual entry during apply/plan
+ - default value in declaration block
+ - TF_VAR_<NAME> Env variables
+ - terraform.tfvars files  --> we can define the values for the variable, non-sensitive. 
+ - *.auto.tfvars file
+ - command line -var or -var-file
 
+Ex: 
+main.tf --> 
+   - define our backend & providers
+   - we can define local variables. 
+   - we can define variables i.e., var.ami , var.instance_name etc
+  
+variables.tf --> 
+   - vars mentioned under variables.tf file & can change during run time
 
+terraform.tfvars --> 
+   - default name with the name "terraform.tfvars"
+   - we can define the values for the variable, non-sensitive. 
+
+another-variable-file.tfvars -->
+   - explicitly tell when we do terraform apply
+   - terraform apply -var-file= 
+
+===========================: Additional Language Features :=======================================================
+Meta- Arguments:
+1. depends_on:
+    - Terraform automatically generats dependency graph based on reference. 
+    - Ex:
+     If we want to create the resource aws_iam_role_policy before aws_instance, hen we should define depends_on under aws_instace
+    so that aws_instance would fail if attending to create it before the aws_iam_role_policy.
+
+2. count:
+    - if want to create multiple resources/copies then we can use count under resource. 
+    - useful if we have multiple resources nearly identical. 
+
+3. for_each:
+    - kind of count arg but much more control of it to customise.
+    - use to create multiple resource.
+
+4. Lifecycle: Lifecycle meta-arguments control how Terraform treats particular resources.
+    - create_before_destroy = true: indicates that if the resource does need to be destroyed, 
+    Terraform should first provision its replacement before destroying the deprecated resource. 
+    This can be useful for things such as zero downtime deployments.
+    - ignore_changes: Sometimes an entity outside of terraform will automatically modify a resource (e.g. adding metadata, etc...). 
+    The ignore_changes argument allows you to ignore specific types of resource changes to prevent this from causing Terraform to attempt to revert those changes.
+    - prevent_destroy: provides an additional stopgap against accidentally destroying resources with terraform. 
+    If set to true, Terraform will reject any attempt to destroy that resource.
+-------------------------------
+Provisioners:
+ - Perform action on local / remote m/c's.
+ - file, local-exec, remote-exec, vendor(chef,puppet,ansible)
+
+===========================: Project Org + Modules :============================================================
+Modules:
+ - Module are containers for multiple resources that are used together. 
+ - Collection of .tf and /or .tf.json files kept together in a directory.
+ - Modules are the main way to package and resuse resource configuration with Terraform.
+ 
+Types:
+ 1. Root Module:
+    - default module containing all .tf files in main working dir.
+ 2. Child Module: 
+    - A separate external module referred to from a .tf file.
+
+Module Sources:
+ - local path, terraform registry, github, bitbuckeet, s3, gcs bucket etc
+
+===========================: Managing Multiple Env :============================================================
+Dev / SIT/ PROD ETC
+1. File Structure
+2. Workspace
+
+Terragrunt:
+ - tool by gruntwork.io --> meta tooling can be apply on the top of that terraform 
+ - make easier and keeping configuration dry.
+ - less complexcity. 
