@@ -31,13 +31,14 @@ Version:
 - K8s doesn't natively support monitoring, logging & tracing .(vanilla k8s)
 - K8s doesnot natively support CICD Pipeline. 
 
- EKS : Amazon Elastic k8s service
- AKS : Azure K8s service
- GKE : Google k8s Engine
- Digitalocean K8s
- IBM Cloud K8s Services
- Oracle Container Engine for k8s
- VMWare Tanzu K8s Grid
+K8s in Public cloud:
+ - EKS : Amazon Elastic k8s service
+ - AKS : Azure K8s service
+ - GKE : Google k8s Engine
+ - Digitalocean K8s
+ - IBM Cloud K8s Services
+ - Oracle Container Engine for k8s
+ - VMWare Tanzu K8s Grid
 
  -->  self Managed: Openshift by Redhat and Docker enterprise. 
 
