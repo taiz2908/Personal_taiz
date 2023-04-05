@@ -163,15 +163,45 @@ resource "aws_s3_bucket" "bucket" {
   }
 }
 
+# Creating AWS VPC Using Terraform:
+ - VPC
+ - Subnet
+ - Internet Gateway
+ - Route Table
+ - Subnet Associations
+ - Security Groups
+ - EC2 Instance
+Ex:
+ 
 ===================: Terraform Variables & Outputs: ===========================================
+Ref: https://developer.hashicorp.com/terraform/language/values/variables
+
 Variable Types:
 1. Input variables:
-   - var.<name>
-  Ex:
+ - Ex: string, num, bool etc. 
+ - Here we have to define two fies. 
+   - main.tf
+   - variable.tf
+Ex: 
+- main.tf , file
+resource "aws_instance" "web1" {
+  ami           = var.ami_type
+  instance_type = var.instance_type
+  tags = {
+    Name = "server1"
+  }
+}
+
+- variable.tf, file
   variable "instance_type" {
   description = "ec2 instance type"
   type        = string
   default     = "t2.micro"
+}
+  variable "ami_type" {
+  description = "ec2 instance type"
+  type        = string
+  default     = "data.aws_ami.ubuntu.id"
 }
 
 2. Local Variables: Temporary variables.can reuse,  Take a value repeatadely 

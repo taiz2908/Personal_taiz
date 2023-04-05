@@ -2,6 +2,8 @@
 Galaxy Developer tool: 
 Java Path:
 Maven Path:
+Terraform Path:
+AWS Path:
 Docker: 
 Minikube:
 
@@ -21,5 +23,22 @@ How to check :
  - open Windows Power Shell --> run as admin
  - java -version
  - mvn -version
- - In CMD opens as asmin
+ - In CMD opens as as min
  - echo %JAVA_HOME%
+
+Terraform
+  3. System Variables
+      - Click on path edit
+      - copy and paste the path
+      - ok & save
+   to check open CMD
+      - terraform -version
+
+AWS : CLI V2
+   4. To open CMD & paste the code
+      - ref: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+      - aws
+      - aws configure [ AWS Access key & secrete access key ]
+      - aws s3 ls
+
+
