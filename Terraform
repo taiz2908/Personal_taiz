@@ -1,7 +1,12 @@
 Ref: 
  1. - https://www.youtube.com/watch?v=7xngnjfIlK4&t=1716s
     - https://github.com/sidpalas/devops-directive-terraform-course
- 2. 
+
+ 2. https://www.youtube.com/watch?v=iRaai1IBlB0&t=8s
+
+ 3. https://www.youtube.com/watch?v=7xngnjfIlK4 Learn Terraform (and AWS) by Building a Dev Environment – Full Course for Beginners
+
+ 4. https://www.youtube.com/watch?v=SLB_c_ayRMo&t=51s Terraform Course - Automate your AWS cloud infrastructure
 
 
 ============================: INTRODUCTION :=================================================================
@@ -70,7 +75,7 @@ The terraform init command creates a working directory in which Terraform config
 2. Terraform validate
  - Shows the message: Success! The configuration is valid. 
 
-3. Terraform Plan:
+3. Terraform Plan: "dry run"
  - compaired desired state with actual state.
  - it will perform the following actions.
  - it'll display show after apply 
@@ -167,13 +172,15 @@ resource "aws_s3_bucket" "bucket" {
  - VPC
  - Subnet
  - Internet Gateway
- - Route Table
+ - Route Table 
  - Subnet Associations
  - Security Groups
  - EC2 Instance
-Ex:
- 
-===================: Terraform Variables & Outputs: ===========================================
+Ex: https://github.com/taiz2908/DevOps_Projects/tree/main/terraform
+ # route table/vpc/security groups/ resource for terraform
+
+========================: Terraform Variables & Outputs: ===================================================
+
 Ref: https://developer.hashicorp.com/terraform/language/values/variables
 
 Variable Types:
