@@ -4,10 +4,9 @@ Ref:
 
  2. https://www.youtube.com/watch?v=iRaai1IBlB0&t=8s
 
- 3. https://www.youtube.com/watch?v=7xngnjfIlK4 Learn Terraform (and AWS) by Building a Dev Environment – Full Course for Beginners
+ 3. https://www.youtube.com/watch?v=SLB_c_ayRMo&t=51s Terraform Course - Automate your AWS cloud infrastructure
 
- 4. https://www.youtube.com/watch?v=SLB_c_ayRMo&t=51s Terraform Course - Automate your AWS cloud infrastructure
-
+ 4. https://www.youtube.com/watch?v=iRaai1IBlB0&t=6s Learn Terraform (and AWS) by Building a Dev Environment – Full Course for Beginners
 
 ============================: INTRODUCTION :=================================================================
  - IAC - Infrasstructure as a code.
@@ -61,15 +60,16 @@ Terraform cmds:
  # terraform init
  # terraform validate
  # terraform plan
- # terraform apply
+ # terraform apply --auto-approve
  # terraform destroy
 
 1. Terraform Init:
-The terraform init command creates a working directory in which Terraform configuration files can be found. 
+The terraform init command creates a working directory(.terraform) in which Terraform configuration files can be found. 
  - Initializing the backend.../ initializing providers plugins...
+ - Installing required plugins.
  - Reusing previous version
  - Finding latest version of hasicorp
- - installing hasicorp local
+ - Installing hasicorp local
  - Terraform has been successfully initialized
 
 2. Terraform validate
@@ -84,13 +84,22 @@ The terraform init command creates a working directory in which Terraform config
  - it will ask for these actions Yes or No
 -----------------------------
 What is .tfstate ?
- - Whatever it'll create it's lock those things.
+ - Whatever it'll create it's lock those things.(stores all of those resources wh have create / created)
  - JSON file: contains informations about every resource and data object. 
  - Contains sensitive info- database password etc
  - can be stored locally or remotely(S3, Google cloud storage etc)
 
+Other Cmds:
+ # terraform state list , lists all resources
+ # terraform state show <resource_name> , gives a detailed output
+ # terraform output
+ # terraform refresh, refresh all of the states without applying any changes and prints the outputs.
 
-==================:Terraform with Docker: ==========================================================
+Target Resources: using of "-target" flag
+ # terraform apply -target <provider>.<resource_name>  , creating specific one resource
+ # terraform destroy -target <provider>.<resource_name> , destroying specific one resource. 
+
+===================: Terraform with Docker: ==========================================================
  - Terraform Block: Install required providers, versions etc
  - source
  - version
@@ -179,6 +188,10 @@ resource "aws_s3_bucket" "bucket" {
 Ex: https://github.com/taiz2908/DevOps_Projects/tree/main/terraform
  # route table/vpc/security groups/ resource for terraform
 
+Ex: https://www.youtube.com/watch?v=SLB_c_ayRMo&t=51s
+ https://github.com/Sanjeev-Thiyagarajan/Terraform-Crash-Course
+
+
 ========================: Terraform Variables & Outputs: ===================================================
 
 Ref: https://developer.hashicorp.com/terraform/language/values/variables
@@ -189,6 +202,7 @@ Variable Types:
  - Here we have to define two fies. 
    - main.tf
    - variable.tf
+
 Ex: 
 - main.tf , file
 resource "aws_instance" "web1" {
@@ -200,6 +214,7 @@ resource "aws_instance" "web1" {
 }
 
 - variable.tf, file
+Ex:
   variable "instance_type" {
   description = "ec2 instance type"
   type        = string
@@ -215,7 +230,11 @@ resource "aws_instance" "web1" {
    - local.<name>
 
 3. Output Variables:
-   - Allows you to output some value
+   - Allows you to output some value mostly use for knowing the public ip. 
+Ex:
+ output "" {
+  value = 
+ }
 
 Setting Input variables:
  - manual entry during apply/plan
@@ -235,6 +254,7 @@ variables.tf -->
    - vars mentioned under variables.tf file & can change during run time
 
 terraform.tfvars --> 
+   - Assigned a value.
    - default name with the name "terraform.tfvars"
    - we can define the values for the variable, non-sensitive. 
 

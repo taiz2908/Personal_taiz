@@ -21,7 +21,7 @@ echo "Division: ` expr $a / $b `"
 echo "Reminder: ` expr $a % $b `"
 
 Relational Operators: 
--eq	Checks if the value of two operands are equal or not; if yes, then the condition becomes true.	
+-eq	Checks if the value of two operands are "equal" or not; if yes, then the condition becomes true.	
 -ne	Checks if the value of two operands are equal or not; if values are "not equal", then the condition becomes true.	
 -gt	Checks if the value of left operand is "greater than" the value of right operand; if yes, then the condition becomes true.
 -lt	Checks if the value of left operand is "less than" the value of right operand; if yes, then the condition becomes true.
@@ -61,6 +61,43 @@ Statements:
 
 
 -----------------: Scripts Examples: --------------------
+Ex: commandsubstitution.
+ current_directory=$(pwd)
+ echo "present directory is: " $current_directory
+ newfile=`cat>file.txt`
+ echo $newfile
+
+Ex: How to use the parameters.
+ echo $0
+ echo $1
+ # name=$0
+ # echo $@ --> show all the parameters. 
+ # echo $# --> show how many parameters pass
+ # echo "my name is : " $name -->store the parameters
+
+ o/p: file.sh "ibraur ahemad" 31
+
+Ex: Task-1 ,
+ - Read the input from the user i.e. ip / domain name
+ - using the ping cmd to ping the server
+ 
+ read -p "which server you want to ping" server_ip
+ ping c5 -w5 $server_ip
+
+Ex: Task-2,
+ - Remote M/C using bash script
+
+ read -p "enter the username: " username
+ read -p "enter the password: " IP
+ ssh $username@$IP
+or, # passing the parameters. 
+ username=$1
+ IP=$2
+ ssh $username@$IP
+
+
+
+=================================================================================================================
 
 Ex:1, To check file is present in a specific location or not,
  - Note:  If directory then use -d in place of -f
