@@ -8,8 +8,12 @@ Ref:
 
  4. https://www.youtube.com/watch?v=iRaai1IBlB0&t=6s Learn Terraform (and AWS) by Building a Dev Environment – Full Course for Beginners
 
+Interview Qus:
+ 1. https://k21academy.com/terraform-iac/terraform-interview-questions/
+ 2. https://www.youtube.com/watch?v=t9bHZMFxQYY&t=110s
+
 ============================: INTRODUCTION :=================================================================
- - IAC - Infrasstructure as a code.
+ - IAC - Infrasstructure as a code. (create,manage,delete by using the code)
  - Cloudformation(2011): Automated infrastructure in AWS.
     Mitchell Hashimoto - 2014
  - Open source and supports all clouds .
@@ -20,6 +24,9 @@ Ref:
    2. Declarative
  - Reuse the code. 
  - File extension with .tf (terraformfile)
+
+Others IAC / Alternative : Pulumi, CloudFormation by AWS. 
+
  --------------------------
  Installation:
   On windows:
@@ -62,6 +69,16 @@ Terraform cmds:
  # terraform plan
  # terraform apply --auto-approve
  # terraform destroy
+Other Cmds:
+ # terraform fmt: The terraform fmt command is used to rewrite Terraform configuration files to a canonical format and style
+ # terraform state list , lists all resources
+ # terraform state show <resource_name> , gives a detailed output
+ # terraform output
+ # terraform refresh, refresh all of the states without applying any changes and prints the outputs.
+
+Target Resources: using of "-target" flag
+ # terraform apply -target <resource_type>.<resource_name>  , creating specific one resource
+ # terraform destroy -target <resource_type>.<resource_name> , destroying specific one resource. 
 
 1. Terraform Init:
 The terraform init command creates a working directory(.terraform) in which Terraform configuration files can be found. 
@@ -73,6 +90,7 @@ The terraform init command creates a working directory(.terraform) in which Terr
  - Terraform has been successfully initialized
 
 2. Terraform validate
+ - Mostly use to validate the syntax i.e.,missing trailing codes, or equal signs, some modules declar's multiple times etc. 
  - Shows the message: Success! The configuration is valid. 
 
 3. Terraform Plan: "dry run"
@@ -84,20 +102,12 @@ The terraform init command creates a working directory(.terraform) in which Terr
  - it will ask for these actions Yes or No
 -----------------------------
 What is .tfstate ?
- - Whatever it'll create it's lock those things.(stores all of those resources wh have create / created)
+ - Whatever it'll create it's lock those things.(stores all of those resources we have created)
  - JSON file: contains informations about every resource and data object. 
  - Contains sensitive info- database password etc
- - can be stored locally or remotely(S3, Google cloud storage etc)
+ - can be stored locally or remotely (S3, Google cloud storage etc)
 
-Other Cmds:
- # terraform state list , lists all resources
- # terraform state show <resource_name> , gives a detailed output
- # terraform output
- # terraform refresh, refresh all of the states without applying any changes and prints the outputs.
-
-Target Resources: using of "-target" flag
- # terraform apply -target <provider>.<resource_name>  , creating specific one resource
- # terraform destroy -target <provider>.<resource_name> , destroying specific one resource. 
+Ref: https://www.youtube.com/watch?v=5FkcC_w3xQM&t=39s
 
 ===================: Terraform with Docker: ==========================================================
  - Terraform Block: Install required providers, versions etc
@@ -315,3 +325,58 @@ Terragrunt:
  - tool by gruntwork.io --> meta tooling can be apply on the top of that terraform 
  - make easier and keeping configuration dry.
  - less complexcity. 
+
+
+=======================================: INTERVIEW QUS :===========================================================
+1. How to change's the configuration of already created resources by terraform?
+ - # terraform import 
+ - https://developer.hashicorp.com/terraform/cli/commands/import
+
+2. When the terraform runs , terraform.tfstate file created ?
+ - Whatever it'll create it's lock those things. (stores all of those resources we have created)
+ - JSON file: contains informations about every resource and data object. 
+ - Contains sensitive info- database password etc
+ - can be stored locally or remotely (S3, Google cloud storage,Azure storage a/c etc)
+ 
+3. Some how if you loose the terraform.tfstate file then ?
+ - terraform import
+ - Unable to find the .tfstate file.
+ - If we try to recreate it,Cost will increase & duplication will be done
+ - it's create from initial so to avoide this we can use the command terraform import.
+
+4. Features if Terraform?
+ - Can use / manage in multiple cloud's.
+ - Can use HCL easy to understand i.e., human reable 
+ - 
+
+5. Pulumi:
+ - can use any language like python, typescript 
+ - more flexible 
+
+6. Modules in Terraform ?
+ - Refer to Note.
+
+7. Remote Back end in Terraform ?
+ - Makes easier to the team to work together and all the members have the access to the latest state data
+ - work as storage , and users can share the same infrastructure resrouces. 
+
+8. How do we provide variable value in run time ?
+ -  If we commented out default value in variable.tf file.
+
+ variable "ami_type" {
+  description = "ec2 instance type"
+  type        = string
+  # default     = "data.aws_ami.ubuntu.id"
+}
+
+9. Multiple Env , is there any way to manage ?
+ - Terraform workspace: Allows to manage separate state file for each workspace
+ - Reusable Module: This is an Architecture where configuration files are stored in a single directory with module
+ block can source that directory into and pass to that variable.
+
+10. Terraform latest Versions:
+ - terraform_1.5.0-alpha20230405
+ - terraform_1.4.4
+ - terraform_1.4.3
+
+
