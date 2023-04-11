@@ -24,8 +24,8 @@ Relational Operators:
 -eq	Checks if the value of two operands are "equal" or not; if yes, then the condition becomes true.	
 -ne	Checks if the value of two operands are equal or not; if values are "not equal", then the condition becomes true.	
 -gt	Checks if the value of left operand is "greater than" the value of right operand; if yes, then the condition becomes true.
--lt	Checks if the value of left operand is "less than" the value of right operand; if yes, then the condition becomes true.
 -ge	Checks if the value of left operand is "greater than or equal to" the value of right operand; if yes, then the condition becomes true.
+-lt	Checks if the value of left operand is "less than" the value of right operand; if yes, then the condition becomes true.
 -le	Checks if the value of left operand is "less than or equal to" the value of right operand; if yes, then the condition becomes true.
 
 Logical Operators: Boolean 
@@ -95,6 +95,25 @@ or, # passing the parameters.
  IP=$2
  ssh $username@$IP
 
+Ex: Case statement,
+ read -p "enter grade: " grade
+ case $grade in
+ A) echo "marks between 90-100"
+ ;;
+ B) echo "marks between 70-90"
+ ;;
+ c) echo "marks between 50-60"
+ ;;
+ *)
+ echo "marks below 40"
+ esac
+
+Ex: Array, data structure for storing multiple values in a single variables.
+ value=(Ahemad Ganesh Ram);
+ echo ${value[1]}
+ echo ${value[*]} # printing all array's
+
+Ex: For Loop,
 
 
 =================================================================================================================
@@ -124,6 +143,9 @@ Ex:3, Taking i/p and doing arithmatic operations.
  echo "Multiplication: `expr $a \* $b `"
  echo "Division: `expr $a / $b `"
  echo "Reminder: `expr $a % $b `"
+or,
+ read a b
+ echo "Addition: " $((a+b))
 
 Ex:4, Taking i/p and Comparing among three Big number.
  read a b c
