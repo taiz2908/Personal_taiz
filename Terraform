@@ -323,9 +323,18 @@ Provisioners:
  - file, local-exec, remote-exec, vendor(chef,puppet,ansible)
 
 ===========================: Project Org + Modules :============================================================
-Ref: https://www.youtube.com/watch?v=W92fsWzVRsg
+Ref: 
+ - https://www.youtube.com/watch?v=W92fsWzVRsg , What are Terraform Modules | Modules in Terraform | Terraform Modules Examples 
+ - https://www.youtube.com/watch?v=ZP_vAbjfFMs , Use Terraform Module to Build a 3 Tier AWS Network VPC
+
+Before starting we should know what is "Dry principle"?
+ - specifically applied for the software development area. 
+ - don't repeat yourself.
+ - no need to write the code again & again. 
 
 Modules:
+ - As terraform configurations become more complex, module can be used to organise and simplify them.
+ - Also we can share the module within our organisation & with the terraform communities.
  - Module are containers for multiple resources that are used together. 
  - Collection of .tf and /or .tf.json files kept together in a directory.
  - Modules are the main way to package and resuse resource configuration with Terraform.
@@ -358,7 +367,10 @@ Interview Qus:
 1. How to change's the configuration of already created resources by terraform?
  - # terraform import 
  - # terraform import [options] ADDRESS ID
+ - It's bring the resources into the .tfstate file.
  - https://developer.hashicorp.com/terraform/cli/commands/import
+ - https://www.youtube.com/watch?v=l2R_tl1I7cA
+ - https://www.youtube.com/watch?v=YYQ6W90ZsY4
 
 2. When the terraform runs , terraform.tfstate file created ?
  - Whatever it'll create it's lock those things. (stores all of those resources we have created)
@@ -400,7 +412,7 @@ Interview Qus:
 }
 
 9. Multiple Env , is there any way to manage ?
- - Terraform workspace: Allows to manage separate state file for each workspace
+ - Terraform workspace: Allows to manage separate state file for each workspace.
  - Reusable Module: This is an Architecture where configuration files are stored in a single directory with module
  block can source that directory into and pass to that variable.
 
@@ -467,7 +479,8 @@ Ref: https://www.youtube.com/watch?v=7lIlR0hXCY8
  - Variables.tf
  - terraform.tfstate
  - output.tf 
- - 
+ - .terraform --> dir containes modules & plugins used to provision the infrastructure. 
+ - .tfvars
 
 5. How to store sensitive data in Terraform ?
  - 

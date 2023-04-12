@@ -54,7 +54,7 @@ Rename / Delete a file:
 # git mv hello.txt demo.txt - renaming a file
 
 Branching Strategy:
-# git branch - to see the branch details
+# git branch / git branch -a, to see the branch details
 # git branch 'Prod_1.0' / 'branch_name' - Create a new branch
 # git checkout 'branch_name' - switch to new branch with branch name
 # git push origin 'branch_name' - Push from within the branch
@@ -72,10 +72,24 @@ Log / Commit Id's: 40 alpha numeric char
 # git log --oneline
 # git log -P - shows code changes
 # git reflog - show all commit id even deleted
-# git diff - show the difference/ compaire of working dir with staging area
-#
+# git diff - show the difference / compaire of working dir with staging area
+# git difftool <branch_1> <branch_2>
 
 # git 
+-------------------------- GIT TAG ----------------------------------------
+- Marking a lable to particular commit / lable. 
+- pointer -> that refer to git history.
+- Used mostly in the release of the projects.
+
+git checkout <branch_name>
+git tag v1.0 , creating a tag (light-weight tag)
+git tag
+git tag -a v1.1 -m "tag for release1.1" , (annonated tag)
+git show v1.1
+git push origin v1.1
+git push --tags
+git tag -d v1.1 , delete the tag from local
+git push origin -d v1.0 , delete the tag from remote origin
 
 --------------------------How to Create Pull Request's ---------------------------
 1) If developer's wants to do any changes in the code he can't directly do it in the master branch, 

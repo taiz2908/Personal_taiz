@@ -113,8 +113,21 @@ Ex: Array, data structure for storing multiple values in a single variables.
  echo ${value[1]}
  echo ${value[*]} # printing all array's
 
-Ex: For Loop,
+Ex: For Loop, Iteration, doing one thing again & again 
+  [for loop, while loop, until loop]
+Ex-1: for loop
+ #  for ((initialization; condition; inc/dec)) {
+ #  }
+ for ((i=0; i<5; i++)){
+  echo "hello"
+ }
+Ex-2,
+ name=(hi hello todo surname primary secondary)
+  for ((i=0; i<5; i++)) {
+   echo ${name[i]} 
+  }
 
+Ex-1: while loop
 
 =================================================================================================================
 
@@ -176,6 +189,10 @@ Ex:7 Printing 10 to 1 in a single line by using for loop
  do
  echo -n "$counter "
  done
+or, 
+for ((i=10; i>0; i--)) {
+echo $i
+}
 
 Ex:7,
 read num
