@@ -90,6 +90,15 @@ email-ext
 
 ============================================================
 Git Plugins:
+
 Maven Plugins:
+
 Docker Plugings:
+ - Docker
+ - docker pipeline
+ - docker-build-step, allows to add various docker cmds to the job as build steps
+ - Cloudbees docker build and publish, building dockerfiles based projects. 
+ - aqua security scanner 
+ 
 K8s Plugins:
+

@@ -319,8 +319,8 @@ Meta- Arguments:
     If set to true, Terraform will reject any attempt to destroy that resource.
 -------------------------------
 Provisioners:
- - Perform action on local / remote m/c's.
- - file, local-exec, remote-exec, vendor(chef,puppet,ansible)
+ - Allows you to Perform action on local / remote m/c's.
+ - Ex: file, local-exec, remote-exec, vendor(chef,puppet,ansible)
 
 ===========================: Project Org + Modules :============================================================
 Ref: 
@@ -355,9 +355,9 @@ Dev / SIT/ PROD ETC
 
 Terragrunt:
  - tool by gruntwork.io --> meta tooling can be apply on the top of that terraform 
- - make easier and keeping configuration dry.
+ - Keep your Terraform code DRY, Define Terraform code once, no matter how many environments you have.
+ - Keep your backend configuration DRY, Get rid of duplicated backend code.
  - less complexcity. 
-
 
 =======================================: INTERVIEW QUS :===========================================================
 Interview Qus:

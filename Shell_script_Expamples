@@ -108,14 +108,14 @@ Ex: Case statement,
  echo "marks below 40"
  esac
 
-Ex: Array, data structure for storing multiple values in a single variables.
+--- Ex: Array, data structure for storing multiple values in a single variables. ---
  value=(Ahemad Ganesh Ram);
  echo ${value[1]}
  echo ${value[*]} # printing all array's
 
 Ex: For Loop, Iteration, doing one thing again & again 
   [for loop, while loop, until loop]
-Ex-1: for loop
+--- Ex-1: for loop ---
  #  for ((initialization; condition; inc/dec)) {
  #  }
  for ((i=0; i<5; i++)){
@@ -127,7 +127,28 @@ Ex-2,
    echo ${name[i]} 
   }
 
-Ex-1: while loop
+--- Ex-1: while loop ---
+ while [condition];
+ do
+  // code
+ done
+Ex: 
+ i=0
+ while [ $i -le 4 ];
+ do
+ echo "Ibraur"
+ ((i++))
+ done
+
+Ex: Until loop, It works until the condition is false. Reverse of while loop
+ value=1
+ until [ $value -ge 10 ];
+ do
+ echo "ibraur"
+ ((value++))
+ done
+
+Ex:, BreakContinue, Its break the execution of a loop, Continue -> is skip the execution. 
 
 =================================================================================================================
 

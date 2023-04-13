@@ -107,9 +107,19 @@ docker image rm <imageID>
 docker rm <containerID> --force / docker rm -f <container_name>, forcefully delete a container
 
 ------------------------------ DOCKER PORT MAPPING ------------------------------------------------
+TCP:1-65535 port range for the soruce-port 
+8080 -->inside the host m/c
+80 --> application running inside the container 
+If anyone calls 8080, internally its forwards to port 80. 
+
 Ex: Exposing Ports 
  docker pull nginx
  docker run -d -p 8080:80 nginx:latest
+ docker run -d -p 8090:27017 mongodb:latest
+How to Access:
+ localhost:8080
+ localhost:8090
+127.0.0.1 --> localhost port
 
 Ex: Exposing multiple ports.
  #docker run -d -p 8080:80 -p 9090:80 nginx:latest
@@ -130,13 +140,12 @@ Allowing share of data, files & folders between hosts & containers, and between 
 #docker volume rm <volume_name>
  cd /var/lib/docker/volumes/<volume_name>/_data
 
-
 1. Copy the data from local to nginx container: 
- #docker run --name website -v <desktop_path>:</usr/share/nginx/html> -d -p 8080:80 nginx:latest
- #docker exec -it <containername/containerID> bash
- # ctrl+d : come outside of the container.
- # ctrl+p+q: come outside of the container without stopping. 
- # ctrl+c: kill the process
+  #docker run --name website -v <desktop_path>:</usr/share/nginx/html> -d -p 8080:80 nginx:latest
+  #docker exec -it <containername/containerID> bash
+  # ctrl+d : come outside of the container.
+  # ctrl+p+q: come outside of the container without stopping. 
+  # ctrl+c: kill the process
 
 2. Volumes between containers:
   docker run --help: show all commands
@@ -228,7 +237,6 @@ Ex: 3, Deploying springboot app in tomcat server.
  ADD target/sample.war /usr/local/tomcat/webapps
  EXPOSE 8080
  CMD ["catalina.sh", "run"]
-
 
 -------------------- .dockerignore -----------------------------
  We should ignore files /folders . 
