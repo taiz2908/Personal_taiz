@@ -159,7 +159,11 @@ How it Works ?
  - during claim pvc its mismatch with: volumeMounts "name" & volumes "name", i.e., should match.
  - selector issue, pod labels & matchLabels should be match 
 
-
+20. Why not docker swarm instead of K8s??
+ - Cluster is not robust.
+ - K8s Autoscaling , if pod dies automatically its create a new one
+ - rolling update
+ - integrate tools for logging & monitoring like promethus & grafana etc. 
 
 
 
