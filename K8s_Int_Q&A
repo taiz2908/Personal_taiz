@@ -1,8 +1,13 @@
-  https://www.youtube.com/watch?v=Bf1Eq6ocskE: kubernetes interview questions | docker, kubernetes and helm interview questions
-  
-  ========================================================
-  K8s Version: 1.17
+  - https://www.youtube.com/watch?v=Bf1Eq6ocskE: kubernetes interview questions | docker, kubernetes and helm interview questions
+  - https://www.youtube.com/watch?v=0qy5JD7CbJ4
+  - https://www.youtube.com/watch?v=Axplgxm4K3U Kubernetes Toughest Interview Scenarios & Questions 
+  - https://medium.com/@saurabhdahibhate50/ace-your-kubernetes-interview-ii-ba02e9b467ad
+  - https://medium.com/bb-tutorials-and-thoughts/kubernetes-interview-questions-part-1-eb88a9df785f 
 
+
+  ========================================================
+  
+  K8s Version: 1.17
   v1.26 -->latest
   v1.25 
   v1.24
@@ -10,12 +15,16 @@
 
   kubeadm --> setup
  
- 1. what are the primary role / currently working in k8s +  have you written helm charts?
+ 1. what are the Day-to-day activities of k8s / currently working in k8s +  have you written helm charts?
   - use to write deployment files
   - service files
   - writing & modifing helm charts as per the project req , package and deploy to k8s cluster
-  - checking pod logs
-  - Admin side 
+  - checking pod logs.
+  - Admin side - ??
+  - we also ensure the application deployed into the k8s cluster and there is no issue's with the application.
+  - we deployed monitoring tools.
+  - providing support to our developers like networks, services. 
+  - maintenance activities comes - ??
 
 2. Architechture of k8s:
   - Master Node / Control Plane (3 Node): Scheduler , API Server, ETCD, Control manager, Cloud manager , Container runtime , Kubelet, Kubeproxy .
@@ -29,6 +38,9 @@
   Types: & Why with example ?
     1. ReplicaSet --> desired count/replicas & actual count matches, any mismatch going to do self healing.
     2. Deployment --> Gives us rollout & rollback
+       Deployment strategies:  Two types
+        - Recreate, 1st Terminating previous version then recreate / deploy new application versions - Downtime
+        - RollingUpdate , default strategy, first creating the pods then terminating. 
     3. DeamonSet --> One pod per node. Each and evey node (Prometheus & grafana to monitor k8s cluster)
     4. statefulSet --> Maintain a sticky identity for each of their pods. (Data base servers)
 
@@ -46,9 +58,11 @@
 
 6. k8s services:
  - Enabling network. 
-  1. ClusterIP ( Port - 443 / TCP ) --> default
+  1. ClusterIP ( Port - 443 / TCP ) --> default 
   2. NodePort ( 30,000 - 32,767) / TCP --> Stable IP Address.
+     - <node_ip>:<nodePort_ip>
   3. LoadBalancer --> more of network load balancer. ( Layer 4)
+     - end-user's - need to expose the application outside cluster. 
      - Requires public IP / External IP
      - will work when deploy to EKS, AKS, GKE etc. 
   4. Ingress:  --> Application Load balancer (layer 7)
@@ -56,6 +70,13 @@
      - path based routing()
      - host based routing
      - content 
+Difference between NodePort & LoadBalancer:
+  NodePort: 
+     - when a service is created as a nodeport, the kube-proxy updates the IPtables with <node_ip_address> and 
+      the <port> that is choosen at the service conf to access the pods.
+  LoadBalancer:
+     - when a service is created as a loadbalancer, cloud controll manager creates a external load balancer ip
+     using the underlying cloud provide.
 
 7. K8s Volume Types:
  - cephs
@@ -68,6 +89,10 @@
  - hostpath
  - secret
  - fc (fibre channel)
+
+ConfigMaps and Secrets:
+ - Kubernetes that enable decoupling of configuration data and secrets from container images, allowing for better management and security of applications.
+
 ConfigMaps:
  - store the data in key-value pairs in "plain text".
  - storing the application configuration files.
@@ -80,6 +105,7 @@ Note:
  4. Write code to run inside the Pod that uses the Kubernetes API to read a ConfigMap
 Secrets:
  - store the data in "encrypted format".
+ - Ex: passwords, API keys, and certificates
 
 8. Explain static pods in K8s?
  - Static Pods are managed directly by the "kubelet daemon" on a specific node
@@ -125,8 +151,15 @@ Ex;
   2. Kube-node-lease - Contains lease resources to send the heart_beats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
   3. kube-public - Used for public resource . Open to all users with read only access. 
   4. kube-system - For Objects created by k8s (etcd,apiserver,kubeproxy,scheduler,control manager)
- - "Resource Quota"
-
+ 
+Namespaces:
+  - Way to organise the cluster into the virtual sub-clusters, so we are creating the resources (pod,svs,rs,deployment,secrets,ingress,configs) in these namespaces instead of creating all in one namespaces. 
+  - Each namespace logically separated with each other but can communicate with each other. 
+Need of Namespace?
+   - Avoid conflicts like same name between teams.
+   - Restricting Access like Dev & Prod .
+   - Resource limits by using resource quota , i.e allocated to the individual application according to their requirement .(CPU,RAM,Storage per NS etc)
+   
 15. Why we use networking solutions like flannel or calico?
  - Use : We have some nodes & keep creating the pods, and having ip add of the pod , if creating again created with same IP, thats why we need networking solutions. 
 
@@ -162,8 +195,13 @@ How it Works ?
 20. Why not docker swarm instead of K8s??
  - Cluster is not robust.
  - K8s Autoscaling , if pod dies automatically its create a new one
- - rolling update
- - integrate tools for logging & monitoring like promethus & grafana etc. 
+ - rolling update.
+ - CNCF - integrate tools for logging & monitoring like promethus & grafana etc. 
+
+21. Docker Container vs K8s POD ?
+ - k8S pod is a runtime speficiation of a container --> Pod
+ - In a Pod can create multiple container.
+ 
 
 
 
@@ -176,6 +214,25 @@ How it Works ?
  3. have you created deployment file?
   Yes, 
   Ex:
+==============================: Real Time Qus :===================================================================
+1. What are the challenges yoy've faced in prometheus ?
+ - Prometheus HA support
+
+2. How to handle k8s cluster security ?
+ - save the secretes 
+ - we can set up network policies to limit this communication between the pods
+ - Use namespace for multi tenancy support.
+ - RBAC 
+ - Turn on audit logging.
+
+3. If two containers running in a single pod how to access , How does it internally ?
+ - by using <localhost>:<port_number>
+ - K8s handle this by using "Pause container" .
+
+4. What is Service Mesh, why do we need it ?
+ - 
+ - 
+5. What is pod Disruption budget ?
 
 ==============================: Helm :=============================================================================
 1. What and why we need helm charts? What helm charts version that you have worked with? and difference between helm 3 and helm 2? 

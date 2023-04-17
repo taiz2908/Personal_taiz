@@ -287,7 +287,7 @@ Example: rc-definition.yml
 Note: When deployment gets triggered ?
  - When we're changing under "template" & "spec" section like labels / container image name. 
  - After that assigned with a new revision number.
- - If you don't define strategy , by default it's rolling update.
+ - If you don't define strategy , by default it's "RollingUpdate".
 
 Status of rollout:
  # kubectl rollout status deployment/<deployment_name>  - 
@@ -297,8 +297,8 @@ Status of rollout:
 
 Deployment strategies:
  Two types
- 1. Recreate, 1st Terminating previous version then recreate / deploy new application versions - downtime
- 2. RollingUpdate , default strategy, first creating the pos then terminating. 
+ 1. Recreate, 1st Terminating previous version then recreate / deploy new application versions - Downtime
+ 2. RollingUpdate , default strategy, first creating the pods then terminating. 
 Ex:
  strategy:
    type: RollingUpdate / Recreate
@@ -447,8 +447,8 @@ What are Helm charts?
 
 Why we need helm ? / Advantages. 
  - Writing & maintaing k8s manifest file can be time consuming & tidious work. 
- - Makes application deployment easy
- - Improves developer productivity
+ - Makes application deployment easy.
+ - Improves developer productivity.
  - reduces deployment complexity. 
  - Min three yaml files need. 
  Ex: deployment, secretes, configmaps, services etc
@@ -569,8 +569,9 @@ ReadnessProb:
 - readiness probes to know when a container is ready to start accepting traffic.
 
 ========================= "K8S VOLUME" ======================================================================
-
-Link: https://www.youtube.com/watch?v=9zjGOCb-6As&list=PLBGx66SQNZ8aPsFDwb79JrS2KQBTIZo10&index=53
+Link: 
+- https://www.youtube.com/watch?v=9zjGOCb-6As&list=PLBGx66SQNZ8aPsFDwb79JrS2KQBTIZo10&index=53
+- https://medium.com/@saurabhdahibhate50/become-expert-of-secrets-and-configmaps-in-kubernetes-5eb0103d687e
 
 Types:
  - cephs
