@@ -1,12 +1,41 @@
   - https://www.youtube.com/watch?v=Bf1Eq6ocskE: kubernetes interview questions | docker, kubernetes and helm interview questions
   - https://www.youtube.com/watch?v=0qy5JD7CbJ4
   - https://www.youtube.com/watch?v=Axplgxm4K3U Kubernetes Toughest Interview Scenarios & Questions 
+
   - https://medium.com/@saurabhdahibhate50/ace-your-kubernetes-interview-ii-ba02e9b467ad
   - https://medium.com/bb-tutorials-and-thoughts/kubernetes-interview-questions-part-1-eb88a9df785f 
 
+  -  https://www.youtube.com/watch?v=xsBnF9gbXW4 Debug Pod in Kubernetes | Debugging Pod | Pod Logs | ImagePullBackoff 
+  - https://www.youtube.com/watch?v=1x1O7zspLto Troubleshooting Kubernetes Deployments
+  - https://www.youtube.com/watch?v=7b0Qg1Mv55w By CNCF Debugging Kubernetes - what to do when something goes wrong
+
+
+  ======================: Troubleshooting & Debugging Kubernetes common problems :=================================
+  - https://www.youtube.com/watch?v=ORSxQeboprc&t=3  Part-1
+  - https://www.youtube.com/watch?v=5UW0q64B8PA Part-2 
+  Ref : 
+   - https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/
+   - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+  kubectl describe
+  kubectl logs
+  kubectl events  
+  
+  Errors showing while creating pods
+   1. ImagePullBackoff - Invalid image / Invalid tag / Invalid permission
+   2. ErrImage pull(image pulled but pod is pending)
+      - resource quota on namespace
+      - requests and limit sets
+   3. Registry unavailable
+   4. Crashloopbackoff (suppose image is pulled successfully, comes during run time )
+      - livenessprob failure
+      - app failed to start for any reason
+      - trying to write to a folder / missing out some permission
+   5. killcontainer error
+  -----------------------
+
 
   ========================================================
-  
   K8s Version: 1.17
   v1.26 -->latest
   v1.25 

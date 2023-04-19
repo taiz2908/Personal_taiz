@@ -28,7 +28,7 @@ curl http://<POD_ip>
  # kubectl create deployment <deployment_name> --name nginx --dry-run=client -o yaml > 2.yaml
 
 --------------: Logs & debugging: ------------------
-# kubectl describe pod <ngnix> , details/informations of the single pod.
+# kubectl describe pod <pod_name> , details/informations of the single pod.
 # kubectl logs <podname> -f , '-f' to watch / monitoring the logs, to see the pod logs
 # kubectl logs -l name=myLabel, pod logs,with name=myLabel
 # kubectl logs <pod_name> -c <containername>, 

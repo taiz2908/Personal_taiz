@@ -1,0 +1,58 @@
+Ref:
+ - https://github.com/iam-veeramalla/prometheus-Grafana-Zero-to-Hero
+ - 
+
+
+
+==================================================================================
+What us Prometheus ?
+- Prometheus is an open-source monitoring and alerting system,
+ helps you collect and store metrics about your software systems and infrastructure,
+ and analyze that data to gain insights into their health and performance. 
+
+- It provides a powerful query language, a flexible data model, and a range of integrations with other tools and systems. 
+- We can easily monitor metrics such as CPU usage, memory usage, network traffic, & application-specific metrics, 
+ and use that data to troubleshoot issues, optimize performance, and create alerts to notify you when things go wrong.
+- execute some promQL quries. 
+
+Architecture:
+ Component Prometheus Server: which scrapes and stores time series data
+  - It has "http server"
+  - Collects all the info from k8s cluster, and collect those metrics and stores into "TSDB" (time series data base)
+  - Also we can configure "Aleart Manager", notify through mail/ ms-teams channel's etc.
+
+What is Grafana ?
+ - For better visualization. 
+ - Need to create the "data source" and "dashboard".
+ - For dashboard--> import --> 3662
+
+prometheus-Kube-state-metrics:
+ - gives info about k8s api-server and more about k8s cluster. 
+ - info about deployment, services, replica count etc 
+ Advantage of additional metrics:
+  - kube-metrics 
+  - whether expose or not , and url ? we can get the lot of quries from that 
+
+INSTALLATION ?
+ - helm
+ - operators - offers lot of advance capabilities, upgradation prometheus and lots of things 
+
+===================================================================================
+ - Spin up the server's by using Ansible Playbooks.
+ - VM provisioned by using Terraform.
+Applications:
+  - Jenkins url's
+  - Nexus url's
+  - Sonarqubke url's
+  - vault
+  - Aquasec
+  - NexsusIQ
+
+  - Using "pull metric's" to pulls the data and store's in a data base i.e, time series data base. , Grafana reads the data and show in a 
+  visual way.
+  - By using pull metric's Alertmanager send the notifications to mail/ms teams etc.
+
+Roles & Responsibilities:
+ - If any new target added then I've to update it under host inventory file (IP addr)
+ - execute the cmd from ansible host m/c , ansible playbook pb1.yaml file.
+ ====================
