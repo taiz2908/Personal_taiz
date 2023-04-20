@@ -11,7 +11,7 @@ https://www.youtube.com/watch?v=wFAAdla2JXs
 5. https://www.youtube.com/watch?v=TPRSJbtfK4M, Bash Script with Practical Examples | Full Course
 
 
------------------------------------------------------
+=================================================================================================================
 Arithmatic Examples: [ +, -, /*, %, / ]
 read a b
 echo "addition: ` expr $a + $b `"
@@ -132,7 +132,7 @@ Ex-2,
  do
   // code
  done
-Ex: 
+-----
  i=0
  while [ $i -le 4 ];
  do
@@ -148,7 +148,41 @@ Ex: Until loop, It works until the condition is false. Reverse of while loop
  ((value++))
  done
 
-Ex:, BreakContinue, Its break the execution of a loop, Continue -> is skip the execution. 
+Ex:, BreakContinue
+Its break the execution of a loop, 
+Continue -> is skip the execution. 
+for ((i=0; i<=10; i++)) {
+    if [ $i -eq 5 ]
+    then
+    break 
+    else
+    echo $i
+    fi
+}
+-----
+for ((i=0; i<=10; i++)) {
+    read age
+    if [ $age -lt 18 ]
+    then
+    echo "Go back"
+    break
+    else
+    echo "part on"
+    fi
+}
+
+Ex: Automating Dir / File Creation
+read dir
+for ((i=0; i<=10; i++)) {
+ mkdir $dir$
+}
+---
+read demo.txt
+for((i=1;i<=4;i++)){
+  touch $demo.txt$i
+}
+
+Ex: User Creation
 
 =================================================================================================================
 
