@@ -1,6 +1,17 @@
 1. Security group vs NACL.
+
 2. Single part vs multipart upload mechanism in S3 bucket .
+ - Multipart Upload:
+    - Multi-part Upload
+    - parallelizes upload
+    - recommended for files > 100MB (when your object size reaches 100 MB, you should consider using multipart uploads instead of uploading the object in a single operation.)
+    - must use for files > 5GB
+    
 3. S3 lifecycle policy.
+ - To manage your objects so that they are stored cost effectively throughout their lifecycle, 
+ - An S3 Lifecycle configuration is a set of rules that define actions(XML) that Amazon S3 applies to a group of objects. There are two types of actions:
+ - Transition actions & Expiration actions 
+
 4. EKS Cluster.
 5. Application load balancer vs Network Load balancer
 6. role vs policies

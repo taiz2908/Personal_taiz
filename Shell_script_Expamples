@@ -183,6 +183,20 @@ for((i=1;i<=4;i++)){
 }
 
 Ex: User Creation
+Refer to video
+
+Ex: Test Command
+Test cmd is basically used to test the condition. 
+If condition is equal/true it'll return 0 or 1.
+
+A="HELLO"
+B="HELLO"
+if test $A = $B
+then
+echo "equal"
+else
+echo "notequal"
+fi
 
 =================================================================================================================
 
