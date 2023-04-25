@@ -6,8 +6,10 @@ Terraform Path:
 AWS Path:
 Docker: 
 Minikube:
+K8S:
 
-How to set Java (jdk.exe file) & Maven in win10 machine:
+All in win10 machine's:
+How to set Java (jdk.exe file) & Maven:
  This PC --> RIGHT CLICK then properties --> Advance system setting --> Env Variables
   1. User Variables: click on New
      - Variable Name: JAVA_HOME 
@@ -26,7 +28,7 @@ How to check :
  - In CMD opens as as min
  - echo %JAVA_HOME%
 
-Terraform
+Terraform :
   3. System Variables
       - Click on path edit
       - copy and paste the path
@@ -40,5 +42,18 @@ AWS : CLI V2
       - aws
       - aws configure [ AWS Access key & secrete access key ]
       - aws s3 ls
+
+K8S :
+Step-1,
+  - Need kubectl.exe file / download it from k8s official docs, create a folder under C drive
+  and placed it. 
+  - Advance->Env Variable->Path->edit->new->copy&paste the path->ok
+  - open cmd and type kubectl.
+Step-2,
+  - Need kubeconfig.yaml file.
+  - kubectl --kubeconfig  <config.yaml_file> get nodes
+  - Under C drive->users->fileid/name->create .kube dir and paste it under->remove .yaml & type should be file. 
+
+
 
 
