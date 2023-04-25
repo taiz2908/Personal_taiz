@@ -341,6 +341,7 @@ QUAY.IO
  # docker logs --help
  # docker logs <containerID_or_conatinerNAME>
  # docker logs <containerID> | tail , to see the last logs
+ # docker logs <containerID> | --tail 3 , to see the last three line logs
 
  Ex: docker exec:
  # docker exec --help

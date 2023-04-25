@@ -17,3 +17,9 @@
 6. role vs policies
   - Create the "policies" after that gives the access to the s3 bucket
   - need to attached to a "role"
+  
+7. If EC2 disk space full, what actions will take to mitigate ?
+  - First need to check root volume / application EBS volume. 
+  - If issue with root then need to check /var/log
+  - application /tmp
+  - need to take the snapshot increase disk space.

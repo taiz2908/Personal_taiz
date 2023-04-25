@@ -137,6 +137,17 @@ doc/appdev/sample/sample.war /usr/local/tomcat/webapps/sample.war
  - In this case we go with git cherry-pick. Git cherry-pick will pick only one commit whatever you select and merges with commits which are there in your current branch. 
  - So picking particular commit and merging into your current branch we call git cherry-pick.
 
+11. How to make a changes for a commit done before 30days? 
+ - git clone -> create a branch -> applies our changes
+ - git log --oneline
+ - git log git log --since=03.03.2023
+ - git log --before=03.03.2023
+
+12. What is Branch protection in github ?
+ - setting, click on branches, then branch protection, click on add rule. 
+ - Require a pull request before merging 
+ -  Require status checks to pass before merging
+
 ---------------------------: JENKINS-2.332.3 :-----------------------------------
 1. Jenkins Trigger:
  1. Build Periodically : cron job / 5 astrics, Time Interval Build 
@@ -275,9 +286,6 @@ Click On Backup Now & Restore Now.
  - BUILD_ID
  - JOB_NAME
  - BUILD_TAG
-
--------: MAVEN :--------------
- Refere to Maven File.
 
 ----------------------: ANSIBLE :---------------------------------------
 1. Ansible Roles: 
@@ -516,7 +524,14 @@ Ex:
  - Docker Client: This component performs “build” and “run” operations for the purpose of opening communication with the docker host.
  - Docker Host: This component has the main docker daemon and hosts containers and their associated images. The daemon establishes a connection with the docker registry.
  - Docker Registry: This component stores the docker images. There can be a public registry or a private one. The most famous public registries are Docker Hub and Docker Cloud.
---------: K8S :---------------
+
+13. what happned to container logs if you stop/restarted the container ? logs deleted or what?
+ - we won't be loosing any logs.
+ - /var/logs
+ - if deleted the container then will loose it, or we can push it to splunk. 
+
+14. If docker image 2.5gb, what will be cause of concern? how to tackle this?
+ - 
 
 --------: LINUX :-------------
 1. Application port is running or not ?
@@ -553,6 +568,23 @@ Ex:
  4 notused
  5 GUI
  6 Reboot
+
+6. What is " Bastian hosts / gateway server " ? what role do they play ?
+ - It's a server with some user related configuration, like user can have certain permissions to access xyz server.
+ - It's a gateway like certain users can access ec2 servers.
+ - Used to manage access to internal or private network. 
+
+7. If instance terminated ? how to debug the application ?
+ - Terminated means unhealthy , factors ?
+ - disk space full, high cpu utilisation, no memory left
+ - Use top command -> cpu (application could be causing cpu utilisation, need to check with Developer like threading)
+ - checking disk space -> /var/log, /tmp
+ - free -mt -> swap memory
+
+8. cron-job ?
+ - to run the script in a particular interval. 
+
+9. 
 
  =======================================================================================================
  what are the primary role you're doing in k8s?
