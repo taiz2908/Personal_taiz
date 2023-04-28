@@ -92,6 +92,8 @@ email-ext
 Git Plugins:
 
 Maven Plugins:
+ - pipeline-Maven
+ - maven-plugin (maven integration)
 
 Docker Plugings:
  - Docker
@@ -101,4 +103,15 @@ Docker Plugings:
  - aqua security scanner 
  
 K8s Plugins:
+ - kubernetes
+ - kubernetes-credentials
+ - kubernetes-client-api
 
+Notification Plugins:
+ 1. - MS Teams: "Incoming Webhook", add to a team->setup a connector
+    - generate a link, copy & paste
+    - Go to jenkins ->create a pipeline job,  Plugin "office 365" should be installed and add webhook.
+ 2. Email Notification 
+    - Mailer plugin
+ 3. Slack Channel
+    - slack plugins

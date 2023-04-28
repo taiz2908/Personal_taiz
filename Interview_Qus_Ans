@@ -146,7 +146,7 @@ doc/appdev/sample/sample.war /usr/local/tomcat/webapps/sample.war
 12. What is Branch protection in github ?
  - setting, click on branches, then branch protection, click on add rule. 
  - Require a pull request before merging 
- -  Require status checks to pass before merging
+ - Require status checks to pass before merging
 
 ---------------------------: JENKINS-2.332.3 :-----------------------------------
 1. Jenkins Trigger:
@@ -531,7 +531,13 @@ Ex:
  - if deleted the container then will loose it, or we can push it to splunk. 
 
 14. If docker image 2.5gb, what will be cause of concern? how to tackle this?
- - 
+ - building time will be longer.
+ - downloaded error if we're trying to cownload from docker repo.
+ - application will be bulkier.
+Solutions:
+ - Alpine images
+ - remove package binaries after installing , never install those are not required.
+
 
 --------: LINUX :-------------
 1. Application port is running or not ?

@@ -84,10 +84,10 @@ About Project:
 Continous Integration stages I've worked:
 1. Code checkout
 2. Code Build(mvnInstall)
- - mvnInstall refer to "pipeline-libraries under vars folder i.e. mvnInstall.groovy"
+ - mvnInstall refer to "pipeline-libraries under vars/ folder i.e. mvnInstall.groovy"
 
 3. Code deploy(mvnDeploy), pushing generated artifact to Nexus
- -  mvnDeploy refer to "pipeline-libraries under vars folder i.e. mvnDeploy.groovy"
+ - mvnDeploy refer to "pipeline-libraries under vars/ folder i.e. mvnDeploy.groovy"
  - Need to add the plugin "maven-deploy-plugin" under <plugins> section in pom.xml file.
  - Need to give the nexus url under <pluginRepositories>, <repositories> & <distributionManagement>
    - <pluginRepositories> releases

@@ -22,7 +22,6 @@ VIDEO:
 8. Learn Jenkins! Complete Jenkins Course, Zero to Hero: https://www.youtube.com/watch?v=6YZvp2GwT0A&t=2909 
 
 
-
 ---------------------------------------------------------------------------------------
 
 Tasks:
@@ -81,7 +80,7 @@ Required Arrtibutes:
 5) steps - where scripts written
 
 6) post - Executes some logic after all 'stages' completed
-   conditions/types: always / success / failure /
+   Conditions/Types: always / success / failure / cleanup 
   post {
     always {
         // will be excuted not matter build failed / succeeded - Notification  
@@ -91,6 +90,9 @@ Required Arrtibutes:
     }
     failure {
         // will execute the build of the build failed
+    }
+    cleanup {
+        cleanWs() // Clean thw work space after the build
     }
   }
 
@@ -134,18 +136,18 @@ pipeline {
             steps {
                 echo 'Builing'
                 echo "Building version ${NEW_VERSION} "
-
             }
         }
     }   
 }
 ------------------------------------------------------------
 Parameters: 
- Apply to all the branches 
- External configuration that you want to your build 
- we want to be select which version to be deployed so we define by using paramters.
-Various Types of Parameters: string , text, booleanParam, choice, password etc..
-If you want to genereate the parameters script then choose ,pipeline syntax->properties->this project is parameterised
+ - Apply to all the branches 
+ - External configuration that you want to your build 
+ - we want to be select which version to be deployed so we define by using paramters.
+Various Types of Parameters:
+ - string , text, booleanParam, choice, password etc..
+ - If you want to genereate the parameters script then choose ,pipeline syntax->properties->this project is parameterised
 
 Ex: 1
 pipeline {
@@ -184,11 +186,6 @@ pipeline {
         booleanParam(name: 'executeTests', defaultValue: '', description: '')
     }
     stages {
-        stage ('Clone git repo') {
-            steps {
-                git branch: 'main', crendentialsId '****', url: '****'
-            }
-        }
         stage('test') {
             steps {
                 script {
@@ -240,9 +237,9 @@ pipeline {
 }
 ------------------------------------------------------------------------------------
 Parallel Build: 
-In build if we have many steps in a single pipeline it will take more time to complete the build.
-for this we run the build in parallel inside the declarative pipeline.
-Blue Ocean Plugin: We can see the build visually .
+ - In build if we have many steps in a single pipeline it will take more time to complete the build.
+ - For this we run the build in parallel inside the declarative pipeline.
+ - Blue Ocean Plugin: We can see the build visually .
 
 pipeline {
     agent any
@@ -250,11 +247,6 @@ pipeline {
         booleanParam(name: 'executeTests', defaultValue: '', description: '')
     }
     stages {
-        stage ('Clone git repo') {
-            steps {
-                git branch: 'main', url: 'https://github.com/taiz2908/Personal_taiz.git'
-            }
-        }
         stage('parallel stage') { 
             parallel {
                 stage('Running') {
@@ -303,11 +295,6 @@ pipeline {
         booleanParam(name: 'executeTests', defaultValue: '', description: '')
     }
     stages {
-        stage ('Clone git repo') {
-            steps {
-                git branch: 'main', url: 'https://github.com/taiz2908/Personal_taiz.git'
-            }
-        }
         stage('Paramaters') {
                 steps {
                     script {

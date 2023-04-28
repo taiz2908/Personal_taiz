@@ -1,1 +1,28 @@
-set nu -->showing how many lines
+Ref: 
+ - https://www.youtube.com/watch?v=a3ujwK65dgs
+
+set nu --> showing how many lines
+
+Working with Files and Directories:
+ pwd 
+ ls -a :'a' means all
+ ls -l /var/log/  :long list
+ ls -al / ls -alh /
+ cd /var/log
+ cd ..  :parent directory
+ cd / :go to the root directory
+ cd :go to home directory
+ cp file home/ : copy file to home directory
+ mv text.pdf home/
+ mv home/ homenew/ :renaming a directory home to homenew
+
+------------------------------------------------------------
+Create and Manage Hard Links 
+ - ln <target_file> <link_file>
+ - stat hello/demo.txt : show all the details
+ - links to files only not folders. 
+
+Create and Manage Soft Links 
+ - ln -s <target_file> <helloshortcut.txt>
+ - readlink helloshortcut.txt
+ - soft links to files,folders,diff-files systems as well.
