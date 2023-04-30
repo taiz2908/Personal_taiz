@@ -143,7 +143,7 @@ Secrets:
    - For example, kubeadm uses static pods to bring up Kubernetes control plane components like api-server, controller-manager as static pods on the Master Node.
  - /etc/kubernetes/manifests -> keep our yaml files and creates the pods.
 
-9. Do you know high availability in pod level?  "Readnessprob" & "Livenessprob / Healthcheck"
+9. Do you know high availability in pod level? "Livenessprob / Healthcheck" & "Readnessprob" 
 Livenessprob:
  - Application Healthcheck.
  - In Order to verify whether application is running or not within the container we can use livenessprob. 
@@ -240,6 +240,26 @@ Ex:
  - You can use this pattern for sending log events to the external server.
  - You can use this pattern for network-related tasks.
  
+23. How to define/ manage CPU utilisation for a POD/ deployment file. 
+ - By using "limits" & "requests" under resources section.
+Ex:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cpu-demo-2
+  namespace: cpu-example
+spec:
+  containers:
+  - name: cpu-demo-ctr-2
+    image: vish/stress
+    resources:
+      limits:
+        cpu: "100"
+      requests:
+        cpu: "100"
+    args:
+    - -cpus
+    - "2"
 
 
 

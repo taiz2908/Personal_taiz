@@ -533,7 +533,7 @@ helm rollback <release_name>
 helm pull <chart_name> - in the form of tar file
 helm pull -untar <chart_name>
 
-========================= "Readnessprob" & "Livenessprob / Healthcheck" ====================
+========================= "Livenessprob / Healthcheck" & "Readnessprob" ====================
 - Application Healthcheck.
 - Livenessprobes determine whether or not an application running in a container is in a healthy state / 
 - In Order to verify whether application is running or not within the container we can use livenessprob. 
