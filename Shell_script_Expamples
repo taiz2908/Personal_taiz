@@ -181,10 +181,11 @@ read demo.txt
 for((i=1;i<=4;i++)){
   touch $demo.txt$i
 }
-
+--------------
 Ex: User Creation
 Refer to video
 
+--------------
 Ex: Test Command
 Test cmd is basically used to test the condition. 
 If condition is equal/true it'll return 0 or 1.
@@ -271,4 +272,15 @@ c=`expr $a \* $num`
 echo "$num * $a = $c"
 ((a++))
 done
+
+Ex:7, Reverse a Name / string
+step 1:- Take user input in a string
+step 2:- Findthe length of given string using length function
+step 3:- Set i = length-1 and run loop till i <= 0
+step 4:- echo the $i
+step 5:- repeat step 3 and 4 till i==0
+step 6:- end
+
+read input
+
 

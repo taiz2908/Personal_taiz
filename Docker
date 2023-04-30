@@ -43,12 +43,12 @@ Benefits of Container:
 - Run container in sec instead of minutes. 
 - Less resource result less disk spaces. 
 - Less Memory i.e. light weight 
-- Doest need full OS. 
+- Doesn't need full OS. 
 - High Performance 
 - Deployment 
 - Testing (Locally)
 
----------------------------- Docker Images & Contaioners -----------------------------------
+---------------------------- Docker Images & Containers -----------------------------------
 Images:
  - Image is a template for creating an environment of our choice. 
  - It's a snapshot.
@@ -105,6 +105,7 @@ docker rm $(docker ps -aq) , delete all container
 docker rmi $(docker images -q) , remove multiple images
 docker image rm <imageID>
 docker rm <containerID> --force / docker rm -f <container_name>, forcefully delete a container
+docker system prune -f , Remove all unused containers, networks, images (both dangling and unreferenced),optionally, volumes.
 
 ------------------------------ DOCKER PORT MAPPING ------------------------------------------------
 TCP:1-65535 port range for the soruce-port 

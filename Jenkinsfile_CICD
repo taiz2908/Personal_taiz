@@ -166,3 +166,80 @@ pipeline {
         }
     }
 }
+
+===========================================
+1. Application Overview
+2. Git use cases
+3. Jenkins Job Creation 
+4. Maven UNIT TEST
+5. Maven Integration TEST
+6. Maven Building jar/War files
+7. SonarQube Configuration
+8. Sonarqube-webhook Configuration 
+9. Static code Analysis 
+10. QualityGate Status  
+11. Nexus Repo Overview
+12. Release Repo creation 
+13. Snapshot repo creation  & Configuration
+14. Error Debugging
+15. Multistage DockerFile 
+16. Docker Image Build
+17. Docker Image Push
+18. To be continued...
+
+Ex:
+1. APPLICATION
+    - Springboot app
+
+2. SOURCE CODE
+    - GitHub
+
+3. JOB CREATION //Jenkins as CI tool
+    - freestyle
+    - Pipeline //
+    - Multibranch Pipeline //
+
+4. CODE CHECKOUT:GitHub
+    - using Jenkinsfile
+    - Build triggers
+      - pollSCM //
+      - Build periodically //
+
+5. CODE BUILD, //Maven used as build_tool(.war/.jar)
+    - mvn clean install
+    - plugins 
+      - pipeline-Maven
+      - maven-plugin (maven integration)
+
+6. UNIT TEST //to apply test cases, developers write the test cases which is being used in pipeline. 
+    - mvn test 
+
+7. CODE ANALYSIS: //SonarQube by Static code Analysis
+    - 
+
+8. NEXUSIQ //For checking any vunerability present in the code or not. 
+    - we need to provide the .war/.jar path. 
+    Ex: steps {
+         script {
+            nexusIQ ('testproject', "/target/*.war .jar")
+        }
+    }
+
+9. DEPLOY //Deploying generated artifact to Nexus Repo
+    - mvn deploy
+    - Few things needs to update under pom.xml file. 
+     <distributionManagement>
+     <repository>
+       <id>internal.repo</id>  //should match with setting.xml within .m2 folder and also we need to define the nexus credentils.
+       <url>Host to Company Repository</url> //
+     </repository>
+    - <snapshotRepository> //related to DEV env. 
+    - Maven Deploy Plugin //used during the deploy phase. it needs to define under <plugin>
+
+10. DOCKER LOGIN & BUILDING IMAGE
+    - Dockerfile //need to write dockerfile and present in source code repo
+    - 
+
+11. TAGGING & PUSHING //tagging the image and pushing to dockerhub/image repo
+
+
