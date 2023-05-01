@@ -181,7 +181,7 @@ provider "aws" {
 
 # Need to provide ami, instance type & instance id.
 resource "aws_instance" "web1" {
-  ami           = data.aws_ami.ubuntu.id
+  ami           = "data.aws_ami.ubuntu.id"
   instance_type = "t3.micro"
   tags = {
     Name = "server1"
@@ -189,7 +189,7 @@ resource "aws_instance" "web1" {
 }
 
 resource "aws_instance" "web2" {
-  ami           = data.aws_ami.ubuntu.id
+  ami           = "data.aws_ami.ubuntu.id"
   instance_type = "t3.micro"
   tags = {
     Name = "server2"

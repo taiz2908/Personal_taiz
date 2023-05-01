@@ -188,6 +188,7 @@ pipeline {
 18. To be continued...
 
 Ex:
+"pipeline-libraries under vars/ folder i.e. mvnInstall.groovy"
 1. APPLICATION
     - Springboot app
 
@@ -195,15 +196,26 @@ Ex:
     - GitHub
 
 3. JOB CREATION //Jenkins as CI tool
-    - freestyle
+    - Freestyle
     - Pipeline //
     - Multibranch Pipeline //
+    - plugins 
+      - multibranch-scan-webhook-trigger
+      - mailer // send to notification over mail. 
+      - Office-365-Connector // for MS Team's,
+        - "Incoming Webhook", add to a team->setup a connector.
+        - generate a link, copy & paste.
+        - Go to jenkins -> create a pipeline job,  Plugin "office 365" should be installed and add webhook.
 
-4. CODE CHECKOUT:GitHub
+4. CODE CHECKOUT: GitHub
     - using Jenkinsfile
-    - Build triggers
+    - Build triggers used in Jenkins server
       - pollSCM //
       - Build periodically //
+      - Build after other projects are Build
+      - Trigger build remotely
+      - Manual 
+      - Github hook trigger for git scm polling.
 
 5. CODE BUILD, //Maven used as build_tool(.war/.jar)
     - mvn clean install
@@ -214,10 +226,19 @@ Ex:
 6. UNIT TEST //to apply test cases, developers write the test cases which is being used in pipeline. 
     - mvn test 
 
-7. CODE ANALYSIS: //SonarQube by Static code Analysis
+7. CODE ANALYSIS: //SonarQube by Static code Analysis(bugs,coverages,lines,)
     - 
+    - plugins
+      - sonarqube-generic-coverage
+      - SonarQube Scanner (sonar)
+    - Manage jenkins->configure systems->need to provide url & auth token
+      - Auth token from sonar server->admin->security->users
 
-8. NEXUSIQ //For checking any vunerability present in the code or not. 
+8. QualityGate Status: "Ok" 
+    - Jenkins->generate script->wait for quality gates
+    - Sonar->need to generate webhook->configuration->create    
+
+9. NEXUSIQ //For checking any vunerability present in the code or not. 
     - we need to provide the .war/.jar path. 
     Ex: steps {
          script {
@@ -225,7 +246,7 @@ Ex:
         }
     }
 
-9. DEPLOY //Deploying generated artifact to Nexus Repo
+10. DEPLOY //Deploying generated artifact to Nexus Repo
     - mvn deploy
     - Few things needs to update under pom.xml file. 
      <distributionManagement>
@@ -234,12 +255,21 @@ Ex:
        <url>Host to Company Repository</url> //
      </repository>
     - <snapshotRepository> //related to DEV env. 
-    - Maven Deploy Plugin //used during the deploy phase. it needs to define under <plugin>
+    - Maven Deploy Plugin //used during the deploy phase. it needs to define under <plugin> pom.xml.
+    - plugin 
+      - nexus-artifact-uploader 
 
-10. DOCKER LOGIN & BUILDING IMAGE
+11. DOCKER LOGIN & BUILDING IMAGE
     - Dockerfile //need to write dockerfile and present in source code repo
-    - 
+    - plugins 
+      - Docker
+      - docker pipeline
+      - docker-build-step, allows to add various docker cmds to the job as build steps
+      - Cloudbees docker build and publish, building dockerfiles based projects. 
+      - aqua security scanner 
 
-11. TAGGING & PUSHING //tagging the image and pushing to dockerhub/image repo
+12. TAGGING & PUSHING //tagging the image and pushing to dockerhub/image repo
+
+13. Deploying to K8s by Helm Chart
 
 

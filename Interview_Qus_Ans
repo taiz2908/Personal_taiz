@@ -167,7 +167,8 @@ doc/appdev/sample/sample.war /usr/local/tomcat/webapps/sample.war
  - Besides that what if we create or delete a branch in future? So someone has to take care of the pipelines on Jenkins whenever there is change in branches. 
  - That’s where Multibranch pipeline comes into picture.
  - Through Multibranch pipeline we can create a pipeline for each branch in a repository and it also create or remove when there is a change in the branches.
-Create a Multibranch Pipeline
+
+Create a Multibranch Pipeline: 
  - Login to Jenkins GUI
  - Click on “New Item” → Specify a job name → Select “Multibranch Pipeline option”
  - Give Display Name and Description
@@ -176,7 +177,7 @@ Create a Multibranch Pipeline
  - Under "Behaviour" select branch name or we can add in Jenkinsfile with when expression
 
 Apply and Save the job.
-Now Jenkins automatically scans the repository and create a job for each branch wherever it finds a Jenkinsfile and initiate first build.
+ - Now Jenkins automatically scans the repository and create a job for each branch wherever it finds a Jenkinsfile and initiate first build.
 
 Using Webhook:
  - If you wish to automate the build process in the multibranch pipeline we can use Webhook. This feature is not enabled until we install “Multibranch Scan Webhook Trigger”.
@@ -295,7 +296,7 @@ Click On Backup Now & Restore Now.
  - When we call main playbook, main playbook will call all sections files respectively in the order whatever  we mention in playbook.
  - So, by using this Role, we can maintain small playbook without any complexity.
  - Roles 
-    - FILES (index.html / sample.html / war )
+    - FILES (index.html / sample.html / .war )
     - HANDLERS (main.yml) apche2 ,tomcat 8 , mysql_server start
     - META
     - TASKS ( deploy_app.yml , main .yml , pack_install.yml )
@@ -318,7 +319,7 @@ Click On Backup Now & Restore Now.
  - #ansible-galaxy search , #ansible-galaxy install 
  Example: 
 
-4.  Ad-Hoc commands:
+4. Ad-Hoc commands:
  - Ad Hoc commands are ready to use commands using to perform quick task, without using playbooks we can use these Ad-Hoc commands for temporary purpose.
  - These are simple one liner Linux commands we use to meet temporary requirements without actually saving for later. 
  - Here we don’t use Ansible modules. So Idem-potency will not work with Ad-Hoc commands. 
@@ -380,11 +381,11 @@ Ansible-Installation :
  - Check whether Master is reachable to respective nodes or not and response getting as “Pong”.
  - ansible all -m ping
 
-12. Plugins using-
+<!-- 12. Plugins using-
  - publish over SSH : Ansible 
  - Maven integration: Maven
  - Build Pipeline 
- - Role based Authorized strategy
+ - Role based Authorized strategy --> 
 
 13. Ansible playbook structure?
  - HOST : ubnt/centos
