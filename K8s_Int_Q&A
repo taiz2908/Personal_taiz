@@ -17,9 +17,10 @@
    - https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/
    - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
-  kubectl describe
-  kubectl logs
-  kubectl events  
+  Debugging Commands:
+    - kubectl describe pods <pod_name>
+    - kubectl logs <pod_name>
+    - kubectl get events --sort-by=.metadata.creationTimestamp
   
   Errors showing while creating pods
    1. ImagePullBackoff - Invalid image / Invalid tag / Invalid permission
@@ -143,7 +144,7 @@ Secrets:
    - For example, kubeadm uses static pods to bring up Kubernetes control plane components like api-server, controller-manager as static pods on the Master Node.
  - /etc/kubernetes/manifests -> keep our yaml files and creates the pods.
 
-9. Do you know high availability in pod level?  "Readnessprob" & "Livenessprob / Healthcheck"
+9. Do you know high availability in pod level? "Livenessprob / Healthcheck" & "Readnessprob" 
 Livenessprob:
  - Application Healthcheck.
  - In Order to verify whether application is running or not within the container we can use livenessprob. 
@@ -160,6 +161,7 @@ Ex;
 10. Is it possible to deply pod in master?
  - Yeah , Its Possible
  - some "taints" will be there in master, but if we apply some tolerance we can deploy to master. 
+ - we can define taints->master, scheduler looks this taint and povisioned in master.
 
 11. Is it possible to decide to deploy pod in particular node?
  - Yes, we can do that
@@ -174,6 +176,7 @@ Ex;
 13. Init Containers:
  - A Pod can have multiple containers running apps within it, but it can also have one or more init containers, which are run before the app containers are started.
  - Init containers can contain utilities or setup scripts not present in an app image.
+ - All the init Containers will be executed sequentially and if there is an error in the Init container the pod will be restarted which means all the Init containers are executed again.
 
 14. By default how many namespaces are available in kubernetes?
   1. Default - By default resource created  within default namespace , Resource when we don't specify namespace explicitly
@@ -192,7 +195,7 @@ Need of Namespace?
 15. Why we use networking solutions like flannel or calico?
  - Use : We have some nodes & keep creating the pods, and having ip add of the pod , if creating again created with same IP, thats why we need networking solutions. 
 
-16. RBAC Authorization?
+16. RBAC (Role Based Access Control) Authorization?
  - An RBAC Role or ClusterRole contains rules that represent a set of permissions. Permissions are purely additive (there are no "deny" rules).
  - A Role always sets permissions within a particular namespace; when you create a Role, you have to specify the namespace it belongs in.
 
@@ -219,7 +222,7 @@ How it Works ?
 19. Did you face any challenge in application while setting K8s cluster or while deploying application?
  - resource quota full in namespace
  - during claim pvc its mismatch with: volumeMounts "name" & volumes "name", i.e., should match.
- - selector issue, pod labels & matchLabels should be match 
+ - selector issue, pod labels & matchLabels should be match .
 
 20. Why not docker swarm instead of K8s??
  - Cluster is not robust.
@@ -230,7 +233,34 @@ How it Works ?
 21. Docker Container vs K8s POD ?
  - k8S pod is a runtime speficiation of a container --> Pod
  - In a Pod can create multiple container.
+
+22. Side car container ?
+ - Sidecar containers are the containers that should run along with the main container in the pod. 
+ - Whenever you want to "add the additional functionality / extend the functionality" of the existing single container pod without touching the existing one.
+Ex: 
+ - You can use this pattern for sending log events to the external server.
+ - You can use this pattern for network-related tasks.
  
+23. How to define/ manage CPU utilisation for a POD/ deployment file. 
+ - By using "limits" & "requests" under resources section.
+Ex:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cpu-demo-2
+  namespace: cpu-example
+spec:
+  containers:
+  - name: cpu-demo-ctr-2
+    image: vish/stress
+    resources:
+      limits:
+        cpu: "100"
+      requests:
+        cpu: "100"
+    args:
+    - -cpus
+    - "2"
 
 
 
@@ -262,6 +292,12 @@ How it Works ?
  - 
  - 
 5. What is pod Disruption budget ?
+
+6. A pod is trying to access the volume, but it gives access error ?
+ - May be due to its AccessModes: If pv is having 
+ - ReadWriteOnce
+ - ReadOnlyOnce 
+ - ReadWriteMany
 
 ==============================: Helm :=============================================================================
 1. What and why we need helm charts? What helm charts version that you have worked with? and difference between helm 3 and helm 2? 

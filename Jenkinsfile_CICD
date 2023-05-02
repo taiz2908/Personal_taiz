@@ -190,7 +190,8 @@ pipeline {
 Ex:
 "pipeline-libraries under vars/ folder i.e. mvnInstall.groovy"
 1. APPLICATION
-    - Springboot app
+    - Springboot app generating .jar
+    - /root/.m2/repository/
 
 2. SOURCE CODE
     - GitHub
@@ -200,7 +201,7 @@ Ex:
     - Pipeline //
     - Multibranch Pipeline //
     - plugins 
-      - multibranch-scan-webhook-trigger
+      - multibranch-scan-webhook-trigger //for multibranch pipeline.
       - mailer // send to notification over mail. 
       - Office-365-Connector // for MS Team's,
         - "Incoming Webhook", add to a team->setup a connector.
@@ -258,14 +259,15 @@ Ex:
     - Maven Deploy Plugin //used during the deploy phase. it needs to define under <plugin> pom.xml.
     - plugin 
       - nexus-artifact-uploader 
+      - Nexus Platform (nexus-jenkins-plugin)
 
 11. DOCKER LOGIN & BUILDING IMAGE
     - Dockerfile //need to write dockerfile and present in source code repo
     - plugins 
-      - Docker
+      - Docker (docker-plugin)
       - docker pipeline
       - docker-build-step, allows to add various docker cmds to the job as build steps
-      - Cloudbees docker build and publish, building dockerfiles based projects. 
+      - Cloudbees docker build and publish (docker-build-publish), building dockerfiles based projects. 
       - aqua security scanner 
 
 12. TAGGING & PUSHING //tagging the image and pushing to dockerhub/image repo
