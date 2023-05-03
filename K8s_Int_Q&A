@@ -16,10 +16,11 @@
   Ref : 
    - https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/
    - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
-
-  kubectl describe
-  kubectl logs
-  kubectl events  
+  
+  Debugging commands:
+   - kubectl describe pod <pod_name>
+   - kubectl logs <pod_name> 
+   - kubectl get events --sort-by=.metadata.creationTimestamp
   
   Errors showing while creating pods
    1. ImagePullBackoff - Invalid image / Invalid tag / Invalid permission
