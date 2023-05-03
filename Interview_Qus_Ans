@@ -522,9 +522,14 @@ Ex:
 
 12. How many Docker components are there?
  There are three docker components, they are: Docker Client, Docker Host and Docker Registry.
- - Docker Client: This component performs “build” and “run” operations for the purpose of opening communication with the docker host.
- - Docker Host: This component has the main docker daemon and hosts containers and their associated images. The daemon establishes a connection with the docker registry.
- - Docker Registry: This component stores the docker images. There can be a public registry or a private one. The most famous public registries are Docker Hub and Docker Cloud.
+  1. Docker Client: 
+    - This component performs “build” and “run” operations for the purpose of opening communication with the docker host.
+  2. Docker Host: 
+    - This component has the main docker daemon and hosts containers and their associated images. 
+    - The daemon establishes a connection with the docker registry.
+  3. Docker Registry: 
+    - This component stores the docker images. There can be a public registry or a private one.
+    - The most famous public registries are Docker Hub and Docker Cloud.
 
 13. what happned to container logs if you stop/restarted the container ? logs deleted or what?
  - we won't be loosing any logs.

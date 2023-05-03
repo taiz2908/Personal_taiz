@@ -222,7 +222,7 @@ Ex:
     - mvn clean install
     - plugins 
       - pipeline-Maven
-      - maven-plugin (maven integration)
+      - maven integration (maven-plugin)
 
 6. UNIT TEST //to apply test cases, developers write the test cases which is being used in pipeline. 
     - mvn test 
