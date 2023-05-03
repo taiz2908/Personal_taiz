@@ -49,7 +49,7 @@ In Pom.xml:
 Ex:
 <distributionManagement>
     <repository>
-      <id>internal.repo</id>
+      <id>internal.repo</id> 
       <url>Host to Company Repository</url>
     </repository>
   </distributionManagement>

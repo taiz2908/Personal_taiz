@@ -1,0 +1,44 @@
+Ref:
+ - https://www.youtube.com/watch?v=BLQ0PDjgN8w
+ - https://www.jenkins.io/doc/book/pipeline/shared-libraries/
+
+======================
+ - Common reusable code. 
+ - store in one place
+ - in Jenkinsfile we call the function in the name of shared-libraries and accordingly it'll executes.
+ - written in .groovy extension.  
+
+Advantages
+ - Standarization of Pipelines
+ - Reduce duplication of code
+ - Easy onboarding of new applications, projects or teams
+ - One place to fix issues with the shared or common code
+ - Code Maintainence
+ - Reduce the risk of errors
+
+Shared libraries divided into three folders. 
+ 1. vars
+ 2. src 
+ 3. resources 
+
+Ex: helloWorld.groovy
+def call() {
+  sh 'Hello World'
+}
+
+How to Configure in Jenkins?
+ - Manage jenkins->Configure systems->global-pipeline libraries
+ - Need to provide the branch name and git repo url. 
+
+Jenkinsfile:
+@Library("library_name") _ 
+pipeline {
+  agent any
+  stages {
+    stage('hello') {
+      steps {
+        helloWorld()
+      }
+    }
+  }
+}

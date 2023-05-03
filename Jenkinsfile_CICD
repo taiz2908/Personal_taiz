@@ -189,6 +189,9 @@ pipeline {
 
 Ex:
 "pipeline-libraries under vars/ folder i.e. mvnInstall.groovy"
+Managed jenkins-> credentials
+    - Added github, sonar, nexus, docker. 
+
 1. APPLICATION
     - Springboot app generating .jar
     - /root/.m2/repository/
@@ -199,9 +202,11 @@ Ex:
 3. JOB CREATION //Jenkins as CI tool
     - Freestyle
     - Pipeline //
-    - Multibranch Pipeline //
+    - Multibranch Pipeline // 
+      - Pipeline: Multibranch (ID: workflow-multibranch) // show the job multibranch pipeline.
+      - Multibranch Scan Webhook Trigger (ID: multibranch-scan-webhook-trigger) 
+      //Enables webhook, check wich branches has changed and than build those branches.
     - plugins 
-      - multibranch-scan-webhook-trigger //for multibranch pipeline.
       - mailer // send to notification over mail. 
       - Office-365-Connector // for MS Team's,
         - "Incoming Webhook", add to a team->setup a connector.
@@ -218,7 +223,7 @@ Ex:
       - Manual 
       - Github hook trigger for git scm polling.
 
-5. CODE BUILD, //Maven used as build_tool(.war/.jar)
+5. CODE BUILD, // Maven used as build_tool(.war/.jar)
     - mvn clean install
     - plugins 
       - pipeline-Maven
@@ -227,17 +232,19 @@ Ex:
 6. UNIT TEST //to apply test cases, developers write the test cases which is being used in pipeline. 
     - mvn test 
 
-7. CODE ANALYSIS: //SonarQube by Static code Analysis(bugs,coverages,lines,)
-    - 
+7. CODE ANALYSIS: //SonarQube by Static code Analysis (bugs,coverages,lines,)
+    - credentialsid already defined in the shared-libraries.
+    - under script block we need to write, sonar:sonar
+    - Manage jenkins-> configure systems-> need to provide url & auth token
+    - Auth token from sonar server->admin->security->users
     - plugins
-      - sonarqube-generic-coverage
-      - SonarQube Scanner (sonar)
-    - Manage jenkins->configure systems->need to provide url & auth token
-      - Auth token from sonar server->admin->security->users
-
+      - sonarqube-generic-coverage (ID: sonarqube-generic-coverage)
+      - SonarQube Scanner (ID: sonar)
+    
 8. QualityGate Status: "Ok" 
+    - For generating script need to refer "wait for quality gates"
     - Jenkins->generate script->wait for quality gates
-    - Sonar->need to generate webhook->configuration->create    
+    - Sonar server->Admin->need to generate webhook->configuration->create -> provide jenkin url.  
 
 9. NEXUSIQ //For checking any vunerability present in the code or not. 
     - we need to provide the .war/.jar path. 
@@ -248,6 +255,7 @@ Ex:
     }
 
 10. DEPLOY //Deploying generated artifact to Nexus Repo
+    - Used for store the release (deployable application) & snapshots. 
     - mvn deploy
     - Few things needs to update under pom.xml file. 
      <distributionManagement>
@@ -263,6 +271,9 @@ Ex:
 
 11. DOCKER LOGIN & BUILDING IMAGE
     - Dockerfile //need to write dockerfile and present in source code repo
+    - provide the credentialid, username & password.
+      - docker login -u \$my_update -p \my_passwd $repo_url
+      - docker build
     - plugins 
       - Docker (docker-plugin)
       - docker pipeline
@@ -271,7 +282,10 @@ Ex:
       - aqua security scanner 
 
 12. TAGGING & PUSHING //tagging the image and pushing to dockerhub/image repo
+    - Dockerfile //need to write dockerfile and present in source code repo
+    - provide the credentialid, username & password.
+      - docker tag $newimg:$newtag $repo_url/$newimg:$newtag
+      - docker push $repo_url/$newimg:$newtag
 
 13. Deploying to K8s by Helm Chart
-
 
