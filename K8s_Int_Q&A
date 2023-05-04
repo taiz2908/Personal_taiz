@@ -144,7 +144,12 @@ Secrets:
    - For example, kubeadm uses static pods to bring up Kubernetes control plane components like api-server, controller-manager as static pods on the Master Node.
  - /etc/kubernetes/manifests -> keep our yaml files and creates the pods.
 
-9. Do you know high availability in pod level? "Livenessprob / Healthcheck" & "Readnessprob" 
+9. Init Containers:
+ - A Pod can have multiple containers running apps within it, but it can also have one or more init containers, which are run before the app containers are started.
+ - Init containers can contain utilities or setup scripts not present in an app image.
+ - All the init Containers will be executed sequentially and if there is an error in the Init container the pod will be restarted which means all the Init containers are executed again.
+
+10. Do you know high availability in pod level? "Livenessprob / Healthcheck" & "Readnessprob" 
 Livenessprob:
  - Application Healthcheck.
  - In Order to verify whether application is running or not within the container we can use livenessprob. 
@@ -158,26 +163,22 @@ Ex;
  - For example, an application might need to load large data or configuration files during startup, or depend on external services after startup. 
  - In such cases, you don't want to kill the application, but you don't want to send it requests either. Kubernetes provides readiness probes to detect and mitigate these situations.
 
-10. Is it possible to deply pod in master?
+11. Is it possible to deply pod in master?
  - Yeah , Its Possible
  - some "taints" will be there in master, but if we apply some tolerance we can deploy to master. 
  - we can define taints->master, scheduler looks this taint and pocisioned in master.
 
-11. Is it possible to decide to deploy pod in particular node?
+12. Is it possible to decide Assigning Pods to a specific Nodes?
  - Yes, we can do that
- - "nodeSelector" we can do that, also we can use nodeAffinity. 
+   1. nodeSelector
+   2. affinity
+   3. nodeName
 
-12. To upgrade K8s version, what steps you will follow?
+13. To upgrade K8s version, what steps you will follow?
  - we need to take off the pods from the nodes. 
  - Move to node1 to node2.i.e., cordorton. 
  - we can do upgradation 
- - 
-
-13. Init Containers:
- - A Pod can have multiple containers running apps within it, but it can also have one or more init containers, which are run before the app containers are started.
- - Init containers can contain utilities or setup scripts not present in an app image.
- - All the init Containers will be executed sequentially and if there is an error in the Init container the pod will be restarted which means all the Init containers are executed again.
-
+ 
 14. By default how many namespaces are available in kubernetes?
   1. Default - By default resource created  within default namespace , Resource when we don't specify namespace explicitly
   2. Kube-node-lease - Contains lease resources to send the heart_beats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
@@ -262,17 +263,13 @@ spec:
     - -cpus
     - "2"
 
+24. Have you create / configure k8s cluster ?
+ - No, But I know how to configure the cluster. 
+  1. Installer : Kubeadm
+  2. kubeadm init
+  3. kubeadm join
+  4. We need to configure CNI.
 
-
-
-
- 2. what are the error's facing in k8s?
-  - Mountvolume.setup failed --> we need to create a dir
-    - mkdir /data
-
- 3. have you created deployment file?
-  Yes, 
-  Ex:
 ==============================: Real Time Qus :===================================================================
 1. What are the challenges yoy've faced in prometheus ?
  - Prometheus HA support
