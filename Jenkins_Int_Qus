@@ -18,7 +18,7 @@ Ref : https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
 #sudo systemctl status jenkins
 #sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
-#find /usr/lib/jvm/java-11.0* | head -n 3
+#find /usr/lib/jvm/java-11-openjdk-11* | head -n 3
 #vi .bash_profile 
  JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
  PATH=$JAVA_HOME/bin:$PATH
@@ -26,6 +26,9 @@ Ref : https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
  /usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
 #source ~/.bash_profile
 
+Note: 
+ - By default, Jenkins stores all of its data in this directory on the file system
+ - /var/lib/jenkins
 ------------------------- Build Trigger's ---------------------------------------
 
 1. Build Periodically : cron job / 5 astrics 

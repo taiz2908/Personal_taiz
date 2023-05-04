@@ -165,11 +165,19 @@ Below's are the set of instructions using in dockerfile:
  ADD: copy the files from the remote source i.e, from website,
  It downloads tar, zip, or web file and extracts and copies inside of our image.
  ENV: gets an env variable 
- WORKDIR: Going to create a workdir inside of the container 
+ WORKDIR: Going to create a workdir inside of the container "/app"
  USER: instruction sets the user name 
  ENTRYPOINT: it executes as it is & if we provide any new arguments its appended at the end of the instruction. 
  CMD: it's failed as its try to replaced the arg/instruction to httpd.
 
+---------------------------------------------
+Multi-Stage Dockerfile:
+ - Used for light-weight 
+ - One of the most challenging things about building images is keeping the image size down. 
+ - Each RUN, COPY, and ADD instruction in the Dockerfile adds a layer to the image, 
+ and you need to remember to clean up any artifacts you don’t need before moving on to the next layer.
+ - COPY --from=<alias> line copies just the built artifact from the previous stage into this new stage. 
+ 
 ------------------------ ENTERYPOINT vs CMD ----------------------
 ENTRYPOINT has two forms:
  - The exec form, which is the preferred form: ENTRYPOINT ["executable", "param1", "param2"]
