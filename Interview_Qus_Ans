@@ -393,7 +393,6 @@ Ansible-Installation :
  - VARIABLE: section, var1/var2 (pkg )
  - TASKS: each play contains task and these task from top to bottom,under task we use modules. 
  - HANDLERS: to start the services
-
 Ex: 1,
 - hosts: ubnt
   become: true
@@ -448,6 +447,13 @@ Ex:2,
  - For Ansible it means After first run of a playbook to set things to a desired state. 
  - Further runs of the same playbook should result in 0 changes.
  - In simplest terms, idempotency means you can be sure of a consistent state in your environment.
+ 
+16. ansible-playbook offers five tag-related command-line options:
+  --tags all - run all tasks, ignore tags (default behavior)
+  --tags [tag1, tag2] - run only tasks with either the tag tag1 or the tag tag2
+  --skip-tags [tag3, tag4] - run all tasks except those with either the tag tag3 or the tag tag4
+  --tags tagged - run only tasks with at least one tag
+  --tags untagged - run only tasks with no tags
 
 16. Ansible Config file?
  
