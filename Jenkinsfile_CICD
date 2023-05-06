@@ -3,9 +3,8 @@ def newimg = 'web-server'
 def newtag = params.IMAGE_TAG
 def repo_url = ''
 
-//running in k8s cluster, so mentioned k8s under the agent 
 pipeline {
-    agent {
+    agent { //running in k8s cluster, so mentioned k8s under the agent 
         kubernetes {
             workspaceVolume hostPathWorkspaceVolumne("/buildstore/jenkins")
             defaultContainer 'maven'
