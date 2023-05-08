@@ -33,6 +33,8 @@
       - app failed to start for any reason
       - trying to write to a folder / missing out some permission
    5. killcontainer error
+   6. validationError (pod.spec.containers)
+      - syntax / array error
   -----------------------
 
 

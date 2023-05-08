@@ -128,7 +128,7 @@ Kubernetes definition file always contains four top level fields:
        lables: (We can filter the pod )
          name:
  	     app: able to filter out the pods by giving the unique name ( myapp ) 
-4. "spec": specification section , Defines whats inside th object we're creating. 
+4. "spec": specification section , Defines whats inside the object we're creating. 
        containers: name of the pod within the container
        	 - name: nginx-container - name of the container i.e nginx container 
        	   image: nginx - docker hub image name to create 

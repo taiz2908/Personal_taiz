@@ -32,6 +32,7 @@ curl http://<POD_ip>
 # kubectl logs <podname> -f , '-f' to watch / monitoring the logs, to see the pod logs
 # kubectl logs -l name=myLabel, pod logs,with name=myLabel
 # kubectl logs <pod_name> -c <containername>, 
+# docker inspect <image_name>
 
 # kubectl describe pod <pod_namae> -o wide | more -->lables, status,ip, container info, host port numnber etc and "events"
  - from the events we can use for troubleshooting 

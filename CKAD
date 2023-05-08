@@ -1,6 +1,26 @@
-Application Design & Build - 20%
-Application Env, Config & security - 25%
-Application Deployment - 20%
-Servicing & Networking - 20%
-Application Observability & Maintenance - 15%
+1. Application Design & Build - 20%
+2. Application Env, Config & security - 25%
+3. Application Deployment - 20%
+4. Servicing & Networking - 20%
+5. Application Observability & Maintenance - 15%
 ==================================================================================================================
+Ex: command & args for Pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: nginx
+spec:
+ containers:
+  - name: nginx
+    image: naginx:latest
+    ports:
+     - containerPort: 8080
+    command: [""]
+    args: [""]
+---
+#kubectl run <pod_name> --image <image_name>  --port 80 --dry-run=client -o yaml > nginx-pod.yaml
+#kubectl delete pod -all
+---
+Labels & Selectors:
+
+ 
