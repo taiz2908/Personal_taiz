@@ -1,4 +1,54 @@
 Ref:
 https://www.youtube.com/watch?v=Dppl6iA2G8Q&list=PLBGx66SQNZ8ZvdIoctCTWB3ApXQpQGEin&index=3
 
-OSI MODEL:
+1. OSI MODEL
+2. Subnets
+3. Public & Private N/w
+4. CIDR Notations
+5. Static vs Dynamic IP
+6. Firewall
+7. Proxy
+8. Public & Private DNS
+9. VPN
+10. protocols 
+ 
+=======================
+1.
+
+2. Subnets:
+ - slipt into large n/w into grouping of small interconnected n/w to minimise the traffic. 
+
+3. Private N/w:
+ - Control by entirely single organisation. 
+ - Within the org.
+  Public N/W:
+ - External user can acccess. 
+
+4. CIDR: "Classless Inter-Domain Routing"
+ - Amount of bits. allocated to the n/w
+ - /24 , means 24 allocated to n/w, 8 bit allocated to hosts.
+
+5. Static vs Dynamic IP:
+ - Dynamic IP means public IP i.e., when we reboot the ec2 instance ip will change
+ - So we required static ip
+
+6. Firewall:
+ - N/w security device. 
+
+7. Proxy:
+ - system/router -> gateway between internet & users. 
+
+8. Public & Private DNS: 
+ - AWS -> Route53
+
+9. VPN:
+ - Enables private connection between two m/c or n/w over a shared public n/w.
+
+10. protocols:
+   - http (80)
+   - https (443)
+   - ftp (21)
+   - tcp
+   - ssh (22)
+   - ssl/tls (465)
+   - smtp (25)
