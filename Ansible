@@ -1,2 +1,70 @@
 Ref:
 https://www.youtube.com/watch?v=Z6YGH0HVejE
+
+---------------------
+Set-up
+ - Password less authentication 
+ - ssh-keygen in master and generate the key pairs.
+ - cd ~/.ssh/ -> copy "id_rsa.pub" paste it under "authorized_keys" in the target server.
+ - ssh <public_ip>
+
+---------------------:Host Inventory file:-------------
+ - Here we add node details like ip, m/c name etc
+ - we can group them as well by using []. 
+
+-------------------- :Ansible Adhoc commands: ----------
+For one / two tasks and playbooks for multiple tasks. 
+ - ansible all -m setup -a "filter=ansile_distribution"
+ - ansile all -m command -a "uptime"
+ - ansible all -i hosts -m shell -a "df"
+ - ansible all -m package -a "name=tree state=present"
+ - ansible all -i hosts -l ubnt -m shell -a "ls /"
+ - ansible all -i hosts -l cent -m raw -a "touch /tmp/demo.txt"
+ - ansible all -m ping
+ - ansible all -m file -a "name=/tmp/demo.txt state=touch"
+ - ansible all -m file -a "name=/tmp/mydir state=directory"
+ - ansible all -m user -a "name=john state=present"
+ - ansible all -m group -a "name=devops state=present"
+ - ansible all -m file -a "name=/tmp/demo.txt mode=0777 owner=john group=devops"
+ - ansible all -i hosts -l ubnt -m apt -a "name=git-core state=present"
+ - ansible all -i hosts -l ubnt -m apt -a "name=git-core state=present"
+ - ansible all -i hosts -l cent -m yum -a "name=git-core state=present"
+ - ansible all -i hosts -l ubnt -m apt -a "name=apache2 state=latest"
+ - ansible all -i hosts -l ubnt -m apt -a "name=apache2 state=latest"
+ - ansible all -i hosts -l cent -m yum -a "name=httpd state=latest"
+ - ansible all -i hosts -l ubnt -m service -a "name=apache2 state=startd"
+ - ansible all -i hosts -l ubnt -m service -a "name=apache2 state=started"
+ - ansible all -i hosts -l cent -m systemd -a "name=httpd state=started"
+ - ansible all -m cron -a "name='myjob' minute='30' hour='5' job='ls -l > /tmp/files.log'"
+
+ -------------------------: Ansible Playbooks :-----------------
+Ex: 1
+--- [three hifens denotes its a yaml file]
+---
+- hosts: all
+  become: root 
+  gather_facts: true
+  tasks:
+    - name: to copy a file
+      copy: src=demo.txt  dest=/tmp/demo.txt
+    - name: to display msg
+      debug:
+        msg: file copied!
+ansible-playbook playbooks/pb1.yml --syntax-check
+ansible-playbook playbooks/pb1.yml
+ansible-playbook -vvv playbooks/pb1.yml , (-v means verbose option)
+
+Ex: 02
+ ---
+ - hosts: ubnt
+  remote_user: root
+  gather_facts: true
+  tasks:
+    - name: to updat repo
+      raw: apt-get update
+    - name: to install apache
+      apt: name=apache2 state=present
+    - name: to deploy a file
+      copy: src=index.html  dest=/var/www/html/index.html
+    - name: to start service
+      service: name=apache2 state=started

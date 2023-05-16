@@ -369,7 +369,7 @@ By using # docker inspect <containerID>
 - For the purpose of communication amongst the containers, ports are exposed by each and every container.
 
 ---------------: Docker Networking :-----------------------------
-1. Bridge
+1. Bridge - Default n/w
 2. Host
 3. None
 4. Overlay

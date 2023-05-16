@@ -315,8 +315,9 @@ Click On Backup Now & Restore Now.
  - It is also used for the distribution of packages containing roles, plugins, and modules also known as collection.
  - The ansible-galaxy-collection command implements similar to init, build, install, etc like an ansible-galaxy command.
  - Repository for “Ansible Roles”
- - Docker: Geerlingguy
- - #ansible-galaxy search , #ansible-galaxy install 
+ - ansible-galaxy search  
+ - ansible-galaxy install
+ - ansible-galaxy role init kubernetes 
  Example: 
 
 4. Ad-Hoc commands:
@@ -325,9 +326,9 @@ Click On Backup Now & Restore Now.
  - Here we don’t use Ansible modules. So Idem-potency will not work with Ad-Hoc commands. 
  - If at all we don’t get required YAML module to write to create infrastructure, then we go for it. 
 Ex:
- - ansible-all -i hosts -l <ubnt> -m apt -a "name=apache2 state=present"
- - ansible-all -i hosts -l <ip> -m setup -a "filter=ansible_distribution"
- - ansible-all -i hosts -l <centos> -m package -a "name=net-tools state=latest"
+ - ansible all -i hosts -l <ubnt> -m apt -a "name=apache2 state=present"
+ - ansible all -i hosts -l <ip> -m setup -a "filter=ansible_distribution"
+ - ansible all -i hosts -l <centos> -m package -a "name=net-tools state=latest"
 
 5. When we run playbook what are the things happening?
  - Gathering Facts

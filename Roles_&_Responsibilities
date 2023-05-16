@@ -17,7 +17,7 @@
  -
  -
  -
-4. Adding diff diff CI Stages in Jenkinsfile as per the project req. 
+4. Adding different CI Stages in Jenkinsfile as per the project req. 
  - code checkout (gerrit / git)
  - Code build (mvnInstall)
  - Code deploy (mvnDeploy)
