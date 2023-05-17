@@ -1,5 +1,6 @@
 Ref:
-https://www.youtube.com/watch?v=Z6YGH0HVejE
+- https://www.youtube.com/watch?v=Z6YGH0HVejE
+- https://www.youtube.com/watch?v=j5PgN0J3d7M&t=7s : Interview Qus
 
 ---------------------
 Set-up
@@ -63,8 +64,32 @@ Ex: 02
     - name: to updat repo
       raw: apt-get update
     - name: to install apache
-      apt: name=apache2 state=present
+      apt: name=nginx state=present
     - name: to deploy a file
       copy: src=index.html  dest=/var/www/html/index.html
     - name: to start service
-      service: name=apache2 state=started
+      service: name=nginx state=started
+
+Ex: 03,
+---
+- hosts: all
+  remote_user: root
+  gather_facts: true
+  vars:
+    - pack1: java
+    - pack2: tomcat
+  tasks:
+    - name: to install {{pack1}}
+      yum: name={{pack1}} update_cache=yes state=present
+
+    - name: to install {{pack2}}
+      package: name={{pack2}} state=present
+      notify:
+        - start tomcat
+
+    - name: to deploy a file
+      copy: src=sample.war  dest=/var/lib/tomcat/webapps/sample.war
+
+  handlers:
+    - name: start tomcat
+      systemd: name=tomcat state=started
