@@ -1,3 +1,18 @@
+Major AWS Services:
+ - EC2
+ - IAM
+ - EBS
+ - S3
+ - Auto Scaling
+ - ELB
+ - VPC
+ - Route 53
+ - DynamoDB
+ - SNS
+ - SQS
+ - ECS
+ - EKS
+
 1. Security group vs NACL.
 
 2. Single part vs multipart upload mechanism in S3 bucket .

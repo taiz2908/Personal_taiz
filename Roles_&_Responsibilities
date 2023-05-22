@@ -17,14 +17,14 @@
  -
  -
  -
-4. Adding different CI Stages in Jenkinsfile as per the project req. 
+4. Integrate different CI-CD Stages in Jenkinsfile as per the project req. 
  - code checkout (gerrit / git)
  - Code build (mvnInstall)
  - Code deploy (mvnDeploy)
  - SonarQube (code quality analysis)
  - NexusIq (Vulnerability)
  - 
-5. Creating various JOBS as per the project req. 
+5. Creating various JOBS & Configure as per the project req. 
 - free style
 - maven 
 - pipeline
@@ -45,9 +45,9 @@ Updating pom.xml file
 ------------ Ansible ------------------
 
 ------------- Docker ------------------
-1. Writing the Dockerfile.
+1. Writing the Multistage - Dockerfile.
 2. Managing the container's with various docker commands. 
-3. 
+3. Debugging the containers.
 
 ------------- K8S ---------------------
 1. 

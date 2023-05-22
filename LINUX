@@ -1,7 +1,10 @@
 Ref: 
  - https://www.youtube.com/watch?v=a3ujwK65dgs
+ - https://www.youtube.com/watch?v=vo9F_l_wwZs PART 1 | 60 Linux Questions for Job Interview Preparation in Hindi in 60 min with Answer | Linux QnA
+ - https://www.youtube.com/watch?v=MJ5g8fEDRe0 PART 2
 
 set nu --> showing how many lines
+cd ~/.ssh/
 
 Working with Files and Directories:
  pwd 

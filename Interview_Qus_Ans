@@ -395,6 +395,7 @@ Ansible-Installation :
  - TASKS: each play contains task and these task from top to bottom,under task we use modules. 
  - HANDLERS: to start the services
 Ex: 1,
+---
 - hosts: ubnt
   become: true
   gather_facts: yes
@@ -414,6 +415,7 @@ Ex: 1,
     service: name=apache2 state=started
 
 Ex:2, 
+---
 - hosts: all
   become: true
   gather_facts: yes
