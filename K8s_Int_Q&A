@@ -13,6 +13,9 @@
   ======================: Troubleshooting & Debugging Kubernetes common problems :=================================
   - https://www.youtube.com/watch?v=ORSxQeboprc&t=3  Part-1
   - https://www.youtube.com/watch?v=5UW0q64B8PA Part-2 
+  - https://www.youtube.com/watch?v=d7gl5YE8OoI
+  - https://www.youtube.com/watch?v=1x1O7zspLto&t=2s
+  - https://www.youtube.com/watch?v=xsBnF9gbXW4&t=449s
   Ref : 
    - https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/
    - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
@@ -272,6 +275,13 @@ spec:
   3. kubeadm join
   4. We need to configure CNI.
 
+25. 
+ - Does traffic pass through kube-proxy - yes
+ - Which component assign IP's to the POD - kube-proxy
+ - Can components like kubeproxy, kubelet & scheduler directly talks to etcd - No, via api-server.
+ - If kube-proxy die for few sec's will it cause issue in existing traffic routing? - No
+ 
+  
 ==============================: Real Time Qus :===================================================================
 1. What are the challenges yoy've faced in prometheus ?
  - Prometheus HA support
