@@ -327,7 +327,7 @@ Networking in K8S:
       spec: 
         type: NodePort
         ports:
-         - targetPort: 80 ---1 (withinpod)
+         - targetPort: 80 ---1 (application running - withinpod)
             port: 80 ---2 (service port)
             nodeport: 30008 ---3 (node)
        selector:  ----> "Could be hundrade of pods , so we will use lables & selector to link together " pull the lables from the pod and place under selector section . 
@@ -355,13 +355,18 @@ Networking in K8S:
 
 ----------------------------: Kubernetes Ingress: ---------------------------------------------
 What is Ingress?
+  - Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
   - We can access the application from outside of the cluster. 
   - We declare which request should go to which service.So we should write the ingress rule for this. 
-  - For ingress rule we should have deploy "Ingress Controller" pod into our cluster to process the ingress rule.
+  - For ingress rule we should have deploy "Ingress Controller"/load balaner, pod into our cluster to process the ingress rule.
   - Ingress Controller could be an entrypoint to the cluster.
 
+Benefits of Ingress over services:
+  - Enterprise & TLS missing(secure load balancing). 
+  - If we choose service type as "LoadBalancer" cloud provider charging for each & every static IP address. 
+
 How it Works ? 
-http-->load balancer-->ingress controller-->reads ingress rules-->forwards to service-->pod
+http-->ingress managed load balancer-->ingress controller-->reads ingress rules-->forwards to service-->pod
  1. User hit the http request i.e http:/www.xyz.com
  2. Forwards the service to load balancer.
  3. Load balancer forward the service to ingress controller pod and reads the ingress rules and decide which service to call.
@@ -373,16 +378,45 @@ Imp Note:
 
 Benefits over NodePort / LoadBalancer:
   - We can include our own authentication .
+  - Path Based routing.
+  - Host Based routing.
 
 Ingress Controller: Mostly third parites.
 Types:
   - "Nginx Ingress Controller" only maintained by K8s itself.
   - HA Proxy
   - traefik
+  - F5
   - Istio etc
 # kubectl get po -n ingress-nginx - to verify nginx ingress controller and get expose through service.
 # kubectl get svc -n ingress-nginx - Nodeport service is created for nginx ingress controller., if cloud it should create Load balancer service. 
 # kubectl describe ing nginx-ingress
+kubectl get pods -A | grep nginx
+kubectl logs <nginx-ingress-controller-pod.name> -n <namespace.name>
+ - shows sync
+
+Note:
+ - In prod/pre-prod/dev : we use our own domain name (needs to provide under host)
+Ex:
+ apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wildcard-host
+spec:
+  rules:
+  - host: "foo.bar.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/bar"
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+TLS:
+  - SSL passthrough.(not-recommended)
+  - SSL Bridging
  
 ------------------------: Kubernetes Namespaces: ------------------------------
  1. What is Namespace?
