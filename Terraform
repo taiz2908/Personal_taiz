@@ -310,8 +310,8 @@ Meta- Arguments:
 1. depends_on:
     - Terraform automatically generats dependency graph based on reference. 
     - Ex:
-     If we want to create the resource aws_iam_role_policy before aws_instance, hen we should define depends_on under aws_instace
-    so that aws_instance would fail if attending to create it before the aws_iam_role_policy.
+     If we want to create the resource aws_iam_role_policy before aws_instance, hence we should define depends_on under aws_instace
+     so that aws_instance would fail if attending to create it before the aws_iam_role_policy.
 
 2. count:
     - if want to create multiple resources/copies then we can use count under resource. 
@@ -379,6 +379,14 @@ Types:
 
 Module Sources:
  - local path, terraform registry, github, bitbuckeet, s3, gcs bucket etc
+
+Ex: How we call main.tf in module?
+ module "vpc" {
+   source = "./modules/aws_vpc"
+ }
+ module "subnet" {
+   source = "./modules/aws_subnet"
+ }
 
 ===========================: Managing Multiple Env :============================================================
 Dev / SIT/ PROD ETC
@@ -456,6 +464,26 @@ Interview Qus:
 11. Disadvantage of Terraform:
  - state file is the single source of truth.
  - Manual changes to the cloud provider cann't be identified  and auto corrected.
+
+12. Deploy all the resources into correct order? How to do that?
+ - Meta- Arguments: "depends_on"
+    - Terraform automatically generats dependency graph based on reference. 
+    - Ex:
+     If we want to create the resource aws_iam_role_policy before aws_instance, hence we should define depends_on under aws_instace
+     so that aws_instance would fail if attending to create it before the aws_iam_role_policy.
+
+13. Need to create the multiple instances of the same resources with slightly diff configurations, How to do that?
+ - By using "count" meta arg. 
+
+14. Need to create ec2 instance using terraform, then execute a shell script after it has been created how to do that?
+ - Execute the "remote-exec" provisioners. 
+ Ex:
+ provisioner "remote-exec" {
+  inline = [
+    "sudo yum -y update",
+    "sudo yum install -y httpd"'
+  ]
+ }
 =======================================================================================================
 Ref: https://www.youtube.com/watch?v=pCoCynze4Ag
 
@@ -503,3 +531,106 @@ Ref: https://www.youtube.com/watch?v=7lIlR0hXCY8
 
 7. 
  
+============================: PROJECT :===================
+Ref: 
+ - https://www.youtube.com/watch?v=fgpec0gvuJQ&list=PLLu1bCv5AByF1wC7epZHGAjfhmDR5XKK7&index=15
+Jenkins install using terraform | Run Shellscript on ec2 using ssh.
+1. Authenticate terraform with aws creds
+2. create default vpc if not exist 
+3. use data source to get all availability zones in a region
+4. create default subnet if one doesn't exist 
+5. Create security group for the jenkins instance
+6. create jenkins server 
+7. create null resource and execute install_jenkins.sh script
+---
+provider "aws" {
+  region = var.
+  access_key = var.
+  secret_key = var.
+}
+---
+resource "aws_default_vpc" "default" {
+  tags = {
+    Name = "Default VPC"
+  }
+}
+// resource tag when to use , when we're going to create new resource
+// data tag when to use , use when we have resource already created/existing. 
+---
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+---
+resource "aws_default_subnet" "default_az1" {
+  availability_zone = data.aws_availability_zones.available.names[0]
+
+  tags = {
+    Name = "Default subnet for us-west-2a"
+  }
+}
+---
+resource "aws_security_group" "allow_tls" {
+  name        = "allow_tls"
+  description = "Allow TLS inbound traffic"
+  vpc_id      = aws_default_vpc.default.id
+
+  ingress {
+    description      = "SSH Access"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = [aws_vpc.main.cidr_block]
+  }
+   ingress {
+    description      = "HTTP Access"
+    from_port        = 8080
+    to_port          = 8080
+    protocol         = "tcp"
+    cidr_blocks      = [aws_vpc.main.cidr_block]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "allow_tls"
+  }
+}
+---
+resource "aws_instance" "jenkins_server" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
+  subnet_id = aws_default_subnet.default_az1.id
+  vpc_security_group_ids = [ aws_default_vpc.default.id ]
+  key_name = "****"
+
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+---
+resource "aws_instance" "web" {
+  # ...
+
+  # Establishes connection to be used by all
+  # generic remote provisioners (i.e. file/remote-exec)
+  connection {
+    type     = "ssh"
+    user     = "ubuntu"
+    password/private_kay = var.root_password/file("~/downloads/demo.pem")
+    host     = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "puppet apply",
+      "consul join ${aws_instance.web.private_ip}",
+    ]
+  }
+}
+===========================================

@@ -2,10 +2,64 @@ Ref:
  - https://www.youtube.com/watch?v=a3ujwK65dgs
  - https://www.youtube.com/watch?v=vo9F_l_wwZs PART 1 | 60 Linux Questions for Job Interview Preparation in Hindi in 60 min with Answer | Linux QnA
  - https://www.youtube.com/watch?v=MJ5g8fEDRe0 PART 2
+====================================================
+History:
+ - Linus Torvalds - 1991 
+ - Its a kernel 
+ - "Kernel" It's a open source, Low level operation system which manages the entire OS
+ - Redhat / Ubuntu / Suse / Kali etc
+ - Redaht [ RHEL, CentOS, Fedora]
 
+ # - root user
+ $ - normal user
+ sudo su - super user do
+ cat /etc/os-release - show all the details / versions etc.
+----------------------------------------------------------------------
+Linus Bootstrap: Multistage initialization process during booting a linux installation.
+1. BIOS
+2. MBR
+3. GRUB
+4. KERNEL
+5. INIT
+6. RUNLEVEL
+--------------------------------
+RUN-LEVEL
+0 - shutdown
+1 - single user
+2 - multiuser
+3 - multiuser with n/w
+4 - Not used
+5 - GUI
+6 - Reboot
+-----------------------------------
+"|" pipe: get result of one cmd & can provide the i/p for other cmd
+">>" append
 set nu --> showing how many lines
 cd ~/.ssh/
+----------------------------: CRON-JOB :-------------------
+Five astricts - * * * * *
+* mins in hour
+* hour in day
+* day in month
+* month in year
+* [ 0,7:Sunday, 1:Monday ]
+Ex:
+ to list crontab entries: crontab -l
+ sunday @ 5pm: * 17 * * 0 sample.sh
 
+---------------------------: FOLDER STRUCTURE :-------------
+- /root :root user home directory
+- /etc :configuration files , backup files
+- /home :other user home directory
+- /bin :binary files(mainly cmnds present within /bin, both normal & root user can be use)
+- /sbin
+- /dev
+- /lib
+- /lib64
+- /tmp
+- /opt
+- /boot
+----------------------------: :-------------------------------
 Working with Files and Directories:
  pwd 
  ls -a :'a' means all

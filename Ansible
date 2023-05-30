@@ -93,3 +93,31 @@ Ex: 03,
   handlers:
     - name: start tomcat
       systemd: name=tomcat state=started
+
+========================: Interview Qus :=========================================================================
+1. How Ansible helped in your org?
+ - Configure Prometheus & Grafana
+ - added new m/c under host-inventory file.
+ - reduce the time.
+ - increase the productivity.
+
+2. Dynamic Inventory?
+ 
+3. Ansible Tower?
+ - GUI
+ - Enterprise model which comes with some additional features 
+ - get the support from redhat. 
+
+4. Handlers? 
+ - installing nginx, httpd etc
+ - so that case we use notify and notify would call and accordingly it will execute the task. 
+
+5. Does Ansible support parallel tasks?
+ - yes
+ - if 5 tasks, then it'll perform task-1 all of the hosts, then move to task-2.
+ - 
+
+6. Ansible use to connect to windows & Linux?
+ - bin rm & ssh
+
+7. 
