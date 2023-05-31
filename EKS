@@ -1,3 +1,60 @@
-EKS Cluster creation by using Terraform
- - https://www.youtube.com/watch?v=_TFk5jQr2lk
- 
+EKS Cluster Setup:
+ - https://www.youtube.com/watch?v=1O-I7NtwCeE Kubernetes Course| EKS Cluster Setup | An easiest way with step by step instructions. PART-1
+ - https://www.youtube.com/watch?v=zjhsVsCI3gc PART-2, Kubernetes .. EKS Cluster Scaling
+---
+ - EKS Cluster creation by using Terraform:
+   https://www.youtube.com/watch?v=_TFk5jQr2lk
+
+---- Study / Reference Materials ----
+- https://aws.amazon.com/eks/getting-started/
+- https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html
+- https://eksctl.io/
+
+=============================: EKS Cluster Setup – eksctl :======================================
+Intro:
+ - Managed kubernetes services
+ - AWS manage master node
+ - install necessary apps   
+ - scaling & backups
+ - we can create the cluster via consol,cloud formation, aws cli, terraform. 
+ - eksctl - cli for amazon EKS [needs to authenticate with aws, how? by using aws_access_key & secrete_access_key]
+ - eksctl create cluster --> single cmnd can create the cluster. 
+
+Prerequisites:
+ 1. kubectl : 1.27 or later
+ 2. eksctl : 0.14.0 or later
+ 3. Required IAM permissions 
+
+Step-1,
+ - AWS a/c
+ - An existing VPC and subnets that meet Amazon EKS requirements/ if not we can create it. 
+ - Need to create IAM role & security group [ aws user with lists of permission's]
+
+Step-2, Create worker node/ EKS Clinet i.e., ec2 instance and connect to cluster
+ - create a node group 
+ - choose cluster it'll attach to
+ - define security groups, select instance type, resources.  
+ - define max & min number of nodes.
+Need to install:
+ 1. AWS CLI: 2.11.3 or later or 1.27.93 or later.
+ 2. kubectl : 1.27 or later
+ 3. Required IAM permissions 
+   - AWScloudformationfull access
+   - IAMfullaccess
+   - amazon ec2 full access
+   - Administrator full access.
+
+Step-3, 
+After that we can run:
+ - eksctl create cluster --name <cluster_name> --region <region_name> --node-type <t2.medium>
+i.e.,
+ - Create control plane with IAM role
+ - give name, select k8s version
+ - choose region & vpc
+ - choose security for the cluster
+
+===============================: EKS Cluster Scaling :====================================
+ - Auto scaling group - Horizontal scaling. 
+ - eksctl get cluster --region <region_name> - to check how many cluster running in that region. 
+ - eksctl get nodegroup --region <region_name> --cluster <cluster_name> - to check node group. 
+ - eksctl scale nodegroup --cluster <cluster_name> --nodes 4 --nodes-max 4 --name <node_group_name> --region <region_name> - scaling the node. 
