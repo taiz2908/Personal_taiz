@@ -234,7 +234,8 @@ How it Works ?
  - Cluster is not robust.
  - K8s Autoscaling , if pod dies automatically its create a new one
  - rolling update.
- - CNCF - integrate tools for logging & monitoring like promethus & grafana etc. 
+ - Enterprise edition of k8s supports more features like monitoring, logging & CICD etc. 
+ - CNCF - open source community, integrate tools for logging & monitoring like promethus & grafana etc. 
 
 21. Docker Container vs K8s POD ?
  - k8S pod is a runtime speficiation of a container --> Pod

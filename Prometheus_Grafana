@@ -1,10 +1,10 @@
 Ref:
  - https://github.com/iam-veeramalla/prometheus-Grafana-Zero-to-Hero
- - 
-
-
+ - https://www.youtube.com/watch?v=EeiYpnBHnhY&list=PLdpzxOOAlwvIKMhk8WhzN1pYoJ1YU8Csa&index=53
 
 ==================================================================================
+Why required?
+ - 
 What us Prometheus ?
 - Prometheus is an open-source monitoring and alerting system,
  helps you collect and store metrics about your software systems and infrastructure,
@@ -16,26 +16,37 @@ What us Prometheus ?
 - execute some promQL quries. 
 
 Architecture:
- Component Prometheus Server: which scrapes and stores time series data
+ Component called "Prometheus Server": which scrapes and stores time series data
   - It has "http server"
-  - Collects all the info from k8s cluster, and collect those metrics and stores into "TSDB" (time series data base)
-  - Also we can configure "Aleart Manager", notify through mail/ ms-teams channel's etc.
+  - Collects all the info from k8s cluster(has api-server expsose's metrics), and collect those metrics and stores into "TSDB" (time series data base).
+  - TSDB stores all info in HDD/SSD in a node.
+  - Also we can configure "Aleart Manager", notify through mail / ms-teams / slack channel's etc.
 
 What is Grafana ?
  - For better visualization. 
  - Need to create the "data source" and "dashboard".
- - For dashboard--> import --> 3662
+ - For dashboard--> import --> 3662 
+ - 3662 its a standard template created by grafana. 
 
-prometheus-Kube-state-metrics:
- - gives info about k8s api-server and more about k8s cluster. 
- - info about deployment, services, replica count etc 
- Advantage of additional metrics:
+prometheus-kube-state-metrics:
+ - Gives info about k8s api-server,status of etcd, default installation info and more about k8s cluster. 
+ - Info about deployment, services, replica count etc.
+Advantage of additional metrics:
   - kube-metrics 
   - whether expose or not , and url ? we can get the lot of quries from that 
 
+Additional Matrics?
+ - If you have a application, we want to check healthcheck, livenessprob , how? 
+ - Developer should use "prometheus metrics library" to scrap the metrics.
+
 INSTALLATION ?
- - helm
+ - helm - Byusing helm charts
  - operators - offers lot of advance capabilities, upgradation prometheus and lots of things 
+
+# helm repo add prometheus-community <repo_url>
+# helm repo update
+# helm install prometheus prometheus-community/prometheus
+# kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-ext
 
 ===================================================================================
  - Spin up the server's by using Ansible Playbooks.

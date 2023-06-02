@@ -2,8 +2,11 @@ EKS Cluster Setup:
  - https://www.youtube.com/watch?v=1O-I7NtwCeE Kubernetes Course| EKS Cluster Setup | An easiest way with step by step instructions. PART-1
  - https://www.youtube.com/watch?v=zjhsVsCI3gc PART-2, Kubernetes .. EKS Cluster Scaling
 ---
- - EKS Cluster creation by using Terraform:
+ - Kubernetes hands on introduction (2023) | Amazon EKS Workshop
    https://www.youtube.com/watch?v=_TFk5jQr2lk
+---
+ - Setup Kubernetes using Terraform | EKS setup using terraform | Provision EKS on AWS:
+   https://www.youtube.com/watch?v=acnpInts120&t=96s
 
 ---- Study / Reference Materials ----
 - https://aws.amazon.com/eks/getting-started/
@@ -58,3 +61,18 @@ i.e.,
  - eksctl get cluster --region <region_name> - to check how many cluster running in that region. 
  - eksctl get nodegroup --region <region_name> --cluster <cluster_name> - to check node group. 
  - eksctl scale nodegroup --cluster <cluster_name> --nodes 4 --nodes-max 4 --name <node_group_name> --region <region_name> - scaling the node. 
+
+==============================: Setup Kubernetes using Terraform :=======================
+1. Create VPC
+2. Create extra subnet for k8s
+3. Create EC2 Instance
+4. Create security groups for k8s
+5. Create IAM Roles.
+6. Create IAM policies.
+7. Attach Roles
+8. Create EKS Cluster
+9. Create Node Group
+
+==========: Setup EKS Cluster using eksctl and Deploy Springboot Microservices into EKS using Jenkins Pipeline ;=====
+Ref: 
+- https://www.youtube.com/watch?v=C1BlN66s9yo
