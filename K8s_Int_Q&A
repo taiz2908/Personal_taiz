@@ -11,11 +11,12 @@
 
 
   ======================: Troubleshooting & Debugging Kubernetes common problems :=================================
-  - https://www.youtube.com/watch?v=ORSxQeboprc&t=3  Part-1
+  - https://www.youtube.com/watch?v=ORSxQeboprc&t=3  Part-1 -->completed
   - https://www.youtube.com/watch?v=5UW0q64B8PA Part-2 
   - https://www.youtube.com/watch?v=d7gl5YE8OoI
   - https://www.youtube.com/watch?v=1x1O7zspLto&t=2s
   - https://www.youtube.com/watch?v=xsBnF9gbXW4&t=449s
+  
   Ref : 
    - https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/
    - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
@@ -26,22 +27,56 @@
    - kubectl get events --sort-by=.metadata.creationTimestamp
   
   Errors showing while creating pods
-   1. ImagePullBackoff - Invalid image / Invalid tag / Invalid permission
-   2. ErrImage pull(image pulled but pod is pending)
+   1. "ImagePullBackoff" - Invalid image / Invalid tag / Invalid permission
+   2. "ErrImage pull"(image pulled but pod is pending)
       - resource quota on namespace
       - requests and limit sets
-   3. Registry unavailable
-   4. Crashloopbackoff (suppose image is pulled successfully, comes during run time )
+   3. "Registry unavailable"
+   4. "CrashLoopBackOff" (suppose image is pulled successfully, comes during run time )
       - livenessprob failure
       - app failed to start for any reason
       - trying to write to a folder / missing out some permission
+    "init: CrashLoopBackOff" 
+    Solution:
+      - we need to check init container ? kubectl get pod <pod_name> -o yaml > demo.yml
+      - First the manifest file. 
+      - 
    5. killcontainer error
    6. validationError (pod.spec.containers)
       - syntax / array error
-  -----------------------
+   7. Pending - status showing ?
+      - when ? -> when it's not schedule
+    Solutions:
+      - kubectl describe pod <pod_name>
+      - showing some taints as well as one node not ready. 
+      - kubectl describe node <node_name> , we can see some taints there. so need to remove
+      - kubectl taint node <node_name> <taint_name>- , - means remove,untainted it. 
+   8. "Terminating" in Deployment. 
+      - check node status, found node not ready.
+      - 
 
+  -----------------------: How to Troubleshoot Kubernetes Clusters :-----------------------
+  Ref:
+   - https://www.youtube.com/watch?v=EirIuYq1Yes
 
-  ========================================================
+  1. kubectl get nodes
+     - error: The connection to the server <IP:listing_port> was refused did you specify the right host orports?
+    Solution:
+     - cd /etc/kubernetes/manifests/
+     - more kube-apiserver.yml (here we can check)
+     - Need to modify in config file
+     - cd .kube , vi config (under server need to edit & correct it)
+     If still facing issue check the api-server mentioned in point-2 below. 
+  2. Who manages the static pod ? 
+     - kubelet
+     How to check kubelet is healthy or not ?
+     - systemctl status kubelet (check the status under Active) 
+     - systemctl enable --now kubelet -->enable and start combined into one.
+  3. After enabling kubelet, "kubectl get nodes" not working ? Now we have to check pod logs.
+     - cd /var/log/pod/
+     - ls -lrth --> cd kubesystem_kube-apiserver --> ls -lrth
+
+  =======================: K8S INTERVIEW QUS :=============================================================
   K8s Version: 1.17
   v1.26 -->latest
   v1.25 
@@ -143,7 +178,7 @@ Secrets:
  - Ex: passwords, API keys, and certificates
 
 8. Explain static pods in K8s?
- - Static Pods are managed directly by the "kubelet daemon" on a specific node
+ - Static Pods are managed directly by the "kubelet daemon" on a specific node.
  - Use Cases of Using Static Pods :
    - Static pods are usually used by different software for bootstrapping Kubernetes itself. 
    - For example, kubeadm uses static pods to bring up Kubernetes control plane components like api-server, controller-manager as static pods on the Master Node.
