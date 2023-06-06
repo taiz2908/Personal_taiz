@@ -1,6 +1,7 @@
-Ref: Jenkinsfile : Jenkins.io
-https://www.jenkins.io/doc/book/pipeline/syntax/#parameters
-https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/
+Ref: Jenkinsfile
+ - https://www.jenkins.io/doc/book/pipeline/syntax/#parameters
+ - https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/
+ - https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#handling-credentials
 
 VIDEO:
 1. https://www.youtube.com/watch?v=aFRjn_4nb-Q&list=PLKaiHc24qCTSnXaus2t4b71ihq9k649XS

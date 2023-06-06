@@ -59,6 +59,11 @@ pipeline {
         pollSCM('') //Enabling build on push
     } */
 
+    /*parameters {
+        choice(name: 'VERSION', choices: ['1.1.0', '1.2.1'], description: '')
+        booleanParam(name: 'executeTests', defaultValue: true, description: '')
+    }*/
+
     stages {
         stage ('PACKAGE') {
             steps {
@@ -99,10 +104,10 @@ pipeline {
                         withCredentials([
                             usernamePassword(credentialsID:'my_cred', usernameVariable:'my_update', passwordVariables:'my_passwd')
                         ]) {
-                            sh """#!/bin/sh
+                            sh """#!/bin/sh 
                              docker login -u \$my_update -p \my_passwd $repo_url
                              docker build -t $newimg:$newtag --build-arg SRC=$repo_url --build-arg IMG=$newimg --build-arg TAG=newtag .
-                           """  
+                           """
                         }
                     }
                 }
@@ -166,6 +171,13 @@ pipeline {
     }
 }
 
+Note:
+ - How to write multipline shell scripts ?
+ steps{
+    sh """
+
+    """;
+ }
 ================================================================================================================
 Ex:
 "pipeline-libraries under vars/ folder i.e. mvnInstall.groovy"
@@ -236,6 +248,8 @@ Managed jenkins-> credentials
 
 10. DEPLOY //Deploying generated artifact to "Sonatype Nexus" Repo
     - Used for store the release (deployable application) & snapshots. 
+      - Snapshot: 1.0.1
+      - Release: 1.0.1-SNAPSHOT 
     - mvn deploy
     - Few things needs to update under pom.xml file. 
      <distributionManagement>
@@ -248,6 +262,13 @@ Managed jenkins-> credentials
     - plugin:
       - nexus-artifact-uploader 
       - Nexus Platform (nexus-jenkins-plugin)
+      - pipeline-utility-steps
+    Note: How to automate that new version should upload to nexus?
+      - We can achieve by dynamic way. 
+      - need to install "pipeline-utility-steps" plugin.
+      - write the some script 
+        - def readVersionpom = readMavenPom file: 'pom.xml'
+        - after that variablised the version
 
 11. DOCKER LOGIN & BUILDING IMAGE
     - Dockerfile //need to write dockerfile and present in source code repo
@@ -267,6 +288,7 @@ Managed jenkins-> credentials
       - docker tag $newimg:$newtag $repo_url/$newimg:$newtag
       - docker push $repo_url/$newimg:$newtag
 
+=================: CD - 1 :============================
 13. Deploying to K8s by Helm Chart
     - we are updating the tags in helm charts. 
     - Plugins:
@@ -275,4 +297,59 @@ Managed jenkins-> credentials
       - kubernetes-client-api
 
 14. Deploying Helm to Cluster via IBM UCD
+
+
+===================: CD - 2 :==========================
+Ref:
+ - https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#handling-credentials
+ 
+1. EKS Cluster by terraform
+   - spin up the cluster by using terraform 
+
+2. Deployment.yaml
+   - Need to write deployment yml file
+3. service.yaml
+   - Need to write service yml file
+
+4. Jenkins - CD
+   - aws cli need to installed in jenkins server
+   - in Jenkins instance need to configure "AWS_ACCESS_KEY_ID" & "AWS_SECRET_ACCESS_KEY"
+   - Need to add credentials? manage jenkins-->manage credentilas-->add.
+
+5. Parameters & Env variable
+---
+pipeline {
+    agent {
+        // Define agent details here
+    }
+    parameters {
+        choice(name: 'action', choices:'create\ndestroy', description: '')
+        string(name: 'cluster', defaultValue: 'demo-cluster', description: '')
+        string(name: 'region', defaultValue: 'us-east-1', description: '')
+    }
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    }
+    stages {
+        stage('EKS Connect') {
+            steps {
+                sh """
+                aws configure set AWS_ACCESS_KEY_ID "$AWS_ACCESS_KEY_ID "
+                aws configure set AWS_SECRET_ACCESS_KEY "$AWS_SECRET_ACCESS_KEY"
+                aws configure set region ""
+                aws eks --region ${params.region} update-kubeconfig --name ${params.cluster}
+                """; 
+            }
+        }
+        stage('EKS Deployment') {
+            steps {
+                sh """
+                kubectl apply -f .
+                """;
+            }
+        }
+    }
+}
+===============================================================================================
 

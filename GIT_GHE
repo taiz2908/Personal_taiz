@@ -101,11 +101,20 @@ That is Application Id/ Task ID etc
 
 -------------------------- Git Branching Strategy -------------------
 Currently in our project basically  we have 
-1) Master Branch: It containes production code which is stable
-2) Development Branch: Has Pre-Production code . (when we're assigned with new feature we can create a new feature branch frm dev branch, we can create a pull request and merged it with dev branch,and perticular feature branch will be deleted )
+1) Master Branch: It containes production code which is stable [ Active Development ]
+   - Always Up to date. 
+   
+2) Development Branch: 
+   - Has Pre-Production code . (when we're assigned with new feature we can create a new feature branch frm dev branch, we can create a pull request and merged it with dev branch,and perticular feature branch will be deleted )
+
 3) Feature Branch: 
-4) Release Branch: to support preparation of new prod release. 
-5) Hot Fix Branch: to patch prod releases. 
+
+4) Release Branch: [ Delivering code to the customer ]
+   - to support preparation of new prod release. 
+
+5) Hot Fix Branch:  [Qucik changes and deliver to customer]
+   - to patch prod releases.
+   - It should go both in master as well as release branch.
 
 
 

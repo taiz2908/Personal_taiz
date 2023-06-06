@@ -70,6 +70,7 @@ Working with Files and Directories:
  cd / :go to the root directory
  cd :go to home directory
  cp file home/ : copy file to home directory
+ cp -r <> <>
  mv text.pdf home/
  mv home/ homenew/ :renaming a directory home to homenew
 

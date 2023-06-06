@@ -4,7 +4,8 @@
  - https://www.youtube.com/watch?v=wMHtTcu-4RA
 
 3. Deploying Java Applications with Docker and Kubernetes | DevOps Project 
- - https://www.youtube.com/watch?v=0GgBi8yNQT4
+ - https://www.youtube.com/watch?v=0GgBi8yNQT4 [GitHub + Jenkins + Terraform + Helm + AmazonEKS ] --> Completed
+ - https://www.youtube.com/watch?v=edmHwUTs9OA [GitHub | Jenkins | Docker | ECR | Kubernetes]
 
 4. DevOps Project 3 | DevOps Project | GitHub+Jenkins+Terraform+Helm+AmazonEKS
  - https://www.youtube.com/watch?v=tpZsWJvKNWg
@@ -16,4 +17,96 @@
  - https://www.youtube.com/watch?v=JGQI5pkK82w
 
 7. https://www.youtube.com/watch?v=WFyyCiZz1k4 DevOps Real Time Project [ HINDI ] | PART-2/3 | 9871551902
+
+8. https://www.youtube.com/watch?v=cgsBdVnMV-o&list=PLdpzxOOAlwvIKMhk8WhzN1pYoJ1YU8Csa&index=54  AWS LIVE PROJECT | DEPLOY APP USING HTTPD --> Completed
+
+9. CICD pipeline for Java application to deploy on kubernetes cluster using Jenkins | Devops Project
+https://www.youtube.com/watch?v=adG0vq5boL8
+
+10. https://www.youtube.com/watch?v=8KZi7KBpk0I&t=3286s CI/CD Project | Docker | Jenkins | Nexus | SonarQube | datree | Helm | K8s
+
+==============================: Project 8 [DEPLOY APP(Static Website) USING HTTPD]: ============================
+ - Create EC2
+ - Update the OS
+ - Install httpd/nginx
+ - Install git
+ - Clone the repo
+ - cp file to /var/www/html path
+ - Restart the httpd/nginx
+ - Access the website by using public IP.
+
+================================: Project-3, [GitHub | Jenkins | Docker | ECR | AWS EKS ] :==============
+Tools Used:
+ - Git & Github
+ - Jenkins
+ - Docker
+ - Jenkins
+ - AWS
+   - ECR
+   - EKS
+
+Step 1:
+ - Code + Dockerfile + Deployment.yml + Service.yml should present in gitHub.
+ - Jenkinsfile also presnt within github.
+
+Step 2:
+ - Create EC2 Instance for Jenkins server.
+   - Key-pair
+   - Security groups
+   - Allow http,https, ssh port , inbound rule(8080, custom TCP)
+   - After that need to update the OS.
+ - Need to install following softwares in Jenkins GUI
+   - Git
+   - Java
+   - Docker
+   - AWS CLI 
+   - Kubectl cmd line utility.
+ - Need to configure Jenkins UI.
+   - Provide the github path
+   - Mention the branch(*/master or, */main)
+
+Step 3:
+ - Need to create ECR Repo in AWS consol.
+ - Need to create EKS Cluster by using terraform script.
+
+Step 4: [ We can add these scripts within our Jenkisfile ]
+ - set -ex //gives the summary of the execution
+ - VERSION=$TAG //takes the version from user, parameterised it by using "string"
+ - cd ${WORKSPACE}/DevOps_Project_1
+
+ - export AWS_PROFILE="euran_devops_project"    
+ - echo $AWS_PROFILE
+
+ - whoami
+ - aws ecr get-login-password --region <region_name> | sudo docker login --username AWS --password-stdin "<ecr_repo_name>"
+
+ - sudo docker build -t nginx-application .
+ - sudo docker tag nginx-application:latest <ecr_repo_name>:$VERSION
+ - sudo docker push <ecr_repo_name>/nginx-application:$VERSION
+
+ - DOCKER_IMAGE="<ecr_repo_name>/nginx-application:$VERSION"
+
+ - sed -i "s@devops_image@$DOCKER_IMAGE@g" nginx_deployment.yaml
+ - cat nginx_deployment.yaml
+ - aws eks update-kubeconfig --name <cluster_name> --region <region_name> --profile euran_devops_project
+ - kubectl apply -f nginx_deployment.yaml
+ - kubectl expose deployment nginx-deployment --type=LoadBalancer --name=nginx-service
+
+
+================================: Project-3, [GitHub + Jenkins + Terraform + Helm + AmazonEKS] :==========
+
+================================: Project-9, Java app to deploy on k8s(EKS) cluster using Jenkins :=======
+
+==============: Project-10, CI/CD Project | Docker | Jenkins | Nexus | SonarQube | datree | Helm | K8s :=======
+Tools Used:
+ - Git & Github
+ - Jenkins
+ - SonarQube
+ - Nexus
+ - Docker
+ - Helm
+ - K8s
+
+Step 1:
+ 
 

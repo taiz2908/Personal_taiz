@@ -1,17 +1,140 @@
-Major AWS Services:
+============: Major AWS Services: =======
  - EC2
+   - General Purpose
+   - Compute Optimized
+   - Memory Optimized
+   - Storage Optimized
+  Purchasing Options:
+   - On-demand Instances
+   - Spot Instances
+   - Dedicated Hosts
+   - Dedicated Instances
+   - Standard Reserved Instances
+  Instance States:
+   - Stop
+   - Terminate
+   - Hybernate
+   - Standby
+
  - IAM
+   - Users: User can belong to multiple groups
+   - Groups : Groups are collections of users and have policies attached to them
+   - IAM User has limited permission to the account
+   - Policies: Policies are JSON documents that outline permissions for users, groups or roles
+     - User based policies
+       - IAM policies define which API calls should be allowed for a specific user
+     - Resource based policies
+       - Control access to an AWS resource
+   - Roles: Collection of policies for AWS services
+
  - EBS
+   - Bound to an AZ
+   - By default, upon instance termination, the root EBS volume is deleted and any other attached EBS volume is not deleted.
+   - To replicate an EBS volume across AZ or region, need to copy its snapshot
+   - EBS Multi-attach allows the same EBS volume to attach to multiple EC2 instances in the same AZ
+  Types:
+   - General Purpose SSD : Good for system boot volumes, virtual desktop
+   - Provisioned IOPS SSD :Transaction-intensive Applications with high frequency of small & random IO operations. 
+   - Hard Disk Drives (HDD) :Throughput-intensive Applications that require large & sequential IO operations and are less sensitive to increased I/O latency 
+  Snapshots:
+   - Data Lifecycle Manager (DLM) can be used to automate the creation, retention, and deletion of snapshots of EBS volumes.
+   - Snapshots are incremental
+   - Only the most recent snapshot is required to restore the volume
+
  - S3
+   - 
+   -
+   -
+   -
+   -
+
+ - CloudWatch
+   - 
+   - 
+
+ - Lambda
+   - Serverless (short actions/functionality)
+   - we can directly run the application. 
+
  - Auto Scaling
- - ELB
+
+ - ELB 
+   - N/w LB 
+     - Operates at Layer 4 (TCP, UDP)
+     - Can handle millions of request per seconds (extreme performance)
+     - Lower latency ~ 100 ms (vs 400 ms for ALB)
+     - 1 static public IP per AZ (vs a static hostname for CLB & ALB)
+     - Elastic IP can be assigned to NLB
+   - App LB
+     - Load balancing to multiple applications (target groups) based on the request parameters
+     - Operates at Layer 7 (HTTP, HTTPS and WebSocket)
+     - Provides a fixed hostname (xxx.region.elb.amazonaws.com)
+     - ALB terminates the upstream connection and creates a new downstream connection to the targets (TCP termination)
+     - Security Groups can be attached to ALBs to filters requests
+     - Great for micro services & container-based applications (Docker & ECS)
+   - Gateway LB
+     - Operates at layer 3 (Network layer) - IP Protocol
+     - Used to route requests to a fleet of 3rd party virtual appliances like Firewalls, Intrusion Detection and Prevention Systems (IDPS), etc.
+     - Performs two functions:
+       - Transparent Network Gateway (single entry/exit for all traffic)
+       - Load Balancer (distributes traffic to virtual appliances)
+  Cross-zone Load Balancing:
+
  - VPC
+   - Create VPC
+   - Create subnet
+   - Create Route table
+   - Create Internet Gateway
+
  - Route 53
+   - DNS
+
  - DynamoDB
  - SNS
  - SQS
- - ECS
+ - ECS (Elastic Container Service)
+   - AWS managed container orchestration platform. / AWS proprietary service
  - EKS
+   - Managed k8s service. 
+   - https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
+
+ - ECR (Elastic Container Registry)
+   - AWS managed private Docker repository
+   - Pay for the storage you use to store docker images (no provisioning)
+   - Integrated with ECS & IAM for security
+   - Storage backed by S3
+   - Can upload Docker images on ECR manually or we can use a CICD service like CodeBuild
+
+ - Fargate
+ - Cloudformations(CFT)
+ - KMS
+ - CloudTrail
+ - 
+
+Ref:
+ - https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+
+==============: AWS CLI :=============
+- Version : Version 2
+# aws version - to check properly installed or not
+# aws configure
+ - AWS access key ID
+ - AWS Secrete key ID
+# aws s3 ls
+# aws s3 mb <bucket_name> - create bucket
+# aws s3 rb - Delete buckets
+# aws s3 rm - Delete objects
+# aws s3 mv <source> <target> - Move objects
+# aws s3 cp <source> <target> - copy objects
+
+=============: Cloudformation :======================================
+How to create?
+ - Create stack
+ - if template is present then need to choose "template is ready"
+ - template source [S3, Upload a template file]
+ - Next --> Done
+
+====================: AWS INTERVIEW QUS :=========================================================
 
 1. Security group vs NACL.
 
