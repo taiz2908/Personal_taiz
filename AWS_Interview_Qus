@@ -1,20 +1,25 @@
 ============: Major AWS Services: =======
- - EC2
+ - EC2 
    - General Purpose
    - Compute Optimized
-   - Memory Optimized
+   - Memory Optimized (larger RAM size)
+   - Accelerated Computing (larger data sizes with read & write access)
    - Storage Optimized
   Purchasing Options:
-   - On-demand Instances
+   - On-demand Instances: shorterm irregular workload that can't be interrupted. 
    - Spot Instances
    - Dedicated Hosts
    - Dedicated Instances
-   - Standard Reserved Instances
+   - Standard Reserved Instances: min 1year
   Instance States:
    - Stop
    - Terminate
    - Hybernate
    - Standby
+
+ - AMI
+   - OS Image + App Image
+   - Avaialble in AWS, Marketplace, Custom AMI
 
  - IAM
    - Users: User can belong to multiple groups
@@ -35,37 +40,86 @@
   Types:
    - General Purpose SSD : Good for system boot volumes, virtual desktop
    - Provisioned IOPS SSD :Transaction-intensive Applications with high frequency of small & random IO operations. 
-   - Hard Disk Drives (HDD) :Throughput-intensive Applications that require large & sequential IO operations and are less sensitive to increased I/O latency 
+   - Cold (HDD) :Throughput-intensive Applications that require large & sequential IO operations and are less sensitive to increased I/O latency 
+   - Throughput optimised HDD
+   - Magentic(standard)
   Snapshots:
    - Data Lifecycle Manager (DLM) can be used to automate the creation, retention, and deletion of snapshots of EBS volumes.
    - Snapshots are incremental
    - Only the most recent snapshot is required to restore the volume
 
  - S3
-   - 
-   -
-   -
-   -
-   -
+   - Global Service
+   - Object store (key-value pairs)
+   - Buckets must have a globally unique name
+   - Buckets are defined at the regional level
+   - Max Object Size: 5TB
+  Bucket Versioning:
+   - Enabled at the bucket level
+   - Protects against unintended deletes
+   - Ability to restore to a previous version
+  Storage Classes:
+   - S3 Standard
+   - S3 Standard Infrequent Access
+   - S3 One zone IA
+   - S3 Intelligent Tiering
+   - S3 Glacier
+   - S3 Glacier deep archieve
+  Data Transfer Costs:
+   - Uploads to S3 are free
+   - Downloads from S3 are paid
 
  - CloudWatch
-   - 
-   - 
+   - Serverless performance monitoring service
+   - EC2 instances have metrics every 5 minutes
+   - With detailed monitoring (for a cost), you get metrics every 1 minute
+   - Use detailed monitoring if you want to react faster to changes (eg. scale faster for your ASG)
+  Available metrics in CloudWatch:
+   - CPU Utilization
+   - Network Utilization
+   - Disk Performance
+   - Disk Reads/Writes
+  Custom metrics:
+   - Memory utilization (memory usage)
+   - Disk swap utilization
+   - Disk space utilization
+   - Page file utilization
+  Logs:
+   - Used to store application logs
+   - Log Groups represent an application sending logs to CW
+   - Log Streams represent instances within applications or log files or containers
+   - Logs Expiration: never expire (default), 30 days, etc.
+  Logs can be sent to:
+   - S3 buckets (exports)
+   - Kinesis Data Streams
+   - Kinesis Data Firehose
+   - Lambda functions
+   - ElasticSearch
 
  - Lambda
    - Serverless (short actions/functionality)
    - we can directly run the application. 
 
  - Auto Scaling
+   - Regional Service
+   - Supports Multi AZ
+   - Automatically add(scale out) or, remove(scale in) instances (scale horizontally) based on the load.
+   - Free (pay for the underlying resources)
+   - IAM roles attached to an ASG will get assigned to the launched EC2 instances
+   - ASG can terminate instances marked as unhealthy by an ELB.
+  Components:
+   - Scaling policy: min & max
+   - metric type: we can define cpu utilisation %
+   - target group
 
  - ELB 
-   - N/w LB 
+   - Network LB 
      - Operates at Layer 4 (TCP, UDP)
      - Can handle millions of request per seconds (extreme performance)
      - Lower latency ~ 100 ms (vs 400 ms for ALB)
      - 1 static public IP per AZ (vs a static hostname for CLB & ALB)
      - Elastic IP can be assigned to NLB
-   - App LB
+   - Application LB
      - Load balancing to multiple applications (target groups) based on the request parameters
      - Operates at Layer 7 (HTTP, HTTPS and WebSocket)
      - Provides a fixed hostname (xxx.region.elb.amazonaws.com)
@@ -81,19 +135,53 @@
   Cross-zone Load Balancing:
 
  - VPC
+   - Customize our n/w configuration, n/w that is isolated from other n/w.
+   - Max 5 vpc can be created in one region, 200 subnets in 1 vpc.
+   - VPC confined to region.
+   - Subnet confined to subnet.
+  Types:
+   - default (has IG)
+   - custom (Doesn't have IG, need to create)
+  How to Create? 
    - Create VPC
    - Create subnet
    - Create Route table
-   - Create Internet Gateway
+   - Create Internet Gateway   
+  Public vs Private Subnet:
+   - Major diff is IG
+   - In public traffic is routed to an IG
+   - In private traffic doesn't route to IG
+  NAT Gateway:
+   - By using Nat gateway we can access aws services
+   - to create nat gateway must specify the public subnet.
+   - must specify elastic ip.
+  VPC Peering:
+   - Its a n/w connection between two vpc that enables us to route traffic between them.
+   - using IPV4 address or IPV6 address.
+  VPC Endpoint:
+   - enables us to privately connect your vpc to support aws services.
+   - instances don't require public ip address.
 
  - Route 53
-   - DNS
+   - Global Service
+   - AWS managed Authoritative DNS (customer can update the DNS records and have full control over the DNS)
+   - Also a Domain Registrar (for registering domain names)
+  Record Types:
+   - A - maps a hostname to IPv4
+   - AAAA - maps a hostname to IPv6
+   - CNAME - maps a hostname to another hostname
+   - NS (Name Servers) - controls how traffic is routed for a domain
+   - Alias - maps a hostname to an AWS resource
 
  - DynamoDB
+
  - SNS
+
  - SQS
+
  - ECS (Elastic Container Service)
    - AWS managed container orchestration platform. / AWS proprietary service
+
  - EKS
    - Managed k8s service. 
    - https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
@@ -106,8 +194,11 @@
    - Can upload Docker images on ECR manually or we can use a CICD service like CodeBuild
 
  - Fargate
+
  - Cloudformations(CFT)
+
  - KMS
+
  - CloudTrail
  - 
 
@@ -136,7 +227,15 @@ How to create?
 
 ====================: AWS INTERVIEW QUS :=========================================================
 
-1. Security group vs NACL.
+1. Security Group vs NACL.
+   Security Group
+    - Operates instance level
+    - allow rules only
+    - stateful
+   NACL
+    - Operates subnet level.
+    - we can allow as well deny rules.
+    - stateless.
 
 2. Single part vs multipart upload mechanism in S3 bucket .
  - Multipart Upload:
@@ -172,3 +271,43 @@ How to create?
   - If issue with root then need to check /var/log
   - application /tmp
   - need to take the snapshot increase disk space.
+
+============: AWS EC2 Interview Questions and Answers for Experienced :================
+8. What are the type of virtualization do we have on AWS Platform?
+  - hvm
+  - paravirtualisation 
+
+9. What are the type of root device?
+  - EBS
+  - Instance store
+
+10. What are the type of EBS Volumes and the use cases?
+  - refer to above note.
+
+11. What is difference between t2.micro and t3.micro?
+  - t2/t3 --> family type
+  - .micro/small/nano --> define the size like ram,cpu etc.
+
+12. Why do we attach IAM role with EC2 machine while creating it?
+  - User can get least priveledge to perform the action. 
+
+13. What is Advantage of IAM role with EC2?
+  - 
+
+14. What are the usages of TAGs with EC2 / AWS Resources?
+  - we can know those instance use for which purpose. accordingly we can perform / reach out to the team. 
+
+15. What is T2/T3 unlimited option?
+  - we have cpu credit usage & cpu credit balance.  
+
+16. What are the type of Hypervisors in AWS?
+  - xen (t2.micro) 
+  - nitro (t3.micro) --> faster & cheaper.
+
+17. How can we recover lost ec2 ssh key?
+  - No way to recover
+  - we can mount the root volume
+
+18. How to check shared AMIs?
+  - go to AMI
+  - Three options (owned by me, public images, private images)
