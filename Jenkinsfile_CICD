@@ -313,8 +313,10 @@ Ref:
 
 4. Jenkins - CD
    - aws cli need to installed in jenkins server
+   - Kubectl cmd line utility.
+   - eksctl
    - in Jenkins instance need to configure "AWS_ACCESS_KEY_ID" & "AWS_SECRET_ACCESS_KEY"
-   - Need to add credentials? manage jenkins-->manage credentilas-->add.
+   - Need to add credentials? manage jenkin s--> manage credentilas--> add.
 
 5. Parameters & Env variable
 ---
@@ -338,7 +340,7 @@ pipeline {
                 aws configure set AWS_ACCESS_KEY_ID "$AWS_ACCESS_KEY_ID "
                 aws configure set AWS_SECRET_ACCESS_KEY "$AWS_SECRET_ACCESS_KEY"
                 aws configure set region ""
-                aws eks --region ${params.region} update-kubeconfig --name ${params.cluster}
+                aws eks update-kubeconfig --region ${params.region} --name ${params.cluster}
                 """; 
             }
         }

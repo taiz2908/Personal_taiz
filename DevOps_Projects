@@ -4,10 +4,9 @@
  - https://www.youtube.com/watch?v=wMHtTcu-4RA
 
 3. Deploying Java Applications with Docker and Kubernetes | DevOps Project 
- - https://www.youtube.com/watch?v=0GgBi8yNQT4 [GitHub + Jenkins + Terraform + Helm + AmazonEKS ] --> Completed
- - https://www.youtube.com/watch?v=edmHwUTs9OA [GitHub | Jenkins | Docker | ECR | Kubernetes]
+ - https://www.youtube.com/watch?v=0GgBi8yNQT4 
 
-4. DevOps Project 3 | DevOps Project | GitHub+Jenkins+Terraform+Helm+AmazonEKS
+4. DevOps Project | DevOps Project | GitHub+Jenkins+Terraform+Helm+AmazonEKS
  - https://www.youtube.com/watch?v=tpZsWJvKNWg
 
 5. Jenkins CI/CD Pipeline - SonarQube, Docker, Github Webhooks on AWS
@@ -37,7 +36,7 @@ https://www.youtube.com/watch?v=adG0vq5boL8
  - Restart the httpd/nginx
  - Access the website by using public IP.
 
-================================: Project-3, [GitHub | Jenkins | Docker | ECR | AWS EKS ] :==============
+================================: Project-4, [GitHub | Jenkins | Docker | ECR | AWS EKS ] :==============
 Tools Used:
  - Git & Github
  - Jenkins
@@ -49,13 +48,13 @@ Tools Used:
 
 Step 1:
  - Code + Dockerfile + Deployment.yml + Service.yml(LoadBalancer) should present in gitHub.
- - Jenkinsfile also presnt within github.
+ - Jenkinsfile also present within github.
 
 Step 2:
  - Create EC2 Instance for Jenkins server.
    - Key-pair
    - Security groups
-   - Allow http,https, ssh port , inbound rule(8080, custom TCP)
+   - Allow http, https, ssh port , inbound rule(8080, custom TCP)
    - After that need to update the OS.
  - Need to install following softwares in Jenkins GUI
    - Git
@@ -69,7 +68,7 @@ Step 2:
 
 Step 3:
  - Need to create ECR Repo in AWS consol.
- - Need to create EKS Cluster by using terraform script.
+ - Need to create EKS Cluster by using "terraform script".
 
 Step 4: [ We can add these scripts within our Jenkisfile ]
  - set -ex //gives the summary of the execution
@@ -90,13 +89,75 @@ Step 4: [ We can add these scripts within our Jenkisfile ]
 
  - sed -i "s@devops_image@$DOCKER_IMAGE@g" nginx_deployment.yaml
  - cat nginx_deployment.yaml
+
  - aws eks update-kubeconfig --name <cluster_name> --region <region_name> --profile euran_devops_project
  - kubectl apply -f nginx_deployment.yaml
  - kubectl expose deployment nginx-deployment --type=LoadBalancer --name=nginx-service
 
-========================: Project-11, Deploy Springboot [GitHub | Jenkins | Docker | ECR | AWS EKS ] :===========
+===================: Project-11, Deploy Springboot [GitHub | Jenkins | MAVEN | Docker | ECR | AWS EKS ] :===========
+ # Extension of Project- 4 , Only thing is that we have added some extra tools. 
 
+ Tools Used:
+ - Git & Github
+ - Jenkins
+ - Docker
+ - Jenkins
+ - Maven
+ - AWS
+   - ECR (Image repo)
+   - EKS (Cluster)
 
+ Pipeline stages:
+ - code checkout
+ - mvn build
+ - building image
+ - tagging image
+ - pushing
+ - deploy to eks cluster
+
+Step 1:
+ - Code + Dockerfile + Deployment.yml + Service.yml(LoadBalancer) should present in gitHub.
+ - Jenkinsfile also present within github.
+
+Step 2:
+ - Create EC2 Instance (ubuntu:18.04) for Jenkins server.
+   - Key-pair
+   - Security groups
+   - Allow http, https, ssh port , inbound rule(8080, custom TCP)
+   - After that need to update the OS and installing jenkins.
+ - Need to install following softwares in Jenkins GUI
+   - Git
+   - Java
+   - Maven (maven automatically install java) & configure the path in Jenkins gui under global tool configuration.
+   - Docker
+    - add jenkins user to docker group
+    - sudo usermod -a -G docker jenkins
+   - AWS CLI 
+   - Kubectl cmd line utility.
+   - eksctl
+ - Need to configure Jenkins UI.
+   - Provide the github path
+   - Mention the branch(*/master or, */main)
+
+Step 3:
+ - Need to create ECR Repo in AWS consol.
+ - Setting up eks cluster ?
+   - create secrete key & access key
+   - creating IAM role with policy (AdministratorAccess policy)
+ - Need to create IAM role for EKS Cluster and attach to the instance.
+   - eksctl create cluster --name <cluster_name> --region <region_name> --node-type <node_type/t3.small>
+
+Step 4:
+ - we need to create credentials to connect eks cluster using kubeconfig. 
+ - Switch to Jenkins user (sudo su - jenkins) as jenkins have to access to "kubeconfig" file.
+   - cat /var/lib/jenkins/.kube/config
+   - need to store the value in a text file.
+   - go to jenkins--> manage credentials-->secrete file-->upload and save it
+ - Need to install few plugins. 
+   - docker 
+   - docker pipeline
+   - k8s cli
+ 
 ================================: Project-3, [GitHub + Jenkins + Terraform + Helm + AmazonEKS] :==========
 
 ================================: Project-9, Java app to deploy on k8s(EKS) cluster using Jenkins :=======
