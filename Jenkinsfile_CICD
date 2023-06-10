@@ -309,7 +309,7 @@ Ref:
 2. Deployment.yaml
    - Need to write deployment yml file
 3. service.yaml
-   - Need to write service yml file
+   - Need to write service yml file(service type: LoadBalancer)
 
 4. Jenkins - CD
    - aws cli need to installed in jenkins server

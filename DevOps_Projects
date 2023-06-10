@@ -25,6 +25,8 @@ https://www.youtube.com/watch?v=adG0vq5boL8
 
 10. https://www.youtube.com/watch?v=8KZi7KBpk0I&t=3286s CI/CD Project | Docker | Jenkins | Nexus | SonarQube | datree | Helm | K8s
 
+11. https://www.youtube.com/watch?v=C1BlN66s9yo  EKS Cluster using eksctl and Deploy Springboot Microservices into EKS using Jenkins Pipeline
+
 ==============================: Project 8 [DEPLOY APP(Static Website) USING HTTPD]: ============================
  - Create EC2
  - Update the OS
@@ -46,7 +48,7 @@ Tools Used:
    - EKS
 
 Step 1:
- - Code + Dockerfile + Deployment.yml + Service.yml should present in gitHub.
+ - Code + Dockerfile + Deployment.yml + Service.yml(LoadBalancer) should present in gitHub.
  - Jenkinsfile also presnt within github.
 
 Step 2:
@@ -91,6 +93,8 @@ Step 4: [ We can add these scripts within our Jenkisfile ]
  - aws eks update-kubeconfig --name <cluster_name> --region <region_name> --profile euran_devops_project
  - kubectl apply -f nginx_deployment.yaml
  - kubectl expose deployment nginx-deployment --type=LoadBalancer --name=nginx-service
+
+========================: Project-11, Deploy Springboot [GitHub | Jenkins | Docker | ECR | AWS EKS ] :===========
 
 
 ================================: Project-3, [GitHub + Jenkins + Terraform + Helm + AmazonEKS] :==========
