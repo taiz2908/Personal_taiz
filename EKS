@@ -19,7 +19,11 @@ Intro:
  - AWS manage master node
  - install necessary apps   
  - scaling & backups
- - we can create the cluster via consol,cloud formation, aws cli, terraform. 
+ - we can create the cluster via 
+   - Consol,
+   - Cloud Formation
+   - AWS CLI by eksctl 
+   - Terraform
  - eksctl - cli for amazon EKS [needs to authenticate with aws, how? by using aws_access_key & secrete_access_key]
  - eksctl create cluster --> single cmnd can create the cluster. 
 
@@ -55,6 +59,39 @@ i.e.,
  - give name, select k8s version
  - choose region & vpc
  - choose security for the cluster
+
+------------------: Scripts :--------------------------
+# Installing AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+# Installing eksctl
+ARCH=amd64
+PLATFORM=$(uname -s)_$ARCH
+curl -sLO "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+curl -sL "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+sudo mv /tmp/eksctl /usr/local/bin
+
+# Installing Kubectl
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+kubectl version --short --client
+
+# IAM PERMISSIONS:
+IAM-->RoleS-->Create role--> AWS SERVICE--> EC2
+ - AWSCloudFormationFullAccess
+ - AdministratorAccess	
+ - IAMFullAccess	
+ - AmazonEC2FullAccess	
+ - save it. 
+After that Attach to EC2 m/c.
+
+# Creating the cluster by using eksctl cmd utility.
+eksctl create cluster --name ibraur-cluster --region us-east-1 --node-type t2.small
+eksctl delete cluster ibraur-cluster --region us-east-1
 
 ===============================: EKS Cluster Scaling :====================================
  - Auto scaling group - Horizontal scaling. 
