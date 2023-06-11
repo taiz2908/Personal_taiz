@@ -20,7 +20,7 @@ Intro:
  - install necessary apps   
  - scaling & backups
  - we can create the cluster via 
-   - Consol,
+   - Consol
    - Cloud Formation
    - AWS CLI by eksctl 
    - Terraform
