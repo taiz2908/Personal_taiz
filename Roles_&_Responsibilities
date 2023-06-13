@@ -1,3 +1,15 @@
+------------- IN-General -------------
+1. we do have our CICD task, depends on the team requirement within the sprint. 
+2. also we support development team. 
+3. CI-CD Process. (Need to brief properly)
+4. How to handle sensitive info ?
+   - Hasicorp Vault 
+5. How did you integrate vault in your pipeline ?
+   - other team handled so we requested.
+6. Can you use this pipeline for all env ? how did you organise ?
+   - dev / staging /prod
+   - 
+
 ----------Git & GHE --------------------
 1. Creating & managing the GHE Repo by using various git cmds for different services/components. 
 2. Creating / deletion the branchs.
@@ -55,6 +67,8 @@ Updating pom.xml file
 
 
 -------------- IBM UCD ---------------
+
+
 
 
 

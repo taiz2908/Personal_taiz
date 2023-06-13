@@ -59,12 +59,26 @@ Ex:
 - /tmp
 - /opt
 - /boot
-----------------------------: :-------------------------------
+----------------------------: File Listing :-------------------------------
 Working with Files and Directories:
  pwd 
+ cal 
+ date
+ touch
+ mkdir
+ rmdir
+ rm -rf
+ rm -rf *.txt
+ what is cp/mv/mkdir
+ cp/mv/mkdir --help
+ man cp/mv/mkdir 
+
  ls -a :'a' means all
  ls -l /var/log/  :long list
  ls -al / ls -alh /
+ ls -ltr
+ ls -lth - to check newly modified files / dir
+ ls -i
  cd /var/log
  cd ..  :parent directory
  cd / :go to the root directory
@@ -74,13 +88,62 @@ Working with Files and Directories:
  mv text.pdf home/
  mv home/ homenew/ :renaming a directory home to homenew
 
-------------------------------------------------------------
+---------------------: PRIVATE/PUBLIC/HOSTNAME-------------
+hostname -i - public ip
+curl infconfig.me - private ip
+hostname -f - hostname/FQDN
+
+---------------------: MEMORY DETAILS :--------------------
+top - CPU Utilisation
+free -h - RAM / Primary memory
+df -h - HDD / Secondary memory
+ - df -h /home/mandeep
+du - directory usage
+uptime - Load average
+ps -ef / -aux - dispaly all the processes.
+
+----------------------: Hard Link vs Soft Link :--------------------------------------
+Inode values:
+ - Unique number for every file in linux , contains metadata. 
+
 Create and Manage Hard Links 
  - ln <target_file> <link_file>
- - stat hello/demo.txt : show all the details
+ - ln demo.txt Hlink
  - links to files only not folders. 
+ - Can access the data from hardlink
+ - inode number is similar to the actual file.
+Note
+ - We can use copy cmd, i.e., cp but if we modify the actual file it won't impact the actual file, but in Hlink it's viceversa. 
 
 Create and Manage Soft Links 
  - ln -s <target_file> <helloshortcut.txt>
+ - ln -s demo.txt Slink
  - readlink helloshortcut.txt
- - soft links to files,folders,diff-files systems as well.
+ - soft links to files, folders, diff-files systems as well.
+ - Can't access the data from Slink, only stores the path.
+
+--------------------: FILE PERMISSIONS / SECURITY "chmod" :-------------------------
+read, r - 4
+write, w - 2
+execute, x - 1
+no permission - 0
+
+Initials: owners, group, others
+ - chmod 421 demo.txt / chmod 777 demo.txt
+
+chattr +i demo.txt - Immutable files/ config/ imp files
+chattr -i demo.txt - Mutable
+
+u - users
+g - groups
+o - others
++ - grant permission
+_ - revoke permission
+= - grant a special permission & revoke other permission
+
+Ex:
+ - chmod +x demo.txt - users grant execute permission.
+
+------------------: CHOWN :-------------------------------------------
+
+

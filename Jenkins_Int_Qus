@@ -1,7 +1,8 @@
 https://www.jenkins.io/doc/developer/plugin-development/dependency-management/
 
-
-Ref : https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
+==============: INSTALLATION SCRIPTS :=================================
+Ref
+- https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
 
 #yum -y update
 #sudo yum install java-11-openjdk
