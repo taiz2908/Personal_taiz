@@ -95,10 +95,13 @@
   v1.25 
   v1.24
   v1.23
-
-  kubeadm --> setup
- 
- 1. what are the Day-to-day activities of k8s / currently working in k8s +  have you written helm charts?
+---
+Production Env:
+  1. Bootstrapping clusters with "kubeadm"
+  2. Installing Kubernetes with "kOps"
+  3. Installing Kubernetes with "Kubespray"
+---
+ 1. what are the Day-to-day activities / currently working in k8s +  have you written helm charts?
   - use to write deployment files
   - service files
   - writing & modifing helm charts as per the project req , package and deploy to k8s cluster
@@ -126,6 +129,8 @@
         - RollingUpdate , default strategy, first creating the pods then terminating. 
     3. DeamonSet --> One pod per node. Each and evey node (Prometheus & grafana to monitor k8s cluster)
     4. statefulSet --> Maintain a sticky identity for each of their pods. (Data base servers)
+  Canary Deployment ?
+    - 
 
 4. What are all objects you used in K8s?
  - deployment
@@ -219,7 +224,7 @@ Ex;
 11. Is it possible to deply pod in master?
  - Yeah , Its Possible
  - some "taints" will be there in master, but if we apply some tolerance we can deploy to master. 
- - we can define taints->master, scheduler looks this taint and pocisioned in master.
+ - we can define taints->master, scheduler looks this taint and povisioned in master.
 
 12. Is it possible to decide Assigning Pods to a specific Nodes?
  - Yes, we can do that
@@ -268,7 +273,7 @@ Pod request the volume through the PV claim, claim tries to find a volume in clu
 
 18. What is Ingress?
   - We can access the application from outside of the cluster. 
-  - We declare which request should go to which service.So we should write the ingress rule for this. 
+  - We declare which request should go to which service. So we should write the ingress rule for this. 
   - For ingress rule we should have deploy "Ingress Controller" pod into our cluster to process the ingress rule.
   - Ingress Controller could be an entrypoint to the cluster.
 How it Works ? 
@@ -331,7 +336,6 @@ spec:
  - Can components like kubeproxy, kubelet & scheduler directly talks to etcd - No, via api-server.
  - If kube-proxy die for few sec's will it cause issue in existing traffic routing? - No
  
-  
 ==============================: Real Time Qus :===================================================================
 1. What are the challenges yoy've faced in prometheus ?
  - Prometheus HA support
@@ -347,9 +351,33 @@ spec:
  - by using <localhost>:<port_number>
  - K8s handle this by using "Pause container" .
 
-4. What is Service Mesh, why do we need it ?
- - 
- - 
+4. What is Istio & Service Mesh , why do we need it ?
+ - Istio (implementation) is a service Mesh (pattern).
+ - Service Mesh manages communication between microservices. 
+ - Service Mesh has a Control plane that automatically injects the sidecar proxy every micro service pod. so micro services can talk to each other through those service. 
+ - Service Mesh has traffic split configuration. ( new version 3.0-> 10% , 2.0-> 90% )
+   - Also know canary deployment. 
+
+Istio Architechture:
+ - Control Plane (Istiod)
+ - Data Plane (Envoy proxy)
+ 
+Entry point to the cluster:
+ - Istio Ingress gateway. 
+
+Traffic Flow:
+ - user hit the request-> istio gateway->envoy proxy->service->pod
+
+Why do we need a dedicated tool & new challenges ?
+ - we need endpoint. 
+ - security ?
+   - firewall / proxy 
+Sidecar Proxy: 
+ - Handle these network logic.
+ - acts as a proxy.
+ - third-party application.
+
+
 5. What is pod Disruption budget ?
 
 6. A pod is trying to access the volume, but it gives access error ?
@@ -368,16 +396,17 @@ spec:
 
   # tree mycharts
   mycharts/ -->folder
-  - Charts.yaml --> meta info about chart, name, version,description, dependecies etc.
-  - values.yaml --> Imp one, place where all the values can be configure/ default value can be configured .
+  - Charts.yaml --> meta / info about chart, name, version,description, dependecies etc.
+  - values.yaml --> Imp one, place where all the values can be configure / default value can be configured .
   - charts/ --> folder contain chart dependecies. 
-  - templates/ -->folder contains actual templates files stored.
+  - templates/ --> folder contains actual templates files stored.
     - .txt
     - _helpers.tpl
     - deployment.yaml
     - ingress.yaml
     - service.yaml
     - serviceaccount.yaml
+  - .helmignore --> contains pattern to ignore.  
 Note:
 - 1st values. yaml 
 - values.yaml validating json schema. 

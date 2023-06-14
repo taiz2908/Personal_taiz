@@ -245,17 +245,17 @@ Example: rc-definition.yml
  
 2. ReplicaSet: replicaset-definition.yml
   - "Labels & Selectors:" Monitors the exisiting pods as its already created , if anyone fails then its deploy a new one .
-  - "label  " uses as filter section.
+  - "label" uses as filter section.
   - "selector" to connect to pod through labels.
 
  Example:
  1. apiVersion: apps/v1
  2. kind: ReplicaSet , "Note: R & S should be in capital"
  3. metadata:
- 	   name: myapp-replicaset
- 	 lables:
- 		- name: myapp
- 		  type: front-end
+ 	  name: myapp-replicaset
+ 	  lables:
+ 		 - name: myapp
+ 		   type: front-end
  4. spec:
   	 	1. template:
  		    1. metadata: 
@@ -348,10 +348,10 @@ Networking in K8S:
  - If we're using bare metal then we've to set entrypoint like proxy-server. 
  
  Microservices Application on K8S:
-     1. First we need to create the container by using the images "docker run cmd" to start an instance / container . (all images of the applications are already build and avaialble in dockerhub repo)
-     2. deploy pods
-     3. enable connectivity between the services . what application required .
-     4. Create the services ( ClusterIP & NodePort )
+  1. First we need to create the container by using the images "docker run cmd" to start an instance / container . (all images of the applications are already build and avaialble in dockerhub repo)
+  2. deploy pods
+  3. enable connectivity between the services . what application required .
+  4. Create the services ( ClusterIP & NodePort )
 
 ----------------------------: Kubernetes Ingress: ---------------------------------------------
 What is Ingress?
@@ -362,7 +362,7 @@ What is Ingress?
   - Ingress Controller could be an entrypoint to the cluster.
 
 Benefits of Ingress over services:
-  - Enterprise & TLS missing(secure load balancing). 
+  - Enterprise & TLS missing (Secure load balancing). 
   - If we choose service type as "LoadBalancer" cloud provider charging for each & every static IP address. 
 
 How it Works ? 
@@ -474,7 +474,7 @@ What is Helm?
 What are Helm charts?
  - Bundle of YAML files.
  - We can create our own helm charts with helm
- - download and can use.
+ - Download and can use.
  - With the help of helm charts we can define, install, upgrade the application. 
  Ex:
  Database apps, Mongo DB, Elasticsearch, mySQL, Prometheus etc..
@@ -483,7 +483,7 @@ Why we need helm ? / Advantages.
  - Writing & maintaing k8s manifest file can be time consuming & tidious work. 
  - Makes application deployment easy.
  - Improves developer productivity.
- - reduces deployment complexity. 
+ - Reduces deployment complexcity. 
  - Min three yaml files need. 
  Ex: deployment, secretes, configmaps, services etc
 -------------------------
@@ -493,7 +493,7 @@ Helm chart Structure:
 
   #tree mycharts
   mycharts/ -->folder
-  - Charts.yaml -->meta info about chart, name, version, dependecies etc.
+  - Charts.yaml --> meta info about chart, name, version, dependecies etc.
   - values.yaml --> Imp , place where all the values can be configure/ default value can be configured .
   - charts/ --> folder contain chart dependecies. 
   - templates/ -->folder contains actual templates files stored.
@@ -569,7 +569,7 @@ helm pull -untar <chart_name>
 
 ========================= "Livenessprob / Healthcheck" & "Readnessprob" ====================
 - Application Healthcheck.
-- Livenessprobes determine whether or not an application running in a container is in a healthy state / 
+- Livenessprobes determine whether or not an application running in a container is in a healthy state or not.
 - In Order to verify whether application is running or not within the container we can use livenessprob. 
 - If the cmds succeds, it returns 0 and the kubelet consider the container is alive & healthy. 
 - if it's get nonzero then kills the pod/container & recreate it. 
@@ -610,13 +610,12 @@ Link:
 Types:
  - cephs
  - configMap
-  - secret
+ - secret
  - emptydir
  - persistentVolumeClaim
  - local
  - nfs
  - hostpath
-
 
 Node local memory (emptydir & hostPath) -->
 Cloud volumes
