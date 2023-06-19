@@ -2,10 +2,6 @@
 https://www.youtube.com/watch?v=JLU_CHe3azY
 
 2. 
-
-
-
-
 ----------: Ports & Versions: ----------------------
 Tomcat:
 Nginx:
@@ -18,7 +14,6 @@ Helm: v3
 Maven:
 Ansible:
 Terraform: v1.3.4
-
 
 ------------------------ DOCKERFILE'S EXAMPLE ----------------------------------------
 Docker file's:
@@ -288,6 +283,22 @@ Click On Backup Now & Restore Now.
  - JOB_NAME
  - BUILD_TAG
 
+12. How to take Backup & restore jenkins configuration and data?
+ - backup the jenkins plugins by copying the "plugins" directory in the jenkins home dir to the another location.
+ - Backup config files "jenkins.xml" & "secrets" by copying them to another location.
+ - we can copy the "job" dir "userContent" dir to another location.
+
+13. Configure new jenkins pipeline but getting error says "no tool maven found", how to resolve this issue?
+ - Jenkins unable to locate maven installation directory. 
+ - need to provide correct path in jenkins.
+ - we need to go to jenkins dashboard-->manage jenkins-->global tool configuration-->add maven --> provide the path.
+ - MAVEN_HOME path need to provide.
+
+14. You have a jenkins pipeline that runs unit test for your app, but the pipeline fails when the test fails, 
+How would you configure the pipeline to continue running even after is a test fails?
+ - We need to use the try-catch block in jenkinsfile.
+ - In try block - we need to add jenkinsfile that contains a cmd to run the unit test.
+ - Add catch block - will execute if a test fails.
 ----------------------: ANSIBLE :---------------------------------------
 1. Ansible Roles: 
  - If we add more and more functionalities to a single playbook it will make it difficult to maintain in a single file.

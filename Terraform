@@ -178,7 +178,7 @@ terraform {
 How to generate the Key from AWS Console?
  - IAM-> Create users-> Tik on access key-> permissions-> attached the policies.
  - Download Access keyID & Secrete Access key
-# providing the resgion, access_key & secrete_access key. 
+# providing the region, access_key & secrete_access key. 
 provider "aws" {
   region     = "us-west-2"
   access_key = "my-access-key"

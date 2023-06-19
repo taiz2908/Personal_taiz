@@ -13,6 +13,7 @@
    - Standard Reserved Instances: min 1year
   Instance States:
    - Stop
+   - start
    - Terminate
    - Hybernate
    - Standby
@@ -22,31 +23,31 @@
    - Avaialble in AWS, Marketplace, Custom AMI
 
  - IAM
-   - Users: User can belong to multiple groups
-   - Groups : Groups are collections of users and have policies attached to them
-   - IAM User has limited permission to the account
+   - Users: User can belong to multiple groups.
+   - Groups : Groups are collections of "users" and have "policies" attached to them.
+   - IAM User has limited permission to the account.
    - Policies: Policies are JSON documents that outline permissions for users, groups or roles
-     - User based policies
-       - IAM policies define which API calls should be allowed for a specific user
-     - Resource based policies
-       - Control access to an AWS resource
-   - Roles: Collection of policies for AWS services
+     1. User based policies
+       - IAM policies define which API calls should be allowed for a specific user.
+     2. Resource based policies
+       - Control access to an AWS resource.
+   - Roles: Collection of policies for AWS services.
 
  - EBS
    - Bound to an AZ
    - By default, upon instance termination, the root EBS volume is deleted and any other attached EBS volume is not deleted.
-   - To replicate an EBS volume across AZ or region, need to copy its snapshot
+   - To replicate an EBS volume across AZ or region, need to copy its snapshot.
    - EBS Multi-attach allows the same EBS volume to attach to multiple EC2 instances in the same AZ
   Types:
-   - General Purpose SSD : Good for system boot volumes, virtual desktop
-   - Provisioned IOPS SSD :Transaction-intensive Applications with high frequency of small & random IO operations. 
-   - Cold (HDD) :Throughput-intensive Applications that require large & sequential IO operations and are less sensitive to increased I/O latency 
-   - Throughput optimised HDD
-   - Magentic(standard)
+   1. General Purpose SSD : Good for system boot volumes, virtual desktop
+   2. Provisioned IOPS SSD :Transaction-intensive Applications with high frequency of small & random IO operations. 
+   3. Cold (HDD) :Throughput-intensive Applications that require large & sequential IO operations and are less sensitive to increased I/O latency 
+   4. Throughput optimised HDD
+   5. Magentic(standard)
   Snapshots:
    - Data Lifecycle Manager (DLM) can be used to automate the creation, retention, and deletion of snapshots of EBS volumes.
-   - Snapshots are incremental
-   - Only the most recent snapshot is required to restore the volume
+   - Snapshots are incremental.
+   - Only the most recent snapshot is required to restore the volume.
 
  - S3
    - Global Service
@@ -59,12 +60,12 @@
    - Protects against unintended deletes
    - Ability to restore to a previous version
   Storage Classes:
-   - S3 Standard
-   - S3 Standard Infrequent Access
-   - S3 One zone IA
-   - S3 Intelligent Tiering
-   - S3 Glacier
-   - S3 Glacier deep archieve
+   1. S3 Standard
+   2. S3 Standard Infrequent Access
+   3. S3 One zone IA
+   4. S3 Intelligent Tiering
+   5. S3 Glacier
+   6. S3 Glacier deep archieve
   Data Transfer Costs:
    - Uploads to S3 are free
    - Downloads from S3 are paid
@@ -113,20 +114,20 @@
    - target group
 
  - ELB 
-   - Network LB 
+   1. Network LB 
      - Operates at Layer 4 (TCP, UDP)
      - Can handle millions of request per seconds (extreme performance)
      - Lower latency ~ 100 ms (vs 400 ms for ALB)
      - 1 static public IP per AZ (vs a static hostname for CLB & ALB)
      - Elastic IP can be assigned to NLB
-   - Application LB
+   2. Application LB
      - Load balancing to multiple applications (target groups) based on the request parameters
      - Operates at Layer 7 (HTTP, HTTPS and WebSocket)
      - Provides a fixed hostname (xxx.region.elb.amazonaws.com)
      - ALB terminates the upstream connection and creates a new downstream connection to the targets (TCP termination)
      - Security Groups can be attached to ALBs to filters requests
      - Great for micro services & container-based applications (Docker & ECS)
-   - Gateway LB
+   3. Gateway LB
      - Operates at layer 3 (Network layer) - IP Protocol
      - Used to route requests to a fleet of 3rd party virtual appliances like Firewalls, Intrusion Detection and Prevention Systems (IDPS), etc.
      - Performs two functions:
@@ -196,6 +197,10 @@
  - Fargate
 
  - Cloudformations(CFT)
+   - Create stack
+   - If template is present then need to choose "template is ready"
+   - Template source [S3, Upload a template file]
+  - Next --> Done
 
  - KMS
 
@@ -217,13 +222,6 @@ Ref:
 # aws s3 rm - Delete objects
 # aws s3 mv <source> <target> - Move objects
 # aws s3 cp <source> <target> - copy objects
-
-=============: Cloudformation :======================================
-How to create?
- - Create stack
- - if template is present then need to choose "template is ready"
- - template source [S3, Upload a template file]
- - Next --> Done
 
 ====================: AWS INTERVIEW QUS :=========================================================
 
@@ -274,7 +272,7 @@ How to create?
 
 ============: AWS EC2 Interview Questions and Answers for Experienced :================
 8. What are the type of virtualization do we have on AWS Platform?
-  - hvm
+  - hvm (hardware virtual machine)
   - paravirtualisation 
 
 9. What are the type of root device?
