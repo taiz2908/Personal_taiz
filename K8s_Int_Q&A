@@ -9,7 +9,6 @@
   - https://www.youtube.com/watch?v=1x1O7zspLto Troubleshooting Kubernetes Deployments
   - https://www.youtube.com/watch?v=7b0Qg1Mv55w By CNCF Debugging Kubernetes - what to do when something goes wrong
 
-
   ======================: Troubleshooting & Debugging Kubernetes common problems :=================================
   - https://www.youtube.com/watch?v=ORSxQeboprc&t=3  Part-1 -->completed
   - https://www.youtube.com/watch?v=5UW0q64B8PA Part-2 -->completed.
@@ -276,6 +275,7 @@ Pod request the volume through the PV claim, claim tries to find a volume in clu
   - We declare which request should go to which service. So we should write the ingress rule for this. 
   - For ingress rule we should have deploy "Ingress Controller" pod into our cluster to process the ingress rule.
   - Ingress Controller could be an entrypoint to the cluster.
+  - Ingress provides load balancing, SSL termination, url-based routing.
 How it Works ? 
  - http-->load balancer-->ingress controller-->reads ingress rules-->forwards to service-->pod
 
