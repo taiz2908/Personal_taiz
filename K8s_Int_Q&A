@@ -193,6 +193,7 @@ Note:
 Secrets:
  - store the data in "encrypted format".
  - Ex: passwords, API keys, and certificates
+ - echo <secrete-msg> | base64 --decode
 
 8. Explain static pods in K8s?
  - Static Pods are managed directly by the "kubelet daemon" on a specific node.
@@ -256,10 +257,16 @@ Need of Namespace?
 
 16. RBAC (Role Based Access Control) Authorization?
  - An RBAC Role or ClusterRole contains rules that represent a set of permissions. Permissions are purely additive (there are no "deny" rules).
+ - RBAC authorization uses the <rbac.authorization.k8s.io> API group to drive authorization decisions, allowing you to dynamically configure policies through the Kubernetes API.
  - A Role always sets permissions within a particular namespace; when you create a Role, you have to specify the namespace it belongs in.
 
+RoleBinding and ClusterRoleBinding:
+ - A role binding grants the permissions defined in a role to a user or set of users. 
+ - It holds a list of subjects (users, groups, or service accounts), and a reference to the role being granted. 
+ - A RoleBinding grants permissions within a specific namespace whereas a ClusterRoleBinding grants that access cluster-wide.
+
 17. What is use of PV and PVC?
-Pod request the volume through the PV claim, claim tries to find a volume in cluster, Volume has the actual storage backend. 
+ - Pod request the volume through the PV claim, claim tries to find a volume in cluster, Volume has the actual storage backend. 
  - PV & PVC: --> Real world, --> infra team will provide the storage. 
  - Cluster-wide resource used to store the data beyond the lifetime of a pod.
  - in order to use pv , we need to first claim it using pvc.
@@ -269,6 +276,11 @@ Pod request the volume through the PV claim, claim tries to find a volume in clu
   - PV1 3gb
   - PV2 2gb --> bound
   - PV3 500mb 
+---
+AccessModes:
+ - ReadWriteOnce
+ - ReadOnlyOnce 
+ - ReadWriteMany
 
 18. What is Ingress?
   - We can access the application from outside of the cluster. 
@@ -302,7 +314,7 @@ Ex:
  - You can use this pattern for sending log events to the external server.
  - You can use this pattern for network-related tasks.
  
-23. How to define/ manage CPU utilisation for a POD/ deployment file. 
+23. How to define / manage CPU utilisation for a POD / deployment file. 
  - By using "limits" & "requests" under resources section.
 Ex:
 apiVersion: v1
@@ -331,10 +343,10 @@ spec:
   4. We need to configure CNI.
 
 25. 
- - Does traffic pass through kube-proxy - yes
- - Which component assign IP's to the POD - kube-proxy
- - Can components like kubeproxy, kubelet & scheduler directly talks to etcd - No, via api-server.
- - If kube-proxy die for few sec's will it cause issue in existing traffic routing? - No
+ - Does traffic pass through kube-proxy: yes
+ - Which component assign IP's to the POD: kube-proxy
+ - Can components like kubeproxy, kubelet & scheduler directly talks to etcd: No, via api-server.
+ - If kube-proxy die for few sec's will it cause issue in existing traffic routing? : No
  
 ==============================: Real Time Qus :===================================================================
 1. What are the challenges yoy've faced in prometheus ?
