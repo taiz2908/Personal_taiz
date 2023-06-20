@@ -14,6 +14,7 @@ Git Config:
 # git config --global user.name "" - set a Username
 # git config --global user.email "" - set an Email
 # git clone <repo_url> : Clone (download) a repo that already exist on github, including all files, branches & commits.
+# git clone -b master --single-branch <url>
 # git remote add origin <url> : After using git init cmd link the local repo to an empty guthub repo.
 # git remote -v : to whether remote repo configured or not.
 

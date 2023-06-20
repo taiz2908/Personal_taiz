@@ -99,10 +99,10 @@ doc/appdev/sample/sample.war /usr/local/tomcat/webapps/sample.war
 
 5. What is the difference between Git pull and Fetch?
  - We use Git pull command to get changes from central repository. In this operation, internally two commands will get executed. One is Git fetch and another one is Git merge.
+ - So Git pull is the combination of {Git pull & Git merge}.
  - Git fetch means, only bringing changes from central repo to local repo. But these changes will not be integrated to local repo which is there in your server.
  - Git merge means, merging changes to your local repository which is there in your server. Then only you can see these changes.
- - So Git pull is the combination of Git pull and Git merge.
-
+ 
 6. What is the difference between Git merge and rebase?
  - We often use these commands to merge code in multiple branches. Both are almost same but few differences. When you run Git merge, one new merge commit will be generated which is having the history of both development branches. 
  - It preserves the history of both branches. By seeing this merge commit, everyone will come to know that we merged two branches. 
@@ -135,7 +135,7 @@ doc/appdev/sample/sample.war /usr/local/tomcat/webapps/sample.war
 11. How to make a changes for a commit done before 30days? 
  - git clone -> create a branch -> applies our changes
  - git log --oneline
- - git log git log --since=03.03.2023
+ - git log --since=03.03.2023
  - git log --before=03.03.2023
 
 12. What is Branch protection in github ?

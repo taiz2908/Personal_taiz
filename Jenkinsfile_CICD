@@ -179,6 +179,10 @@ Note:
     """;
  }
 ================================================================================================================
+Note:
+ - we can add pre-checks stage that is { dependent tool running or not, dependecies }
+  by stopping the pipeline at the beginning itself.
+
 Ex:
 "pipeline-libraries under vars/ folder i.e. mvnInstall.groovy"
 Managed jenkins-> credentials
@@ -204,6 +208,7 @@ Managed jenkins-> credentials
         - "Incoming Webhook", add to a team->setup a connector.
         - generate a link, copy & paste.
         - Go to jenkins -> create a pipeline job,  Plugin "office 365" should be installed and add webhook.
+      - Job DSL //Jobs with default configuration, How to achieve
 
 4. CODE CHECKOUT: GitHub
     - using Jenkinsfile //pipeline script from SCM
