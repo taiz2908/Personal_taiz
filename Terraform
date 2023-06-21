@@ -284,7 +284,7 @@ Setting Input variables:
 
 Ex: 
 main.tf --> 
-   - define our backend & providers
+   - define our backend & providers.
    - we can define local variables. 
    - we can define variables i.e., var.ami , var.instance_name etc
 

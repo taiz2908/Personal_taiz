@@ -58,9 +58,9 @@ ansible-playbook -vvv playbooks/pb1.yml , (-v means verbose option)
 Ex: 02
  ---
  - hosts: ubnt
-  remote_user: root
-  gather_facts: true
-  tasks:
+   remote_user: root
+   gather_facts: true
+   tasks:
     - name: to updat repo
       raw: apt-get update
     - name: to install apache

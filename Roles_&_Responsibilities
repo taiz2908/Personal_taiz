@@ -9,7 +9,6 @@
 6. Can you use this pipeline for all env ? how did you organise ?
    - dev / staging /prod
    - 
-
 ----------Git & GHE --------------------
 1. Creating & managing the GHE Repo by using various git cmds for different services/components. 
 2. Creating / deletion the branchs.
@@ -25,10 +24,7 @@
  - Creating parameterized jobs (string , text, booleanParam, choice, password etc.)
  - Adding req attributes after stages i.e., post (cleanup, always, success, failures etc. ) 
 2. Assiging the roles to the users / teams . (roles based strategy)
-3. Installing diff plugins in Jenkins to achieve Continous Integration.
- -
- -
- -
+3. Installing diff plugins in Jenkins to achieve Continous Integration. (refer to CICD section)
 4. Integrate different CI-CD Stages in Jenkinsfile as per the project req. 
  - code checkout (gerrit / git)
  - Code build (mvnInstall)

@@ -2,23 +2,23 @@ Intro:
  - SaaS platform
  - 
 Components:
- - Azure Boards
- - Azure Pipeline
- - Azure Repos
- - Azure Test Plans
- - Azure Artifacts
+ 1. Azure Boards
+ 2. Azure Pipeline
+ 3. Azure Repos
+ 4. Azure Test Plans
+ 5. Azure Artifacts
 
  - Create the New project for the application
 
- - Azure Boards: (Can create tickets, tasks, bugs, task, feature etc) --> kind of Jira Board
+ 1. Azure Boards: (Can create tickets, tasks, bugs, task, feature etc) --> kind of Jira Board
  - Need to define Agile / scrum
 
- - Azure Repos: (Code repo) --> github, bitbucket, gitlab etc
+ 2. Azure Repos: (Code repo) --> github, bitbucket, gitlab etc
    - pull requests
    - branches
    - commits
 
- - Azure Pipeline: (.yaml)
+ 3. Azure Pipeline: (.yaml)
    - Env (Create env and can configure in the pipeline --> view the deployments)
    - Release (Only created by UI)
    - Library
@@ -29,13 +29,13 @@ Components:
      - Under the job we need to define the steps.
      - if we have multiple job we can define multiple jobs and mention "pool" section under it. 
 
- - Azure Artifacts:
+ 4. Azure Artifacts:
    - Maven packages
    - nuget.exe
    - npm
    - Also we can build the application and create the docker image and store it in "azure container registry".
 
-- Azure Test Plans (centralized)
+5. Azure Test Plans: (centralized)
   - Manual Test cases
   - Automated Test cases
 ---
