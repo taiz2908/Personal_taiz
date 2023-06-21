@@ -251,6 +251,15 @@ Need of Namespace?
    - Restricting Access like Dev & Prod .
    - Resource limits by using "resource quota" , i.e allocated to the individual application according to their requirement .(CPU,RAM,Storage per NS etc)
    - kubectl apply -f resourcequota.yaml -n <namespace_name>
+
+Namespaces and DNS
+  - When you create a Service, it creates a corresponding DNS entry. 
+  - This entry is of the form <service-name>.<namespace-name>.svc.cluster.local.
+Ex:
+ apiVersion: v1
+ kind: Namespace
+ metadata:
+   name: <insert-namespace-name-here>
    
 15. Why we use networking solutions like flannel or calico?
  - Use : We have some nodes & keep creating the pods, and having ip add of the pod , if creating again created with same IP, thats why we need networking solutions. 
@@ -366,7 +375,7 @@ spec:
 4. What is Istio & Service Mesh , why do we need it ?
  - Istio (implementation) is a service Mesh (pattern).
  - Service Mesh manages communication between microservices. 
- - Service Mesh has a Control plane that automatically injects the sidecar proxy every micro service pod. so micro services can talk to each other through those service. 
+ - Service Mesh has a Control plane that automatically injects the "sidecar proxy" to every micro service pod. so micro services can talk to each other through those service. 
  - Service Mesh has traffic split configuration. ( new version 3.0-> 10% , 2.0-> 90% )
    - Also know canary deployment. 
 
@@ -378,7 +387,7 @@ Entry point to the cluster:
  - Istio Ingress gateway. 
 
 Traffic Flow:
- - user hit the request-> istio gateway->envoy proxy->service->pod
+ - user hit the request --> istio gateway --> envoy proxy --> service --> pod
 
 Why do we need a dedicated tool & new challenges ?
  - we need endpoint. 
@@ -388,7 +397,6 @@ Sidecar Proxy:
  - Handle these network logic.
  - acts as a proxy.
  - third-party application.
-
 
 5. What is pod Disruption budget ?
 
