@@ -109,9 +109,9 @@
    - IAM roles attached to an ASG will get assigned to the launched EC2 instances
    - ASG can terminate instances marked as unhealthy by an ELB.
   Components:
-   - Scaling policy: min & max
+   - Scaling policy: min & max number of instances.
    - metric type: we can define cpu utilisation %
-   - target group
+   - target groups
 
  - ELB 
    1. Network LB 
@@ -309,3 +309,8 @@ Ref:
 18. How to check shared AMIs?
   - go to AMI
   - Three options (owned by me, public images, private images)
+
+=====================================================================================================
+Ref: https://www.youtube.com/watch?v=SorYr_8oi18
+
+1. 

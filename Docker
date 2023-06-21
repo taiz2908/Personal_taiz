@@ -109,7 +109,7 @@ docker rm <containerID> --force / docker rm -f <container_name>, forcefully dele
 docker system prune -f , Remove all unused containers, networks, images (both dangling and unreferenced),optionally, volumes.
 
 ------------------------------ DOCKER PORT MAPPING ------------------------------------------------
-TCP:1-65535 port range for the soruce-port 
+TCP:1-65535 port range for the source-port 
 8080 -->inside the host m/c
 80 --> application running inside the container 
 If anyone calls 8080, internally its forwards to port 80. 
@@ -171,7 +171,7 @@ Below's are the set of instructions using in dockerfile:
  ENTRYPOINT: it executes as it is & if we provide any new arguments its appended at the end of the instruction. 
  CMD: it's failed as its try to replaced the arg/instruction to httpd.
 
----------------------------------------------
+----------------------------------------------
 Multi-Stage Dockerfile:
  - Used for light-weight 
  - One of the most challenging things about building images is keeping the image size down. 

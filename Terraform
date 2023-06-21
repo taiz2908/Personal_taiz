@@ -232,7 +232,6 @@ Ex:
  - https://github.com/Sanjeev-Thiyagarajan/Terraform-Crash-Course
 
 ========================: Terraform Variables & Outputs: ===================================================
-
 Ref: https://developer.hashicorp.com/terraform/language/values/variables
 
 Variable Types:
