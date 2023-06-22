@@ -10,14 +10,12 @@ Github is a code hosting platform for version control and collaboration. It lets
 Git Commands:
 create a dir & within dir initiate git init
 # git init - Initialize an empty dir as a git repo
-Git Config:
 # git config --global user.name "" - set a Username
 # git config --global user.email "" - set an Email
 # git clone <repo_url> : Clone (download) a repo that already exist on github, including all files, branches & commits.
 # git clone -b master --single-branch <url>
 # git remote add origin <url> : After using git init cmd link the local repo to an empty guthub repo.
 # git remote -v : to whether remote repo configured or not.
-
 # git add . - Git add all untracked files.
 # git commit -m "msg" / git commit -am "msg" - commit changes.
 # git status - show all untracked files

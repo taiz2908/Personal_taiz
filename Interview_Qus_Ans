@@ -303,7 +303,7 @@ How would you configure the pipeline to continue running even after is a test fa
 1. Ansible Roles: 
  - If we add more and more functionalities to a single playbook it will make it difficult to maintain in a single file.
  - To resolve this issue, the playbooks are arranged in a directory structure called roles. 
- - Under roles directory we created sub directory such as files, handlers, meta, task, vars) and inside sub directory We create main.yml file.
+ - Under roles directory we created sub directory such as (files, handlers, meta, task, vars) and inside sub directory We create main.yml file.
  - When we call main playbook, main playbook will call all sections files respectively in the order whatever  we mention in playbook.
  - So, by using this Role, we can maintain small playbook without any complexity.
  - Roles 
