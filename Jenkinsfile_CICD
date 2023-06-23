@@ -359,4 +359,20 @@ pipeline {
     }
 }
 ===============================================================================================
+SAST: Static Application Security Testing
+ - SAST is a compilation of algorithms & methods for source code analysis, which can automatically detect potential
+ errors or identify vulnerable patterns.
+ - It examine the source code and generate the reports provind a comprehensive analysis.
+ - Considered as white box security testing.
+Ex:
+ - Veracode (Licensed)
+ - Sonar (Opensource)
+ - NexusIQ
 
+DAST: Dyanamic Application Security Testing
+ - Sometimes refers "web application vulnerability scanner"
+ - Considered as Black box security testing.    
+ - 
+Ex:
+ - Burp Suite Pro (most popular Dast tool)
+ - It's a proxy based tool used to evaluate the security of web based application.
