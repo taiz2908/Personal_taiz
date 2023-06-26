@@ -1,10 +1,11 @@
+#deployment file 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ngin-deployment
-  labels:
-   app: nginx
-  namespace:
+  namespace: Dev # specifying ns, that pods needs to be created.
+  annotations: 
+   kubernetes.io/change-cause: "updating image:2.1" # using for change-cause during rollout history.
 spec:
   replicas: 3
   selector:
@@ -18,17 +19,82 @@ spec:
      - name: nginx-deployment
        image:
        ports:
-        - containerPort: 80
+        - containerPort: 81
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: nginx-service-clusterip
+  namespace: Dev
 spec:
+  selector:
+    app: nginx-dep
+  ports:
+    - port: 80
+      targetPort: 81 # port on which the container is running
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-nodeport
+  namespace: Dev
+spec:
+  type: NodePort
+  selector:
+    app: nginx-dep
+  ports:
+    - port: 80
+      targetPort: 81
+      nodePort: 30007
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-loadbalancer
+  namespace: Dev
+spec:
+  type: LoadBalancer # will get the extrenal IP
   selector:
     app: nginx-dep
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
-  type: LoadBalancer 
+      targetPort: 81 # port on which the container is running
+
+=====================================================
+apiVersion: v1
+kind: Namespace
+metadata: 
+ name: Dev 
+# how to access a service in a diff ns: <service-name>.<namespace-name>.svc.cluster.local:<portnum>
+
+==========================="""Kubernetes Ingress"""=========================
+# pathtypes (prefix, exact  , implementationspecific )
+Ingress rule example:
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-nginx
+spec:
+  tls:
+   - secretName: <secrete-file-name>
+     hosts:
+      - "nginx-demo.com"
+  rules:
+   - host: nginx-demo.com
+     http:
+       paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: nginx-service-clusterip
+              port:
+                number: 80 
+#how to secure app by using https with TLS Certificate.
+#For that we need to genereate self signed certificate and private key with openssl. 
+ - openssl req -x509 -newkey rsa:4096 -sh256 -nodes -keyout tls.key-out tls.crt -subj "/CN=nginx-demo.com" -days 365
+ - By using the above cmd we can generate tls.crt & tls.key.
+ - after that we can create a secrete.yaml 
+

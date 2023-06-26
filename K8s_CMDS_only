@@ -10,7 +10,8 @@
 # kubectl explain pod.spec | grep -i require
 
 # kubectl get all | nodes | po | deployment | sv | rs | ns | pv | pvc , to get the status
-kubectl get all -A
+# kubectl get all -A :means all namespaces.
+# kubectl get all -n <namespace_name>
 
 # kubectl get rs,pods -o wide , -o:output format, can see the details of  node / IP/ age / status etc..
 # kubectl delete pod <podname>, to delete the pod 
