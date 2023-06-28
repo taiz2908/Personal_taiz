@@ -236,6 +236,14 @@ or,
  read a b
  echo "Addition: " $((a+b))
 ----------------------
+Ex: Taking i/p and Comparing among two Big number.
+if [ $a -gt $b -a $b -lt $a ];
+then
+echo "$a is big"
+else
+echo "$b is big"
+fi
+
 Ex:4, Taking i/p and Comparing among three Big number.
  read a b c
  if [ $a -gt $b -a $b -gt $c ];then
@@ -259,6 +267,20 @@ Ex:6, Printing 10 to 1.
  echo "$num"
  ((num--)) #decrement by 1
  done
+
+Ex: Pyramid 0-9
+i=0
+while [ $i -lt 10 ]
+do 
+  a=$i
+  while [ $a -ge 0 ]
+  do
+  echo -n "$a"
+  ((a--))
+  done
+echo
+((i++))
+done
 -----------------------
 Ex:7 Printing 10 to 1 in a single line by using for loop
  for (( counter=10; counter>0; counter-- ))

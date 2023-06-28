@@ -1,10 +1,11 @@
 ============: Major AWS Services: =======
- - EC2 
-   - General Purpose
-   - Compute Optimized
+ - EC2 (Elastic Cloud Compute)
+  Types:
+   - General Purpose 
+   - Compute Optimized 
    - Memory Optimized (larger RAM size)
    - Accelerated Computing (larger data sizes with read & write access)
-   - Storage Optimized
+   - Storage Optimized ()
   Purchasing Options:
    - On-demand Instances: shorterm irregular workload that can't be interrupted. 
    - Spot Instances
@@ -23,7 +24,7 @@
    - Avaialble in AWS, Marketplace, Custom AMI
 
  - IAM
-   - Users: User can belong to multiple groups.
+   - Users: User can belong to multiple groups. (attach the polocies to the users). "IAMuserChangepassword"
    - Groups : Groups are collections of "users" and have "policies" attached to them.
    - IAM User has limited permission to the account.
    - Policies: Policies are JSON documents that outline permissions for users, groups or roles
@@ -259,7 +260,7 @@ Ref:
   - Lower latency ~ 100 ms (vs 400 ms for ALB)
   - Ability to handle volatile workloads.
 
-6. role vs policies
+6. Role vs Policies
   - Create the "policies" after that gives the access to the s3 bucket
   - need to attached to a "role"
   - IAM role is a set of permissions that grant access to the actions & resources in aws.
