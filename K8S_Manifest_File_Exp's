@@ -98,3 +98,67 @@ spec:
  - By using the above cmd we can generate tls.crt & tls.key.
  - after that we can create a secrete.yaml 
 
+==========================="""Kubernetes Volumes"""=========================
+
+apiVersion: v1
+kind: PersistentVolume #available to the entre cluster
+metadata:
+  name: myebsvol
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany 
+  persistentVolumeReclaimPolicy: Recycle
+  awsElasticBlockStore:
+    volumeID: 
+    fsType: ext4
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass #available to the entre cluster
+metadata:
+  name: storageclass-volclaim
+provisioner: kubernetes.io/aws-ebs
+volumeBindingMode: Immediate or, WaitForFirstConsumer
+reclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myebs-volclaim
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  StorageClass: "storageclass-volclaim"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  selector:      
+    matchLabels:
+     app: mypv
+  template:
+    metadata:
+      labels:
+        app: mypv
+    spec:
+      containers:
+       - name: mongodb
+         image: mongo:latest
+         volumeMounts:
+          - name: mypd #name should be same as volumes
+            mountPath: "/tmp/persistent"
+      volumes:
+        - name: mypd #name should be same as volumeMounts
+          persistentVolumeClaim:
+            claimName: myebs-volclaim #name should match to PersistentVolumeClaim
+
+==========================="""Kubernetes StatefulSet"""=====================================================
+stateful: Storing the state, authentication: true
+stateless: 

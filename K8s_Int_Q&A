@@ -128,6 +128,7 @@ Production Env:
         - RollingUpdate , default strategy, first creating the pods then terminating. 
     3. DeamonSet --> One pod per node. Each and evey node (Prometheus & grafana to monitor k8s cluster)
     4. statefulSet --> Maintain a sticky identity for each of their pods. (Data base servers)
+        - pods are created one by one. 
   Canary Deployment ?
     - 
 
@@ -287,9 +288,10 @@ RoleBinding and ClusterRoleBinding:
   - PV3 500mb 
 ---
 AccessModes:
- - ReadWriteOnce
- - ReadOnlyOnce 
- - ReadWriteMany
+ - ReadWriteOnce : single node
+ - ReadOnlyOnce : 
+ - ReadWriteMany : many nodes
+ - ReadWriteOncePod :
 
 18. What is Ingress?
   - We can access the application from outside of the cluster. 
