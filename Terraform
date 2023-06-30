@@ -56,12 +56,13 @@ Ex:
 Providers:
  - Responsible for understanding the API interaction.
  - <provider>_<resource_type>: Resource type-->2nd
- - automatically created the file and before we need to run terrafrom init.
- - downloaded the plugins for providers.
-AWS : aws
-Azure: azurerm
-Google: google
-Alibaba cloud: alicloud
+ - Automatically created the file and before we need to run terrafrom init.
+ - Downloaded the plugins for providers.
+Ex:
+ AWS : aws
+ Azure: azurerm
+ Google: google
+ Alibaba cloud: alicloud
 
 Terraform cmds:
  # terraform init
@@ -95,7 +96,7 @@ The terraform init command creates a working directory(.terraform) in which Terr
  - Shows the message: Success! The configuration is valid. 
 
 3. Terraform Plan: "dry run"
- - compaired desired state with actual state.
+ - Compaired desired state with actual state.
  - it will perform the following actions.
  - it'll display show after apply 
 

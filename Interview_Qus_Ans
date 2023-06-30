@@ -117,6 +117,7 @@ doc/appdev/sample/sample.war /usr/local/tomcat/webapps/sample.war
 
 8. What is Git squash?
  - To move multiple commits into its parent so that you end up with one commit. If you repeat this process multiple times, you can reduce “n” number of commits to a single one. Finally we will end up with only one parent commit. We use this operation just to reduce number of commits.
+ - git rebase -i 3
 
 9. What is Git hooks?
  - We often call this as web hooks as well. By default we get some configuration files when you install git. These files we use to set some permissions and notification purpose. 
