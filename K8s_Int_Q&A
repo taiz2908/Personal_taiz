@@ -289,8 +289,8 @@ RoleBinding and ClusterRoleBinding:
 ---
 AccessModes:
  - ReadWriteOnce : single node
- - ReadOnlyOnce : 
  - ReadWriteMany : many nodes
+ - ReadOnlyOnce : 
  - ReadWriteOncePod :
 
 18. What is Ingress?

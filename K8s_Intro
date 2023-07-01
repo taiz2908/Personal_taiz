@@ -612,6 +612,7 @@ Types:
  - configMap
  - secret
  - emptydir
+ - PersistantVolume 
  - persistentVolumeClaim
  - local
  - nfs
@@ -648,60 +649,6 @@ Pod request the volume through the PV claim, claim tries to find a volume in clu
   - spec: 
 
 3. Storage Class
- 
-=================================
-PERSISTENT VOLUME EXAMPLE
-================================
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: myebsvol
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Recycle
-  awsElasticBlockStore:
-    volumeID:           # YAHAN APNI EBS VOLUME ID DAALO
-    fsType: ext4
-============
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: myebsvolclaim
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-============================================================================
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: pvdeploy
-spec:
-  replicas: 1
-  selector:      # tells the controller which pods to watch/belong to
-    matchLabels:
-     app: mypv
-  template:
-    metadata:
-      labels:
-        app: mypv
-    spec:
-      containers:
-      - name: shell
-        image: centos
-        command: ["bin/bash", "-c", "sleep 10000"]
-        volumeMounts:
-        - name: mypd
-          mountPath: "/tmp/persistent"
-      volumes:
-        - name: mypd
-          persistentVolumeClaim:
-            claimName: myebsvolclaim
 
 ============================: ConfigMaps & Secrets :=============================================================
 4. ConfigMaps:

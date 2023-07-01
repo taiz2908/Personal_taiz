@@ -14,7 +14,7 @@ spec:
   template:
    metadata:
     app: nginx-dep
-  spec:
+   spec:
     containers:
      - name: nginx-deployment
        image:
@@ -162,3 +162,22 @@ spec:
 ==========================="""Kubernetes StatefulSet"""=====================================================
 stateful: Storing the state, authentication: true
 stateless: 
+
+
+==========================="""ConfigMap & Secrete"""=====================================================
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: mongodb-configmap
+immutable: true or false
+data:
+ username: admin
+ password: password 
+ mongo.conf: |
+  storage:
+   dbpasth: /opt
+  replication:
+   replSetName: "rs0"
+
+ 
