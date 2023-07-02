@@ -1,4 +1,4 @@
-============: Major AWS Services: =======
+ ============: Major AWS Services: =======
  - EC2 (Elastic Cloud Compute)
   Types:
    - General Purpose 
@@ -155,14 +155,18 @@
    - In private traffic doesn't route to IG
   NAT Gateway:
    - By using Nat gateway we can access aws services
-   - to create nat gateway must specify the public subnet.
-   - must specify elastic ip.
+   - To create nat gateway must specify the public subnet.
+   - Must specify elastic ip.
+   - Mask the IP address. 
+   - Help to download the package from the internet.
   VPC Peering:
    - Its a n/w connection between two vpc that enables us to route traffic between them.
    - using IPV4 address or IPV6 address.
   VPC Endpoint:
-   - enables us to privately connect your vpc to support aws services.
-   - instances don't require public ip address.
+   - Enables us to privately connect your vpc to support aws services.
+   - Instances don't require public ip address.
+  Flow:
+   - User hit the app-->IG-->Public Subent-->ELB(target group)-->Route Table-->Private Subnet-->Securty Groups-->EC2
 
  - Route 53
    - Global Service
@@ -262,7 +266,7 @@ Ref:
 
 6. Role vs Policies
   - Create the "policies" after that gives the access to the s3 bucket
-  - need to attached to a "role"
+  - Need to attached to a "role"
   - IAM role is a set of permissions that grant access to the actions & resources in aws.
   
 7. If EC2 disk space full, what actions will take to mitigate ?

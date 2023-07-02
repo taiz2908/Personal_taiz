@@ -300,7 +300,8 @@ How would you configure the pipeline to continue running even after is a test fa
  - We need to use the try-catch block in jenkinsfile.
  - In try block - we need to add jenkinsfile that contains a cmd to run the unit test.
  - Add catch block - will execute if a test fails.
-----------------------: ANSIBLE :---------------------------------------
+
+----------------------------------: ANSIBLE :------------------------------------------
 1. Ansible Roles: 
  - If we add more and more functionalities to a single playbook it will make it difficult to maintain in a single file.
  - To resolve this issue, the playbooks are arranged in a directory structure called roles. 

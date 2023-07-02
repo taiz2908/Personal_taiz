@@ -427,7 +427,7 @@ Interview Qus:
 4. Features of Terraform?
  - Can use / manage in multiple cloud's.
  - Can use HCL easy to understand i.e., human reable 
- - 
+ - Open Source. 
 
 5. Pulumi:
  - can use any language like python, typescript 
