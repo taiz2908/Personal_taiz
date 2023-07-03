@@ -548,25 +548,6 @@ spec:
  selector:
   matchlabels: 
 
-------Heml Cmds----------
-helm list
-helm repo list
-helm repo add <repo_name> <repo_url>
-helm repo remove <repo_name>
-helm search repo jenkins
-helm show --> info about chart
-helm show <values|chart|readme|all> <chart_name>
-helm install <release_name> <chart_name>
-helm install <release_name> <chart_name> --version 0.1.0
-helm create 
-helm install --dry-run <release_name> <chart_name>
-helm status <release_name>
-helm history <release_name>
-helm upgrade <release_name> <chart_name> 
-helm rollback <release_name>
-helm pull <chart_name> - in the form of tar file
-helm pull -untar <chart_name>
-
 ========================= "Livenessprob / Healthcheck" & "Readnessprob" ====================
 - Application Healthcheck.
 - Livenessprobes determine whether or not an application running in a container is in a healthy state or not.
