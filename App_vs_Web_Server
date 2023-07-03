@@ -22,8 +22,17 @@ How to start tomcat server?
 
  Port: 80
  path : /var/www/html 
+ Version: httpd --version
  Docker file path: /usr/share/nginx/html
+ Configuration location: /etc/httpd/conf/httpd.conf
+ Logs:  /var/log/httpd 
   
-How to start tomcat server?
+How to start/check server?
 - service apache2 start: ubuntu
 - systemctl start apache2: CentOS
+- systemctl status httpd
+- systemctl enable httpd
+- systemctl start httpd
+
+-------
+netstat -lntpu | grep :443 

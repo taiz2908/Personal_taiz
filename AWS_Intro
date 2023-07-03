@@ -98,10 +98,6 @@
    - Lambda functions
    - ElasticSearch
 
- - Lambda
-   - Serverless (short actions/functionality)
-   - we can directly run the application. 
-
  - Auto Scaling
    - Regional Service
    - Supports Multi AZ
@@ -184,9 +180,24 @@
  - SNS
 
  - SQS
+ 
+ - Lambda
+   - Serverless (short actions/functionality)
+   - We can run code as functions without managing underlying AWS infrastructure.
+   - Lambda function is a small program that performs a specific task.
+   - Lambda is a Function as a Service (FaaS offering).
+  
+  - Fargate
+   - It's serverless compute engine that allows you to run containers without managing the infrastructure
+   - Fargate service provides a way to run containerized apps on the AWS cloud with minimal infrastructure management.
+   - Fargate primarily a Container-as-a-Service (CaaS)
+   - Access to more memory/CPU size options and the length of time your code needs to run with Fargate
+   - Easily managing multiple containers, network configurations, resource requirements, etc., and it has larger community support.
 
  - ECS (Elastic Container Service)
    - AWS managed container orchestration platform. / AWS proprietary service
+   - Manages the whole life cycle of a container(start,reschdule,stop,kill etc)
+   - https://www.youtube.com/watch?v=AYAh6YDXuho
 
  - EKS
    - Managed k8s service. 
@@ -198,8 +209,6 @@
    - Integrated with ECS & IAM for security
    - Storage backed by S3
    - Can upload Docker images on ECR manually or we can use a CICD service like CodeBuild
-
- - Fargate
 
  - Cloudformations(CFT)
    - Create stack

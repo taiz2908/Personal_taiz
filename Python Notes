@@ -56,12 +56,12 @@ Variables:
  2) boolean('True/False'), 
  3) strings
 
-Ex:
+# Ex:
   name = "Taizun"
   age = 33 / age = "22"
   print(name, age)
 
-Ex: Here defining two variable with first_name & last_name .
+# Ex: Here defining two variable with first_name & last_name .
   first_name = "Tony"
   last_name = "shark"
   age = "52"

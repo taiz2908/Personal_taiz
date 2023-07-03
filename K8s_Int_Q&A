@@ -1,0 +1,437 @@
+  - https://www.youtube.com/watch?v=Bf1Eq6ocskE: kubernetes interview questions | docker, kubernetes and helm interview questions
+  - https://www.youtube.com/watch?v=0qy5JD7CbJ4
+  - https://www.youtube.com/watch?v=Axplgxm4K3U Kubernetes Toughest Interview Scenarios & Questions 
+
+  - https://medium.com/@saurabhdahibhate50/ace-your-kubernetes-interview-ii-ba02e9b467ad
+  - https://medium.com/bb-tutorials-and-thoughts/kubernetes-interview-questions-part-1-eb88a9df785f 
+
+  -  https://www.youtube.com/watch?v=xsBnF9gbXW4 Debug Pod in Kubernetes | Debugging Pod | Pod Logs | ImagePullBackoff 
+  - https://www.youtube.com/watch?v=1x1O7zspLto Troubleshooting Kubernetes Deployments
+  - https://www.youtube.com/watch?v=7b0Qg1Mv55w By CNCF Debugging Kubernetes - what to do when something goes wrong
+
+  ======================: Troubleshooting & Debugging Kubernetes common problems :=================================
+  - https://www.youtube.com/watch?v=ORSxQeboprc&t=3  Part-1 -->completed
+  - https://www.youtube.com/watch?v=5UW0q64B8PA Part-2 -->completed.
+  - https://www.youtube.com/watch?v=d7gl5YE8OoI
+  - https://www.youtube.com/watch?v=1x1O7zspLto&t=2s
+  - https://www.youtube.com/watch?v=xsBnF9gbXW4&t=449s
+  
+  Ref : 
+   - https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/
+   - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+  
+  Debugging commands:
+   - kubectl describe pod <pod_name>
+   - kubectl logs <pod_name> 
+   - kubectl get events --sort-by=.metadata.creationTimestamp
+  
+  Errors showing while creating pods
+   1. "ImagePullBackoff" - Invalid image / Invalid tag / Invalid permission
+
+   2. "ErrImage pull"(image pulled but pod is pending)
+      - resource quota on namespace
+      - requests and limit sets
+
+   3. "Registry unavailable"
+
+   4. "CrashLoopBackOff" (suppose image is pulled & running successfully, comes during run time )
+      - livenessprob failure
+      - app failed to start for any reason
+      - trying to write to a folder / missing out some permission
+    "init: CrashLoopBackOff" 
+    Solution:
+      - we need to check init container ? kubectl get pod <pod_name> -o yaml > demo.yml
+      - First the manifest file. 
+      - 
+   5. killContainerError
+
+   6. validationError (pod.spec.containers)
+      - syntax / array error
+
+   7. Pending - status showing ?
+      - when ? 
+      -> ResourceQuota/namespace (admin team allocated resources for us)
+      -> requests & limit sets
+      -> node or nodes lack of resource
+      -> when it's not schedule
+    Solutions: "when it's not schedule"
+      - kubectl describe pod <pod_name>
+      - showing some taints as well as one node not ready. 
+      - kubectl describe node <node_name> , we can see some taints there. so need to remove
+      - kubectl taint node <node_name> <taint_name>- , - means remove,untainted it. 
+
+   8. "Terminating" in Deployment. 
+      - check node status, found node not ready.
+      - 
+
+  -----------------------: How to Troubleshoot Kubernetes Clusters :-----------------------
+  Ref:
+   - https://www.youtube.com/watch?v=EirIuYq1Yes
+
+  1. kubectl get nodes
+     - error: The connection to the server <IP:listing_port> was refused did you specify the right host orports?
+    Solution:
+     - cd /etc/kubernetes/manifests/
+     - more kube-apiserver.yml (here we can check)
+     - Need to modify in config file
+     - cd .kube , vi config (under server need to edit & correct it)
+     If still facing issue check the api-server mentioned in point-2 below. 
+  2. Who manages the static pod ? 
+     - kubelet
+     How to check kubelet is healthy or not ?
+     - systemctl status kubelet (check the status under Active) 
+     - systemctl enable --now kubelet --> enable and start combined into one.
+  3. After enabling kubelet, "kubectl get nodes" not working ? Now we have to check pod logs.
+     - cd /var/log/pod/
+     - ls -lrth --> cd kubesystem_kube-apiserver --> ls -lrth
+
+  4. OOMKilled:
+     - 
+
+=======================: K8S INTERVIEW QUS :=============================================================
+  K8s Version: 1.17
+  v1.26 -->latest
+  v1.25 
+  v1.24
+  v1.23
+---
+Production Env:
+  1. Bootstrapping clusters with "kubeadm"
+  2. Installing Kubernetes with "kOps"
+  3. Installing Kubernetes with "Kubespray"
+---
+ 1. what are the Day-to-day activities / currently working in k8s +  have you written helm charts?
+  - use to write deployment files
+  - service files
+  - writing & modifing helm charts as per the project req , package and deploy to k8s cluster
+  - checking pod logs.
+  - Admin side - ??
+  - we also ensure the application deployed into the k8s cluster and there is no issue's with the application.
+  - we deployed monitoring tools.
+  - providing support to our developers like networks, services. 
+  - maintenance activities comes - ??
+
+2. Architechture of k8s:
+  - Master Node / Control Plane (3 Node): Scheduler , API Server, ETCD, Control manager, Cloud manager , Container runtime , Kubelet, Kubeproxy .
+  - Worker Node: Kubelet , Kube-proxy, Container runtime (Docker engine / CRI-O / Containerd), Pod(IP Address, Volume, Docker). 
+
+3. Controllers: 
+  Why :
+     - Self Healing, if any pods goes down , bringing back is called self healing.
+     - Roll-out & Roll-back, 1.21 --> 1.22 & 1.22 --> 1.21
+     - High Availability
+  Types: & Why with example ?
+    1. ReplicaSet --> desired count/replicas & actual count matches, any mismatch going to do self healing.
+    2. Deployment --> Gives us rollout & rollback
+       Deployment strategies:  Two types
+        - Recreate, 1st Terminating previous version then recreate / deploy new application versions - Downtime
+        - RollingUpdate , default strategy, first creating the pods then terminating. 
+    3. DeamonSet --> One pod per node. Each and evey node (Prometheus & grafana to monitor k8s cluster)
+    4. statefulSet --> Maintain a sticky identity for each of their pods. (Data base servers)
+        - pods are created one by one. 
+  Canary Deployment ?
+    - 
+
+4. What are all objects you used in K8s?
+ - deployment
+ - service
+ - replicaSet
+ - configMaps
+ - ingress controller 
+
+5. Once you deployed application using deployment into cluster, how do you access application outside world?
+ - once deployment is done
+ - we need to write nodePort service 
+ - Also we can use ingress controller 
+
+6. k8s services:
+ - Enabling network. 
+  1. ClusterIP ( Port - 443 / TCP ) --> default 
+  2. NodePort ( 30,000 - 32,767) / TCP --> Stable IP Address.
+     - <node_ip>:<nodePort_ip>
+  3. LoadBalancer --> more of network load balancer. ( Layer 4)
+     - end-user's - need to expose the application outside cluster. 
+     - Requires public IP / External IP
+     - will work when deploy to EKS, AKS, GKE etc. 
+  4. Ingress:  --> Application Load balancer (layer 7)
+     - http/https
+     - path based routing()
+     - host based routing
+     - content 
+Difference between NodePort & LoadBalancer:
+  NodePort: 
+     - when a service is created as a nodeport, the kube-proxy updates the IPtables with <node_ip_address> and 
+      the <port> that is choosen at the service conf to access the pods.
+  LoadBalancer:
+     - when a service is created as a loadbalancer, cloud controll manager creates a external load balancer ip
+     using the underlying cloud provide.
+
+7. K8s Volume Types:
+ - cephs
+ - configMap
+ - emptydir
+ - persistentvolume
+ - persistentVolumeClaim
+ - local
+ - nfs
+ - hostpath
+ - secret
+ - fc (fibre channel)
+
+ConfigMaps and Secrets:
+ - Kubernetes that enable decoupling of configuration data and secrets from container images, allowing for better management and security of applications.
+
+ConfigMaps:
+ - store the data in key-value pairs in "plain text".
+ - storing the application configuration files.
+ - allows to decouple environment-specific configuration from the container image.
+Note:
+ - There are four different ways that you can use a ConfigMap to configure a container inside a Pod:
+ 1. Inside a container command and args
+ 2. Environment variables for a container
+ 3. Add a file in read-only volume, for the application to read
+ 4. Write code to run inside the Pod that uses the Kubernetes API to read a ConfigMap
+Secrets:
+ - store the data in "encrypted format".
+ - Ex: passwords, API keys, and certificates
+ - echo <secrete-msg> | base64 --decode
+
+8. Explain static pods in K8s?
+ - Static Pods are managed directly by the "kubelet daemon" on a specific node.
+ - Use Cases of Using Static Pods :
+   - Static pods are usually used by different software for bootstrapping Kubernetes itself. 
+   - For example, kubeadm uses static pods to bring up Kubernetes control plane components like api-server, controller-manager as static pods on the Master Node.
+ - /etc/kubernetes/manifests -> keep our yaml files and creates the pods.
+
+9. Init Containers:
+ - A Pod can have multiple containers running apps within it, but it can also have one or more init containers, which are run before the app containers are started.
+ - Init containers can contain utilities or setup scripts not present in an app image.
+ - All the init Containers will be executed sequentially and if there is an error in the Init container the pod will be restarted which means all the Init containers are executed again.
+
+10. Do you know high availability in pod level? "Livenessprob / Healthcheck" & "Readnessprob" 
+Livenessprob:
+ - Application Healthcheck.
+ - In Order to verify whether application is running or not within the container we can use livenessprob. 
+      initialDelaySeconds: 5          
+      periodSeconds: 5                                 
+      timeoutSeconds: 30 
+ReadnessProb:
+  - readiness probes to know when a container is ready to start accepting traffic.
+Ex;
+ - Sometimes, applications are temporarily unable to serve traffic. 
+ - For example, an application might need to load large data or configuration files during startup, or depend on external services after startup. 
+ - In such cases, you don't want to kill the application, but you don't want to send it requests either. Kubernetes provides readiness probes to detect and mitigate these situations.
+
+11. Is it possible to deply pod in master?
+ - Yeah , Its Possible
+ - some "taints" will be there in master, but if we apply some tolerance we can deploy to master. 
+ - we can define taints->master, scheduler looks this taint and povisioned in master.
+
+12. Is it possible to decide Assigning Pods to a specific Nodes?
+ - Yes, we can do that
+   1. nodeSelector
+   2. affinity
+   3. nodeName
+
+13. To upgrade K8s version, what steps you will follow?
+ - we need to take off the pods from the nodes. 
+ - Move to node1 to node2.i.e., cordorton. 
+ - we can do upgradation 
+ 
+14. By default how many namespaces are available in kubernetes?
+  1. Default - By default resource created  within default namespace , Resource when we don't specify namespace explicitly
+  2. Kube-node-lease - Contains lease resources to send the heart_beats of node , if nodes goes down , so Pods within that node will be created with healthy node . Lease will take action . 
+  3. kube-public - Used for public resource . Open to all users with read only access. 
+  4. kube-system - For Objects created by k8s (etcd,apiserver,kubeproxy,scheduler,control manager)
+ 
+Namespaces:
+  - Way to organise the cluster into the virtual sub-clusters, so we are creating the resources (pod,svs,rs,deployment,secrets,ingress,configs) in these namespaces instead of creating all in one namespaces. 
+  - Each namespace logically separated with each other but can communicate with each other. 
+Need of Namespace?
+   - Avoid conflicts like same name between teams.
+   - Restricting Access like Dev & Prod .
+   - Resource limits by using "resource quota" , i.e allocated to the individual application according to their requirement .(CPU,RAM,Storage per NS etc)
+   - kubectl apply -f resourcequota.yaml -n <namespace_name>
+
+Namespaces and DNS
+  - When you create a Service, it creates a corresponding DNS entry. 
+  - This entry is of the form <service-name>.<namespace-name>.svc.cluster.local.
+Ex:
+ apiVersion: v1
+ kind: Namespace
+ metadata:
+   name: <insert-namespace-name-here>
+   
+15. Why we use networking solutions like flannel or calico?
+ - Use : We have some nodes & keep creating the pods, and having ip add of the pod , if creating again created with same IP, thats why we need networking solutions. 
+
+16. RBAC (Role Based Access Control) Authorization?
+ - An RBAC Role or ClusterRole contains rules that represent a set of permissions. Permissions are purely additive (there are no "deny" rules).
+ - RBAC authorization uses the <rbac.authorization.k8s.io> API group to drive authorization decisions, allowing you to dynamically configure policies through the Kubernetes API.
+ - A Role always sets permissions within a particular namespace; when you create a Role, you have to specify the namespace it belongs in.
+
+RoleBinding and ClusterRoleBinding:
+ - A role binding grants the permissions defined in a role to a user or set of users. 
+ - It holds a list of subjects (users, groups, or service accounts), and a reference to the role being granted. 
+ - A RoleBinding grants permissions within a specific namespace whereas a ClusterRoleBinding grants that access cluster-wide.
+
+17. What is use of PV and PVC?
+ - Pod request the volume through the PV claim, claim tries to find a volume in cluster, Volume has the actual storage backend. 
+ - PV & PVC: --> Real world, --> infra team will provide the storage. 
+ - Cluster-wide resource used to store the data beyond the lifetime of a pod.
+ - in order to use pv , we need to first claim it using pvc.
+ - size, speed, read write properties etc
+--------------
+ Storage Admin
+  - PV1 3gb
+  - PV2 2gb --> bound
+  - PV3 500mb 
+---
+AccessModes:
+ - ReadWriteOnce : single node
+ - ReadWriteMany : many nodes
+ - ReadOnlyOnce : 
+ - ReadWriteOncePod :
+
+18. What is Ingress?
+  - We can access the application from outside of the cluster. 
+  - We declare which request should go to which service. So we should write the ingress rule for this. 
+  - For ingress rule we should have deploy "Ingress Controller" pod into our cluster to process the ingress rule.
+  - Ingress Controller could be an entrypoint to the cluster.
+  - Ingress provides load balancing, SSL termination, url-based routing.
+How it Works ? 
+ - http-->load balancer-->ingress controller-->reads ingress rules-->forwards to service-->pod
+
+19. Did you face any challenge in application while setting K8s cluster or while deploying application?
+ - resource quota full in namespace
+ - during claim pvc its mismatch with: volumeMounts "name" & volumes "name", i.e., should match.
+ - selector issue, pod labels & matchLabels should be match 
+
+20. Why not docker swarm instead of K8s??
+ - Cluster is not robust.
+ - K8s Autoscaling , if pod dies automatically its create a new one
+ - rolling update.
+ - Enterprise edition of k8s supports more features like monitoring, logging & CICD etc. 
+ - CNCF - open source community, integrate tools for logging & monitoring like promethus & grafana etc. 
+
+21. Docker Container vs K8s POD ?
+ - k8S pod is a runtime speficiation of a container --> Pod
+ - In a Pod can create multiple container.
+
+22. Side car container ?
+ - Sidecar containers are the containers that should run along with the main container in the pod. 
+ - Whenever you want to "add the additional functionality / extend the functionality" of the existing single container pod without touching the existing one.
+Ex: 
+ - You can use this pattern for sending log events to the external server.
+ - You can use this pattern for network-related tasks.
+ 
+23. How to define / manage CPU utilisation for a POD / deployment file. 
+ - By using "limits" & "requests" under resources section.
+Ex:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cpu-demo-2
+  namespace: cpu-example
+spec:
+  containers:
+  - name: cpu-demo-ctr-2
+    image: vish/stress
+    resources:
+      limits:
+        cpu: "100"
+      requests:
+        cpu: "100"
+    args:
+    - -cpus
+    - "2"
+
+24. Have you create / configure k8s cluster ?
+ - No, But I know how to configure the cluster. 
+  1. Installer : Kubeadm
+  2. kubeadm init
+  3. kubeadm join
+  4. We need to configure CNI.
+
+25. 
+ - Does traffic pass through kube-proxy: yes
+ - Which component assign IP's to the POD: kube-proxy
+ - Can components like kubeproxy, kubelet & scheduler directly talks to etcd: No, via api-server.
+ - If kube-proxy die for few sec's will it cause issue in existing traffic routing? : No
+ 
+==============================: Real Time Qus :===================================================================
+1. What are the challenges yoy've faced in prometheus ?
+ - Prometheus HA support
+
+2. How to handle k8s cluster security ?
+ - save the secretes 
+ - we can set up network policies to limit this communication between the pods
+ - Use namespace for multi tenancy support.
+ - RBAC 
+ - Turn on audit logging.
+
+3. If two containers running in a single pod how to access , How does it internally ?
+ - by using <localhost>:<port_number>
+ - K8s handle this by using "Pause container" .
+
+4. What is Istio & Service Mesh , why do we need it ?
+ - Istio (implementation) is a service Mesh (pattern).
+ - Service Mesh manages communication between microservices. 
+ - Service Mesh has a Control plane that automatically injects the "sidecar proxy" to every micro service pod. so micro services can talk to each other through those service. 
+ - Service Mesh has traffic split configuration. ( new version 3.0-> 10% , 2.0-> 90% )
+   - Also know canary deployment. 
+
+Istio Architechture:
+ - Control Plane (Istiod)
+ - Data Plane (Envoy proxy)
+ 
+Entry point to the cluster:
+ - Istio Ingress gateway. 
+
+Traffic Flow:
+ - user hit the request --> istio gateway --> envoy proxy --> service --> pod
+
+Why do we need a dedicated tool & new challenges ?
+ - we need endpoint. 
+ - security ?
+   - firewall / proxy 
+Sidecar Proxy: 
+ - Handle these network logic.
+ - acts as a proxy.
+ - third-party application.
+
+5. What is pod Disruption budget ?
+
+6. A pod is trying to access the volume, but it gives access error ?
+ - May be due to its AccessModes: If pv is having 
+ - ReadWriteOnce
+ - ReadOnlyOnce 
+ - ReadWriteMany
+
+==============================: Helm :=============================================================================
+1. What and why we need helm charts? What helm charts version that you have worked with? and difference between helm 3 and helm 2? 
+ - Refer K8S Intro
+
+2. What are the files and folders in helm charts and explain briefly about files & folders?
+ - Directory structure: ls
+<Chart.yaml charts/ templates/ values.yaml>
+
+  # tree mycharts
+  mycharts/ -->folder
+  - Charts.yaml --> meta / info about chart, name, version,description, dependecies etc.
+  - values.yaml --> Imp one, place where all the values can be configure / default value can be configured .
+  - charts/ --> folder contain chart dependecies. 
+  - templates/ --> folder contains actual templates files stored.
+    - .txt
+    - _helpers.tpl
+    - deployment.yaml
+    - ingress.yaml
+    - service.yaml
+    - serviceaccount.yaml
+  - .helmignore --> contains pattern to ignore.  
+Note:
+- 1st values. yaml 
+- values.yaml validating json schema. 
+Validating charts value in JSON schema. 
+
+3. 

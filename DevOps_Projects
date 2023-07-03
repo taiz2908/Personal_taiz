@@ -27,14 +27,30 @@ https://www.youtube.com/watch?v=adG0vq5boL8
 11. https://www.youtube.com/watch?v=C1BlN66s9yo  EKS Cluster using eksctl and Deploy Springboot Microservices into EKS using Jenkins Pipeline
 
 ==============================: Project 8 [DEPLOY APP(Static Website) USING HTTPD]: ============================
+
+Step-1:
  - Create EC2
+ - Security Groups 
+   - Inbound need to open the ports
+   - go to add rules
+   - HTTP --> 80 -->Choose anywhere
+   - HTTPS --> 443 -->Choose anywhere
+Step-2:
  - Update the OS
- - Install httpd/nginx
- - Install git
+ - Install httpd
+ Step-3:
+ - Install git 
  - Clone the repo
- - cp file to /var/www/html path
- - Restart the httpd/nginx
- - Access the website by using public IP.
+ or,
+ - wget <github repo url-https> / download zip file--> unzip 
+ - cp to /var/www/html path --> cp/mv * /var/www/html
+Step-4:
+   - systemctl status httpd
+   - systemctl enable http
+   - systemctl start httpd
+   - Access the website by using public IP.
+   Logs:
+    - /var/log/httpd
 
 ================================: Project-4, [GitHub | Jenkins | Docker | ECR | AWS EKS ] :==============
 Tools Used:
