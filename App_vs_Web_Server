@@ -22,6 +22,9 @@ Version:
 How to start tomcat server?
  - catalina.sh - does everything
  - startup.sh - calls catalina.sh start
+How to start tomcat server is running or not?
+ - ps -ef | grep -i tomcat 
+ - netstat -lntpu | grep :8080 
 
 Tomcat Dir structure: 
  - /bin :binary files to start & stop the server (startup.sh, shutdown.sh, catalina.sh)
