@@ -25,6 +25,10 @@ How to start tomcat server?
 How to start tomcat server is running or not?
  - ps -ef | grep -i tomcat 
  - netstat -lntpu | grep :8080 
+ - systemctl status tomcat
+ - systemctl enable tomcat
+ - systemctl stop/start tomcat
+
 
 Tomcat Dir structure: 
  - /bin :binary files to start & stop the server (startup.sh, shutdown.sh, catalina.sh)
@@ -41,10 +45,10 @@ How to change the port number?
 -----------: Web Server :----------------------------
  To deploy static web pages ( .html files)
  Ex: Apache2, httpd, nginx
-
+ 
+ - Version: httpd --version
  - Port: 80
  - path : /var/www/html 
- - Version: httpd --version
  - Docker file path: /usr/share/nginx/html
  - Configuration location: /etc/httpd/conf/httpd.conf
  - Logs:  /var/log/httpd 

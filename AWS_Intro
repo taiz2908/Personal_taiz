@@ -24,7 +24,7 @@
    - Avaialble in AWS, Marketplace, Custom AMI
 
  - IAM
-   - Users: User can belong to multiple groups. (attach the polocies to the users). "IAMuserChangepassword"
+   - Users: User can belong to multiple groups. (attach the policies to the users). "IAMuserChangepassword"
    - Groups : Groups are collections of "users" and have "policies" attached to them.
    - IAM User has limited permission to the account.
    - Policies: Policies are JSON documents that outline permissions for users, groups or roles
@@ -215,7 +215,7 @@
    - Create stack
    - If template is present then need to choose "template is ready"
    - Template source [S3, Upload a template file]
-  - Next --> Done
+   - Next --> Done
 
  - KMS
 
@@ -284,6 +284,42 @@ Ref:
   - If issue with root then need to check /var/log
   - application /tmp
   - need to take the snapshot increase disk space.
+
+8. How will you design your vpc for 2 tier application ? Highley available & scalable. 
+  - Highley Available: Multi AZ, we need to put same app in two Az's. 
+  - Scalabilities: Auto scaling group for application servers.
+Two Tier Application: Front end + Backend
+  - Create a public subnet: Place a LB 
+  - Create a private subnet: Deploy the two tier app. 
+
+9. Org having VPC with multiple subnets, You want to restrict outbound internet access for resource in one subnet.
+  but allow outbound internet access for resource in another subnet. How to achieve this?
+  - To restrict outbound internet access : we can modify the route table associated with the subnet, we can remove
+  the default route (0.0.0.0/0) that points to an IG.
+
+10. You have a VPC with a public subnet and a private subnet. Instances in the private subnet need to access the internet for software updates. How would you allow internet access for instances in the private subnet?
+  - To allow internet access for instances in the private subnet, we can use a "NAT Gateway" or a NAT instance. 
+  - We would place the NAT Gateway/instance in the public subnet and configure the private subnet route table to send outbound traffic to the NAT Gateway/instance. 
+  - This way, instances in the private subnet can access the internet through the NAT Gateway/instance.
+
+11. You have launched EC2 instances in your VPC, and you want them to communicate with each other using private IP addresses. What steps would you take to enable this communication?
+  - By default, instances within the "same VPC" can communicate with each other using private IP addresses. 
+  - To ensure this communication, we need to make sure that the instances are launched in the "same VPC" and are placed in the "same subnet" or "subnets that are connected through a peering connection or a VPC peering" link. 
+  - Additionally, we should check the security groups associated with the instances to ensure that the necessary inbound and outbound rules are configured to allow communication between them.
+
+12. You want to implement strict network access control for your VPC resources. How would you achieve this?
+  - we can use Network Access Control Lists (NACLs).
+  - Operate at the subnet level.
+  - We can define "inbound and outbound rules" in the NACLs to allow or deny traffic based on source and destination IP addresses, ports, and protocols. 
+
+13. Your organization requires an isolated environment within the VPC for running sensitive workloads. How would you set up this isolated environment?
+  - we can create a private subnet with no internet gateway attached. known as an "isolated subnet," will not have direct internet connectivity. We can place the sensitive workloads in this subnet.
+  - ensuring that they are protected from inbound and outbound internet traffic.
+
+14. Your application needs to access AWS services, such as S3 securely within your VPC. How would you achieve this?
+  - To securely access AWS services within the VPC, we can use "VPC Endpoints".
+  - VPC endpoints allow instances in the VPC to communicate with AWS services privately, without requiring internet gateways or NAT gateways.
+
 
 ============: AWS EC2 Interview Questions and Answers for Experienced :================
 8. What are the type of virtualization do we have on AWS Platform?

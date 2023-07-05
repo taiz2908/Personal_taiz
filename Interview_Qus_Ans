@@ -3,17 +3,21 @@ https://www.youtube.com/watch?v=JLU_CHe3azY
 
 2. 
 ----------: Ports & Versions: ----------------------
-Tomcat:
-Nginx:
+Tomcat: 8080
+Nginx: 80
 Git: v2.38.1
-Jenkins: v2.332.3
-Sonarqube:
+Jenkins: 8080, v2.332.3
+Nexus: 8081
+Sonarqube: 9000,
 K8s:
 Docker:
 Helm: v3
 Maven:
 Ansible:
 Terraform: v1.3.4
+Prometheus: 9090
+Grafana: 3000
+Alert Manager: 9093
 
 ------------------------ DOCKERFILE'S EXAMPLE ----------------------------------------
 Docker file's:
