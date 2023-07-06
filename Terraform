@@ -436,8 +436,8 @@ Interview Qus:
 6. Modules in Terraform ?
  - Refer to Note.
 
-7. Remote Back end in Terraform ?
- - A backend defines where Terraform stores its state data files.
+7. Remote Back end & Backend in Terraform ?
+ - A backend defines where Terraform stores its "state data files".
  - Makes easier to the team to work together and all the members have the access to the latest state data
  - work as storage , and users can share the same infrastructure resrouces. 
  - Two types of Backend (Local & Remote)
@@ -484,6 +484,18 @@ Interview Qus:
     "sudo yum install -y httpd"'
   ]
  }
+
+ 15. How to handle secrets in Terraform?
+  - We can use terraform remote backend, like S3 bucket
+  - Enforce with IAM / RBAC.
+
+ 16. Resource Graph in Terraform?
+  - Basically it's a dependecy graph. 
+
+ 17. What is tained Terraform resource?
+  - Particular object has been degraded / damaged. so next timw when we can run it proposes need to take proper action. 
+
+ 18. 
 =======================================================================================================
 Ref: https://www.youtube.com/watch?v=pCoCynze4Ag
 

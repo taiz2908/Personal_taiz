@@ -167,7 +167,7 @@
  - Route 53
    - Global Service
    - AWS managed Authoritative DNS (customer can update the DNS records and have full control over the DNS)
-   - Also a Domain Registrar (for registering domain names)
+   - Also a Domain Registration (for registering domain names)
   Record Types:
    - A - maps a hostname to IPv4
    - AAAA - maps a hostname to IPv6
@@ -320,6 +320,8 @@ Two Tier Application: Front end + Backend
   - To securely access AWS services within the VPC, we can use "VPC Endpoints".
   - VPC endpoints allow instances in the VPC to communicate with AWS services privately, without requiring internet gateways or NAT gateways.
 
+15. 
+
 
 ============: AWS EC2 Interview Questions and Answers for Experienced :================
 8. What are the type of virtualization do we have on AWS Platform?
@@ -403,7 +405,7 @@ How to create?
    - create a new role
    - using an existing role
 
-After Deploy--> we need to create the Event-->test it --> get the response,function logs, requestid.
+After Deploy--> we need to create the Event-->Test it --> get the response,function logs, requestid.
 
 Add Trigger:
  - Alexa
