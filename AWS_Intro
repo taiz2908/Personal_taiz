@@ -148,7 +148,7 @@
   Public vs Private Subnet:
    - Major diff is IG
    - In public traffic is routed to an IG
-   - In private traffic doesn't route to IG
+   - In private traffic doesn't route to IG (Will not access to internet )
   NAT Gateway:
    - By using Nat gateway we can access aws services
    - To create nat gateway must specify the public subnet.

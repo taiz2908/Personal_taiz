@@ -180,7 +180,7 @@ Note:
  }
 ================================================================================================================
 Note:
- - we can add pre-checks stage that is { dependent tool running or not, dependecies }
+ - we can add pre-checks stage that is ( dependent tool running or not, dependecies )
   by stopping the pipeline at the beginning itself.
 
 Ex:
