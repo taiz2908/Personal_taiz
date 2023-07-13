@@ -107,8 +107,8 @@
    - ASG can terminate instances marked as unhealthy by an ELB.
   Components:
    - Scaling policy: min & max number of instances.
-   - metric type: we can define cpu utilisation %
-   - target groups
+   - Metric type: we can define cpu utilisation %
+   - Target groups:
 
  - ELB 
    1. Network LB 
@@ -163,6 +163,9 @@
    - Instances don't require public ip address.
   Flow:
    - User hit the app-->IG-->Public Subent-->ELB(target group)-->Route Table-->Private Subnet-->Securty Groups-->EC2
+  CIDR:
+   - /16 : 65,536 ip's
+   - /24 : 256 IP'S
 
  - Route 53
    - Global Service
