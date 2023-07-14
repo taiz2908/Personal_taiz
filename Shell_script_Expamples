@@ -161,6 +161,15 @@ for ((i=0; i<=10; i++)) {
     echo $i
     fi
 }
+or,
+value=1
+while [ $value -le 10 ]; do
+  echo "$value"
+  if [ $value -eq 5 ]; then
+  break
+  fi
+  ((value++))
+done
 -----
 for ((i=0; i<=10; i++)) {
     read age
@@ -180,7 +189,7 @@ for ((i=0; i<=10; i++)) {
 }
 ---
 read demo.txt
-for((i=1;i<=4;i++)){
+for((i=1;i<=4;i++)) {
   touch $demo.txt$i
 }
 --------------
