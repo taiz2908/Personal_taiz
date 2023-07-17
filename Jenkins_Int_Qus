@@ -31,6 +31,8 @@ Note:
  - By default, Jenkins stores all of its data in this directory on the file system
  - /var/lib/jenkins
 ------------------------- Build Trigger's ---------------------------------------
+- Builds Periodically triggers builds as per the schedule (every 10 minutes) even if you haven't changed anything.
+- Poll SCM will check for changes before triggering any build, if there are changes to the previous version there only build will be triggered.
 
 1. Build Periodically : cron job / 5 astrics 
 2. Poll scm : * * * * * 

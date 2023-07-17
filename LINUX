@@ -76,7 +76,7 @@ Working with Files and Directories:
  date
  touch
  mkdir
- rmdir
+ rmdir / rm -rf
  rm -rf
  rm -rf *.txt
  what is cp/mv/mkdir
@@ -84,7 +84,7 @@ Working with Files and Directories:
  man cp/mv/mkdir 
 
  ls -a :'a' means all
- ls -l /var/log/  :long list
+ ls -l or, ll /var/log/  :long list 
  ls -al / ls -alh /
  ls -ltr
  ls -lth - to check newly modified files / dir
@@ -97,6 +97,39 @@ Working with Files and Directories:
  cp -r <> <>
  mv text.pdf home/
  mv home/ homenew/ :renaming a directory home to homenew
+
+---------
+Ex: copying file1 content to file2
+ - touch file1 file2 
+ - cat > file1
+   hello world!
+ - cp file1 file2
+Ex: copying file1 content to dir directory. 
+ - cp file1 dir
+Ex: cp dir1 to dir2 directory
+ - cp -r dir1 dir2
+Ex: 
+
+---------------------: find, grep :-----------------------
+find: to search the file or directory path.
+Ex:
+ - find / -name <file1> : to search in entire system
+ - find 
+
+grep: search for the string
+Ex:
+ - grep -i <error> file1    
+
+-----------------------: sed, awk :-------------------------
+sed: stream editor (search a word in the file & replace with the new word)
+Note:
+ - it'll only modify the o/p, but there will be no change in the original file. 
+Ex:
+ - sed 's/old_test/new_text/' <file_name> , original file not change. only give o/p.    
+ - sed -i 's/old_test/new_text/' <file_name> , going to update the file
+ - sed 's/old_test/new_text/g' <file_name>  , g:globally
+ - sed -n '5,10p' <file_name> , display 5 to 10 lines. 
+ 
 
 ---------------------: PRIVATE/PUBLIC/HOSTNAME-------------
 hostname -i - public ip
