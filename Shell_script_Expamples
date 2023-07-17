@@ -356,3 +356,16 @@ echo "$a is even"
 else
 echo "$a is odd"
 fi
+
+===========================================================================================================
+Ex: Get the report from AWS resource usage.
+ #!/bin/bash
+
+ ##############
+ # Author: Ibraur
+ # Date:
+ ##############
+
+ # aws s3
+ # aws ec2
+ # aws IAM users
