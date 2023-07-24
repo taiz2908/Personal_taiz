@@ -52,10 +52,13 @@
 
  - S3
    - Global Service
+   - 99.99999999999%
    - Object store (key-value pairs)
    - Buckets must have a globally unique name
    - Buckets are defined at the regional level
    - Max Object Size: 5TB
+   - Scalability, Availability, Security, Cost effective, Performance
+   - Static website hosting.
   Bucket Versioning:
    - Enabled at the bucket level
    - Protects against unintended deletes
@@ -214,8 +217,8 @@
    - Storage backed by S3
    - Can upload Docker images on ECR manually or we can use a CICD service like CodeBuild
 
- - Cloudformations(CFT)
-   - Create stack
+ - Cloudformations Template(CFT)
+   - Create stack , supports only YAML or JSON.
    - If template is present then need to choose "template is ready"
    - Template source [S3, Upload a template file]
    - Next --> Done
@@ -228,12 +231,20 @@
 Ref:
  - https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
 
-==============: AWS CLI :=============
-- Version : Version 2
-# aws version - to check properly installed or not
+====================: AWS CLI :========================================================
+Ref:
+ - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+ - https://docs.aws.amazon.com/cli/latest/reference/
+INTRO: 
+- AWS CLI / Terraform / CloudFormation / AWS CDK : Automate Infra in AWS.
+- Python is required. 
+- Latest : Version 2
+
+# aws --version - to check properly installed or not
 # aws configure
  - AWS access key ID
  - AWS Secrete key ID
+
 # aws s3 ls
 # aws s3 mb <bucket_name> - create bucket
 # aws s3 rb - Delete buckets

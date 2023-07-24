@@ -357,6 +357,21 @@ else
 echo "$a is odd"
 fi
 
+
+============:Shell Script to Count the Vowels, Consonants and Numbers in a String:========================
+#!/bin/sh
+
+echo -n "Enter a line of text: "
+read string
+
+numCount=$(echo $string | grep -o "[0-9]" | wc --lines)
+vowCount=$(echo $string | grep -o -i "[aeiou]" | wc --lines)
+consCount=$(echo $string | grep -o -i "[bcdfghjklmnpqrstvwxyz]" | wc --lines)
+
+echo "The given string has $vowCount vowels, $consCount consonants and $numCount numbers in it."
+
+ref:
+https://nandakumar.co.in/learn/post/shell-script-to-count-vowels.html#:~:text=The%20utility%20grep%20is%20used,print%20the%20matched%20characters%20only.
 ===========================================================================================================
 Ex: Get the report from AWS resource usage.
  #!/bin/bash

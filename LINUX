@@ -88,37 +88,54 @@ Working with Files and Directories:
  ls -al / ls -alh /
  ls -ltr
  ls -lth - to check newly modified files / dir
+ ls -l | wc -l - Counting Files in the Current Directory
+ ls -laS - to short entire with the largest size in the top.
+ ls -laS /home/demo > demo.txt - stores thr o/p in demo.txt
  ls -i
  cd /var/log
+ cd ~ - switch to root directory
  cd ..  :parent directory
  cd / :go to the root directory
  cd :go to home directory
- cp file home/ : copy file to home directory
- cp -r <> <>
- mv text.pdf home/
- mv home/ homenew/ :renaming a directory home to homenew
+ cat file.txt
+ cat -b file.txt - show text line only
+ cat -n file.txt - show total lines including gaps between two lines.
+ 
 
----------
+---------: cp, mv
 Ex: copying file1 content to file2
  - touch file1 file2 
  - cat > file1
    hello world!
  - cp file1 file2
+ - cp file1 /home/demo/user 
+ - cp /home/demo/file.txt .
 Ex: copying file1 content to dir directory. 
  - cp file1 dir
 Ex: cp dir1 to dir2 directory
- - cp -r dir1 dir2
-Ex: 
+ - cp -r/-R dir1 dir2
 
----------------------: find, grep :-----------------------
+mv: moving from source to destination, Renaming the file. 
+ - mv text.pdf home/ : moving text.pdf to home directory. 
+ - mv home/ homenew/ :renaming a directory home to homenew
+
+---------------------: find, grep, sort :-----------------------
 find: to search the file or directory path.
 Ex:
  - find / -name <file1> : to search in entire system
  - find 
 
-grep: search for the string
+grep: search for the string/word in a text file.
 Ex:
- - grep -i <error> file1    
+ - grep -i <error> file1 , i for case sensitive.
+ - grep -n <error> file1, matching string along with line number. 
+
+sort: to sort the results of a search either alphabetically / numerically.
+ - sort file1.txt - returns them in a alphabetical order
+ - sort -r file1.txt - returns in a reverse order.
+ - sort -f file1.txt - case insensitive sorting
+ - sort -n file1.txt - returns the result as per numerical order 
+
 
 -----------------------: sed, awk :-------------------------
 sed: stream editor (search a word in the file & replace with the new word)
@@ -165,7 +182,7 @@ Create and Manage Soft Links
  - soft links to files, folders, diff-files systems as well.
  - Can't access the data from Slink, only stores the path.
 
---------------------: FILE PERMISSIONS / SECURITY "chmod" :-------------------------
+--------------------: FILE PERMISSIONS / SECURITY "chmod" / User Permissions :-------------------------
 read, r - 4
 write, w - 2
 execute, x - 1
@@ -177,6 +194,12 @@ Initials: owners, group, others
 chattr +i demo.txt - Immutable files/ config/ imp files
 chattr -i demo.txt - Mutable
 
+d rwx rwx r-x demo.txt
+d - directory
+r - read permissions for owner user only
+w - write permisson to modify file content by owner user alone.
+x - can access this folder if it's in path variable.(execution rights).
+
 u - users
 g - groups
 o - others
@@ -186,6 +209,7 @@ _ - revoke permission
 
 Ex:
  - chmod +x demo.txt - users grant execute permission.
+
 
 ------------------: CHOWN :-------------------------------------------
 
