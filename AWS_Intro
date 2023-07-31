@@ -75,7 +75,7 @@
    - Downloads from S3 are paid
 
  - CloudWatch
-   - Serverless performance monitoring service
+   - Serverless performance monitoring service (monitoring, alerting, logging & reporting)
    - EC2 instances have metrics every 5 minutes
    - With detailed monitoring (for a cost), you get metrics every 1 minute
    - Use detailed monitoring if you want to react faster to changes (eg. scale faster for your ASG)
@@ -89,6 +89,9 @@
    - Disk swap utilization
    - Disk space utilization
    - Page file utilization
+  Alarms:
+   - Create alarm -> select metric -> what kind of metrics you want
+   - Ex: per instance metric -> select SNS Topics. 
   Logs:
    - Used to store application logs
    - Log Groups represent an application sending logs to CW
@@ -100,6 +103,9 @@
    - Kinesis Data Firehose
    - Lambda functions
    - ElasticSearch
+  Cost Optimisation:
+   - Lambda Function
+  Scaling:
 
  - Auto Scaling
    - Regional Service
