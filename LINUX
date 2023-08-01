@@ -123,7 +123,7 @@ mv: moving from source to destination, Renaming the file.
 find: to search the file or directory path.
 Ex:
  - find / -name <file1> : to search in entire system
- - find 
+ - pick - log files > 20mg -> find / -type f -name "*.log" -size +20M
 
 grep: search for the string/word in a text file.
 Ex:

@@ -174,7 +174,8 @@ Step 4:
    - docker pipeline
    - k8s cli
  
-================================: Project-3, [GitHub + Jenkins + Terraform + Helm + AmazonEKS] :==========
+================================: Project-3, [Deploying Java Applications with Docker and Kubernetes] :==========
+
 
 ================================: Project-9, Java app to deploy on k8s(EKS) cluster using Jenkins :=======
 
