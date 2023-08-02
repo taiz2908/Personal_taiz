@@ -153,7 +153,10 @@ Production Env:
      - end-user's - need to expose the application outside cluster. 
      - Requires public IP / External IP
      - will work when deploy to EKS, AKS, GKE etc. 
-  4. Ingress:  --> Application Load balancer (layer 7)
+  4. ExternalName
+     - map a Service to a DNS name
+  ---
+  5. Ingress:  --> Application Load balancer (layer 7)
      - http/https
      - path based routing()
      - host based routing

@@ -201,16 +201,19 @@ Differences:
 # kubectl get svc --> "kubernetes" is the default service.
 Why:
     - Enables the communication between various components within & outside of the application . 
+Advantages:
+    - Load Balancing 
+    - Zero downtime 
+    - service discovery
 Types:
      1. Node port ( 30,000 - 32,767)
      2. ClusterIP (Port - 443 / TCP) Default one , Expose's the pod Internal to the cluster , when we don't want to expose the application to the outside world i.e database's 
      3. Load balancer
-     4. Multi-Port , For some Services, you need to expose more than one port. Kubernetes lets you configure multiple port definitions on a Service object.
-Advantages:
-      - Load Balancing 
-      - Zero downtime 
-      - service discovery 
-
+     4. ExternalName
+     - map a Service to a DNS name
+Multi-Port Service:
+  - For some Services, you need to expose more than one port. Kubernetes lets you configure multiple port definitions on a Service object.
+ 
 -----------------------: Kubernetes Replication Tyes : -----------------------
 
 1. Replication Controller : One fails we still have another one , providing high availability , can help automatically bringing up the new pods even its just one or hundrade  .
