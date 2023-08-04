@@ -92,6 +92,7 @@ curl http://<POD_ip>
 #helm show <values|chart|readme|all> <chart_name>
 #helm install <release_name> <chart_name>
 #helm install <release_name> <chart_name> --version 0.1.0
+#helm uninstall - It removes all of the resources associated with the last release of the chart as well as the release history, freeing it up for future use.
 #helm status <release_name>
 #helm history <release_name>
 #helm upgrade <release_name> <chart_name> 
