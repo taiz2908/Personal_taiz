@@ -40,7 +40,7 @@
    - To replicate an EBS volume across AZ or region, need to copy its snapshot.
    - EBS Multi-attach allows the same EBS volume to attach to multiple EC2 instances in the same AZ
   Types:
-   1. General Purpose SSD : Good for system boot volumes, virtual desktop
+   1. General Purpose SSD : Good for system boot volumes, Virtual desktop
    2. Provisioned IOPS SSD :Transaction-intensive Applications with high frequency of small & random IO operations. 
    3. Cold (HDD) :Throughput-intensive Applications that require large & sequential IO operations and are less sensitive to increased I/O latency 
    4. Throughput optimised HDD
@@ -91,7 +91,7 @@
    - Page file utilization
   Alarms:
    - Create alarm -> select metric -> what kind of metrics you want
-   - Ex: per instance metric -> select SNS Topics. 
+   - Ex: per instance metric -> select SNS Topics -> mention the email address.
   Logs:
    - Used to store application logs
    - Log Groups represent an application sending logs to CW
@@ -133,6 +133,8 @@
      - ALB terminates the upstream connection and creates a new downstream connection to the targets (TCP termination)
      - Security Groups can be attached to ALBs to filters requests
      - Great for micro services & container-based applications (Docker & ECS)
+     - Target Group: instance, ip add, lambda function, ALB
+     - Protocol: http v1, http v2, GRPC
    3. Gateway LB
      - Operates at layer 3 (Network layer) - IP Protocol
      - Used to route requests to a fleet of 3rd party virtual appliances like Firewalls, Intrusion Detection and Prevention Systems (IDPS), etc.
@@ -178,8 +180,7 @@
 
  - Route 53
    - Global Service
-   - AWS managed Authoritative DNS (customer can update the DNS records and have full control over the DNS)
-   - Also a Domain Registration (for registering domain names)
+   - Domain registration, DNS routing, and health checking.
   Record Types:
    - A - maps a hostname to IPv4
    - AAAA - maps a hostname to IPv6
@@ -305,6 +306,7 @@ INTRO:
   - application /tmp
   - need to take the snapshot increase disk space.
 
+--------: Scenario Based Interview Questions on EC2, IAM and VPC :------------------------
 8. How will you design your vpc for 2 tier application ? Highley available & scalable. 
   - Highley Available: Multi AZ, we need to put same app in two Az's. 
   - Scalabilities: Auto scaling group for application servers.

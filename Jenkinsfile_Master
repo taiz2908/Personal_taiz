@@ -92,7 +92,7 @@ Required Arrtibutes:
         // will execute the build of the build failed
     }
     cleanup {
-        cleanWs() // Clean thw work space after the build
+        cleanWs() // Clean the work space after the build
     }
   }
 
