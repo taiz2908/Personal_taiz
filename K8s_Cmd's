@@ -84,6 +84,7 @@ curl http://<POD_ip>
 
 #helm -h --> show all comds
 #helm list
+#Helm Verify - verify that a chart at the given path has been signed and is valid
 #helm repo list
 #helm repo add <repo_name> <repo_url>
 #helm repo remove <repo_name>
