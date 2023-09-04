@@ -85,7 +85,7 @@ Working with Files and Directories:
  man cp/mv/mkdir 
 
  ls -a :'a' means all
- ls -l or, ll /var/log/  :long list 
+ ls -l or, ll /var/log/  :long list format
  ls -al / ls -alh /
  ls -ltr
  ls -lth - to check newly modified files / dir
@@ -103,7 +103,7 @@ Working with Files and Directories:
  cat -n file.txt - show total lines including gaps between two lines.
  
 
----------: cp, mv
+---------: cp, mv :----------------------------------
 Ex: copying file1 content to file2
  - touch file1 file2 
  - cat > file1
@@ -184,36 +184,41 @@ Create and Manage Soft Links
  - Can't access the data from Slink, only stores the path.
 
 --------------------: FILE PERMISSIONS / SECURITY "chmod" / User Permissions :-------------------------
+ 
+ - chmod: to change the access permission of files or directories.
+ - chown: to change the owner of the files or directories.
+ - chgrp: to change the group ownership of the files or directories.
+---
 read, r - 4
 write, w - 2
 execute, x - 1
 no permission - 0
-
-Initials: owners, group, others
- - chmod 421 demo.txt / chmod 777 demo.txt
-
-chattr +i demo.txt - Immutable files/ config/ imp files
-chattr -i demo.txt - Mutable
-
-d rwx rwx r-x demo.txt
-d - directory
-r - read permissions for owner user only
-w - write permisson to modify file content by owner user alone.
-x - can access this folder if it's in path variable.(execution rights).
-
+---
 u - users
 g - groups
 o - others
 + - grant permission
 _ - revoke permission
 = - grant a special permission & revoke other permission
+---
+Ex:
+ d rwx rwx r-x <user_name> <group_name> 445 demo.txt
+ d - directory
+ r - read permissions for owner user only
+ w - write permisson to modify file content by owner user alone.
+ x - can access this folder if it's in path variable.(execution rights).
+---
+Initials: owners, group, others
+ - chmod 421 demo.txt / chmod 777 demo.txt
+
+chattr +i demo.txt - Immutable files/ config/ imp files
+chattr -i demo.txt - Mutable
 
 Ex:
  - chmod +x demo.txt - users grant execute permission.
 
-
-------------------: CHOWN :-------------------------------------------
-
+-----------------------------: tar :------------------------------------------------
+ - tar -c
 
 
 ==============================:Linux Networking Commands :========================================================
