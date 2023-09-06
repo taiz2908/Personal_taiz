@@ -1,0 +1,62 @@
+Ref:
+ - https://www.youtube.com/watch?v=nnIFkEOzNp4 - by Abhishek Veeramalla
+ - https://www.youtube.com/watch?v=AYAh6YDXuho - By TechWorld with Nana
+
+
+
+============: ECS (Elastic Container Service) :=======================================
+ - AWS managed container orchestration platform / AWS proprietary service. 
+ - Manages the whole life cycle of a container (start,reschdule,stop,kill etc)
+   
+Drawbacks:
+ - dont have features like k8s like Custom Resource defination (CRD). 
+ - k8s is open source and lot of features and open source community 
+ - ISTIO , Argo CD etc mostly support k8s
+ - In k8s needs to configure Ingress controller. 
+ - Advance security options. 
+
+ECS :
+ - Mostly we can use Fargate & EC2.   
+ - Cost effective. 
+ - Easy to create the cluster.  
+
+Components of ECS:
+ - Task Defination - how does the container looks like.
+ - Clusters
+ - Namespaces 
+
+Cluster:
+ - Need to create the cluster 
+ - Vpc, subnet, Namespace 
+ - Infrastructure 
+  - AWS Fargate (managed automatically )
+  - EC2
+ - Cloudwatch Monitoring (default)
+ - Create it. 
+
+----
+FIRST OF ALL : We need to login & build the dockerfile 
+ - Login: aws ecr get-login-password --region <region_name> | --username AWS --password-stdin <registoy_name>
+ - Building: docker build -t <registory_name i.e ecr>/<repository>:latest . 
+ - Pushing to ECR: docker push <registory_name i.e ecr>/<repository>:latest
+
+Now go to ECS:
+ - Task definition -> Create Task Definition
+ - Choose OS , Task size, 
+ - Task Role (IAM role) - Allows Container in the task to make API requests to AWS Services.
+ - Task Execution role - Used for the container agent to make AWS API requests on your behalf. 
+  - Ex: Integrated with cloudwatch. 
+
+Container -1 :
+ - Name
+ - Image url
+ - Essential containers 
+ Port Mapping:
+ - container port
+ - protocol
+ - Port name
+ - App Protocol
+ Resource Allocation limits:
+ - 
+
+

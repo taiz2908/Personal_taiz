@@ -260,6 +260,9 @@ INTRO:
 # aws s3 cp <source> <target> - copy objects
 
 ====================: AWS INTERVIEW QUS :=========================================================
+Ref: 
+- https://www.youtube.com/watch?v=SorYr_8oi18
+- 
 
 1. Security Group vs NACL.
    Security Group
@@ -386,64 +389,10 @@ Two Tier Application: Front end + Backend
   - Three options (owned by me, public images, private images)
 
 =====================================================================================================
-Ref: https://www.youtube.com/watch?v=SorYr_8oi18
+
 
 1. 
 
-===========================: AWS LAMBDA:==========================================================================
-- Serverless (short actions/functionality)
-   - We can run the code as functions without provisioning & managing underlying AWS infrastructure.
-   - Aws handles the scaling, maintenance, capacity provisioning & logging.
-   - Lambda function is a small program that performs a specific task.
-   - Lambda is a Function as a Service (FaaS offering).
----
-Lambda Function:
- - It's a code 
-Trigger:
- - Upload file s3
- - Request to API Gateway
- - Dynamodb update
-Event:
- - JSON DATA
- - 
-Context: 
- - parameters 
- - data need to pass
-lambda handler(event, context)
----
-How to create?
- - Create a function
-   - author from scratch
-   - use a blueprint
-   - Container Image
- - Need to choose the runtime 
-   - python
-   - node.js
-   - go
- - Architecture
-   - x86_64
-   - arm64
- - Permissions
-   - create a new role
-   - using an existing role
 
-After Deploy--> we need to create the Event-->Test it --> get the response,function logs, requestid.
 
-Add Trigger:
- - Alexa
- - Api Gateway
- - Cloudfront
- - Application Load Balancer
- - S3
- - SNS
- - SQS
 
-Layers:
- - Add other dependencies/required packages. 
-
-Add Destinations:
- - Send invocation records to a destination when your function is invoked asynchronously, or if your function processes records from a stream.
- - The type of invocation that maps to the destination.
-   - Asynchronous invocation
-   - Stream invocation
-----
