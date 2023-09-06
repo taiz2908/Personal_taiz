@@ -30,12 +30,14 @@ curl http://<POD_ip>
  # kubectl create deployment <deployment_name> --name nginx --dry-run=client -o yaml > 2.yaml
 
 --------------: Logs & debugging: ------------------
-# kubectl describe pod <pod_name> , details/informations of the single pod.
-# kubectl logs <podname> -f , '-f' to watch / monitoring the logs, to see the pod logs
+# kubectl describe pod/deployment <pod_name>/<deployment_name> , details/informations of the single pod.
+# kubectl logs -f <podname>, '-f' to watch / monitoring the logs, to see the pod logs
 # kubectl logs -l name=myLabel, pod logs,with name=myLabel
 # kubectl logs <pod_name> -c <containername>, 
 # docker inspect <image_name>
-
+# kubectl top node : list all running node, their resource utilisation, metrics like cpu/memory running on node
+# kubectl top pod : all running pod in default namespace. 
+# kubectl top pod --all-namespace
 # kubectl describe pod <pod_namae> -o wide | more -->lables, status,ip, container info, host port numnber etc and "events"
  - from the events we can use for troubleshooting 
 -------------------------------------------------
