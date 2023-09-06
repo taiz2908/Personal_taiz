@@ -1,13 +1,24 @@
 Ref:
  - https://www.youtube.com/watch?v=nnIFkEOzNp4 - by Abhishek Veeramalla
  - https://www.youtube.com/watch?v=AYAh6YDXuho - By TechWorld with Nana
-
+ - https://www.youtube.com/watch?v=esISkPlnxL0 - KodeKloud
 
 
 ============: ECS (Elastic Container Service) :=======================================
  - AWS managed container orchestration platform / AWS proprietary service. 
  - Manages the whole life cycle of a container (start,reschdule,stop,kill etc)
-   
+ - It also a container orchestration service provided by aws. 
+
+ECS :
+ - Mostly we can use Fargate & EC2.   
+ - Cost effective. 
+ - Easy to create the cluster. 
+ - Only we need to develope the application & create the containers(writing dockerfile for the application) 
+
+Architecture:   
+- ECS like --> Control Plane
+- Fargate 
+
 Drawbacks:
  - dont have features like k8s like Custom Resource defination (CRD). 
  - k8s is open source and lot of features and open source community 
@@ -15,21 +26,18 @@ Drawbacks:
  - In k8s needs to configure Ingress controller. 
  - Advance security options. 
 
-ECS :
- - Mostly we can use Fargate & EC2.   
- - Cost effective. 
- - Easy to create the cluster.  
-
-Components of ECS:
- - Task Defination - how does the container looks like.
+Components of ECS Cluster : 
+ - Task Defination - How does the container looks like / Blueprint for our containers
+ - Task - Instance of the task definition / running container's.
  - Clusters
  - Namespaces 
 
-Cluster:
+Cluster Overview:
  - Need to create the cluster 
  - Vpc, subnet, Namespace 
  - Infrastructure 
-  - AWS Fargate (managed automatically )
+  - AWS Fargate (managed automatically ) [no need to provision & managing servers, On demand, only infra resources
+  need to run the container, pay only what you use, easily scales up ]
   - EC2
  - Cloudwatch Monitoring (default)
  - Create it. 
@@ -58,5 +66,6 @@ Container -1 :
  - App Protocol
  Resource Allocation limits:
  - 
+----
 
 
