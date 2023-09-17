@@ -41,9 +41,15 @@ RUN-LEVEL
 4 - Not used
 5 - GUI
 6 - Reboot
------------------------------------
+----------------------: Regular Expressions: -------------------
 "|" pipe: get result of one cmd & can provide the i/p for other cmd
 ">>" append
+. replace any character
+$ matches the end of the string
+() group regular expressions
+\ represents special character 
+* macthes the preceeding character zero or more times
+
 set nu --> showing how many lines
 cd ~/.ssh/
 ----------------------------: CRON-JOB :-------------------
@@ -69,6 +75,12 @@ Ex:
 - /tmp
 - /opt
 - /boot
+
+------------------: SSH :--------------
+ - Password less authentication 
+ - ssh-keygen in master and generate the key pairs.
+ - cd ~/.ssh/ -> copy "id_rsa.pub" paste it under "authorized_keys" in the target server.
+ - ssh <public_ip>
 ----------------------------: File Listing :-------------------------------
 Working with Files and Directories:
  pwd 
@@ -218,8 +230,17 @@ Ex:
  - chmod +x demo.txt - users grant execute permission.
 
 -----------------------------: tar :------------------------------------------------
- - tar -c
+ - tar -cvf <tar_file_name> <file_name> : compressing file to tar format
+ - tar -xvf <tar_file_name> :extracting / decompressing file
 
+
+-------------------------: USER, GROUP :--------------------
+useradd <user_name>
+passwd <user_name>
+userdel <user_name>
+groupadd <group_name>
+groupdel <group_name>
+usermod -g <group_name> <user_name> : adding user to a primary group. 
 
 ==============================:Linux Networking Commands :========================================================
 1. Ping (Packet Internet Groper)

@@ -1,0 +1,38 @@
+====== echo =====
+- printing any message.
+Ex:
+ #!/usr/bin/bash
+ echo "Hello World"
+ echo "tODAY DATE IS: $(date)"
+ echo "$USER"
+Ex:
+ echo -e "this is firstline. \nThis is second line" #using of one echo cmd to printing two lines by using -e & \n flag.
+
+====== Exit status of a cmd =====
+- If get 0 then it's success before executing the cmd, or if it shows 1-255 then unsuccess. 
+- 127 : cmd not found
+- 1 : cmd failed during execution (cmd is valid)
+- 2 :Incorrect usage of cmd.
+Ex:
+ cat demo.txt
+ echo $? 
+ 0
+ ---
+ ahdhdsnhdn
+ echo $?
+ 1
+
+============= Variable ============
+1. System defined Variable - env
+2. User defined Variable
+
+Ex:
+x=2
+echo "$x"
+
+x="hello world" //if data having some spaces then follow the quotation. 
+echo "$x"
+
+date //its a cmd 
+x=$(date) //storing the o/p in x
+echo "$x" //printing the o/p

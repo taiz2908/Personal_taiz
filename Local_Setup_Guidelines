@@ -9,7 +9,8 @@ Minikube:
 K8S:
 
 All in win10 machine's:
-How to set Java (jdk.exe file) & Maven:
+
+Java (jdk.exe file) & Maven:
  This PC --> RIGHT CLICK then properties --> Advance system setting --> Env Variables
   1. User Variables: click on New
      - Variable Name: JAVA_HOME 
@@ -20,7 +21,6 @@ How to set Java (jdk.exe file) & Maven:
      - click on New and paste the path
      - C:\Program Files\Java\jdk1.8.0_321\bin
      - C:\Apps\Galaxy\maven\bin
-
 How to check :
  - open Windows Power Shell --> run as admin
  - java -version
@@ -42,6 +42,8 @@ AWS : CLI V2
       - aws
       - aws configure [ AWS Access key & secrete access key ]
       - aws s3 ls
+State_file:
+ - 
 
 K8S :
 Step-1,
