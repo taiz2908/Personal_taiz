@@ -2,15 +2,19 @@ Ref:
  - https://www.youtube.com/watch?v=nnIFkEOzNp4 - by Abhishek Veeramalla
  - https://www.youtube.com/watch?v=AYAh6YDXuho - By TechWorld with Nana
  - https://www.youtube.com/watch?v=esISkPlnxL0 - KodeKloud
+ - https://www.youtube.com/watch?v=nWfwlOqs2p4 - AWS ECS | Elastic Container Service | AWS Cloud | Deploying Containers on ECS Fargate
 
 
 ============: ECS (Elastic Container Service) :=======================================
  - AWS managed container orchestration platform / AWS proprietary service. 
  - Manages the whole life cycle of a container (start,reschdule,stop,kill etc)
  - It also a container orchestration service provided by aws. 
+ - Works pay as you go model. 
+
+PaS: Service to run containers
 
 ECS :
- - Mostly we can use Fargate & EC2.   
+ - Mostly we can use Fargate (Serverless) & EC2.   
  - Cost effective. 
  - Easy to create the cluster. 
  - Only we need to develope the application & create the containers(writing dockerfile for the application) 
@@ -27,10 +31,12 @@ Drawbacks:
  - Advance security options. 
 
 Components of ECS Cluster : 
- - Task Defination - How does the container looks like / Blueprint for our containers
+ - Task Defination - How does the container looks like / Blueprint for our containers. cpu, memory needs to be define.
  - Task - Instance of the task definition / running container's.
  - Clusters
  - Namespaces 
+ - Services: Just like website,running around the clock ,containers need to deploy as service 
+ - Tasks: running a patch workload, ex: logs need to upload on the top up s3 bucket. 
 
 Cluster Overview:
  - Need to create the cluster 
