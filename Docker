@@ -80,6 +80,7 @@ Container's:
  - docker ps --help
  - docker ps -a / docker ps -aq: to show running as well as stop container 
  - docker start 
+ - docker restart <container_id>
  - docker stop: stopping the running container,send the signal SIGTERM.
  - docker kill: Kill one or more container, send the signal SIGKILL.
  - docker rm 
