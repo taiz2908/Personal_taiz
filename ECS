@@ -31,11 +31,20 @@ Drawbacks:
  - Advance security options. 
 
 Components of ECS Cluster : 
- - Task Defination - How does the container looks like / Blueprint for our containers. cpu, memory needs to be define.
- - Task - Instance of the task definition / running container's.
  - Clusters
- - Namespaces 
  - Services: Just like website,running around the clock ,containers need to deploy as service 
+   - A service ensures that a certain numbers of Tasks are running at all times.
+   - Restarts containers that have exited /Crashed. 
+ - Task Defination 
+   - How does the container looks like / Blueprint for our containers.
+   - CPU, Memory needs to be define
+   - Images, Ports, Volume etc
+ - Task 
+   - Instance of the task definition.
+   - Running container's.
+
+ - Namespaces 
+
  - Tasks: running a patch workload, ex: logs need to upload on the top up s3 bucket. 
 
 Cluster Overview:
@@ -73,5 +82,29 @@ Container -1 :
  Resource Allocation limits:
  - 
 ----
+
+===============================
+
+
+
+EXPOSE 9090
+
+# Use an official Prometheus base image
+FROM prom/prometheus:latest
+
+# Copy your Prometheus configuration file into the container
+COPY /etc/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
+
+# Expose Prometheus web UI and API port
+EXPOSE 9090
+
+# Start Prometheus with the specified configuration
+CMD ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/prometheus", "--web.console.libraries=/etc/prometheus/console_libraries", "--web.console.templates=/etc/prometheus/consoles"]
+
+
+
+docker build -t my-prometheus .
+docker run -p 9090:9090 my-prometheus
+
 
 
