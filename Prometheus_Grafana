@@ -66,4 +66,4 @@ Applications:
 Roles & Responsibilities:
  - If any new target added then I've to update it under host inventory file (IP addr)
  - execute the cmd from ansible host m/c , ansible playbook pb1.yaml file.
- ====================
+ ==========================================================================================================
