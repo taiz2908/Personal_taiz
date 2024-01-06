@@ -5,6 +5,8 @@ Ref:
 - https://www.youtube.com/watch?v=41UBe7J4oQo&list=PLKDtzUTXWwwF6e0UFWxpylEJgrKm0dEoI: docker containers namespaces
 - https://www.youtube.com/watch?v=pg19Z8LL06w Docker Crash Course for Absolute Beginners 
 - https://www.youtube.com/watch?v=rLrISSCXiMo The 21 Docker Commands Every Developer Needs to Know
+- https://www.youtube.com/watch?v=31k6AtW-b3Y 
+- https://www.youtube.com/watch?v=RqTEHSBrYFw&t=29s :Complete Docker Course - From BEGINNER to PRO! (Learn Containers)
 
 Docker Interview Qus:
 - https://www.interviewbit.com/docker-interview-questions/
@@ -86,7 +88,7 @@ Container's:
  - docker rm 
  - docker attach
  - docker inspect: Can view the container details like IP, volume, network, env path etc.
- - docker logs: Want to view the logs of the container. 
+ - docker logs -f <container_name>: Want to view the logs of the container. 
  - docker stats --all / <containerID> : to check the container CPU Usage's
  - docker commit
  - docker top 

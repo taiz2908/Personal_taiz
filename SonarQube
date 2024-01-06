@@ -1,0 +1,48 @@
+Components of SonarQube:
+ 1. Rules: Instructions which we need to follow while writing the code
+ 2. Database (mysql, postgress, Oracle ): Analysis report needs to store in databse.
+ 3. Web Interface: Through the web interface we can see. 
+
+ ES: Elastic Search: 
+  -   Helps to search required data from sonarqube database. 
+
+ SonarScanner:
+ - It is a tool that connects your build system with SonarQube server and analyzes source code written in Java, C#, 
+ VB.
+ - Sourcecode should have "sonarscanner.properties" file.
+ - If not then we should generate one.
+Note: 
+ - If we have mvn installed no need to install. we can use mvn goal cmd. 
+
+Pre-requisite:
+ - EC2 m/c min 2GB RAM,  & Open port 9000.
+ - JRE / JDK above 11
+ - SonarQube cannot be run as "root" on Unix-based systems, so create a dedicated user account for SonarQube if necessary.
+
+Set-Up SonarQube Server:
+ - https://github.com/ravdy/DevOps/blob/master/sonarqube/Setup_SonarQube.md
+ - Under "conf" directory "sonar.properties" file is there like port,database url etc.
+ - Under "bin" directory linux-x86-64 folder is there, under that "sonar.sh" for start up the server.
+ 
+Logs:
+ - cd ..
+ - cd logs
+ - more sonar.20232.log
+Creating a User for Sonar:
+ - useradd <sonar_user>
+ - chown -R <sonar_user>:<sonar_user_group> /opt/sonarqube-x.x 
+Login as <sonar_user>:
+ - cd /opt/sonarqube-x.x/bin/linux-x86-64   
+ - ./sonar.sh start / status
+
+===========: Sonar Server :=================
+How to add a project:
+ - Project Key : <any_name>
+ - Provide a token: <token_name> & generate it
+ - by this token we can authenticate our sonarQube, like jenkins etc.
+ - Click on continue. and generate the script. 
+
+Rules: C, PHP, Java, CSS, html, etc
+Quality Profiles: Collection of rules.
+Quality Gates (Coverage, Duplicate lines, Maitainability rating, security rating rtc):  Set the % , means 80% pass, below 80% not passed. 
+Admin: Secutiy > users. 

@@ -28,6 +28,13 @@ How to check :
  - In CMD opens as as min
  - echo %JAVA_HOME%
 
+Install & set the path in Linux:
+ - java -version
+ - yum list | grep -i openjdk
+ - amazon-linux-extras list
+ - amazon-linux-extras install java-openjdk11
+ - 
+
 Terraform :
   3. System Variables
       - Click on path edit

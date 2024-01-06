@@ -60,8 +60,21 @@ Five astricts - * * * * *
 * month in year
 * [ 0,7:Sunday, 1:Monday ]
 Ex:
- to list crontab entries: crontab -l
+ crontab -l :o list crontab entries
  sunday @ 5pm: * 17 * * 0 sample.sh
+
+ #yum install cronie
+ #systemctl status crond
+ #crontab -e : need to add new entry. 
+  Ex: * * * * * /bin/bash /tmp/test.sh
+ #vi test.sh : scripts need to write inside test.sh
+ #chmod +x test.sh : need to give execute permission.
+
+Note: 
+ cd /etc
+ ls -la |grep -i cron
+ cat cron.allow
+ cat cron.deny
 
 ---------------------------: FOLDER STRUCTURE :-------------
 - /root :root user home directory
@@ -233,6 +246,8 @@ Ex:
  - tar -cvf <tar_file_name> <file_name> : compressing file to tar format
  - tar -xvf <tar_file_name> :extracting / decompressing file
 
+ - zip file.zip file1.txt file2.txt : storing fil1.txt & file2.txt under file.zip folder
+ - zip -u file.zip file3.txt : -u means we can add more files into file.zip folder.
 
 -------------------------: USER, GROUP :--------------------
 useradd <user_name>
