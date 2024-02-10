@@ -1,0 +1,36 @@
+Ref: 
+ - https://us-east-1.console.aws.amazon.com/docdb/home?region=us-east-1#landing
+ - https://www.youtube.com/watch?v=atN4n55iXkE
+
+
+==============
+Why?
+ - Non-Relational data base. (Mongodb, Redis, Cassandra, memcached)
+ - In Amazon DocumentDB, the storage and compute are decoupled, allowing each to scale independently.
+ - You can increase the read capacity to millions of requests per second by adding up to 15 low latency read replicas in minutes, regardless of the size of your data. 
+ - Amazon DocumentDB is designed for 99.99% availability and replicates six copies of your data across three AWS Availability Zones (AZs).
+
+Features and benefits:
+ - MongoDB-compatible
+ - Highly available
+ - Performance at scale
+ - Fully managed
+
+Basic Points:
+ - Version: Engine version is 4.0.0. , 5.0.0
+ - Default port: 27017
+ - Instance Type: R5, R6G
+
+CloudWatch:
+ CPU
+  - CPU Utilization — The percentage of the computer processing capacity used.
+ Memory
+ - Freeable Memory — How much RAM is available on the instance.
+ Swap Usage — How much swap space is used by the instance, in megabytes.
+ 
+ Input/output operations
+ - Read IOPS, Write IOPS — The average number of disk read or write operations per second.
+ Read Latency, Write Latency — The average time for a read or write operation in milliseconds.
+ Read Throughput, Write Throughput — The average number of megabytes read from or written to disk per second.
+ Disk Queue Depth — The number of I/O operationsthat are waiting to be written to or read from disk.
+
