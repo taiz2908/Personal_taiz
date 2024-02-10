@@ -105,6 +105,7 @@ Working with Files and Directories:
  rmdir / rm -rf
  rm -rf
  rm -rf *.txt
+ rm -rf /var/lib/jenkins/workspace/*
  what is cp/mv/mkdir
  cp/mv/mkdir --help
  man cp/mv/mkdir 

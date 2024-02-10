@@ -306,7 +306,7 @@ Managed jenkins-> credentials
 
 ===================: CD - 2 :==========================
 Ref:
- - https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#handling-credentials
+ -  
  
 1. EKS Cluster by terraform
    - spin up the cluster by using terraform 
