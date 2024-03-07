@@ -1,3 +1,7 @@
+PROJECTS:
+ - https://www.youtube.com/watch?v=KeF4ANsvkkc How to Integrate Jenkins with SonarQube | Jenkins SonarQube Maven CICD pipeline | Code Review
+
+
 Components of SonarQube:
  1. Rules: Instructions which we need to follow while writing the code
  2. Database (mysql, postgress, Oracle ): Analysis report needs to store in databse.
