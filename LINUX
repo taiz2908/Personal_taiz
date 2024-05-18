@@ -176,8 +176,8 @@ Ex:
  
 
 ---------------------: PRIVATE/PUBLIC/HOSTNAME-------------
-hostname -i - public ip
-curl infconfig.me - private ip
+hostname -i : private ip
+curl infconfig.me : public ip
 hostname -f - hostname/FQDN
 
 ---------------------: MEMORY DETAILS :--------------------
