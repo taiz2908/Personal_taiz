@@ -150,6 +150,7 @@ mv: moving from source to destination, Renaming the file.
 find: to search the file or directory path.
 Ex:
  - find / -name <file1> : to search in entire system
+ - find . -name <file_name>: to search in current dir
  - pick - log files > 20mg -> find / -type f -name "*.log" -size +20M
 
 grep: search for the string/word in a text file.
@@ -203,11 +204,10 @@ Note
  - We can use copy cmd, i.e., cp but if we modify the actual file it won't impact the actual file, but in Hlink it's viceversa. 
 
 Create and Manage Soft Links 
- - ln -s <target_file> <helloshortcut.txt>
- - ln -s demo.txt Slink
- - readlink helloshortcut.txt
- - soft links to files, folders, diff-files systems as well.
- - Can't access the data from Slink, only stores the path.
+ - ln -s <target_file_path> <softlink/filename>
+ - Shortcut_path of the actual file.
+ - inode number is different from the actual file.
+ - If actual file gets deleted softlink also deleted.
 
 --------------------: FILE PERMISSIONS / SECURITY "chmod" / User Permissions :-------------------------
  
@@ -242,6 +242,10 @@ chattr -i demo.txt - Mutable
 
 Ex:
  - chmod +x demo.txt - users grant execute permission.
+
+---------------------------: wget, scp :-------------------------
+- wget <link> : download any file /software from internet.
+- scp <filename> servername: Allows transferring of file between a local host and remote host or between two remote hosts.
 
 -----------------------------: tar :------------------------------------------------
  - tar -cvf <tar_file_name> <file_name> : compressing file to tar format
