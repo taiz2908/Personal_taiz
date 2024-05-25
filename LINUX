@@ -166,7 +166,7 @@ sort: to sort the results of a search either alphabetically / numerically.
 
 
 -----------------------: sed, awk :-------------------------
-sed: stream editor (search a word in the file & replace with the new word)
+SED: stream editor (search a word in the file & replace with the new word)
 Note:
  - it'll only modify the o/p, but there will be no change in the original file. 
 Ex:
@@ -174,7 +174,8 @@ Ex:
  - sed -i 's/old_test/new_text/' <file_name> , going to update the file
  - sed 's/old_test/new_text/g' <file_name>  , g:globally
  - sed -n '5,10p' <file_name> , display 5 to 10 lines. 
- 
+
+AWK:
 
 ---------------------: PRIVATE/PUBLIC/HOSTNAME-------------
 hostname -i : private ip
