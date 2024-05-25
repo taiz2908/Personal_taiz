@@ -175,6 +175,9 @@ Ex:
  - sed -n '5,10p' <file_name> , display 5 to 10 lines. 
 
 AWK:
+EX:
+ -
+ 
 
 ---------------------: PRIVATE/PUBLIC/HOSTNAME-------------
 hostname -i : private ip
