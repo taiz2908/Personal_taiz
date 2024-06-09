@@ -29,7 +29,6 @@ How to start tomcat server is running or not?
  - systemctl enable tomcat
  - systemctl stop/start tomcat
 
-
 Tomcat Dir structure: 
  - /bin :binary files to start & stop the server (startup.sh, shutdown.sh, catalina.sh)
  - /conf : contains configuration files: (server.xml, tomcat-users.xml)
@@ -41,6 +40,32 @@ Tomcat Dir structure:
 How to change the port number?
  - Go to /conf dir then edit server.xml and edit <connector_port>http and assign new port number. 
  - we need to start tomcat server.
+
+--------: FEW CONFIGURATION NEEDS TO DO :------
+Step 1:
+ find / -name contex.xml
+
+Step 2:
+  /webapps/host-manager/META-INF/contex.xml
+  /webapps/manager/META-INF/contex.xml
+
+ commented out <!--
+  value 
+ -->
+ 
+Step 3: 
+vi apache-tomcat-9.0.89/conf/tomcat-users.xml
+
+ <role rolename="manager-gui"/>
+ <role rolename="manager-script"/>
+ <role rolename="manager-jmx"/>
+ <role rolename="manager-status"/>
+ <user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+ <user username="deployer" password="deployer" roles="manager-script"/>
+ <user username="tomcat" password="secret" roles="manager-gui"/>
+
+Step 4:
+ ./startup.sh
 
 -----------: Web Server :----------------------------
  To deploy static web pages ( .html files)
