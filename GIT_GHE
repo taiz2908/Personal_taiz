@@ -67,8 +67,8 @@ Delete & renaming the existing branch:
 # git push origin --delete 'branch_name' - Delete from remote repo.
 
 Log / Commit Id's: 40 alpha numeric char
-# git log - to show all commit ID i.e author ,commmit, date
-# git log --oneline
+# git log - to show all commit ID i.e author ,commmit, date , filename
+# git log --oneline - only commit id & filename
 # git log -P - shows code changes
 # git reflog - show all commit id even deleted
 # git diff - show the difference / compaire of working dir with staging area
