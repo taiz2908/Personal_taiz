@@ -38,6 +38,11 @@ Note:
 
  -----
  317f74d0efcd4847bb9d4c211103c1f3
+ 
+----------------------:New_Process:------------
+https://www.jenkins.io/doc/tutorials/tutorial-for-installing-jenkins-on-AWS/#step1-security-group
+https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/amazon-linux-install.html
+
 ------------------------- Build Trigger's ---------------------------------------
 - Builds Periodically triggers builds as per the schedule (every 10 minutes) even if you haven't changed anything.
 - Poll SCM will check for changes before triggering any build, if there are changes to the previous version there only build will be triggered.
