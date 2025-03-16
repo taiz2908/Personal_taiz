@@ -2,6 +2,9 @@ Ref:
  - https://www.youtube.com/watch?v=BLQ0PDjgN8w
  - https://www.jenkins.io/doc/book/pipeline/shared-libraries/
 
+Project:
+ - https://www.youtube.com/watch?v=g-v9AsubOqY Complete Real-time DevOps CI/CD Project | Jenkins Shared Lib | DevSecOps | Advanced Pro | HandsOn
+
 ======================
  - Common reusable code. 
  - store in one place
@@ -21,14 +24,17 @@ Shared libraries divided into three folders.
  2. src 
  3. resources 
 
+How to Configure in Jenkins?
+ - Manage Jenkins -> Configure systems -> Global-pipeline libraries
+ - Need to provide the name, branch name and git repo url. 
+   - Name: Same as library_name define in the pipeline. 
+   - Rtrieval method: Modern SCM
+   - Need to provide the shared library repo_link
+-------------------------------------------------------------
 Ex: helloWorld.groovy
 def call() {
   sh 'Hello World'
 }
-
-How to Configure in Jenkins?
- - Manage jenkins->Configure systems->global-pipeline libraries
- - Need to provide the branch name and git repo url. 
 
 Jenkinsfile:
 @Library("library_name") _ 

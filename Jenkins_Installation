@@ -105,3 +105,15 @@ Required Arrtibutes:
   - Role-based strategy
 ------------------------------------------------------------------------------
 JNLP Port in jenkins ?
+
+=========: GIT_PRIVATE_REPO :=========
+Two Auth:
+ 1. HTTPS
+ 2. SSH
+
+1. HTTPS: Best Option (username & type password)
+  - GITHUB: Settings -> Developer settings -> Personal access token -> Generate token -> Repo(all), read.org, user:email -> Generate toekn
+  - JENKINS: Credentials: -> Add:Jenkins -> Username(email address) -> tik:treat username as secrete -> paste token -> id(choose yours)
+
+2. SSH:
+  -  GITHUB: Settings -> Developer settings -> SSH & GPG KEYS -> Need to generate keys in linux
