@@ -1,0 +1,26 @@
+OCP
+ - Self Managed
+ - Service Managed, Red Hat OpenShift Service on AWS (ROSA)
+ - CRC (minikube)
+
+HA:
+ - 3 control planes (recommented: 32CPU & 32GB RAM) 
+ - SNO (Single node configuration)
+-------------------------------
+Openshift offers on top of k8s:
+ - In build networking (default: CRIO)
+ - In build observability (Alerting, metrics, Dashboard, Targets)
+ -  - In build CICD under Builds section 
+   - If we need to use 
+   - in build ci - Tekton
+   - inbuild cd - Argo CD
+ - Advance user mgmt (SSO, like Jenkins)
+ - Operators (Installing controllers) , mainly everything install by operators. 
+   - ArgoCD
+   - Red hat openshift Gitops 
+ - OLM (Operator life cycle mgmt)
+ - UI 
+
+ 
+
+ 
