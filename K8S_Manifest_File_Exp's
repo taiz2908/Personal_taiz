@@ -1,4 +1,4 @@
-#deployment file 
+## Deployment file 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -164,7 +164,7 @@ stateful: Storing the state, authentication: true
 stateless: 
 
 
-==========================="""ConfigMap & Secrete"""=====================================================
+===========================""ConfigMap & Secrete"""=====================================================
 
 apiVersion: v1
 kind: ConfigMap
