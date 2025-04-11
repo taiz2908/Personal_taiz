@@ -64,15 +64,19 @@ jenkins.install.UpgradeWizard.state                                      userCon
 jenkins.mvn.GlobalMavenConfig.xml                                        users
 jenkins.telemetry.Correlator.xml                                         workspace
 
-======================================
-Jenkins Full Backup & restore: "https://www.youtube.com/watch?v=gIUfI6cNZTo&t=1413s"
+=================: JENKINS BK & UPGRADE STEPS :====================
+- URL: https://www.jenkins.io/doc/upgrade-guide/
+
+Method_1: 
+ - Jenkins Full Backup & restore: "https://www.youtube.com/watch?v=gIUfI6cNZTo&t=1413s"
  - tar -zcvf jenkins.bk.tar.gz /var/lib/jenkins/
  - aws s3 cp <cloud> .
  - rm -rf /var/lib/jenkins/*
  - tar -zxvf jenkins.bk.tar.gz -C /
  - systemctl start jenkins
 
-Note: Upgrade Jenkins using .war file "https://www.youtube.com/watch?v=uNeIJLJpYxw"
+Method_2:
+ - Upgrade Jenkins using .war file "https://www.youtube.com/watch?v=uNeIJLJpYxw"
  - cd /usr/share/java/jenkins.war
  - check the permission 
  - Apply the same permission with the new .war file.
