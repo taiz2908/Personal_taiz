@@ -1,0 +1,16 @@
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+https://dev.to/aws-builders/how-to-use-aws-cli-auto-prompt-to-help-you-build-your-command-faster-12l6
+
+Windows:
+CMD
+c:\> set AWS_CLI_AUTO_PROMPT=on-partial
+c:\> set AWS_CLI_AUTO_PROMPT
+
+PowerShell or Terminal
+C:\> $Env:AWS_CLI_AUTO_PROMPT = 'on-partial'
+> $Env:AWS_CLI_AUTO_PROMPT
+on-partial
+
+Linux :Terminal
+$ export AWS_CLI_AUTO_PROMPT="on-partial"
+-----------------------------------------------
