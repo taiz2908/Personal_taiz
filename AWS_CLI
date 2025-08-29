@@ -1,4 +1,4 @@
-https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html
 https://dev.to/aws-builders/how-to-use-aws-cli-auto-prompt-to-help-you-build-your-command-faster-12l6
 
 Windows:
@@ -13,4 +13,7 @@ on-partial
 
 Linux :Terminal
 $ export AWS_CLI_AUTO_PROMPT="on-partial"
------------------------------------------------
+---------------------------------------------
+S3:
+ - aws s3 rm s3://mybucket/hello.txt #delete the file inside the bucket
+ - aws s3 rb s3://mybucket #remove_bucket

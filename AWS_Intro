@@ -1,11 +1,12 @@
  ============: Major AWS Services: =======
  - EC2 (Elastic Cloud Compute)
-  Types:
-   - General Purpose 
-   - Compute Optimized 
-   - Memory Optimized (larger RAM size)
-   - Accelerated Computing (larger data sizes with read & write access)
-   - Storage Optimized ()
+  Types: https://aws.amazon.com/ec2/instance-types/
+   - General Purpose : T & M
+   - Compute Optimized : C
+   - Memory Optimized (larger RAM size) : R, X & U
+   - Accelerated Computing (larger data sizes with read & write access) : G, T, D
+   - Storage Optimized () : I, D
+   - HPC Optimized : Hpc
   Purchasing Options:
    - On-demand Instances: shorterm irregular workload that can't be interrupted. 
    - Spot Instances
@@ -65,7 +66,7 @@
    - Ability to restore to a previous version
   Storage Classes:
    1. S3 Standard
-   2. S3 Standard Infrequent Access
+   2. S3 Standard Infrequent Access (50% less from Standard, don't access a file more than a month)
    3. S3 One zone IA
    4. S3 Intelligent Tiering
    5. S3 Glacier
