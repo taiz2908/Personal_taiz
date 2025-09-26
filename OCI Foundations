@@ -1,0 +1,25 @@
+Oracle Cloud Infrastructure 2025: Foundations Associate (1Z0-1085-25)
+
+Skills you will learn:
+
+Fundamentals of Oracle Cloud Infrastructure (OCI): 
+ Learn the basics of OCI, its architecture, and distributed cloud model; understand compartments, authentication, and authorization within OCI, and set up a tenancy.
+
+Networking in OCI: 
+ Gain knowledge on VCN introduction, routing, and security; learn how to implement load balancers within your OCI environment.
+
+Compute Services:
+  Understand the basics of compute instances, scaling strategies, and Oracle Container Engine for Kubernetes (OKE); explore container workloads in OCI and serverless functions using Oracle Functions.
+
+Storage Solutions:
+  Get introduced to various storage options, including object storage, block volume, and file storage.
+
+Database Services: 
+ Learn about Autonomous Database, MySQL, and other database services in OCI.
+ 
+Security in OCI: 
+ Dive into Cloud Guard, security zones, encryption basics, and vault services.
+
+Cost Management: 
+ Understand pricing, cost management strategies, tagging, and support rewards.
+---
