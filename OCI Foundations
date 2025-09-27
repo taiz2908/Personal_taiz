@@ -16,10 +16,44 @@ Storage Solutions:
 
 Database Services: 
  Learn about Autonomous Database, MySQL, and other database services in OCI.
- 
+
 Security in OCI: 
  Dive into Cloud Guard, security zones, encryption basics, and vault services.
 
 Cost Management: 
  Understand pricing, cost management strategies, tagging, and support rewards.
 ---
+
+----OCI Architecture----
+REGION --> AD --> FD
+
+Choosing a region: 
+ 1. Location
+ 2. Data residency & compliance
+ 3. Service Availability 
+
+Availability Domain: Isolated from each other, fault toleance, unlikily to fail simultaniuosly. 
+ - Each availability Domain has three FD
+ - Logical data center within an AD
+
+FD: A fault domain is a subdivision of an AD. Each availability domain contains three fault domains. Fault domains let you distribute your instances so that they are not on the same physical hardware within a single availability domain. A fault domain cannot be associated with multiple availability domains.
+
+
+-----Identity and Access Management-----
+Authentication: who is going to login (users)
+Authorization: Permissions
+
+Identity Domain:
+ - users, groups, --> policies --> compartment --> resources.
+
+Compartments:
+ - Logical containers 
+ - All compartments are global. 
+ - Six level of nesting. 
+ - we can set quotas & budgets. 
+Ex: Compartment A [VM's, Virtual cloud Network, Load Balancer]
+
+Principals: IAM entities that are allows to interact with OCI resources. 
+ 1. IAM Users
+ 2. Resource principals
+ 3. Group
