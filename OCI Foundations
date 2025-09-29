@@ -57,3 +57,58 @@ Principals: IAM entities that are allows to interact with OCI resources.
  1. IAM Users
  2. Resource principals
  3. Group
+
+----Networking: VCN---
+1. Internet Gateway (IGW)
+   - Allows resources in your VCN to connect to the internet.
+   - Supports both inbound and outbound traffic.
+   - Typically associated with public subnets.
+   
+2. NAT Gateway:
+   - By using Nat gateway we can access OCI services
+   - Enables outbound connections to the internet but blocks inbound traffic.
+   - Provides unidirectional traffic: VCN → Internet ✅, Internet → VCN ❌.
+   - Enables outbound to the internet bt block inbound from internet. 
+Common use case:
+   - Downloading patches or packages from the internet for instances in private subnets.
+Key requirements:
+   - Subnet must be private (no direct internet access).
+   - Public IP address (Elastic IP) is automatically assigned to the NAT gateway.
+   - IP masking: Hides the private IP of instances while communicating externally.
+
+3. Service Gateway:
+   - OCI Resouces can access without using nat/internet gateway. 
+
+4. Dynamic Routing gateway:
+   - Virtual router that is path : private traffic other than VPN that is on-prem env. 
+   - Connecting to On-Premises via DRG : Used when traffic must go to on-premises network or another VCN.
+
+VCN Routing:
+
+VCN Security:
+ - In OCI, VCN Security ensures controlled network traffic between resources and external networks.
+ - It is primarily managed using two layers of security:
+   1. Security Lists (SG)
+     - Act like virtual firewalls at the subnet level.
+     - Define stateless or stateful rules for ingress (inbound) and egress (outbound) traffic.
+    Default Behavior:
+     - Allow all outbound traffic.
+     - Deny all inbound traffic except for certain defaults (like ICMP).
+Key Features:
+ - Stateful rules:
+ - Automatically allow the response traffic.
+   - E- xample: If inbound TCP 22 is allowed, outbound response traffic is automatically allowed.
+ Stateless rules:
+   - Require explicit rules for both directions
+
+  2. Network Security Groups (NSG)
+    - Similar to security lists, but applied at the VNIC (instance) level instead of subnet level.
+    - Provide granular control for specific resources.
+    - Multiple VNICs across different subnets can share the same NSG rules
+
+OCI Load Balancer:
+ 1. Layer 7 : http/s 
+   - comes in two diff shapes: Flexible scale, Dynamic shape 
+ 2. N/W LB : Layer 4 - TCP & UDP
+
+
