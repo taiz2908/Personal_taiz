@@ -111,4 +111,90 @@ OCI Load Balancer:
    - comes in two diff shapes: Flexible scale, Dynamic shape 
  2. N/W LB : Layer 4 - TCP & UDP
 
+---- Compute Introduction ----
+
+Preemptible VM's:
+ - Low cost
+ - short lived
+ - Batch Jobs
+ - Fault tolerance workloads
+ - 50% cheaper
+
+Live Migrate  between host:
+ - without rebooting transfer data
+
+Instance capacity type:
+ - on-demand
+ - preemtible
+ - capacity reservation
+ - dedicated host
+ - compute cluster  
+
+Note:
+ - snapdragon is not available for the OCI compute service.
+
+Scaling:
+ 1. Vertical scaling - scale up / down, downtime will be there. like hardware. 
+ 2. Horizontal scaling(Auto scaling) - scale out / in , same vm's.
+  - No cost
+  - need to create template i.e., config 
+  - need to place under instance pool. 
+  - write auto scaling rule. 
+
+Oracle Container Engine for Kubernetes (OKE):
+ - Enhanced cluster
+ - Basic Clusters
+---
+ - Managed Nodes (managed by us) vs Virtual Nodes (serverless)
+
+OCI Container Instances:
+ - OCI Container Instances are a serverless way to run containers in Oracle Cloud without managing VMs or Kubernetes clusters.
+ - Think of them as “OCI’s version of AWS Fargate (outside EKS)” → you give OCI your container image, and it runs it for you.
+Use Cases:
+  - Simple workloads → Run a web API, backend service, batch job, or worker.
+  - CI/CD pipelines → Run build/test containers on demand.
+  - Event-driven workloads → Trigger containers from OCI Events, Functions, or Schedules. 
+  - Alternative to OKE for small apps → No cluster/node management overhead.
+
+Serverless with Oracle Functions: Function as a service 
+ - Kind of Lambda function like AWS
+
+
+---- Storage Introduction ----
+Types:
+ 1. Local NVMe : Locally attached storage. 
+ 2. Block Volume : we can do partitions. 
+ 3. File Storage : shared file storage system. 
+
+ 4. Objest storage : video,log, photo etc. like PUT, GET 
+   - Ideal for unstructured data
+   - multiple tiers. 
+   - regional, public service. 
+   1. Standard storage tier : frequent access
+   2. Infrequent access tier : min 31 days retention
+   3. Archive tier : min 90 days retention, restore time 1 hour, download time 24 hrs. 
+   4. Auto tiering.
+
+Data Migration services:
+ - Data Transfer disk
+ - Data Trasfer appliance. 
+
+Block Volume: 
+ Target Volume performance:
+  - Lower cost: Large sequential - 2 IOPS/GB
+  - Balanced cost: Balanced choice for random IOPS - 60 IOPS/GB
+  - Higer performance: Most I/O demanding workloads - 75 IOPS/gb
+  - Ultra high : 90-225 IOPS/GB
+
+Resizing Block Volume:
+ - online - without deattching the instance
+ - offline - 
+
+Volume Groups:
+ - 
+
+File Storage: 
+ - 
+
+
 
