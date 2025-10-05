@@ -196,5 +196,29 @@ Volume Groups:
 File Storage: 
  - 
 
+----- Security Introduction ------
+Shared Security Model:
+ - Managed by us:
+   - Data
+   - Devices
+   - Accounts & Identity
+   - Applications
+   - Network controls
+   - OS
+- Oracle Manages:
+   - Virtualizations
+   - Physical hosts
+   - Physical N/w
+   - Physical Datacenter
+
+Layers:
+ 1. Infra proctection : Ddos, web application frewall, Security lists/NSG, Network firewall
+ 2. IAM : IAM, MFA, Federation, Audit
+ 3. OS & Workload protection : Shield instance, dedicated host, Bastian, OS Mgmt
+ 4. Data protection : Virtual key mgmt, certificates, Vault secret mgmt, data safe
+ 5. Detection & Remediation: Cloud guard, security zones, Threat intelligence, vulnability scanning
+
+ Screenshot 2025-10-05 at 1.12.29 PM.png
+
 
 
