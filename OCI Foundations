@@ -218,7 +218,88 @@ Layers:
  4. Data protection : Virtual key mgmt, certificates, Vault secret mgmt, data safe
  5. Detection & Remediation: Cloud guard, security zones, Threat intelligence, vulnability scanning
 
- Screenshot 2025-10-05 at 1.12.29 PM.png
+Cloud Guard:
+ - Falls under cloud security posture mgmt.
+ - Monitor & identify secuirity issue.
+ - completely automated the remediation. 
+
+OCI Security Zones:
+ - A Security Zone is a special type of compartment that enforces strict, pre-defined security policies on all resources created within it.
+ - It helps you automatically apply Oracle’s best-practice security rules — you can’t create or modify any resource in ways that violate those rules.
+ - Need to turn on cloud guard.
+ - Policy -> Cloud Guard -> create zone. 
+Example:
+ - You can’t create public buckets in Object Storage.
+ - You can’t create public subnets in VCNs.
+ - You must enable encryption for all storage volumes.
+ - You must use customer-managed keys (Vault) for encryption.
+ - No public IPs on compute instances.
+
+OCI Security Advisor:
+ - The Security Advisor is a recommendation engine within OCI’s Security Center that assesses your tenancy’s security posture and gives guided, actionable advice to improve it.
+ - Think of it as your personal security consultant inside OCI.
+Use cases:
+ - Audit readiness and compliance reporting.
+ - Continuous security posture management.
+ - Prioritizing high-risk misconfigurations.
+ - Understanding the impact of policy changes.
+
+Encryption Basics:
+ - Symmetric encription : 
+   - single key used for encription & decryption, 
+   - AES Symmmetric keys
+   - cann't used for digital signing
+ - Asymmetric encription : 
+   - different keys used, 
+   - RSA symmmetric keys
+   - can be used for digital signing
+ - ECDSA Keys:
+   - can be used for digital signing
+   - not for encription & decription data
+
+Hardware security Models:
+  - used to manage digital keys
+  - tamper-evident hardwares.
+
+Vault:
+ - Vault supports AES, RSA & ECDSA algo. 
+ - Regional service.
+ - Use envelope encription.
+
+----- Governance and Administration -----
+Pricing:
+ - Three pricing models:
+   1. Pay as you go
+   2. Annual universal credits
+   3. Bring your own license.
+ - Incoming traffic free
+ - outing traffic lower (Egress to the internet is charged)
+
+Cost Management:
+ - Budgets
+ - Cost analysis
+ - Usage reports
+ - quotas : user defined for specific compartments.
+ - service limits : set by oracle for a tenecy/region.
+
+Cloud Advisor:
+ - Cloud Advisor is a recommendation engine in OCI that analyzes your resources and provides actionable suggestions to help you:
+  - Reduce unnecessary costs 💰
+  - Improve performance ⚡
+  - Strengthen security 🔐
+  - Increase resilience
+Four sections:
+ 1. cost mgmt
+ 2. High availability
+ 3. Performance
+ 4. Security
+
+Tagging:
+ 1. Free form tags
+ 2. Defined tags - recommended 
+
+Support Rewards:
+ - 
 
 
 
