@@ -36,8 +36,13 @@ Availability Domain: Isolated from each other, fault toleance, unlikily to fail 
  - Each availability Domain has three FD
  - Logical data center within an AD
 
-FD: A fault domain is a subdivision of an AD. Each availability domain contains three fault domains. Fault domains let you distribute your instances so that they are not on the same physical hardware within a single availability domain. A fault domain cannot be associated with multiple availability domains.
+FD: A fault domain is a subdivision of an AD. 
+ - Each availability domain contains three fault domains. 
+ - Fault domains let you distribute your instances so that they are not on the same physical hardware within a single availability domain. 
+ - A fault domain cannot be associated with multiple availability domains.
 
+Notes:
+ -  To create resources in a different region, you need to subscribe to the new region first.
 
 -----Identity and Access Management-----
 Authentication: who is going to login (users)
@@ -88,18 +93,19 @@ VCN Routing:
 VCN Security:
  - In OCI, VCN Security ensures controlled network traffic between resources and external networks.
  - It is primarily managed using two layers of security:
+
    1. Security Lists (SG)
      - Act like virtual firewalls at the subnet level.
      - Define stateless or stateful rules for ingress (inbound) and egress (outbound) traffic.
     Default Behavior:
-     - Allow all outbound traffic.
-     - Deny all inbound traffic except for certain defaults (like ICMP).
-Key Features:
- - Stateful rules:
- - Automatically allow the response traffic.
-   - E- xample: If inbound TCP 22 is allowed, outbound response traffic is automatically allowed.
- Stateless rules:
-   - Require explicit rules for both directions
+     - Allow all outbound traffic. "traffic going out from your system or resource to another destination."
+     - Deny all inbound traffic except for certain defaults (like ICMP). ""traffic coming into your system or resource from the outside.
+    Key Features:
+     Stateful rules:
+     - Automatically allow the response traffic.
+     - Example: If inbound TCP 22 is allowed, outbound response traffic is automatically allowed.
+     Stateless rules:
+     - Require explicit rules for both directions
 
   2. Network Security Groups (NSG)
     - Similar to security lists, but applied at the VNIC (instance) level instead of subnet level.
@@ -187,7 +193,7 @@ Block Volume:
   - Ultra high : 90-225 IOPS/GB
 
 Resizing Block Volume:
- - online - without deattching the instance
+ - online - without de-attching the instance
  - offline - 
 
 Volume Groups:
