@@ -63,7 +63,7 @@ Principals: IAM entities that are allows to interact with OCI resources.
  2. Resource principals
  3. Group
 
-----Networking: VCN---
+----Networking: VCN----
 1. Internet Gateway (IGW)
    - Allows resources in your VCN to connect to the internet.
    - Supports both inbound and outbound traffic.
@@ -168,7 +168,7 @@ Serverless with Oracle Functions: Function as a service
 
 ---- Storage Introduction ----
 Types:
- 1. Local NVMe : Locally attached storage. 
+ 1. Local NVMe : Locally attached to a compute instance storage, not persistance.
  2. Block Volume : we can do partitions. 
  3. File Storage : shared file storage system. 
 
@@ -181,7 +181,7 @@ Types:
    3. Archive tier : min 90 days retention, restore time 1 hour, download time 24 hrs. 
    4. Auto tiering.
 
-Data Migration services:
+Data Migration/transfer services:
  - Data Transfer disk
  - Data Trasfer appliance. 
 
@@ -218,7 +218,7 @@ Shared Security Model:
    - Physical Datacenter
 
 Layers:
- 1. Infra proctection : Ddos, web application frewall, Security lists/NSG, Network firewall
+ 1. Infra proctection : Ddos- web application firewall, Security lists/NSG, Network firewall
  2. IAM : IAM, MFA, Federation, Audit
  3. OS & Workload protection : Shield instance, dedicated host, Bastian, OS Mgmt
  4. Data protection : Virtual key mgmt, certificates, Vault secret mgmt, data safe
@@ -307,5 +307,64 @@ Tagging:
 Support Rewards:
  - 
 
+ ---- Database Services ----
+ 1. Oracle Public Cloud
+    - Base database service - VM'S "inbuild data base within VM's"
+    - Exadata database service on dedicated infra. (Exacs)
+    - Autonomous Database (managed  by oracle) on shared & dedicated exadata infra. ()
+ 2. Customer data center
+    - Exadata database service on cloud@Customer. (Exacc)
+    - Autonomous Database on exadata cloud@customer.
+
+Database service:
+ - Base database service:
+   - standard edition (SE2), enterprise editions (EE,HP,EXP) etc
+   - Flexible shapes - Ampere, AMD, Intel x9 
+   - Automated backups.
+   - High Availability.
+   - Disaster recovery.
+   - inluded license & Bring your own license.
+
+Oracle Autonomous Dtabase: 
+ - Managed database.
+ - self provisioning, securing, managing, reparing, scaling, optimising. 
+
+MySQL Heatwave:
+ - Integrated with mysql service with oci. 
+ - massive performance boost
+ - 1400 faster than aws Aurora. 
+ - Machine learning integration
+ - Real-time analytics
+ - cost-effective
+ - scalability
+ - fully managed service
+ - security
+ - available in OCI, AWS, Azure etc
+
+Opensearch:
+ - fully managed opensearch cluster.
+ - input - text, images, social, graphs etc. 
+ - under Apache 2.0 license.
+ - derived from elastic search - 7.10.2
+ - distributed search engine,
+
+OCI Goldengate service:
+ - Real time data integration: data movement, transformation & synchronization across heterogeneous system.
+ - Managed service.
+ - Elasticity & Scalability.
+ - Database support.
+ - Hybrid Implementation.
+ - Zero down time migration.
+ - Security.
+ - Transactional consistency,
+ - continous data availability.
+
+OCI NoSQL Database:
+ - Fully managed service.
+ - scalability.
+ - Flexible data models: JSON, simple k-value,schema-less design etc
+ - Use-cases: IoT, mobile app,360-degree cust view, online gaming, digital advertising etc
+ - security
+ - low latency
 
 
