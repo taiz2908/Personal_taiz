@@ -658,3 +658,23 @@ Solutions:
 18. Describe how you’d set up observability (logs, metrics, traces).
 19. What’s the difference between mutable and immutable infrastructure?
 20. Your service goes down at 2 AM. How do you approach troubleshooting?
+=====================
+Most resumes fail DevOps interviews for ONE reason 👇
+
+Hiring managers don’t reject resumes because of missing tools.
+They reject them because impact is missing.
+
+Here’s what I see again and again in DevOps / SRE resumes:
+❌ Worked on AWS & Kubernetes
+ ❌ Handled production issues
+ ❌ Good knowledge of Linux
+
+But interviewers actually want to know:
+ ✅ What broke in production?
+ ✅ How did you fix it?
+ ✅ What did you automate?
+ ✅ What changed after you worked on it?
+
+Example difference:
+❌ Managed Kubernetes clusters
+ ✅ Automated Kubernetes deployments using Helm, reducing release failures by 40%
