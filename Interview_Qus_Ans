@@ -678,3 +678,20 @@ But interviewers actually want to know:
 Example difference:
 ❌ Managed Kubernetes clusters
  ✅ Automated Kubernetes deployments using Helm, reducing release failures by 40%
+
+====================
+Before you touch Kubernetes, build the fundamentals.
+
+Start with Linux.
+Nearly every DevOps tool runs on Linux. File permissions, processes, services, logs, systemctl, the shell and if you can’t operate a Linux server with confidence, managing clusters will feel impossible.
+
+Learn Git the right way.
+Branching, merging, rebasing, reviewing changes because these are everyday tasks. Strong Git habits make both collaboration and automation far smoother.
+
+Get comfortable with Bash scripting.
+Most automation begins with the command line. Understanding how to write, debug, and chain commands together helps you grasp how CI/CD systems actually work under the hood.
+
+Master the basics of networking.
+IP addresses, ports, DNS, subnets, routing, load balancing because nothing in the cloud functions without networking. If you understand how traffic flows, everything else becomes easier to reason about.
+
+Once these fundamentals are strong, tools like Docker, Kubernetes, Terraform, and AWS finally start to make sense.
