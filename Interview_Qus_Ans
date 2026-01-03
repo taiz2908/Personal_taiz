@@ -658,6 +658,7 @@ Solutions:
 18. Describe how you’d set up observability (logs, metrics, traces).
 19. What’s the difference between mutable and immutable infrastructure?
 20. Your service goes down at 2 AM. How do you approach troubleshooting?
+21. 
 =====================
 Most resumes fail DevOps interviews for ONE reason 👇
 
@@ -695,3 +696,26 @@ Master the basics of networking.
 IP addresses, ports, DNS, subnets, routing, load balancing because nothing in the cloud functions without networking. If you understand how traffic flows, everything else becomes easier to reason about.
 
 Once these fundamentals are strong, tools like Docker, Kubernetes, Terraform, and AWS finally start to make sense.
+===================
+Devops Tool 1 Focus: Core Linux Interview Questions
+
+• What is Linux and why is it widely used in DevOps?
+• Difference between Linux and Unix
+• What is a shell? Difference between bash and sh
+• Explain Linux directory structure (/etc, /var, /opt, /usr)
+• What is root user? How is it different from normal user?
+• File permissions (r, w, x) and chmod explained
+• Difference between chmod 755 and chmod 777
+• What is umask?
+• Hard link vs soft link
+• How do you check running processes?
+• Difference between ps, top, and htop
+• How do you kill a process in Linux?
+• What is a daemon process?
+• How do you check disk usage and memory uses 
+• Difference between df and du
+• What is a package manager? (yum, apt)
+• How do you find a file in Linux?
+• What is grep and why is it important?
+• What is SSH and how does it work?
+• How do you check Linux logs?

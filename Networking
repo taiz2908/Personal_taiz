@@ -1,5 +1,6 @@
 Ref:
 https://www.youtube.com/watch?v=Dppl6iA2G8Q&list=PLBGx66SQNZ8ZvdIoctCTWB3ApXQpQGEin&index=3
+https://www.youtube.com/watch?v=mNTs-shuFno
 
 1. OSI MODEL
 2. Subnets
@@ -13,7 +14,7 @@ https://www.youtube.com/watch?v=Dppl6iA2G8Q&list=PLBGx66SQNZ8ZvdIoctCTWB3ApXQpQG
 10. protocols 
  
 =======================
-1.
+1. OSI Model: Open System Interconnection
 
 2. Subnets:
  - slipt into large n/w into grouping of small interconnected n/w to minimise the traffic. 
@@ -52,3 +53,27 @@ https://www.youtube.com/watch?v=Dppl6iA2G8Q&list=PLBGx66SQNZ8ZvdIoctCTWB3ApXQpQG
    - ssh (22)
    - ssl/tls (465)
    - smtp (25)
+
+====================
+How Does the Internet Work?
+ - By using brower & using protocol: http/https --> DNS --> IP
+ - keeping the data in the server
+ - This server is having th IP address.
+ - DNS --> mapped with that IP address. 
+
+traceroute google.com --> tracing the route means from starting to ending point of that target/respective server. 
+ping google.com --> internet is working or not. 
+---
+
+OSI Model / TCP-IP: Open System Interconnection: APST - NDP
+ - Layer 7 : Application : HTTP/HTTPS, FTP, SMTP, DNS 
+ - Layer 6 : Presentation : also known as the syntax layer, ensure data security during transmission
+ - Layer 5 : Session : manages and controls the connections between computers (API, Socket)
+ - Layer 4 : Transport : TCP, UDP 
+ - Layer 3 : Network :
+ - Layer 2 : Data Link : Ethernet
+ - Layer 1 : Physical :
+
+----
+
+ 
