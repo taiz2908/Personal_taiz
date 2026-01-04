@@ -1,0 +1,49 @@
+AWS SERVICES:
+
+EC2
+ - creation of EC2
+ - taking the spanshot of ami
+ - Type change, upgrade/downgrade
+ - Installing required softwares, OS upgrade etc.
+
+IAM 
+ - creation of user & groups
+ - reset user passwd
+ - 
+
+STORAGE: 
+ - EBS 
+   - Taking snapshot.
+   - Upgrade volume like gp2 to gp3
+   - cleaning unused EBS
+
+ - EFS 
+   -
+   -
+
+ - S3
+  - Creation, deletion of bucket
+  - Copy & download data/files etc.
+  - S3 Cleanup & creation of lifecycle policy
+
+ECS 
+  - Task creation/updation
+  - service creation
+  -
+
+ECR 
+  - Rules added for older image cleanup.
+  - 
+
+CLOUDWATCH
+  - Monitoring services like EC2, ECS Cluster, Elastic_DocDB - CPUUtilization, LogicalDisk, EBS Write Ops - readOps, Network In & Out etc.
+  - Creation of Dashboard. 
+  - Checking the metrics of particular services.
+
+LAMBDA
+DOCUMENTDB 
+
+
+LOAD BALANCER
+
+

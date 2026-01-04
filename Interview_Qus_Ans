@@ -719,3 +719,29 @@ Devops Tool 1 Focus: Core Linux Interview Questions
 • What is grep and why is it important?
 • What is SSH and how does it work?
 • How do you check Linux logs?
+
+============𝐀𝐖𝐒
+1. Let's say you have a few EC2 instances in Private Subnet. How can you connect them to have internet access?
+2. What are load balancers and then what type of load balancers AWS supports?
+3. You have EC2 instances running in a private subnet inside your VPC. These instances need to access Amazon S3, but you don’t want their traffic to go over the public internet. What AWS feature or configuration would you use to enable private connectivity to S3?
+4. I already have an IAM role with a specific set of permissions. I want another IAM role to have exactly the same permissions in another AWS account. How can I achieve this?
+5. I have a remote EC2 instance. How can I connect to it?
+
+☸️ 𝐊𝐮𝐛𝐞𝐫𝐧𝐞𝐭𝐞𝐬
+1. Describe the Achitecture of Kubernetes.
+2. In Kubernetes, what is the difference between a Deployment, StatefulSet and ReplicaSet?
+3. The application needs to persist its data even if pods are recreated. Which Kubernetes resource provides this persistent storage for StatefulSets?
+4. What is CNI in Kubernetes and what does it do?
+5. What are services in Kubernetes?
+6. Using Helm, how can I deploy the same application multiple times in a Kubernetes cluster?
+
+🌍 𝐓𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦
+1. I want to run some commands automatically on an EC2 instance immediately after it is created using Terraform. How can I achieve this?
+2. I already created some cloud resources manually. Later, I wrote Terraform code for those resources. How can I bring the existing (manually created) resources under Terraform management and sync them with the Terraform state?
+3. If multiple users are working on the same Terraform configuration and try to modify the same infrastructure resource at the same time, does Terraform allow this? How does Terraform handle concurrent changes?
+4. What is the difference between using `count` and `for_each` in Terraform, and when should each be used?
+
+🐧 𝐋𝐢𝐧𝐮𝐱
+1. How can I check which ports are open and listening on an Ubuntu system
+2. In Linux, I have certain network interfaces. I want to see the IP for those interfaces. How can I check?
+3. How can I check the available (free) disk space for a directory in Linux?
