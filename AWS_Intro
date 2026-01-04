@@ -64,14 +64,24 @@
    - Enabled at the bucket level
    - Protects against unintended deletes
    - Ability to restore to a previous version
+  Bucket Types:
+   1. General-purpose Bucket
+   2. Directory Bucket
+   3. Table Bucket
+   4. Vector Bucket
   Storage Classes:
-   1. S3 Standard
-   2. S3 Standard Infrequent Access (50% less from Standard, don't access a file more than a month)
-   3. S3 One zone IA
-   4. S3 Intelligent Tiering
-   5. S3 Glacier
-   6. S3 Glacier deep archieve
+   1. S3 Standard - for general-purpose storage of frequently accessed data.
+   2. S3 Express One Zone - for high-performance frequently accessed data in a single-Availability Zone.
+   3. S3 Standard IA - (50% less from Standard, don't access a file more than a month) - for long-lived, but less frequently accessed data.
+   4. S3 One zone IA - for long-lived, but less frequently accessed data.
+   5. S3 Intelligent Tiering - automatically optimize costs for data with unknown or changing access patterns.
+   6. S3 Glacier:
+     - S3 Glacier Instant Retrieval - for archive data that needs immediate access.
+     - S3 Glacier Flexible Retrieval - for archive data that doesn't require immediate access but needs the flexibility to retrieve large sets of data at no cost.
+     - S3 Glacier Deep Archive - for long-term archive and digital preservation at the lowest storage costs in the cloud.
   Data Transfer Costs:
+   Storage pricing:
+   - You pay for storing objects in your S3 buckets. The rate you’re charged depends on your objects' size, how long you stored the objects during the month, and the storage class
    - Uploads to S3 are free
    - Downloads from S3 are paid
 
