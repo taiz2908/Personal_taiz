@@ -73,7 +73,14 @@ OSI Model / TCP-IP: Open System Interconnection: APST - NDP
  - Layer 3 : Network :
  - Layer 2 : Data Link : Ethernet
  - Layer 1 : Physical :
-
+TCP-IP:
+ - Application Layer (application + presentation + session)
+ - Transport Layer (Transport)
+ - Internet Layer (Network)
+ - Network Access (Data Link + Physical)
 ----
+
+IP/SUBNETS:
+ -
 
  

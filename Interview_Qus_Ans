@@ -696,9 +696,8 @@ Master the basics of networking.
 IP addresses, ports, DNS, subnets, routing, load balancing because nothing in the cloud functions without networking. If you understand how traffic flows, everything else becomes easier to reason about.
 
 Once these fundamentals are strong, tools like Docker, Kubernetes, Terraform, and AWS finally start to make sense.
-===================
-Devops Tool 1 Focus: Core Linux Interview Questions
 
+===================: Devops Tool 1 Focus: Core Linux Interview Questions :===============================
 • What is Linux and why is it widely used in DevOps?
 • Difference between Linux and Unix
 • What is a shell? Difference between bash and sh
@@ -720,11 +719,21 @@ Devops Tool 1 Focus: Core Linux Interview Questions
 • What is SSH and how does it work?
 • How do you check Linux logs?
 
-============𝐀𝐖𝐒
+============𝐀𝐖𝐒========================
 1. Let's say you have a few EC2 instances in Private Subnet. How can you connect them to have internet access?
+   Ans: 
+    - Private Subnet (EC2)  --->  NAT Gateway  --->  Internet Gateway
+  Traffic Flow Example:
+   - EC2 → NAT Gateway → Internet Gateway → Internet
+   - Internet → IGW → NAT Gateway → EC2 (response only)
+
+
+
 2. What are load balancers and then what type of load balancers AWS supports?
 3. You have EC2 instances running in a private subnet inside your VPC. These instances need to access Amazon S3, but you don’t want their traffic to go over the public internet. What AWS feature or configuration would you use to enable private connectivity to S3?
 4. I already have an IAM role with a specific set of permissions. I want another IAM role to have exactly the same permissions in another AWS account. How can I achieve this?
+  Ans: 
+
 5. I have a remote EC2 instance. How can I connect to it?
 
 ☸️ 𝐊𝐮𝐛𝐞𝐫𝐧𝐞𝐭𝐞𝐬
@@ -745,3 +754,39 @@ Devops Tool 1 Focus: Core Linux Interview Questions
 1. How can I check which ports are open and listening on an Ubuntu system
 2. In Linux, I have certain network interfaces. I want to see the IP for those interfaces. How can I check?
 3. How can I check the available (free) disk space for a directory in Linux?
+---*********AWS Interview Questions*********
+• 1. Can you attach a single EBS volume to multiple EC2 instances at the same time?
+ • 2. What is EBS?
+ • 3. How can you access an S3 bucket privately?
+ • 4. What is a VPC?
+ • 5. How many VPCs can be created in one AWS Region?
+ • 6. What is VPC Peering?
+ • 7. What is a Subnet?
+ • 8. What are the types of Auto Scaling in AWS?
+ • 9. What is a Public Subnet and a Private Subnet?
+ • 10. What is a Route Table?
+ • 11. What is CloudFormation?
+ • 12. What is a Public Key and Private Key?
+ • 13. What is the purpose and use of S3?
+ • 14. What is the difference between S3 and Glacier?
+ • 15. What is the difference between EC2 and ECS?
+ • 16. Why should you not use EC2 for databases? Why RDS?
+ • 17. What is the difference between NACL and Security Group?
+ • 18. Explain the S3 Lifecycle.
+ • 19. What is ELB and how many types are there?
+ • 20. Can you increase the size of the root volume without stopping the instance?
+ • 21. What is AWS Lambda?
+ • 22. How do you connect EC2 with DynamoDB?
+ • 23. What is CloudWatch and why do we use Grafana?
+ • 24. What is IAM? Explain Roles and Policies.
+ • 25. What is Route 53?
+ • 26. What is Transit Gateway?
+ • 27. What is an Internet Gateway?
+ • 28. What is the difference between Edge Location, Availability Zone, and Region?
+ • 29. What is SNS?
+ • 30. What is SQS?
+ • 31. What is the port number for NoSQL?
+ • 32. What is the port number for MySQL?
+ • 33. How do you take a backup of an EC2 instance in Linux?
+ • 34. What is the port number for DynamoDB?
+ • 35. What is DevOps and why do we need a DevOps role?
