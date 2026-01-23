@@ -41,7 +41,13 @@ CLOUDWATCH
   - Checking the metrics of particular services.
 
 LAMBDA
-DOCUMENTDB 
+
+DOCUMENTDB
+  - creating cluster
+  - add in scheduler
+  - h/w modification as per the requirement
+  - storage type modification 
+  - creation/modification parameters group
 
 
 LOAD BALANCER
