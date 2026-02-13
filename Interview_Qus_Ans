@@ -790,3 +790,9 @@ Once these fundamentals are strong, tools like Docker, Kubernetes, Terraform, an
  • 33. How do you take a backup of an EC2 instance in Linux?
  • 34. What is the port number for DynamoDB?
  • 35. What is DevOps and why do we need a DevOps role?
+
+ ------
+ Questions: 
+- What will you check if an application is slow but CPU and memory are normal?
+- How do you troubleshoot when everything looks healthy but users see errors?
+- How do you approach a production issue step by step?
