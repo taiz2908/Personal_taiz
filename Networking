@@ -70,7 +70,7 @@ OSI Model / TCP-IP: Open System Interconnection: APST - NDP
  - Layer 6 : Presentation : also known as the syntax layer, ensure data security during transmission
  - Layer 5 : Session : manages and controls the connections between computers (API, Socket)
  - Layer 4 : Transport : TCP, UDP 
- - Layer 3 : Network :
+ - Layer 3 : Network : 
  - Layer 2 : Data Link : Ethernet
  - Layer 1 : Physical :
 TCP-IP:
@@ -81,6 +81,9 @@ TCP-IP:
 ----
 
 IP/SUBNETS:
- -
+ - Subnets : 
+   - Subnetting is the process of dividing a large IP network into smaller logical networks called subnets.
+
+   House Num 37A,Bagalur Main Road, 1st B Cross,Sivapura
 
  
