@@ -1,0 +1,146 @@
+===========: AWS SERVICES :============
+
+EC2
+ - creation of EC2
+ - taking the spanshot of ami
+ - Ami permissions
+ - Type change, upgrade/downgrade
+ - Installing required softwares, OS upgrade etc.
+ - Creation & attaching Elastic IP's. 
+
+IAM 
+ - creation of user & groups
+ - reset user passwd
+ - creation of roles
+
+STORAGE: 
+ - EBS 
+   - Taking snapshot.
+   - Upgrade volume like gp2 to gp3
+   - cleaning unused EBS
+
+ - EFS 
+   - Cleaning EFS
+   - Creating access point
+
+ - S3
+  - Creation, deletion of bucket
+  - Copy & download data / files etc.
+  - S3 Cleanup & creation of lifecycle policy
+
+ECS 
+  - Task creation/updation
+  - service creation
+  - 
+
+ECR 
+  - Rules added for older image cleanup.
+  - Creation of new image repo 
+
+CLOUDWATCH
+  - Monitoring services like EC2, ECS Cluster, Elastic_DocDB - CPUUtilization, LogicalDisk, EBS Write Ops - readOps, Network In & Out etc.
+  - Creation of Dashboard. 
+  - Checking the metrics of particular services.
+
+LAMBDA
+  - Creation of Lmabda as per the need like EC2 scheduling, DocumentDB, ECS etc.
+
+DOCUMENTDB
+  - creating cluster
+  - add in scheduler
+  - h/w modification as per the requirement
+  - storage type modification 
+  - creation/modification parameters group
+
+
+LOAD BALANCER
+
+--- DevOps Roles & Responsibilities ---
+
+- Set up and manage development, testing, and production environments.
+- Build application code and create Docker images for deployment.
+- Deploy containerized applications and packages across environments.
+- Execute and manage database SQL scripts for application releases.
+- Configure and maintain system configuration parameters.
+- Perform database backup and restoration to ensure data reliability.
+- Maintain system security, access control, and environment compliance.
+- Manage system patching and regular security updates.
+- Manage user access and permissions across infrastructure and systems.
+- Design and implement CI/CD pipelines for automated deployments.
+- Document environment architecture, configurations, and operational procedures.
+- Collaborate with developers to troubleshoot and resolve application issues.
+- Monitor server performance metrics (CPU, memory, JVM utilization).
+- Perform regular housekeeping tasks including log cleanup, reports, Docker images, and database maintenance.
+- Maintain environment inventory including server specs, IPs, repositories, pipelines, and domain details.
+- Implement and manage performance monitoring and observability tools.
+- Troubleshoot and resolve infrastructure and environment-related issues.
+- Communicate environment updates and changes with project stakeholders.
+- Follow operational processes, release procedures, and deployment checklists.
+- Track and resolve assigned tasks, incidents, and service requests.
+
+======== DevOps IN-General======
+
+1. we do have our CICD task, depends on the team requirement within the sprint. 
+2. also we support development team. 
+3. CI-CD Process. (Need to brief properly)
+4. How to handle sensitive info ?
+   - Hasicorp Vault 
+5. How did you integrate vault in your pipeline ?
+   - other team handled so we requested.
+6. Can you use this pipeline for all env ? how did you organise ?
+   - dev / staging /prod
+   - 
+----------Git & GHE --------------------
+1. Creating & managing the GHE Repo by using various git cmds for different services/components. 
+2. Creating / deletion the branchs.
+3. Solving git conflicts during merging.
+4. Guiding Developers reg generateting the ssh keys and connect with git to respective repo's like GHE, Gerrit etc.
+5. Creating Branching strategy as per the project Req. 
+6. Guiding & merging the pull request into the master branch.
+
+----------- Jenkins -------------------
+1. Writing / modifying the Jenkinsfile according to the project req. 
+ - Creating parallel jobs
+ - Creating parent child jobs, upstream / downstream 
+ - Creating parameterized jobs (string , text, booleanParam, choice, password etc.)
+ - Adding req attributes after stages i.e., post (cleanup, always, success, failures etc. ) 
+2. Assiging the roles to the users / teams . (roles based strategy)
+3. Installing diff plugins in Jenkins to achieve Continous Integration. (refer to CICD section)
+4. Integrate different CI-CD Stages in Jenkinsfile as per the project req. 
+ - code checkout (gerrit / git)
+ - Code build (mvnInstall)
+ - Code deploy (mvnDeploy)
+ - SonarQube (code quality analysis)
+ - NexusIq (Vulnerability)
+ - 
+5. Creating various JOBS & Configure as per the project req. 
+- free style
+- maven 
+- pipeline
+- multibranch pipeline 
+----------- Maven --------------------
+1. Using as Build tools for the building of deployable artifacts from source code & deploying to those
+   artifacts to nexus / Jfrog repo. 
+Ex:
+Updating pom.xml file
+ - Adding required plugins as per the project requirement , under <build> section. 
+  - <maven-deploy-plugin>
+  - <jacoco-maven-plugin>
+  -
+ - Updating <distributionManagement> section & setting.xml file for pushing the artifact to nexus repo.
+  - Release section, 
+  - Snapshot section, 
+ - 
+------------ Ansible ------------------
+
+------------- Docker ------------------
+1. Writing the Multistage - Dockerfile.
+2. Managing the container's with various docker commands. 
+3. Debugging the containers.
+
+------------- K8S ---------------------
+1. 
+2.
+
+
+-------------- IBM UCD ---------------

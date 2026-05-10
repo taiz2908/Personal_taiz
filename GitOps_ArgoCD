@@ -1,0 +1,20 @@
+What is GitOps?
+ - Automated procedd
+ - more transparent
+ - more than Iac
+
+Two Deployments:
+  1. Push Deployment : CICD like jenkins or GitLabs
+  2. Pull Deployment : 
+      - Agent installed in the env like k8s cluster , actively pull the changes from the git repo
+      - monitors & compaires desired state with actual state
+      - applies the changes to get to desired state. 
+      - Ex: FluxCD or ArgoCD
+      - Easy rollback. 
+
+
+==========: ArgoCD :==================
+Ref: 
+ - https://youtu.be/lNVVyMH8EuA?si=H4orJDxLmreN2jCS  Valaxy Technologies, Argo CD for Beginners
+ - https://www.youtube.com/watch?v=MeU5_k9ssrs       TechWorld with Nana, 
+

@@ -797,6 +797,49 @@ Once these fundamentals are strong, tools like Docker, Kubernetes, Terraform, an
 - How do you troubleshoot when everything looks healthy but users see errors?
 - How do you approach a production issue step by step?
 
+=====
+AWS Scenario-Based Interview Q&A – Day 1
+
+🔹 1. EC2 instance is running, but application not accessible – How to troubleshoot?
+
+✅ Steps:
+
+Check Security Groups → Ensure required ports (80/443) are open
+Verify NACLs → Allow inbound/outbound traffic
+Check Application status → systemctl status nginx / netstat -tulnp
+Validate Public IP / DNS
+Check OS firewall → iptables / firewalld
+Review logs → /var/log/messages, app logs
+
+💡 Example:
+Port 80 was not open in Security Group → Added rule → Application became accessible.
+
+🔹 2. Application slow during peak traffic – What to check?
+
+✅ Check:
+
+CloudWatch Metrics → CPU, Memory, Network
+Enable Auto Scaling
+Use Elastic Load Balancer (ALB)
+Enable CloudFront CDN
+Optimize DB (RDS read replicas)
+
+💡 Example:
+High CPU (90%) during peak → Enabled Auto Scaling → Traffic distributed → Performance improved.
+
+🔹 3. Design a Highly Available AWS Architecture
+
+✅ Best Practices:
+
+Deploy across Multiple AZs
+Use ALB + Auto Scaling Group
+Store static content in S3
+Use RDS Multi-AZ
+Add Route 53 health checks
+
+💡 Example Architecture:
+Users → Route53 → ALB → EC2 (Multi-AZ) → RDS Multi-AZ
+
 ============ This round was clearly designed for 5+ years experienced DevOps Engineers ===============
 
 AWS – Advanced Scenario-Based Questions
@@ -846,3 +889,95 @@ Infrastructure automation (boto3)
 Log parsing & alerting system
 Handle exceptions, retries & logging properly.
 Build a real-time monitoring/automation script.
+
+
+#####
+Walk through your professional background and current role
+Explain the difference between Git merge and Git rebase
+Describe the branching strategy you follow in your projects
+How frequently do you release applications to production and why?
+Explain Linux server patching and how it is handled in AWS environments
+Describe your approach to troubleshooting issues in CI/CD pipelines
+Explain the end-to-end steps involved in your production deployment pipeline
+How do you investigate and resolve failures in a CI/CD job?
+What is a multi-stage Dockerfile and why is it used?
+Write a sample multi-stage Dockerfile
+Explain Kubernetes services and their use cases
+Write a Kubernetes Pod YAML manifest
+How do you recover or handle a corrupted Terraform file or state?
+How do you resolve merge conflicts in Git?
+Which AWS services have you worked with in real projects?
+Explain how you set up and manage an Auto Scaling Group
+What is elasticity in cloud computing, and how have you implemented it?
+
+==========================
+☁️ AWS & Networking
+1) Design a 3-tier AWS architecture with a focus on networking
+2) Difference between SNS vs SQS?  give the real-world examples?
+3) How to identify private vs public subnets?
+4) Suppose you have two EC2 instances in the same VPC, both deployed in different public subnets. How would you configure them to communicate with each other
+5) What if they are in different private subnets?
+6) What is S3 Cross-Region Replication? Why we use?
+7) Suppose your EC2 instance has attached EBS volume of 100 GB but instance not being used full space, just using 40%. what to done to reduce volume?
+
+Terraform
+8) What is data source in terraform? Give an example where we can use?
+9) What is key differences terraform fmt vs terraform validate?
+10) What is Lifecycle Meta-Argument in Terraform?
+11) If I want to mark terraform variable as sensitive how to mark? what happened if the mark?
+
+Kubernetes:
+12) What is Readiness Probe vs Liveness Probe in Kubernetes?
+13) Explain what is Deployment and StatefulSet with the example?
+14) Explain what is Deployment and StatefulSet with the example?
+15)  What types of services in Kubernetes and explain each one?
+16) What do you understand by Taints and Tolerations?
+17)  What is Persistent Volume (PV) & Persistent Volume Claim (PVC)? How it works?
+
+Jenkins
+18)  What is GitHub Action? Have you use in your project?
+19) How many types of Jenkins pipelines and which one you use in your project? Why?
+20) Suppose your Jenkins pipelines is stuck how to troubleshoot step by step?
+21) How do you integrate Jenkins with Git? Which plugin is required for this integration
+22) Can you explain the role of build executors in Jenkins, and how many executors were configured in your project?
+===========================
+
+Most DevOps candidates prepare for the wrong interview questions.
+
+They memorize Kubernetes commands. They practice Terraform syntax. They rehearse CI/CD pipeline explanations until they can recite them in their sleep.
+
+And then they walk into the interview and get asked something like this.
+"Tell me about a time you pushed a fix to production and it made things worse."
+
+Silence.
+
+After sitting on both sides of the interview table, here are the questions that actually separate good DevOps engineers from great ones and almost nobody prepares for them:
+
+"How do you decide when NOT to automate something?"
+ - Automation is not always the answer. The best engineers know when the juice is not worth the squeeze. If you  cannot answer this one clearly, it signals you think in tools, not outcomes.
+
+"Walk me through how you would onboard a new engineer to your on call rotation."
+ - This is really a question about documentation, empathy, and team culture. Interviewers love this because it shows whether you think beyond your own laptop.
+
+"Describe a deployment that scared you. What did you do differently after?"
+ - Anyone can talk about wins. The engineers worth hiring talk about fear, caution, and what they learned. This answer tells a hiring manager more about you than any tool you can name.
+
+"How do you handle disagreement with a developer about how something should be deployed?"
+ - DevOps is a collaboration, not a gatekeeping role. If your answer does not include listening, it is probably not the right answer.
+
+"What does good look like for the system you are responsible for?"
+ - This one trips up a lot of people. Great engineers have an opinion about what healthy looks like and can defend it. They are not just reacting to problems, they are working toward something specific.
+
+Here is the honest truth.
+
+Hiring managers are not just looking for someone who knows the tools. They are looking for someone who can think under pressure, communicate clearly, and make the team around them better.
+
+The technical bar matters. But it is rarely what makes or breaks the decision
+
+================
+Spend more time understanding system architecture, design, cloud security, networking, and real-world problem solving.
+Only 2 companies asked me deeply about Kubernetes. Most interviewers were more interested in 
+ - How I design systems 
+ - Handle security in cloud environments, 
+ - Troubleshoot issues,
+ - Think during production scenarios.
