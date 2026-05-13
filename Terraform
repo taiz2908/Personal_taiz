@@ -125,14 +125,14 @@ How to Store Terraform State File In AWS S3?
 Ex:
    terraform {
     backend "s3" {
-    encryption = "true"
-    bucket = "mycmpy-tf-state"
-    region = "us-east-1"
-    kms_key_id = "terraform-state/anyname.tfstate"
-    dynamo_table = "terraform-lock"
-    role_arm = "arn:aws:iam:{}-role/terraform-state-s3"
-      }
+     encryption = "true"
+     bucket = "mycmpy-tf-state"
+     region = "us-east-1"
+     kms_key_id = "terraform-state/anyname.tfstate"
+     dynamo_table = "terraform-lock"
+     role_arm = "arn:aws:iam:{}-role/terraform-state-s3"
     }
+  }
 
 ===================: Terraform with Docker: ==========================================================
  - Terraform Block: Install required providers, versions etc
