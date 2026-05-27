@@ -20,11 +20,11 @@
    - Hybernate
    - Standby
 
- - AMI
+ - AMI:
    - OS Image + App Image
    - Avaialble in AWS, Marketplace, Custom AMI
 
- - IAM
+ - IAM:
    - Users: User can belong to multiple groups. (attach the policies to the users). "IAMuserChangepassword"
    - Groups : Groups are collections of "users" and have "policies" attached to them.
    - IAM User has limited permission to the account.
@@ -35,7 +35,7 @@
        - Control access to an AWS resource.
    - Roles: Collection of policies for AWS services.
 
- - EBS
+ - EBS:
    - Bound to an AZ
    - By default, upon instance termination, the root EBS volume is deleted and any other attached EBS volume is not deleted.
    - To replicate an EBS volume across AZ or region, need to copy its snapshot.
@@ -51,7 +51,7 @@
    - Snapshots are incremental.
    - Only the most recent snapshot is required to restore the volume.
 
- - S3
+ - S3:
    - Global Service
    - 99.99999999999%
    - Object store (key-value pairs)
@@ -85,7 +85,7 @@
    - Uploads to S3 are free
    - Downloads from S3 are paid
 
- - CloudWatch
+ - CloudWatch :
    - Serverless performance monitoring service (monitoring, alerting, logging & reporting)
    - EC2 instances have metrics every 5 minutes
    - With detailed monitoring (for a cost), you get metrics every 1 minute
@@ -118,7 +118,7 @@
    - Lambda Function
   Scaling:
 
- - Auto Scaling
+ - Auto Scaling :
    - Regional Service
    - Supports Multi AZ
    - Automatically add(scale out) or, remove(scale in) instances (scale horizontally) based on the load.
@@ -130,7 +130,7 @@
    - Metric type: we can define cpu utilisation %
    - Target groups:
 
- - ELB 
+ - ELB :
    1. Network LB 
      - Operates at Layer 4 (TCP, UDP)
      - Can handle millions of request per seconds (extreme performance)
@@ -154,7 +154,7 @@
        - Load Balancer (distributes traffic to virtual appliances)
   Cross-zone Load Balancing:
 
- - VPC
+ - VPC:
    - Customize our n/w configuration, n/w that is isolated from other n/w.
    - Max 5 vpc can be created in one region, 200 subnets in 1 vpc.
    - VPC confined to region.
@@ -189,62 +189,65 @@
    - /16 : 65,536 ip's
    - /24 : 256 IP'S
 
- - Route 53
+ - Route 53:
    - Global Service
    - Domain registration, DNS routing, and health checking.
-  Record Types:
-   - A - maps a hostname to IPv4
-   - AAAA - maps a hostname to IPv6
-   - CNAME - maps a hostname to another hostname
-   - NS (Name Servers) - controls how traffic is routed for a domain
-   - Alias - maps a hostname to an AWS resource
+  Record Types
+    - A - maps a hostname to IPv4
+    - AAAA - maps a hostname to IPv6
+    - CNAME - maps a hostname to another hostname
+    - NS (Name Servers) - controls how traffic is routed for a domain
+    - Alias - maps a hostname to an AWS resource
 
- - DynamoDB
+ - DynamoDB:
 
- - SNS
+ - SNS:
 
- - SQS
+ - SQS:
  
- - Lambda
+ - Lambda:
    - Serverless (short actions/functionality)
    - We can run the code as functions without provisioning & managing underlying AWS infrastructure.
    - Aws handles the scaling, maintenance, capacity provisioning & logging.
    - Lambda function is a small program that performs a specific task.
    - Lambda is a Function as a Service (FaaS offering).
   
-  - Fargate
+  - Fargate:
    - It's serverless compute engine that allows you to run containers without managing the infrastructure
    - Fargate service provides a way to run containerized apps on the AWS cloud with minimal infrastructure management.
    - Fargate primarily a Container-as-a-Service (CaaS)
    - Access to more memory/CPU size options and the length of time your code needs to run with Fargate
    - Easily managing multiple containers, network configurations, resource requirements, etc., and it has larger community support.
 
- - ECS (Elastic Container Service)
+ - ECS (Elastic Container Service):
    - AWS managed container orchestration platform. / AWS proprietary service
    - Manages the whole life cycle of a container(start,reschdule,stop,kill etc)
    - https://www.youtube.com/watch?v=AYAh6YDXuho
 
- - EKS
+ - EKS:
    - Managed k8s service. 
    - https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
 
- - ECR (Elastic Container Registry)
+ - ECR (Elastic Container Registry):
    - AWS managed private Docker repository
    - Pay for the storage you use to store docker images (no provisioning)
    - Integrated with ECS & IAM for security
    - Storage backed by S3
    - Can upload Docker images on ECR manually or we can use a CICD service like CodeBuild
 
- - Cloudformations Template(CFT)
+ - Cloudformations Template(CFT):
    - Create stack , supports only YAML or JSON.
    - If template is present then need to choose "template is ready"
    - Template source [S3, Upload a template file]
    - Next --> Done
 
- - KMS
+ - KMS:
 
- - CloudTrail
- - 
+ - CloudTrail:
+
+ - CloudFront:
+    
+
 
 Ref:
  - https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
