@@ -527,6 +527,12 @@ Interview Qus:
 21. how to debugging the error in terraform?
   - during terraform plan / terraform init it'll through the error. 
   - depends on the error we can do the debugging the issue. 
+
+22. Infrasstructure manually modified in AWS & terraform shows unexpected changes during terraform plan. 
+    what happened here and what would you do ? or what is Terraform drift ?
+  - Manual changes in AWS, which causes drift between Terraform state and actual infrastructure.
+  - I would first verify what changed and whether it was intentional. If not needed, I’d revert it using Terraform apply. 
+  - If the change is valid, I’d update the Terraform code accordingly and commit it properly.
 =======================================================================================================
 Ref: https://www.youtube.com/watch?v=pCoCynze4Ag
 
