@@ -229,11 +229,29 @@
    - https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
 
  - ECR (Elastic Container Registry):
-   - AWS managed private Docker repository
+   - AWS managed container image registry service that is secure, scalable, and reliable. 
    - Pay for the storage you use to store docker images (no provisioning)
    - Integrated with ECS & IAM for security
-   - Storage backed by S3
    - Can upload Docker images on ECR manually or we can use a CICD service like CodeBuild
+   - Lifecycle policy : Match Criteria
+      - Filtering on image age
+      - Filtering on last pulled time
+      - Filtering on archive transition time
+      - Filtering on image count
+   - Image Tag Status:
+      - Tagged(wildcard macthing)
+      - Tagged(prefix matching)
+      - Untagged
+      - Any
+   - Features of Amazon ECR:
+      - Automate the cleanup of images by using lifecycle policies in Amazon ECR.
+      - Scan images for software vulnerabilities in Amazon ECR. 
+        - Enhanced scanning: Amazon ECR integrates with Amazon Inspector to provide automated, continuous scanning of your repositories. [OS and programming languages package vulnerabilities]
+        - Basic scanning: OS Scans.
+      - Private registry settings in Amazon ECR.
+      - Managed signing automatically generates cryptographic signatures when images are pushed to Amazon ECR
+
+
 
  - Cloudformations Template(CFT):
    - Create stack , supports only YAML or JSON.
