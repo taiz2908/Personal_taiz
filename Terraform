@@ -684,3 +684,39 @@ resource "aws_instance" "web" {
 }
 ==========================: test :============
 
+Sample Terraform files:
+
+variables.tf
+variable "ami_id" {
+  description = "The AMI ID to use for the EC2 instance"
+  type        = string
+}
+
+variable "instance_type" {
+  description = "The type of instance to start"
+  type        = string
+  default     = "t3.micro"
+}
+
+variable "instance_name" {
+  description = "Value for the Name tag of the EC2 instance"
+  type        = string
+  default     = "my-ec2-instance"
+}
+
+variable "subnet_id" {
+  description = "The VPC Subnet ID to launch in"
+  type        = string
+}
+---
+main.tf
+resource "aws_instance" "server" {
+  ami           = var.ami_id
+  instance_type = var.instance_type
+  subnet_id     = var.subnet_id
+
+  tags = {
+    Name = var.instance_name
+  }
+}
+
