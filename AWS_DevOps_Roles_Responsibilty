@@ -1,5 +1,15 @@
-===========: AWS SERVICES :============
 
+################## AWS INFRA COST SAVING ###########################
+
+ - Implement Lambda function to stop/start EC2, DocumentDB, ECS cluster during non business hours.
+ - EBS : Upgradting GP2 to GP3 as GP3 is roughly 20% cheaper. (gp3 - General purpose SSD)
+ - Cleaning our ECR images by applying rules. (images tag pattern)
+ - Cleaning EFS by automating scripts. 
+ - Cleaning S3 buckets and moving to Glacier.
+ - Deleting unused EC2 & EBS , also deleting Load balancers with target groups.
+ - 
+
+===========: AWS SERVICES :============
 EC2
  - creation of EC2
  - taking the spanshot of ami
@@ -54,6 +64,7 @@ DOCUMENTDB
 
 
 LOAD BALANCER
+
 
 --- DevOps Roles & Responsibilities ---
 
