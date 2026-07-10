@@ -1,0 +1,16 @@
+You'll pay $73 a month for EKS before a single container runs. ECS charges you nothing to exist. That one line settles more AWS architecture debates than any benchmark ever will.
+
+Here's the thing people miss: 𝗘𝗖𝗦 𝗮𝗻𝗱 𝗘𝗞𝗦 𝗮𝗿𝗲𝗻'𝘁 𝗿𝗶𝘃𝗮𝗹𝘀 𝗶𝗻 𝘁𝗵𝗲 𝘄𝗮𝘆 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸. They're both just orchestrators - they decide where your containers run. Fargate and EC2 decide what they run on. You can mix and match.
+Quick history. ECS shipped in 2015 as AWS's own container orchestrator - celebrated ten years in 2025. Then Kubernetes ate the world, and in 2018 AWS launched EKS so teams could run real K8s without babysitting the control plane themselves.
+
+𝗪𝗵𝗲𝗿𝗲 𝗘𝗖𝗦 𝘄𝗶𝗻𝘀:
+No control plane fee. Native AWS APIs, so IAM, load balancers, and service discovery just work. A new engineer is productive in days, not weeks. The tradeoff: it's AWS-only, networking options are basic, and you're outside the CNCF tooling universe.
+
+𝗪𝗵𝗲𝗿𝗲 𝗘𝗞𝗦 𝘄𝗶𝗻𝘀:
+Standard Kubernetes APIs mean your manifests travel across clouds. Namespace-level multi-tenancy, fine-grained pod networking, and every operator in the ecosystem: Argo, Istio, Karpenter, Kubeflow. The tradeoff is real too: that $73/cluster fee multiplies fast (three clusters = $219/mo before workloads), and skilled K8s engineers cost more. One industry estimate pegs EKS operational overhead at roughly 5x the engineering hours of ECS.
+The honest math: at small scale, ECS is cheaper and simpler. At large scale, that control plane fee becomes a rounding error and Karpenter bin-packing can cut compute 40–60%.
+
+𝗠𝘆 𝗿𝘂𝗹𝗲 𝗼𝗳 𝘁𝗵𝘂𝗺𝗯: default to ECS + Fargate. Graduate to EKS when a real requirement: multi-cloud, K8s-native tooling, heavy multi-tenancy - forces your hand.
+Compute costs, by the way, are identical between them. Fargate is Fargate on either side.
+
+image.png
