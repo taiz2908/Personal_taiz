@@ -5,7 +5,9 @@
  - EBS : Upgradting GP2 to GP3 as GP3 is roughly 20% cheaper. (gp3 - General purpose SSD)
  - Cleaning our ECR images by applying rules. (images tag pattern)
  - Cleaning EFS by automating scripts. 
- - Cleaning S3 buckets and moving to Glacier.
+   - attach EFS into EC2: sudo mount -t efs -o tls file-system-id:/ efs/
+   - Ex: Mostly we're removing older logs and keeping 5days logs in EFS. 
+ - Cleaning S3 buckets and those are not required moving to Glacier.
  - Deleting unused EC2 & EBS , also deleting Load balancers with target groups.
  - 
 
