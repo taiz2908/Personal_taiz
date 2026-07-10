@@ -354,4 +354,70 @@ pipeline {
         }
     }
 }
+-##########################-- SAMPLE JENKINS FILE SKLETON ---
+pipeline {
+    agent any 
 
+    parameters {
+        string(name: 'ARTIFACT', defaultValue: '.war', description: 'Who should I say hello to?')
+        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+        choice(name: 'CHOICE', choices: ['DEV', 'SIT', 'PROD'], description: 'Pick something')
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+    }  
+
+    environment {
+        NEW_VERSION = '1.2.0'
+        BRANCH = $ {}
+        PROJECTNAME =
+        PROJECTENV =
+        clustername =
+        servicename =
+    }
+
+    tools {
+        maven "$mavenName"
+        jdk "$jdkName"
+
+    }
+
+    stages {
+        stage ('Build Jar File') {
+            steps {
+                mvn -f ${service}/pom.xml clean package -DskipTests=true
+            }
+        }
+        stage ('Build Docker Image') {
+            steps {
+                docker build --no-cache -t ${service}
+                docker tag ${service}:latest
+            }
+        }
+        stage ('Docker Image Push ECR') {
+            steps {
+                aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com
+                docker push <aws_account_id>.dkr.ecr.region.amazonaws.com/my-repository:tag
+            }
+        }
+        stage ('Image Deploy on ECS') {
+            steps {
+                aws ecs update-service --cluster ${cluster_name} --service ${service_name} --force-new-deployment    
+            }
+        }
+    }   
+
+    post {
+        always {
+           // will be excuted not matter build failed / succeeded - Notification  
+        }
+        success {
+           // will excute the script only the build succeeded
+        }
+        failure {
+           // will execute the build of the build failed
+        }
+        cleanup {
+            cleanWs() // Clean the work space after the build
+        }
+    }
+}
