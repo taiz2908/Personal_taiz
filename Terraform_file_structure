@@ -1,0 +1,51 @@
+main.tf
+variables.tf
+output.tf
+terraform.tfvars
+
+----------------------------
+main.tf
+
+provider "aws" {
+    region = var.aws_region
+}
+resource "aws_instance" "instance_01" {
+    ami = var.instance_ami
+    instance_type = var.instance_type
+    tags = {
+        Name = "Instance 01"
+    }
+}
+
+variables.tf
+
+variable "aws_region" {
+    description = "The AWS region to create the resource"
+    type = string
+}
+variable "instance_ami" {
+    description = "The AMI to launch the Instance"
+    type = string
+}
+variable "instance_type" {
+    description = "Type of Instance for EC2"
+    type = string
+}
+
+output.tf
+
+output "instance_id" {
+    value = aws_instance.instance_01.id
+}
+
+terraform.tfvars (It allows to assign values declared in variables.tf file)
+
+aws_region = "us-west-2"
+instance_ami = "ami-080e1f13689e07408"
+instance_type = "t2.micro"
+
+
+
+
+
+

@@ -211,6 +211,7 @@ hostname -f - hostname/FQDN
  - du - directory usage
  - uptime - Load average
  - ps -ef / -aux - dispaly all the processes.
+ - htop #yum install htop -y
 
 ----------------------: Hard Link vs Soft Link :--------------------------------------
 Inode values:
@@ -265,9 +266,10 @@ chattr -i demo.txt - Mutable
 Ex:
  - chmod +x demo.txt - users grant execute permission.
 
----------------------------: wget, scp :-------------------------
-- wget <link> : download any file /software from internet.
+---------------------------: wget, scp, curl :-------------------------
+- wget <link> : Download any file /software from internet.
 - scp <filename> servername: Allows transferring of file between a local host and remote host or between two remote hosts.
+- curl https://example.com : Transfer data to or from a network server using protocols like HTTP, HTTPS, FTP, and more. 
 
 -----------------------------: tar :------------------------------------------------
  - tar -cvf <tar_file_name> <file_name> : compressing file to tar format
@@ -285,6 +287,7 @@ groupdel <group_name>
 usermod -g <group_name> <user_name> : adding user to a primary group. 
 
 ==============================:Linux Networking Commands :========================================================
+
 1. Ping (Packet Internet Groper)
  - Whether the ip address or name is pingable or not. (whether connected or not)
  - ttl(time-to-live) --> network connection with the particular host.
@@ -336,5 +339,3 @@ O/p:
  4  100.66.30.148 (100.66.30.148)  7.987 ms 241.0.5.7 (241.0.5.7)  0.537 ms 241.0.4.158 (241.0.4.158)  0.524 ms
  5  241.0.5.7 (241.0.5.7)  0.563 ms 100.66.2.67 (100.66.2.67)  3.332 ms 99.82.180.135 (99.82.180.135)  1.824 ms
  6  * 240.0.184.5 (240.0.184.5)  0.621 ms *
-
-6. 
