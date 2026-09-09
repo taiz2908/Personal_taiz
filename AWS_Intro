@@ -40,12 +40,16 @@
    - By default, upon instance termination, the root EBS volume is deleted and any other attached EBS volume is not deleted.
    - To replicate an EBS volume across AZ or region, need to copy its snapshot.
    - EBS Multi-attach allows the same EBS volume to attach to multiple EC2 instances in the same AZ
-  Types:
-   1. General Purpose SSD : Good for system boot volumes, Virtual desktop
-   2. Provisioned IOPS SSD :Transaction-intensive Applications with high frequency of small & random IO operations. 
-   3. Cold (HDD) :Throughput-intensive Applications that require large & sequential IO operations and are less sensitive to increased I/O latency 
-   4. Throughput optimised HDD
-   5. Magentic(standard)
+  Types: 
+  Solid state drive (SSD) volumes:
+    1. General Purpose SSD, gp3 & gp2 : Good for system boot volumes, Virtual desktop
+    2. Provisioned IOPS SSD, io2 & io1 : Transaction-intensive Applications with high frequency of small & random IO operations. 
+  Hard disk drive (HDD) volumes:
+    3. Cold (HDD), sc1 : Lowest cost per gigabyte; designed for infrequently accessed large data sets like backup archives or long-term storage. 
+    4. Throughput optimised HDD, st1 : Frequently accessed, high-throughput large sequential workloads like Big Data pipelines, log processing, and data warehousing.
+  Previous Generation :
+    5. Magentic(standard) : 
+
   Snapshots:
    - Data Lifecycle Manager (DLM) can be used to automate the creation, retention, and deletion of snapshots of EBS volumes.
    - Snapshots are incremental.
