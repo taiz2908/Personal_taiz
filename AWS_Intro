@@ -267,7 +267,11 @@
 
  - CloudTrail:
 
- - CloudFront:
+ - CloudFront: (Content Delivery Network)
+
+ - API Gateway:
+   https://www.youtube.com/watch?v=5rG-YgTHMC8
+   https://www.youtube.com/watch?v=jcibXVFiFek
     
 
 
