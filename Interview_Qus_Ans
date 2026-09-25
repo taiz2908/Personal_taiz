@@ -1012,3 +1012,19 @@ Only 2 companies asked me deeply about Kubernetes. Most interviewers were more i
 🔹 You notice secrets hardcoded in YAML. How would you secure them?
 
 🔹 A developer commits code to the main branch. Explain the CI/CD flow from that point until deployment.
+=========================
+1. When its come to AWS compute services, we have services like EC2, Elastic bean, Lambda etc, If you have to deploy an application, what are the factors you will consider to deploy and the selection of service ?
+2. Suppose you have to migrate an application from aws to azure keeping high availability and scalability in mind, How can we do that ?   
+3. How can you migrate whole application from one cloud platform to another ?
+4. How can you make an application, which is hosted in AWS LAMBDA for high scalable and available ?
+5. Explain about API gateway, how the traffic flows, explain with an scenario ?
+6. So I have a project repository, in that i have a folder where there is a terraform code for python web application , Every time a manual changes happens i have to  command terraform apply, get the changes and put it in CI/Cd pipeline and run the pipeline again to make those changes, How can i automate it for a  single click deployment( How to include terraform automation in CICD pipeline - deployment stage) 
+7. How do you manage multi environments setup in terraform, 4 environments, where each environments having same service with different specification ? 
+8. How would you securely deliver your secrets from CICD pipeline to Kubernetes cluster ? Hashicorp vault - Init containers 
+9. How can u install SSL certificates on a Linux server, how will you do it ?
+10. Suppose the application is running in RDS, ensuring high availability and scalability, but suddenly RDS throwing a notification saying, CPU utilization and number of database connections are high, How do you trouble shoot this ?
+11. How can the IAM policy in AWS works, when you give access from say morning 9 to evening 6 ?
+12. Write manifest file pod.yaml for single container (database service)
+13. What is a base image in dockerfile, how will you decide base image for any application.
+14. How you do port forwarding in Docker and Kubernetes.
+15. Is it possible to migrate the application from kops to eks ? and how ?
