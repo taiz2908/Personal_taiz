@@ -981,3 +981,34 @@ Only 2 companies asked me deeply about Kubernetes. Most interviewers were more i
  - Handle security in cloud environments, 
  - Troubleshoot issues,
  - Think during production scenarios.
+
+ =================================================
+ 🔹 A CI/CD pipeline takes around 45 minutes. How would you optimize and reduce the execution time?
+
+🔹 What is the difference between stages and jobs in a multi-stage YAML pipeline?
+
+🔹 You have around 50 microservices on AKS, each with a separate repository and almost 300 lines of similar build/test/deploy YAML. How would you make these pipelines reusable and avoid duplication?
+
+🔹 How would you achieve zero-downtime deployment?
+
+🔹 The application works in Dev and QA but fails in Production. How would you troubleshoot it?
+
+🔹 How would you handle database deployment through an Azure DevOps pipeline?
+
+🔹 Microsoft-hosted vs self-hosted agents — what is the difference and when would you choose each?
+
+🔹 Explain Argo CD vs Kubernetes and the deployment flow using Argo CD.
+
+🔹 An AKS rollout shows successful, but the old image/application is still running. What would you check?
+
+🔹 Your Docker image is around 3 GB. How would you reduce its size?
+
+🔹 A container is running but cannot connect to SQL Server. How would you troubleshoot it?
+
+🔹 An application cannot upload files to an Azure Storage Account. What would you validate?
+
+🔹 Application memory usage keeps increasing. How would you investigate and optimize it?
+
+🔹 You notice secrets hardcoded in YAML. How would you secure them?
+
+🔹 A developer commits code to the main branch. Explain the CI/CD flow from that point until deployment.
