@@ -1,0 +1,12 @@
+How to update image in ECS:
+ - cluster -> service -> Teask defination -> Create New revision and update the latest Image there -> Save
+ - Click on Deploy -> update service -> choose cluster -> Force New deployment -> Desired Task 1 from 0 -> Save
+
+How to update image in EC2 when Docker is installed on top of that
+ - Login to the server using Putty
+ - ec2- user
+ - sudo su -
+ - ls -> docker-compose.yml
+ - authenticate the docker-login, go to ECR and click on show pull image and choose the first url
+ - Paste it to the server hit enter
+ - edit the image here in this file the image will be updated

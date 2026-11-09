@@ -1,0 +1,6 @@
+Login to the EC2 Instance using Putty (pem file), we need to take EC2 private ip
+terminal : ec2-user
+           sudo su -
+           ls
+           docker ps
+           docker start/stop container_name
